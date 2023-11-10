@@ -7,7 +7,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="footer__about">
 					<div class="footer__about__logo">
-						<a href="./index.html"><img src="img/logo.png" alt=""></a>
+						<a href="<%=request.getContextPath()%>/index.html"><img src="img/logo.png" alt=""></a>
 					</div>
 					<ul>
 						<li>팀명</li>
@@ -56,11 +56,11 @@
 		<div class="inquirybtn"
 			style="position: fixed; bottom: 50px; right: 20px; border: 0;">
 			<button onclick="#문의 페이지">
-				<img src="/img/문의2.png" width="50px">
+				<img src="<%=request.getContextPath()%>/img/문의2.png" width="50px">
 			</button>
 		</div>
 		<div style="position: fixed; bottom: 15px; right: 20px;">
-			<a href="#" id="topbtn"> <img src="/img/화살표.png" width="30px">
+			<a href="#" id="topbtn"> <img src="<%=request.getContextPath()%>/img/화살표.png" width="30px">
 			</a>
 		</div>
 </footer>

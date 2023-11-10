@@ -57,23 +57,23 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="header__logo">
-						<a href="./index.html"><img src="./img/9.png" width="100%"></a>
+						<a href="<%=request.getContextPath()%>/index.html"><img src="<%=request.getContextPath()%>/img/9.png" width="100%"></a>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<nav class="header__menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="./shop-grid.html">Shop</a></li>
+							<li class="active"><a href="<%=request.getContextPath()%>/index.html">Home</a></li>
+							<li><a href="<%=request.getContextPath()%>/shop-grid.html">Shop</a></li>
 							<li><a href="#">Pages</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="./blog-details_wh.html">Shop Details</a></li>
-									<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-									<li><a href="./package_country.html">Package</a></li>
-									<li><a href="./blog-details.html">Blog Details</a></li>
+									<li><a href="<%=request.getContextPath()%>/blog-details_wh.html">Shop Details</a></li>
+									<li><a href="<%=request.getContextPath()%>/shoping-cart.html">Shoping Cart</a></li>
+									<li><a href="<%=request.getContextPath()%>/package_country.html">Package</a></li>
+									<li><a href="<%=request.getContextPath()%>/blog-details.html">Blog Details</a></li>
 								</ul></li>
-							<li><a href="./blog.html">Blog</a></li>
-							<li><a href="./contact.html">Contact</a></li>
+							<li><a href="<%=request.getContextPath()%>/blog.html">Blog</a></li>
+							<li><a href="<%=request.getContextPath()%>/contact.html">Contact</a></li>
 						</ul>
 
 					</nav>
@@ -91,13 +91,13 @@
 						<ul>
 							<div class="header__top__right">
 								<div class="header__top__right__auth">
-									<a href="/login.html"><i class="fa fa-user"></i> Login</a>
+									<a href="<%=request.getContextPath()%>/login.html"><i class="fa fa-user"></i> Login</a>
 								</div>
 							</div>
 						</ul>
 					</div>
 					<button>
-						<a href="./blog-details(kh).html">버튼</a>
+						<a href="<%=request.getContextPath()%>/blog-details(kh).html">버튼</a>
 					</button>
 				</div>
 			</div>

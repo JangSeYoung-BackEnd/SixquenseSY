@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <body>
-    <div style="display: flex;">
+    <div style="display: flex;margin-top:170px;">
     <section class="set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
@@ -18,7 +18,7 @@
             </div>
         </div>
     </section>
-    <section class="col-lg-7 shoping-cart spad">
+    <section class="col-lg-7">
         <div class="container">
             <title>장바구니</title>
             <style>
@@ -75,13 +75,7 @@
                         <td class="shoping__cart__price">
                           $55.00
                         </td>
-                        <td class="shoping__cart__quantity">
-                          <div class="quantity">
-                            <div class="pro-qty">
-                              <input type="text" value="1">
-                            </div>
-                          </div>
-                        </td>
+                        
                         <td class="shoping__cart__total">
                           $110.00
                         </td>
@@ -184,6 +178,7 @@
                     }
                     .form-container{
                         display: flex;
+                        width:100%;
                         justify-content: space-between;
                     }
                 </style>
@@ -262,7 +257,7 @@
         </style>
     </div>    
     </section>
-    <div class="col-lg-4" style="border: 2px solid grey; padding: 32px 24px; width: 340px;">
+    <div class="col-lg-2" style="border: 2px solid grey; padding: 22px 24px; width: 340px;">
         <h3>결제 정보</h3>
         <hr>
         <div>
@@ -302,8 +297,8 @@
             </div>
           </div>
           <div>
-            <input type="button" value="결제하기"style="background-color:  #4caf50; color: white;">
-          </div>
+          <button id="paymentButton">결제하기</button>
+        </div>
         </div>
       </div>
     </div>
@@ -348,46 +343,21 @@
       background-color: #45a049;
     }
   </style>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-        }
-    
-        form {
-          max-width: 400px;
-          margin: 20px auto;
-        }
-    
-        label {
-          display: block;
-          margin-bottom: 8px;
-        }
-    
-        input, select {
-          width: 100%;
-          padding: 8px;
-          margin-bottom: 16px;
-          box-sizing: border-box;
-        }
-    
-        .flex-container {
-          display: flex;
-          justify-content: space-between;
-          gap: 16px;
-        }
-    
-        button {
-          background-color: #4caf50;
-          color: white;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-    
-        button:hover {
-          background-color: #45a049;
-        }
-      </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const termsCheckbox = document.getElementById('termsCheckbox');
+      const paymentButton = document.getElementById('paymentButton');
+
+      termsCheckbox.addEventListener('change', function () {
+        paymentButton.disabled = !termsCheckbox.checked;
+      });
+
+      paymentButton.addEventListener('click', function () {
+        // 여기에서 결제 처리를 수행할 수 있습니다.
+        alert('결제가 완료되었습니다.');
+      });
+    });
+  </script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

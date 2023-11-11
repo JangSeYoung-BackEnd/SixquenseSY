@@ -1,229 +1,273 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<style>
+    .menu {
+        width: 800px;
+        overflow: hidden;
+        border-width: 1px;
+    }
+    .menu > li {
+        width: 20%; /*20*5=100%*/
+        line-height: 40px;
+        background-color: #ffffff;
+    }
+    .submenu {
+        height: 0; /*ul의 높이를 안보이게 처리*/
+        overflow: hidden;
+    }
+    .submenu > li {
+        line-height: 50px;
+        background-color: #d4d4d4;
+    }
+    .menu > li:hover {
+        background-color: #d4d4d4;
+        transition-duration: 0.5s;
+    }
+    .menu > li:hover .submenu {
+        height: auto; /*서브메뉴 li한개의 높이 50*5*/
+        transition-duration: 1s;
+    }
+    .popularity-btn {
+        border-width: 1px;
+        color: #ffffff;
+        background-color: #3ec219;
+    }
+    .recent-btn{
+        border-width: 1px;
+        color: #ffffff;
+        background-color: #3ec219;
+    }
+</style>
+
 <body>
-	<!-- Product Section Begin -->
-	<section class="product spad" style="padding-top:250px";>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-5">
-					<div class="sidebar">
-						<div class="sidebar__item">
-							<h4>카테고리</h4>
-							<ul>
-								<li><a href="#">동남아·대만</a></li>
-								<li><a href="#">일본</a></li>
-								<li><a href="#">유럽</a></li>
-								<li><a href="#">미주·캐나다</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-9 col-md-7">
-					<div class="product__discount">
-						<div class="section-title product__discount__title">
-							<h2>동행</h2>
-						</div>
-						<div class="row"></div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-1.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-2.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-3.jpg">
-									<ul class="product__item__pic__hover">
-				z						<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-4.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-5.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-6.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-7.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-8.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-9.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-10.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-11.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg="img/product/product-12.jpg">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="#">제목데이터</a>
-									</h6>
-									<h5>게시글내용</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Product Section End -->
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>동행 메뉴</h4>
+                            <ul class="menu">
+                                <li><a href="#">동남아·대만</a>
+                                    <ul class="submenu">
+                                        <li><a href="#">방콕·파타야</a></li>
+                                        <li><a href="#">호치민·나트랑·달랏</a></li>
+                                        <li><a href="#">푸켓</a></li>
+                                        <li><a href="#">코타카나발루</a></li>
+                                        <li><a href="#">대만</a></li>
+                                        <li><a href="#">보홀</a></li>
+                                        <li><a href="#">싱가포르</a></li>
+                                        <li><a href="#">세부·클락</a></li>
+                                        <li><a href="#">보라카이</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">일본</a>
+                                    <ul class="submenu">
+                                        <li><a href="#">후쿠오카</a></li>
+                                        <li><a href="#">오사카·교토</a></li>
+                                        <li><a href="#">도쿄</a></li>
+                                        <li><a href="#">샷포로</a></li>
+                                        <li><a href="#">오키나와</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">유럽</a>
+                                    <ul class="submenu">
+                                        <li><a href="#">영국</a></li>
+                                        <li><a href="#">프랑스</a></li>
+                                        <li><a href="#">이탈리아</a></li>
+                                        <li><a href="#">스위스</a></li>
+                                        <li><a href="#">스페인·포르투칼</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">미주·캐나다</a>
+                                    <ul class="submenu">
+                                        <li><a href="#">미서부</a></li>
+                                        <li><a href="#">미동부</a></li>
+                                        <li><a href="#">하와이</a></li>
+                                        <li><a href="#">캐나다</a></li>
+                                        <li><a href="#">호주</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>동행</h2>
+                        </div>
+                        <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
+                        <button onclick="" class="recent-btn">최신순</button>
+                        <button onclick="" class="popularity-btn">인기순</button>
+                        <div class="row">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <!-- 동행 게시글 좋아요 버튼 -->
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-9.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-10.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-11.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-12.jpg">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">제목데이터</a></h6>
+                                    <h5>게시글내용</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
 </body>
 <%@ include file="/views/common/footer.jsp"%>

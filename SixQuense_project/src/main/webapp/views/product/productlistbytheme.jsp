@@ -9,16 +9,20 @@
                                 <div class="sidebar">
                                     <div class="sidebar__item">
                                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
-                ul {list-style: none;padding: 0;}
-                ul li {display: inline-block;margin-right: 10px;}
-                .sub-menu {display: none;}
-            </style>
-            <body>
-            <h4>대륙 카테고리</h4>
-            <ul>
-            <li class="continent"><a href="#">동남아·대만</a>
-                <ul class="sub-menu">
+                <style>
+        ul {list-style: none; padding: 0;}
+        ul li {display: inline-block; margin-right: 10px;}
+        .sub-menu {display: none;}
+        .continent{font-size:18px;}
+        .continent .sub-menu li:hover a {font-weight: bold;}
+        .continent a.active {color: orange;}
+    </style>
+</head>
+<body>
+    <h4>대륙 카테고리</h4>
+    <ul>
+        <li class="continent"><a href="#">동남아·대만</a>
+            <ul class="sub-menu">
                 <li><a href="#">다낭</a></li>
                 <li><a href="#">방콕</a></li>
                 <li><a href="#">대만</a></li>
@@ -29,51 +33,57 @@
                 <li><a href="#">푸켓</a></li>
                 <li><a href="#">호치민</a></li>
                 <li><a href="#">푸켓</a></li>
-                </ul>
-            </li><br>
-            <li class="continent"><a href="#">일본</a>
-                <ul class="sub-menu">
-                    <li><a href="#">도쿄</a></li>
-                    <li><a href="#">삿포르</a></li>
-                    <li><a href="#">오사카/교토</a></li>
-                    <li><a href="#">오키나와</a></li>
-                    </ul>
-                </li><br>
-            <li class="continent"><a href="#">유럽</a>
-                <ul class="sub-menu">
-                    <li><a href="#">스위스</a></li>
-                    <li><a href="#">스페인</a></li>
-                    <li><a href="#">영국</a></li>
-                    <li><a href="#">이탈리아</a></li>
-                    <li><a href="#">프랑스</a></li>
-                    </ul>
-                </li><br>
-            <li class="continent"><a href="#">미주·캐나다·대양주</a>
-                <ul class="sub-menu">
-                    <li><a href="#">미동부</a></li>
-                    <li><a href="#">미서부</a></li>
-                    <li><a href="#">캐나다</a></li>
-                    <li><a href="#">하와이</a></li>
-                    <li><a href="#">호주</a></li>
-                </ul>
-            </li>
             </ul>
+        </li>
+        <li class="continent"><a href="#">일본</a>
+            <ul class="sub-menu">
+                <li><a href="#">도쿄</a></li>
+                <li><a href="#">삿포르</a></li>
+                <li><a href="#">오사카/교토</a></li>
+                <li><a href="#">오키나와</a></li>
+            </ul>
+        </li>
+        <li class="continent"><a href="#">유럽</a>
+            <ul class="sub-menu">
+                <li><a href="#">스위스</a></li>
+                <li><a href="#">스페인</a></li>
+                <li><a href="#">영국</a></li>
+                <li><a href="#">이탈리아</a></li>
+                <li><a href="#">프랑스</a></li>
+            </ul>
+        </li>
+        <li class="continent"><a href="#">미주·캐나다·대양주</a>
+            <ul class="sub-menu">
+                <li><a href="#">미동부</a></li>
+                <li><a href="#">미서부</a></li>
+                <li><a href="#">캐나다</a></li>
+                <li><a href="#">하와이</a></li>
+                <li><a href="#">호주</a></li>
+            </ul>
+        </li>
+    </ul>
 
-            <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var continents = document.querySelectorAll('.continent');
-                continents.forEach(function (continent) {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var continents = document.querySelectorAll('.continent');
+            continents.forEach(function (continent) {
                 continent.addEventListener('click', function () {
                     var subMenu = this.querySelector('.sub-menu');
+                    var links = this.querySelectorAll('.continent a');
+                    links.forEach(function (link) {
+                        link.classList.remove('active');
+                    });
                     if (subMenu.style.display === 'none' || subMenu.style.display === '') {
-                    subMenu.style.display = 'block';
+                        subMenu.style.display = 'block';
+                        this.querySelector('a').classList.add('active');
                     } else {
-                    subMenu.style.display = 'none';
+                        subMenu.style.display = 'none';
+                        this.querySelector('a').classList.remove('active');
                     }
                 });
-                });
             });
-            </script>
+        });
+    </script>
             </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
@@ -170,7 +180,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
+                                         <div class="product__discount__item__pic set-bg"
                                             data-setbg="img/product/discount/pd-3.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">

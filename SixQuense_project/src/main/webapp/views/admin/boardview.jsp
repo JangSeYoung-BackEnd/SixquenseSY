@@ -3,6 +3,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <body class="sb-nav-fixed" >
 	<main class="mt-5 pt-5">
+	<section style="padding-top:80px">
 	<div class="container-fluid px-4" style="width : 1170px;">
 		<h1 class="mt-4">Board</h1>
 		<div class="card mb-4">
@@ -42,6 +43,7 @@
 		</div>
 	</div>
 	</main>
+	</section>
 </body>
 
 <%@ include file="/views/common/footer.jsp"%>

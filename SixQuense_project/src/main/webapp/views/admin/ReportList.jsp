@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <body class="sb-nav-fixed">
-<section style="padding-top:80px">
+	<section style="padding-top:80px">
 	<main class="mt-5 pt-5">
 	<div class="container-fluid px-4" style="width : 1170px;">
-		<h1 class="mt-4">Board List</h1>
+		<h1 class="mt-4">신고 목록</h1>
 		<div class="card mb-4">
 			<div class="card-header">
 				<a class="btn btn-primary float-end" href="register"> 
@@ -17,9 +17,9 @@
 					<thead>
 						<tr>
 							<th>글번호</th>
+							<th>신고상태</th>
 							<th>제목</th>
 							<th>작성자</th>
-							<th>조회수</th>
 							<th>작성일</th>
 						</tr>
 					</thead>

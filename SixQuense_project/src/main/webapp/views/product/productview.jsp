@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <style>
     .heart-icon {
         cursor: pointer;
+        display: inline-block;
+		font-size: 14px;
+		padding: 16px 28px 14px 0px; important;
+		margin: 0px 6px 5px 0px; important;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 2px;
+		width: 290px;
+		text-align: center;
+        
     }
 
     .icon_heart_alt::before {
@@ -14,6 +26,7 @@
         content: '\2665'; /* 채워진 하트 아이콘 */
         color: red; /* 원하는 색상으로 설정 */
     }
+    
 </style>
     <!-- Product Details Section Begin -->
     <section class="product-details spad" style="padding-top:250px";>
@@ -46,7 +59,7 @@
                             <span>(리뷰 갯수 reviews)</span>
                         </div>
                         <div class="product__details__price">199,000원</div>
-                        <p>상품 소개글을 쓰겠습니다~~~
+                        <p style="text-align: left">상품 소개글을 쓰겠습니다~~~
                             Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                             vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                             quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
@@ -65,8 +78,9 @@
                         <a href="#" class="primary-btn">예약하기</a>
                         <a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span class="icon_heart_alt"></span> 위시리스트에 담기</a>
                         </div>
-                        <b style="color: darkgrey; font-size: 13px;">몇명이 이 상품을 위시리스트에 담았습니다</b>
-                        
+                        <div style="width: 290px; height: 51px; text-align: center;">
+                        <b style="color: darkgrey; font-size: 13px;"><span style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
+                        </div>
                         <script>
                             function toggleHeartIcon(element) {
                                 // 버튼을 클릭할 때마다 'filled' 클래스를 추가 또는 제거
@@ -75,9 +89,18 @@
                         </script>
 
                         <ul>
-                            <li><b>최소인원</b> <span>최소인원적기</span></li>
-                            <li><b>최대인원</b> <span>최대인원적기</span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                        	<li>
+                        	<img src="<%=request.getContextPath()%>/img/grouptouricon.png" width="20px" height="20px" style="margin-right: 10px">
+                        	<b>그룹투어</b>
+                        	</li>
+                            <li>
+                            <img src="<%=request.getContextPath()%>/img/checkicon2.png" width="20px" height="20px" style="margin-right: 10px">
+                            <b>최소인원</b> <span>최소인원적기</span>
+                            </li>
+                            <li>
+                            <img src="<%=request.getContextPath()%>/img/checkicon2.png" width="20px" height="20px" style="margin-right: 10px">
+                            <b>최대인원</b> <span>최대인원적기</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -101,7 +124,7 @@
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>상품 정보</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    <p style="text-align: left">Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Vivamus
                                         suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam
                                         vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.
@@ -111,7 +134,7 @@
                                         elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus
                                         et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
                                         vel, ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-                                        <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                        <p style="text-align: left">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
                                         elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
                                         porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
@@ -122,7 +145,7 @@
                                 </div>
                                 <div class="product__details__tab__desc">
                                     <h6>코스 소개</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    <p style="text-align: left">Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Vivamus
                                         suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam
                                         vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.
@@ -132,7 +155,7 @@
                                         elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus
                                         et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
                                         vel, ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-                                        <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                        <p style="text-align: left">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
                                         elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
                                         porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
@@ -145,7 +168,7 @@
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>이용 안내</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    <p style="text-align: left">Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
                                         Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
                                         sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
@@ -156,7 +179,7 @@
                                         ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                                         Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
                                         Proin eget tortor risus.</p>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                    <p style="text-align: left">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
                                         elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
                                         porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
@@ -164,7 +187,7 @@
                                 </div>
                                 <div class="product__details__tab__desc">
                                     <h6>환불 안내</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    <p style="text-align: left">Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
                                         Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
                                         sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
@@ -175,7 +198,7 @@
                                         ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                                         Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
                                         Proin eget tortor risus.</p>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                    <p style="text-align: left">Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
                                         ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
                                         elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
                                         porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus

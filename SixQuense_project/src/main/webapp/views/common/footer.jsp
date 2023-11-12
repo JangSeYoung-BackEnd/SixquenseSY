@@ -33,12 +33,14 @@
                     </div>
                 </div>     
             </div>
-        <div class="inquirybtn" style="position: fixed; bottom: 50px; right: 20px; border: 0;">
-                <button onclick="#문의 페이지"><img src="/img/문의2.png" width="50px"></button>
-        </div>
+        <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
+                <button onclick="#문의 페이지" style="background: none; border: none;">
+                    <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
+                </button>
+            </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
         <a href="#" id="topbtn">
-            <img src="/img/화살표.png" width="30px">
+            <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px">
         </a>
         </div>
     </footer>

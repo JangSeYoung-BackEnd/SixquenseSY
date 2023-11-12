@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="./img/9.png" width="100%"></a>
+                        <a href="./index.html"><img src="<%=request.getContextPath() %>/img/9.png" width="100%"></a>
                     </div>
                 </div>
                 <div class="col-lg-4" style="display: contents;">

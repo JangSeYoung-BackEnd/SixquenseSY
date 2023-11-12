@@ -100,9 +100,6 @@ button:hover {
 	}
 </style>
 
-
-
-
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
@@ -163,17 +160,21 @@ button:hover {
 				</div>
 				<div class="col-lg-8 col-md-7 order-md-1 order-1">
 					<div>
-						<span>제목</span> <select name="lunch">
+						<span style="font-size: larger; font-weight: bolder;"> 여기는 제목</span> <select name="accompany">
 							<option value="모집중">모집중</option>
 							<option value="마감">마감</option>
 						</select>
 					</div>
 					<div class="blog__details__text">
-						<img
-							src="https://post-phinf.pstatic.net/MjAxOTA4MjdfMTE2/MDAxNTY2ODc4NTM1MTI3.t2v2BCOumxl1AUfevExRDFtCzQ7nasvUmFEtJfmMElog.fK67P3SAN7_zr_rxQmQaCn9a9dFZJhTugeZe6D_gCo4g.JPEG/%EC%8B%9C%EC%95%A0%ED%8B%80_%EC%9E%90%EC%9C%A0%EC%97%AC%ED%96%89_%EC%9D%BC%EC%A0%95_01.jpg?type=w800_q75"
-							alt="">
+						<div style="display:flex;">
+							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<div style=" width: 250px; height: 250px; border: black; border-style: solid;" > 지도 자리</div>
+						</div>
+						
+					</div>
+					
+					<div>
 						<p>내용 내용 내용 시애틀에서 동행 할 사람 궈함 ~ ~~~</p>
-
 					</div>
 					<div style="display: flex;">
 						<div>글쓴날</div>

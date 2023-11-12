@@ -1,79 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 푸터&top/문의 버튼 -->
-<footer class="footer spad" style="padding-bottom: 80px;">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="footer__about">
-					<div class="footer__about__logo">
-						<a href="<%=request.getContextPath()%>/index.html"><img src="img/logo.png" alt=""></a>
-					</div>
-					<ul>
-						<li>팀명</li>
-						<li>SixQuense</li>
-						<li></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-				<div class="footer__widget">
-					<h6>팀원</h6>
-					<ul>
-						<li>이규홍</li>
-						<li>정우현</li>
-						<li>박승현</li>
-					</ul>
-					<ul>
-						<li>손지은</li>
-						<li>장세영</li>
-						<li>한재희</li>
-					</ul>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="footer__copyright">
-						<div class="footer__copyright__text">
-							<p>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</p>
-						</div>
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script>
-						All rights reserved | This template is made with <i
-							class="fa fa-heart" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
+    <footer class="footer spad" style="padding-bottom: 0px; padding-top: 30px;">
+        <div class="container" style="margin-left: 100px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <p style="width: 1000px; font-size: 12px; text-align: left;">
+                            " 상호명 (주)sixquense | 대표 홍길동 | 개인정보보호책임자 홍길순 | 사업자등록번호 000-000-0000 " | 통신판매업신고번호 2023-서울-0000 | 관광사업등록번호 : 제2023-0호"
+                            <br>
+                            "주소 서울특별시 00구 00,  | 이메일 0000@0000.com | 마케팅/제휴문의 1234@1234.com"
+                            <br>
+                            "광고 매체 문의 5678@1234.com"
+                            <br>
+                            <br>
+                            " 자사는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다."
+                            <br>
+                            " 영업보증보험: 1.5억원 / 기획여행보증: 2억원"
+                            <br>
+                            " sixquense은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품·거래정보 및 거래에 대하여 책임을 지지않습니다."
+                            <br>
+                            " 부득이한 사정에 의해 확정된 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다. "
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                    
+                    </div>
+                </div>     
+            </div>
+        <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
+                <button onclick="#문의 페이지" style="background: none; border: none;">
+                    <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
+                </button>
+            </div>
+        <div style="position: fixed; bottom: 15px; right: 20px;">
+        <a href="#" id="topbtn">
+            <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px">
+        </a>
+        </div>
+    </footer>
+    <!-- 푸터 -->
+    
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 
-						<div class="footer__copyright__payment">
-							<img src="img/payment-item.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="inquirybtn"
-			style="position: fixed; bottom: 50px; right: 20px; border: 0;">
-			<button onclick="#문의 페이지">
-				<img src="<%=request.getContextPath()%>/img/문의2.png" width="50px">
-			</button>
-		</div>
-		<div style="position: fixed; bottom: 15px; right: 20px;">
-			<a href="#" id="topbtn"> <img src="<%=request.getContextPath()%>/img/화살표.png" width="30px">
-			</a>
-		</div>
-</footer>
-<!-- 푸터 -->
 
-<!-- Js Plugins -->
-<script src="<%=request.getContextPath() %>/js/jquery-3.3.1.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/jquery.nice-select.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/jquery.slicknav.js"></script>
-<script src="<%=request.getContextPath() %>/js/mixitup.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/main.js"></script>
+
 </body>
+
 </html>

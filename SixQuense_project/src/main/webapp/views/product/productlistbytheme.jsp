@@ -279,7 +279,6 @@
                         <img src="./img/japen/삿포르패키지.png">
                     </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

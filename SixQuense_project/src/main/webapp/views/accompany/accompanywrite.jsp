@@ -17,6 +17,7 @@
     }
      .container>div{
         /* border: 1px solid black; */
+        
      }
      .container div .contury>div{
         margin: 10px;
@@ -45,7 +46,7 @@
         <div class="section-title product__discount__title">
             <h2>동행 글쓰기</h2>
         </div>
-        <div class="row">
+        <div class="row" style="border: solid gainsboro; margin-bottom: 10px;">
             <div class="col-lg-2 col-md-7 continent">
                 <div class="con-1">동남아·대만</div>
                 <div class="con-2">일본</div>
@@ -90,10 +91,10 @@
         <div class="row">
             <form action="">
                 <div>
-                    <input type="text" id="" name="" placeholder="제목을 입력하세요" style="width: 700px; border:solid gainsboro;">
+                    <input type="text" id="" name="" placeholder="제목 : 여행지/날짜/제목내용 으로 작성해주세요" style="width: 700px; border:solid gainsboro; margin-bottom: 10px;"">
                 </div>
                 <div>
-                    <input type="text" id="" name="" placeholder="카카오톡 링크" style="width: 700px; border:solid gainsboro;">
+                    <input type="text" id="" name="" placeholder="카카오톡 링크 적어주세요!" style="width: 700px; border:solid gainsboro;">
                 </div>
                 <div class="file-btn" onclick="openFileDialog()">
                     <input type="file" accept="image/bmp,image/gif,image/jpg,image/jpeg,image/png,image/raw,image/tif,image/heif,image/heic,image/mp4,image/avi,image/mov,image/wmv,image/mkv,image/mpg,image/rm,image/asf,image/m4v,image/mpeg,image/mpg" style="display: none; margin: 0px; padding: 0px;">
@@ -103,10 +104,10 @@
                     <p class="sc-9332fd40-1 besauD">배경사진을 선택해주세요</p>
                 </div>
                 <div>
-                    <textarea id="" name="" placeholder="글을 작성해주세요(1000자이내)" cols="150" rows="20" maxlength="1000" wrap="on" style="border:solid gainsboro; resize: none;" ></textarea>
+                    <textarea id="" name="" placeholder="1. 현재 동행이 있나요?&#13;&#10;ex)혼자에에요/동행 1명이 있어요.&#13;&#10;&#13;&#10;2.어떤 동행을 찾고 있나요?&#13;&#10;ex)맛집 돌아다니는거 좋아하는 20대 여성/남성 동행 구해요!&#13;&#10;&#13;&#10;3. 원하는 여행코스가있다면 적어주세요!&#13;&#10;&#13;&#10;&#13;&#10;글을 작성해주세요(1000자이내)" cols="150" rows="20" maxlength="1000" wrap="on" style="border:solid gainsboro; resize: none;" ></textarea>
                 </div>
                 <div>
-                    <input type="submit" class="btn-success" id="" name="" value="게시글 등록" style="border:0px;">
+                    <input type="submit" class="btn-success" id="" name="" value="게시글 등록" style="border:0px; margin-left: 1010px; height:32px;">
                 </div>
             </form>
         </div>

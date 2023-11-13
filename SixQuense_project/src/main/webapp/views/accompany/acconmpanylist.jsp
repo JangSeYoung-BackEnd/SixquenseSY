@@ -3,12 +3,12 @@
 <%@ include file="/views/common/header.jsp"%>
 <style>
     .menu {
-        width: 800px;
+        width: 200px;
         overflow: hidden;
         border-width: 1px;
     }
     .menu > li {
-        width: 20%; /*20*5=100%*/
+        width: 100%;
         line-height: 40px;
         background-color: #ffffff;
     }
@@ -18,37 +18,47 @@
     }
     .submenu > li {
         line-height: 50px;
-        background-color: #d4d4d4;
+        background-color: #7fad39;
     }
-    .menu > li:hover {
-        background-color: #d4d4d4;
-        transition-duration: 0.5s;
+    .menu > li:hover a{
+        background-color: #7fad39;
+        color: white;
     }
     .menu > li:hover .submenu {
-        height: auto; /*서브메뉴 li한개의 높이 50*5*/
-        transition-duration: 1s;
+        height: auto;
+        /* transition-duration: 1s; */
     }
     .popularity-btn {
         border-width: 1px;
         color: #ffffff;
-        background-color: #3ec219;
+        background-color: #28a745;
+        border: none;
     }
     .recent-btn{
         border-width: 1px;
         color: #ffffff;
-        background-color: #3ec219;
+        background-color: #28a745;
+        border: none;
+    }
+    .communityBtn{
+        color: white;
+        background-color: #7fad39;
     }
 </style>
-
 <body>
-    <!-- Product Section Begin -->
-    <section class="product spad">
+	<section class="product spad" style="margin-top: 150px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>동행 메뉴</h4>
+                            <h4>커뮤니티 메뉴</h4>
+                            <div style="border: 2px solid #7fad39; width: 200px;"></div>
+                            <div style="margin: 10px 0px 10px 0px;">
+                                <div id="accompany" onclick="accompanyBtn();" style="width: 200px; font-weight: bold;">동행</div>
+                                <div id="cumunity" onclick="cumunityBtn();" style="width: 200px; font-weight: bold">여행리뷰</div>
+                            </div>
+                            <div style="border: 2px solid #7fad39; width: 200px;"></div>
                             <ul class="menu">
                                 <li><a href="#">동남아·대만</a>
                                     <ul class="submenu">
@@ -268,6 +278,19 @@
             </div>
         </div>
     </section>
-    <!-- Product Section End -->
+	<script>
+	   function accompanyBtn(){
+	       if($("#accompany")){
+	           $("#accompany").addClass("communityBtn");
+	           $("#cumunity").removeClass("communityBtn");
+	       }
+	   }
+	   function cumunityBtn(){
+	       if($("#cumunity")){
+	           $("#cumunity").addClass("communityBtn");
+	           $("#accompany").removeClass("communityBtn");
+	       }
+	   }
+	</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

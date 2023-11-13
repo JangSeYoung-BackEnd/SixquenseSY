@@ -5,7 +5,9 @@ import static com.web.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+
 import com.web.accompany.model.dao.AccompanyDAO;
+import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.common.JDBCTemplate;
 
@@ -38,8 +40,10 @@ public class AccompanyService {
 		
 		
 		//글번호로 관련된 댓글을 가져오는 메소드 
-//		public List<AccompanyComment> selectBoardComment(int no) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
+		public List<AccompanyComment> selectAccompanyComment(int no) {
+			Connection conn= getConnection();
+			List <AccompanyComment> list = dao.selectAccompanyComment(conn,no);
+			close(conn);
+			return list;
+		}
 }

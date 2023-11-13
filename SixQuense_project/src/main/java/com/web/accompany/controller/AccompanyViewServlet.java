@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.service.AccompanyService;
 
@@ -60,15 +61,11 @@ public class AccompanyViewServlet extends HttpServlet {
 		
 		AccompanyDTO a = new AccompanyService().selectBoardByNo(no,readResult);
 		//이 글번호에 대한 댓글들을 List에 저장함.
-//		List<AccompanyComment> comments= new AccompanyService().selectBoardComment(no);
-//		request.setAttribute("comments", comments);
+		List<AccompanyComment> comments= new AccompanyService().selectAccompanyComment(no);
+		request.setAttribute("comments", comments);
 		request.setAttribute("board", a);
 		request.getRequestDispatcher("/views/accompany/accompanyview.jsp").forward(request, response);
-		
-		
-		
-		
-		
+
 	}
 
 	/**

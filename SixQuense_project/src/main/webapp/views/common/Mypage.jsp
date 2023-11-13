@@ -8,7 +8,7 @@
                     <div class="breadcrumb__text">
                         <h2>Checkout</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="<%=request.getContextPath() %>/index.html">Home</a>
                             <span>Checkout</span>
                         </div>
                     </div>
@@ -49,6 +49,14 @@
                                 <p>닉네임</p>
                                 <input type="text" value="길동길동" readonly    >
                             </div>
+                             <div class="checkout__input">
+                                <p>비밀번호</p>
+                                <input type="text" value="**********" readonly>
+                            </div>
+                            <div class="checkout__input">
+                                <p>비밀번호 확인</p>
+                                <input type="text" value="" readonly>
+                            </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
                                 <input type="text" placeholder="1569" class="checkout__input__add" readonly>
@@ -57,20 +65,6 @@
                             <div class="checkout__input">
                                 <p>가입날짜</p>
                                 <input type="text" value="2023/11/11" readonly>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone</p>
-                                        <input type="text" value="010-1234-5678" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email</p>
-                                        <input type="text" value="sixquense@gmail.com" readonly>
-                                    </div>
-                                </div>                              
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>

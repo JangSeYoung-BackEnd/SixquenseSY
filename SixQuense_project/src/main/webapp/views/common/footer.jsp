@@ -7,7 +7,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="<%=request.getContextPath()%>/index.html"></a>
                         </div>
                         <p style="width: 1000px; font-size: 12px; text-align: left;">
                             " 상호명 (주)sixquense | 대표 홍길동 | 개인정보보호책임자 홍길순 | 사업자등록번호 000-000-0000 " | 통신판매업신고번호 2023-서울-0000 | 관광사업등록번호 : 제2023-0호"
@@ -40,14 +40,14 @@
             </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
         <a href="#" id="topbtn">
-            <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px">
+            <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px" style="margin-right: 12px">
         </a>
         </div>
     </footer>
     <!-- 푸터 -->
     
     <!-- Js Plugins -->
-    <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>

@@ -194,6 +194,7 @@ button:hover {
 			</div>
 		</div>
 	</section>
+	                
 <!------------------------프로필 Popup 부분 ------------------------>
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">

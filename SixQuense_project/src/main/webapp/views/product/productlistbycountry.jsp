@@ -1,35 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <style>
 .btn-group-lg>.btn, .btn-lg {
-	font-size: 14px; !important;
-	margin: 20px 0px; !important;
-	padding: 10px 16px; !important;
-	width:1106px; !important;
+	font-size: 14px; ! important;
+	margin: 20px 0px; ! important;
+	padding: 10px 16px; ! important;
+	width: 1106px;
+	!
+	important;
 }
 
-p{
-text-align: left; !important;
+p {
+	text-align: left;
+	!
+	important;
 }
 
 .country_package:after {
-    position: absolute;
-    left: 0;
-    bottom: 140px;
-    right: 60px;
-    height: 4px;
-    width: 300px;
-    background: #7fad39;
-    content: "";
-    margin: 0 auto;
+	position: absolute;
+	left: 0;
+	bottom: 140px;
+	right: 60px;
+	height: 4px;
+	width: 300px;
+	background: #7fad39;
+	content: "";
+	margin: 0 auto;
 }
 
 .blog__sidebar__item__tags a.selected {
-      background: #7fad39;
-      color: #ffffff;
-    }
+	background: #7fad39;
+	color: #ffffff;
+}
+
 </style>
 <body>
 	<!-- Blog Section Begin -->
@@ -42,9 +48,9 @@ text-align: left; !important;
 						<div class="blog__sidebar__item">
 							<h4>어떤 여행을 찾고 있나요</h4>
 							<div class="blog__sidebar__item__tags">
-								<a href="#" class="tag">BEST</a> 
-								<a href="#" class="tag">최신순</a> 
-								<a href="#" class="tag">특가</a>
+								<a href="#" class="tag" onclick="scrollToSection('best')">BEST</a> 
+								<a href="#" class="tag" onclick="scrollToSection('latest')">최신순</a> 
+								<a href="#" class="tag" onclick="scrollToSection('special')">특가</a>
 							</div>
 						</div>
 					</div>
@@ -52,7 +58,7 @@ text-align: left; !important;
 				<!-- 여기서 부터  -->
 				<div class="col-lg-8 col-md-7">
 					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="blog__item">
+						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
 								<img src="img/blog/blog-2.jpg" alt="">
 							</div>
@@ -75,7 +81,7 @@ text-align: left; !important;
 					</div>
 					<!-- 여기까지 -->
 					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="blog__item">
+						<div class="blog__item" id="latest">
 							<div class="blog__item__pic">
 								<img src="img/blog/blog-2.jpg" alt="">
 							</div>
@@ -96,7 +102,7 @@ text-align: left; !important;
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="blog__item">
+						<div class="blog__item" id="special">
 							<div class="blog__item__pic">
 								<img src="img/blog/blog-2.jpg" alt="">
 							</div>
@@ -139,5 +145,24 @@ text-align: left; !important;
       tag.classList.add('selected');
     });
   });
+  
+  
+  
+ function scrollToSection(sectionId) {
+	    var element = document.getElementById(sectionId);
+	    // 해당 섹션의 위치를 가져와서 스크롤
+	    if (element) {
+	        var rect = element.getBoundingClientRect();
+	        console.log(rect);
+	        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	        console.log(scrollTop);
+	        var targetY = rect.top + scrollTop -250;
+
+	        window.scrollTo({
+	            top: targetY,
+	            behavior: 'smooth'
+	        });
+	    }
+	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

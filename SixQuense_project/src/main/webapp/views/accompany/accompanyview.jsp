@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ include file="/views/common/header.jsp"%>
+<%
+	/* 게시글 정보를 불러옴 +  댓글의 정보를 불러옴. */
+	/* Board b = (Board) request.getAttribute("board");
+	List<BoardComment> comments = (List<BoardComment>) request.getAttribute("comments"); */
+%>
 
 
 <style>
+div#googleMap img{
+	border-radius:0;
+}
 #likeButtonContainer {
 	text-align: center; /* 이 부분을 추가하여 내용을 가운데로 정렬합니다. */
 }
@@ -100,7 +109,18 @@ button:hover {
 	}
 </style>
 
-
+<script>
+   function myMap(){
+      var mapOptions = { 
+            center:new google.maps.LatLng(51.508742, -0.120850),
+            zoom:5
+      };
+ 
+      var map = new google.maps.Map( 
+             document.getElementById("googleMap") 
+            , mapOptions );
+   }
+</script> 
 
 
 <body>
@@ -163,17 +183,21 @@ button:hover {
 				</div>
 				<div class="col-lg-8 col-md-7 order-md-1 order-1">
 					<div>
-						<span>제목</span> <select name="lunch">
+						<span style="font-size: larger; font-weight: bolder;">제목 </span> <select name="accompany">
+					<%-- 	<%=b.getBoardTitle()%>  --%>
+					<!-- 분기 처리하기 만약에 ~  -->
 							<option value="모집중">모집중</option>
 							<option value="마감">마감</option>
 						</select>
 					</div>
 					<div class="blog__details__text">
-						<img
-							src="https://post-phinf.pstatic.net/MjAxOTA4MjdfMTE2/MDAxNTY2ODc4NTM1MTI3.t2v2BCOumxl1AUfevExRDFtCzQ7nasvUmFEtJfmMElog.fK67P3SAN7_zr_rxQmQaCn9a9dFZJhTugeZe6D_gCo4g.JPEG/%EC%8B%9C%EC%95%A0%ED%8B%80_%EC%9E%90%EC%9C%A0%EC%97%AC%ED%96%89_%EC%9D%BC%EC%A0%95_01.jpg?type=w800_q75"
-							alt="">
+						<div style="display:flex;">
+							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
+						</div>
+					</div>
+					<div>
 						<p>내용 내용 내용 시애틀에서 동행 할 사람 궈함 ~ ~~~</p>
-
 					</div>
 					<div style="display: flex;">
 						<div>글쓴날</div>
@@ -193,6 +217,7 @@ button:hover {
 			</div>
 		</div>
 	</section>
+	                
 <!------------------------프로필 Popup 부분 ------------------------>
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
@@ -286,4 +311,6 @@ button:hover {
 		}
 		
 	</script>
-<%@ include file="/views/common/footer.jsp"%>
+<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+ -->
+ <%@ include file="/views/common/footer.jsp"%>

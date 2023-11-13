@@ -2,11 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+	<button id="#">기본요청보내기</button>
+	<button id="btnpost" onclick="postajaxTest()">post 방식으로 보내기</button>
+	<input id="data" type="text">
+	<div id="container"></div>
+	</script>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
+                        <h2>Checkout</h2> 
                         <div class="breadcrumb__option">
                             <a href="<%=request.getContextPath() %>/index.html">Home</a>
                             <span>Checkout</span>
@@ -90,9 +95,10 @@
                                         <div class="hero__categories__all" style="width: 292px;">
                                             <i class="fa fa-bars"></i>
                                             <span>메뉴</span>
-                                        </div>  
+                                        </div> 
+                                        <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px0;">
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;"> 사용자 아이디</a></li>
+                                            <li id="btn" style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;"> 사용자 아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">개인정보 수정</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;"> 결제상품 조회 & 취소</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;"> 위시리스트</a></li>
@@ -101,6 +107,7 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;"> 나의 글</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;"> 문의사항</a></li>
                                         </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

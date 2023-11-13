@@ -34,14 +34,14 @@
         transition: background-color 0.3s, color 0.3s;
     }
     .choice-contury{
-        background-color: green;
+        background-color: #28a745;
         font-weight: bolder;
         color: white;
     }
 </style>
 <body>
 <section>
-    <div class="container">
+    <div class="container" style="margin-top: 200px;">
         <div class="section-title product__discount__title">
             <h2>동행 글쓰기</h2>
         </div>
@@ -106,7 +106,7 @@
                     <textarea id="" name="" placeholder="글을 작성해주세요(1000자이내)" cols="150" rows="20" maxlength="1000" wrap="on" style="border:solid gainsboro; resize: none;" ></textarea>
                 </div>
                 <div>
-                    <input type="submit" id="" name="" value="게시글 등록">
+                    <input type="submit" class="btn-success" id="" name="" value="게시글 등록" style="border:0px;">
                 </div>
             </form>
         </div>

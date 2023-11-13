@@ -7,11 +7,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-<<<<<<< HEAD
                             <a href="<%=request.getContextPath()%>/index.html"><img src="<%=request.getContextPath()%>/img/logo.png" alt=""></a>
-=======
-                            <a href="<%=request.getContextPath()%>/index.html"></a>
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
                         </div>
                         <p style="width: 1000px; font-size: 12px; text-align: left;">
                             " 상호명 (주)sixquense | 대표 홍길동 | 개인정보보호책임자 홍길순 | 사업자등록번호 000-000-0000 " | 통신판매업신고번호 2023-서울-0000 | 관광사업등록번호 : 제2023-0호"

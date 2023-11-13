@@ -56,4 +56,30 @@ public class AccompanyDAO {
 					.openChattingLink(rs.getString("openChattingLink"))
 					.build();
 	}
+
+	public AccompanyDTO selectAccompanyByNo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		AccompanyDTO a=  null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyByNo"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) a =getAccompanyDTO(rs);
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return a;
+		
+	}
+
+	public int updateAccompanyReadCount(Connection conn, int no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

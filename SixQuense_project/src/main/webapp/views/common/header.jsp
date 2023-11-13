@@ -73,20 +73,19 @@
                     <button type="button" class="btn btn-success"><b>글쓰기</b></button>
                 </div>
             </div>
-                <nav class="header__menu" style="text-align: center; display: contents;">
+                 <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
-                        <li class="active"><a href="<%=request.getContextPath()%>/index.html">Home</a></li>
-                        <li><a href="<%=request.getContextPath()%>/shop-grid.html">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li class="active"><a href="<%=request.getContextPath()%>/index.html"><img src="<%=request.getContextPath() %>/img/icon/홈.png" width="25px"> 홈</a></li>
+                        <li><a href="#"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="<%=request.getContextPath()%>/blog-details_wh.html">Shop Details</a></li>
-                                <li><a href="<%=request.getContextPath()%>/shoping-cart.html">Shoping Cart</a></li>
-                                <li><a href="<%=request.getContextPath()%>/package_country.html">Package</a></li>
-                                <li><a href="<%=request.getContextPath()%>/blog-details.html">Blog Details</a></li>
+                                <li><a href= #>Shop Details</a></li>
+                                <li><a href= #>Shoping Cart</a></li>
+                                <li><a href= #>Package</a></li>
+                                <li><a href= #>Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="<%=request.getContextPath()%>/blog.html">Blog</a></li>
-                        <li><a href="<%=request.getContextPath()%>/contact.html">Contact</a></li>
+                        <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a></li>
+                        <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
                     </ul>
                     
                 </nav>

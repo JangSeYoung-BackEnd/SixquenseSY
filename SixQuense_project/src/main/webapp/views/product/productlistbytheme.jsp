@@ -270,14 +270,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <div class="여행태마">
-                        <h2>겨울에 어디로 갈까요?</h2> 
-                        <div class="product_item"><img src="./img/japen/삿포르패키지.png">
-                        <img src="./img/japen/삿포르패키지.png">
-                        <img src="./img/japen/삿포르패키지.png">
-                        <img src="./img/japen/삿포르패키지.png">
+                        <h2 style="font-weight: bold; text-align: left;">겨울에 어디로 갈까요?</h2>
+                        <div class="product_item">
+                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
                     </div>
+                    </div> 
                     </div>
                 </div>
             </div>

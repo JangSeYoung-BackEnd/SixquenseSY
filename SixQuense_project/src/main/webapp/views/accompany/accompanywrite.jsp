@@ -33,9 +33,9 @@
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
     }
-
-    .continent div:hover, .contury div:hover {
+    .choice-contury{
         background-color: green;
+        font-weight: bolder;
         color: white;
     }
 </style>
@@ -47,53 +47,53 @@
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-7 continent">
-                <div>동남아·대만</div>
-                <div>일본</div>
-                <div>유럽</div>
-                <div>미주·캐나다</div>
+                <div class="con-1">동남아·대만</div>
+                <div class="con-2">일본</div>
+                <div class="con-3">유럽</div>
+                <div class="con-4">미주·캐나다</div>
             </div>
             <div class="col-lg-10 col-md-7">
                 <div class="row contury">
-                    <div>방콕·파타야</div>
-                    <div>호치민·나트랑·달랏</div>
-                    <div>푸켓</div>
-                    <div>코타카나발루</div>
-                    <div>대만</div>
-                    <div>보홀</div>
-                    <div>싱가포르</div>
-                    <div>세부·클락</div>
-                    <div>보라카이</div>
+                    <div class="contury-1-1">방콕·파타야</div>
+                    <div class="contury-1-2">호치민·나트랑·달랏</div>
+                    <div class="contury-1-3">푸켓</div>
+                    <div class="contury-1-4">코타카나발루</div>
+                    <div class="contury-1-5">대만</div>
+                    <div class="contury-1-6">보홀</div>
+                    <div class="contury-1-7">싱가포르</div>
+                    <div class="contury-1-8">세부·클락</div>
+                    <div class="contury-1-9">보라카이</div>
                 </div>
                 <div class="row contury">
-                    <div>후쿠오카</div>
-                    <div>오사카·교토</div>
-                    <div>도쿄</div>
-                    <div>샷포로</div>
-                    <div>오키나와</div>
+                    <div class="contury-2-1">후쿠오카</div>
+                    <div class="contury-2-2">오사카·교토</div>
+                    <div class="contury-2-3">도쿄</div>
+                    <div class="contury-2-4">샷포로</div>
+                    <div class="contury-2-5">오키나와</div>
                 </div>
                 <div class="row contury">
-                    <div>영국</div>
-                    <div>프랑스</div>
-                    <div>이탈리아</div>
-                    <div>스위스</div>
-                    <div>스페인·포르투칼</div>
+                    <div class="contury-3-1">영국</div>
+                    <div class="contury-3-2">프랑스</div>
+                    <div class="contury-3-3">이탈리아</div>
+                    <div class="contury-3-4">스위스</div>
+                    <div class="contury-3-5">스페인·포르투칼</div>
                 </div>
                 <div class="row contury">
-                    <div>미서부</div>
-                    <div>미동부</div>
-                    <div>하와이</div>
-                    <div>캐나다</div>
-                    <div>호주</div>
+                    <div class="contury-4-1">미서부</div>
+                    <div class="contury-4-2">미동부</div>
+                    <div class="contury-4-3">하와이</div>
+                    <div class="contury-4-4">캐나다</div>
+                    <div class="contury-4-5">호주</div>
                 </div>
             </div>
         </div>
         <div class="row">
             <form action="">
                 <div>
-                    <input type="text" id="" name="" placeholder="제목을 입력하세요" style="width: 500px;">
+                    <input type="text" id="" name="" placeholder="제목을 입력하세요" style="width: 700px; border:solid gainsboro;">
                 </div>
                 <div>
-                    <input type="text" id="" name="" placeholder="카카오톡 링크" style="width: 500px;">
+                    <input type="text" id="" name="" placeholder="카카오톡 링크" style="width: 700px; border:solid gainsboro;">
                 </div>
                 <div class="file-btn" onclick="openFileDialog()">
                     <input type="file" accept="image/bmp,image/gif,image/jpg,image/jpeg,image/png,image/raw,image/tif,image/heif,image/heic,image/mp4,image/avi,image/mov,image/wmv,image/mkv,image/mpg,image/rm,image/asf,image/m4v,image/mpeg,image/mpg" style="display: none; margin: 0px; padding: 0px;">
@@ -103,80 +103,66 @@
                     <p class="sc-9332fd40-1 besauD">배경사진을 선택해주세요</p>
                 </div>
                 <div>
-                    <textarea id="" name="" placeholder="글을 작성해주세요" cols="150" rows="10"></textarea>
+                    <textarea id="" name="" placeholder="글을 작성해주세요(1000자이내)" cols="150" rows="20" maxlength="1000" wrap="on" style="border:solid gainsboro; resize: none;" ></textarea>
                 </div>
                 <div>
-                    <input type="submit" id="" name="">
+                    <input type="submit" id="" name="" value="게시글 등록">
                 </div>
             </form>
         </div>
     </div>
     <script>
-        const continentRadio = document.getElementsByName("continent");
-
-        // 라디오 버튼 변경 이벤트 핸들러 함수
-        function handleRadioChange() {
-            const selectedContinent = document.querySelector('input[name="continent"]:checked').value;
-            const asiaContury = document.getElementById("aisa-contury");
-            const japanContury = document.getElementById("japen-contury");
-            const europeContury = document.getElementById("europe-contury");
-            const americaContury = document.getElementById("america-contury");
-
-            asiaContury.style.display = "none";
-            japanContury.style.display = "none";
-            europeContury.style.display = "none";
-            americaContury.style.display = "none";
-
-            if (selectedContinent === "동남아·대만") {
-                asiaContury.style.display = "block";
-            } else if (selectedContinent === "일본") {
-                japanContury.style.display = "block";
-            } else if (selectedContinent === "유럽") {
-                europeContury.style.display = "block";
-            } else if (selectedContinent === "미주·캐나다") {
-                americaContury.style.display = "block";
-            }
-        }
-        // 라디오 버튼에 이벤트 리스너 등록
-        for (const radio of continentRadio) {
-            radio.addEventListener("change", handleRadioChange);
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-        var openButton = document.getElementById('openProfilePopup');
-        var profilePopup = document.getElementById('profilePopup');
-        var closeButton = document.getElementById('closeProfilePopup');
-
-        openButton.addEventListener('click', function() {
-            profilePopup.style.display = 'block';
-        });
-
-        closeButton.addEventListener('click', function() {
-            profilePopup.style.display = 'none';
-        });
-        });
-        var isFilled = false;
-
-        function toggleImage() {
-            var button = document.getElementById('followButton');
-            if (isFilled) {
-                button.src = "/ogani-master/img/팔로우(빈거).png";
-            } else {
-                button.src = "/ogani-master/img/팔로우.png";
-            }
-            isFilled = !isFilled; // 이미지 상태를 토글
-        }
         function openFileDialog() {
             const fileInput = document.querySelector('input[type=file]');
             fileInput.click();
-
-            // 파일이 선택되었을 때 실행될 코드
             fileInput.addEventListener('change', function () {
             const selectedFiles = fileInput.files;
-            console.log('Selected Files:', selectedFiles);
-
-            // 추가로 원하는 동작을 여기에 작성
             });
         }
+        const continent = document.querySelector('.continent');
+        const conturyElements = document.querySelectorAll('[class^="contury-"]');
+
+        conturyElements.forEach((element) => {
+            element.addEventListener('click', function() {
+                conturyElements.forEach((el) => {
+                    $(el).removeClass("choice-contury");
+                });
+                $(element).addClass("choice-contury");
+                if(element.className.includes("1-")){
+                    $.each($(".continent>div"),(i,e)=>{
+                        if(e.classList.contains('con-1')){
+                           $(e).addClass("choice-contury");
+                        }else{
+                            $(e).removeClass("choice-contury");
+                        }
+                    });
+                }else if(element.className.includes("2-")){
+                    $.each($(".continent>div"),(i,e)=>{
+                        if(e.classList.contains('con-2')){
+                            $(e).addClass("choice-contury");
+                        }else{
+                            $(e).removeClass("choice-contury");
+                        }
+                    });
+                }else if(element.className.includes("3-")){
+                    $.each($(".continent>div"),(i,e)=>{
+                        if(e.classList.contains('con-3')){
+                            $(e).addClass("choice-contury");
+                        }else{
+                            $(e).removeClass("choice-contury");
+                        }
+                    });
+                }else if(element.className.includes("4-")){
+                    $.each($(".continent>div"),(i,e)=>{
+                        if(e.classList.contains('con-4')){
+                            $(e).addClass("choice-contury");
+                        }else{
+                            $(e).removeClass("choice-contury");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </section>
 </body>

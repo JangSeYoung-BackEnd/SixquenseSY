@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="<%=request.getContextPath()%>/index.html"><img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" width="100%"></a>
+                        <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" width="100%"></a>
                     </div>
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
@@ -73,24 +73,25 @@
                     <button type="button" class="btn btn-success"><b>글쓰기</b></button>
                 </div>
             </div>
-                <nav class="header__menu" style="text-align: center; display: contents;">
+                 <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
-                        <li class="active"><a href="<%=request.getContextPath()%>/index.html">Home</a></li>
-                        <li><a href="<%=request.getContextPath()%>/shop-grid.html">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/icon/홈.png" width="25px"> 홈</a></li>
+                        <li><a href="#"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="<%=request.getContextPath()%>/blog-details_wh.html">Shop Details</a></li>
-                                <li><a href="<%=request.getContextPath()%>/shoping-cart.html">Shoping Cart</a></li>
-                                <li><a href="<%=request.getContextPath()%>/package_country.html">Package</a></li>
-                                <li><a href="<%=request.getContextPath()%>/blog-details.html">Blog Details</a></li>
+                                <li><a href= #>상품</a></li>
+                                <li><a href= #>상품</a></li>
+
                             </ul>
                         </li>
-                        <li><a href="<%=request.getContextPath()%>/blog.html">Blog</a></li>
-                        <li><a href="<%=request.getContextPath()%>/contact.html">Contact</a></li>
+                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a>
+                        	<ul class="header__menu__dropdown">
+                                <li><a href= #>동행</a></li>
+                                <li><a href= #>여행리뷰</a></li>
+                            </ul>
+                        </li>
+                        <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
                     </ul>
-                    
                 </nav>
-            
         </div>
     </header>
     <!-- 헤더 -->

@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
+<%@ include file="/views/common/header.jsp"%> 
 
 
 <style>
+div#googleMap img{
+	border-radius:0;
+}
 #likeButtonContainer {
 	text-align: center; /* 이 부분을 추가하여 내용을 가운데로 정렬합니다. */
 }
@@ -100,6 +103,20 @@ button:hover {
 	}
 </style>
 
+<script>
+   function myMap(){
+      var mapOptions = { 
+            center:new google.maps.LatLng(51.508742, -0.120850),
+            zoom:5
+      };
+ 
+      var map = new google.maps.Map( 
+             document.getElementById("googleMap") 
+            , mapOptions );
+   }
+</script> 
+
+
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
@@ -168,9 +185,8 @@ button:hover {
 					<div class="blog__details__text">
 						<div style="display:flex;">
 							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
-							<div style=" width: 250px; height: 250px; border: black; border-style: solid;" > 지도 자리</div>
+							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
 						</div>
-						
 					</div>
 					
 					<div>
@@ -288,4 +304,6 @@ button:hover {
 		}
 		
 	</script>
-<%@ include file="/views/common/footer.jsp"%>
+<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+ -->
+ <%@ include file="/views/common/footer.jsp"%>

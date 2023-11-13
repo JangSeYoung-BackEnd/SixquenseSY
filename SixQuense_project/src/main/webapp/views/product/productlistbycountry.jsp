@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
+
 <style>
 .btn-group-lg>.btn, .btn-lg {
 	font-size: 14px; !important;

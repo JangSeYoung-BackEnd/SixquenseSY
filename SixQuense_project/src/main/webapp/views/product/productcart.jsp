@@ -1,6 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+    var IMP = window.IMP; 
+    IMP.init("imp88100268"); 
+  
+    const today = new Date();   
+    const hours = today.getHours(); // 시
+    const minutes = today.getMinutes();  // 분
+    const seconds = today.getSeconds();  // 초
+    const milliseconds = today.getMilliseconds();
+    const makeMerchantUid = hours +  minutes + seconds + milliseconds;
+    
+
+    function paymentButton() {
+        var infocheckbox = document.getElementById("infocheckbox");
+        if (!infocheckbox.checked) {
+            return;
+        }
+
+        IMP.request_pay({
+            pg : 'kakaopay',
+            merchant_uid: "IMP"+makeMerchantUid, 
+            name : '으악으악',
+            amount : 1004,
+            buyer_email : 'sixquence',
+            buyer_name : '장세영',
+            buyer_tel : '010-1234-5678',
+            buyer_addr : 'gdacadamey',
+            buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+</script>
 <body>
     <div style="display: flex;margin-top:170px;">
     <section class="set-bg" data-setbg="img/breadcrumb.jpg">
@@ -18,9 +59,8 @@
             </div>
         </div>
     </section>
-    <section class="col-lg-7">
+    <section class="col-lg-6">
         <div class="container">
-            <title>장바구니</title>
             <style>
               .shoping__cart__item {
                 display: flex;
@@ -58,29 +98,28 @@
                     <thead>
                       <tr>
                         <th class="shoping__product">상품정보</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
+                        <th>가격</th>
+                        <th>수량</th>
+                        <th>총합</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>
                           <div class="shoping__cart__item">
-                            <img src="img/america/캐나다.png" alt="">
-                            <h2>패키지 제목</h2>
+                          <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                            <h3>패키지 제목</h3>
                           </div>
                         </td>
                         <td class="shoping__cart__price">
-                          $55.00
+                          100만원
                         </td>
-                        
                         <td class="shoping__cart__total">
-                          $110.00
+                          수량
                         </td>
-                        <td class="shoping__cart__item__close" onclick="removeRow(this)">
-                          <span class="">✖</span>
+                        <td class="shoping__cart__item__close">
+                          총합
                         </td>
                       </tr>
                     </tbody>
@@ -88,15 +127,7 @@
                 </div>
               </div>
             </div>
-            <script>
-              function removeRow(element) {
-                var row = element.parentNode;
-                while (row.tagName !== "TR") {
-                  row = row.parentNode;
-                }
-                row.parentNode.removeChild(row);
-              }
-            </script>
+            
             <div class="row">
                 <div class="col-lg-12">  
                 </div>
@@ -222,58 +253,48 @@
                 box-sizing: border-box;
                 background-color: #f5f5f5;
             }
-        
-            label {
-                display: block;
-                margin-bottom: 8px;
-            }
-        
-            input,
-            select {
-                width: 100%;
-                padding: 8px;
-                margin-bottom: 16px;
-                box-sizing: border-box;
-            }
-        
-            .flex-container {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 16px;
-            }
-        
-            button {
-                background-color: #4caf50;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-        
-            button:hover {
-                background-color: #45a049;
-            }
         </style>
     </div>    
     </section>
-    <div class="col-lg-2" style="border: 2px solid grey; padding: 22px 24px; width: 340px;">
-        <h3>결제 정보</h3>
-        <hr>
-        <div>
-          <h5>주문 금액</h5>
-          <h4 style="background-color: #4caf50; padding: 5px; color: white;">총 결제 금액 1,179,000원</h4>
-          <h3>약관 안내</h3>
-          <hr>
-          <div>
-            개인정보 수집 및 이용동의(필수)<br>
-            개인정보 제공 동의(필수)<br>
-            고유식별정보 제공 동의(필수)<br>
-            고유식별정보 수집 및 이전 동의(필수)
-            <input type="text" placeholder="위 약관을 확인하였으며, 회원 본인은 약관 및 결제에 동의합니다">
-            <div>
-              예약 취소 규정
-              <p>▶여행자의 여행계약 해제 요청 시 여행약관에 의거하여 취소료가 부과됩니다◀</p>
+    <div class="col-lg-3" style="border: 2px solid grey; padding: 22px 24px; width: 340px;">
+    <h3>결제 정보</h3>
+    <hr>
+    <div>
+        <h5>주문 금액</h5>
+        <h4 style="background-color: #4caf50; padding: 5px; color: white;">총 결제 금액 1,179,000원</h4>
+    </div>
+
+    <h3>약관 안내</h3>
+    <hr>
+
+    <div>
+        <p class="consent">개인정보 수집 및 이용동의
+            <button onclick="showAlert('개인정보 수집 및 이용동의에 동의하셨습니다.', 'personalInfoConsent')">필수</button>
+            <input type="checkbox" id="personalInfoConsent" onchange="checkConsent()">
+        </p>
+        <p class="consent">개인정보 제공 동의
+            <button onclick="showAlert('개인정보 제공 동의에 동의하셨습니다.', 'infoProvidingConsent')">필수</button>
+            <input type="checkbox" id="infoProvidingConsent" onchange="checkConsent()">
+        </p>
+        <p class="consent">고유식별정보 제공 동의
+            <button onclick="showAlert('고유식별정보 제공 동의에 동의하셨습니다.', 'identificationConsent')">필수</button>
+            <input type="checkbox" id="identificationConsent" onchange="checkConsent()">
+        </p>
+        <p class="consent">고유식별정보 수집 및 이전 동의
+            <button onclick="showAlert('고유식별정보 수집 및 이전 동의에 동의하셨습니다.', 'identificationTransferConsent')">필수</button>
+            <input type="checkbox" id="identificationTransferConsent" onchange="checkConsent()">
+        </p>
+    </div>
+
+    <div class="infocheck" style="border: 2px solid grey;">
+        "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"
+        <input type="checkbox" id="infocheckbox">
+    </div>
+
+    <div>
+    <h3 onclick="toggleCancellationPolicy()">예약 취소 규정 보기/숨기기</h3>
+    <div id="cancellationPolicy">
+        <p>▶여행자의 여행계약 해제 요청 시 여행약관에 의거하여 취소료가 부과됩니다◀</p>
               <p>제16조(여행출발 전 계약해제)</p>
               <p>여행개시 30일전까지( ～30) 통보 시 - 계약금 환급</p>
               <p>여행개시 20일전까지(29～20) 통보 시 - 여행요금의 10% 배상</p>
@@ -294,14 +315,10 @@
               <p>업무시간 외 접수한 경우에는 익일(영업일이 아닌 경우 다음 영업일)에 접수한 것으로 간주됩니다.</p>
               <p>업무시간은 월-금 09:00~18:00 (주말,공휴일 제외)</p>
               <p>(예: 토/일/월 출발 상품은 금요일 업무종료 이후 취소시 당일 취소로 간주됩니다.)</p>
-            </div>
-          </div>
-          <div>
-          <button id="paymentButton">결제하기</button>
-        </div>
-        </div>
-      </div>
     </div>
+    <div>
+    <button id="paymentButton" onclick="paymentButton()">결제하기</button>
+</div>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -331,7 +348,7 @@
     }
 
     button {
-      background-color: #4caf50;
+      background-color: #51abf3;
       color: white;
       padding: 10px 15px;
       border: none;
@@ -342,22 +359,55 @@
     button:hover {
       background-color: #45a049;
     }
+    
   </style>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const termsCheckbox = document.getElementById('termsCheckbox');
-      const paymentButton = document.getElementById('paymentButton');
+ <script>
+    function checkConsent() {
+        let personalinfo = document.getElementById("personalInfoConsent").checked;
+        let infoprovide = document.getElementById("infoProvidingConsent").checked;
+        let identifiinfo = document.getElementById("identificationConsent").checked;
+        let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
 
-      termsCheckbox.addEventListener('change', function () {
-        paymentButton.disabled = !termsCheckbox.checked;
-      });
+        var infocheckbox = document.getElementById("infocheckbox");
+        if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
+            infocheckbox.checked = true;
+            infocheckbox.disabled = false;
+        } else {
+            infocheckbox.checked = false;
+            infocheckbox.disabled = true;
+        }
+    }
 
-      paymentButton.addEventListener('click', function () {
-        // 여기에서 결제 처리를 수행할 수 있습니다.
-        alert('결제가 완료되었습니다.');
-      });
+    function showAlert(message, checkboxId) {
+        var userConsent = confirm(message);
+        if (userConsent) {
+            var checkbox = document.getElementById(checkboxId);
+            checkbox.checked = true;
+            checkConsent();
+        }
+    }
+
+    document.getElementById("paymentButton").addEventListener("click", function() {
+        var infocheckbox = document.getElementById("infocheckbox");
+        if (!infocheckbox.checked) {
+            alert("약관을 모두 동의해야 합니다.");
+        }
     });
-  </script>
+
+    function toggleCancellationPolicy() {
+        var policy = document.getElementById("cancellationPolicy");
+        if (policy.style.display === "none") {
+            policy.style.display = "block";
+        } else {
+            policy.style.display = "none";
+        }
+    }
+
+    window.onload = function() {
+        var infocheckbox = document.getElementById("infocheckbox");
+        infocheckbox.disabled = true;
+    }
+</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

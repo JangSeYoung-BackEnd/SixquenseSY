@@ -167,7 +167,7 @@ button:hover {
 					</div>
 					<div class="blog__details__text">
 						<div style="display:flex;">
-							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px;">
+							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
 							<div style=" width: 250px; height: 250px; border: black; border-style: solid;" > 지도 자리</div>
 						</div>
 						

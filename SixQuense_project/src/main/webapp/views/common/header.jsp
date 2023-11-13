@@ -91,9 +91,7 @@
                         </li>
                         <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
                     </ul>
-                    
                 </nav>
-            
         </div>
     </header>
     <!-- 헤더 -->

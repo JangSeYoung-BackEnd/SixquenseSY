@@ -53,49 +53,44 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="./img/9.png" width="100%"></a>
+                        <a href="<%=request.getContextPath()%>/index.html"><img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" width="100%"></a>
                     </div>
-                </div>
-                <div class="col-lg-4" style="display: contents;">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./blog-details_wh.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./package_country.html">Package</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                        
-                    </nav>
-                </div>
-                <div class="col-lg-4 hero__search">
-                    <div class="hero__search__form">
+                </div>              
+                    <div class="hero__search__form" style="margin-left: 70px;">
                         <form action="#">
                             <input type="text" placeholder="어디로 떠나실건가요?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
-                </div>
-                <div class="col-lg-1">
-                    <div class="header__cart">
+                    <div class="header__cart" style="margin-left: 60px;">
                         <ul>
                             <div class="header__top__right"><div class="header__top__right__auth">
-                                <a href="/login.html"><i class="fa fa-user"></i> Login</a></div>
-                                </div>
+                                <button type="button" class="btn btn-success"><a href="/login.html"></i><b style="color: white;">로그인</b></a></button>
+                            </div>
                         </ul>
-                    </div>
-                </div>
-                <div class="wirtebtn" style="display: flex; align-items: center;">
-                    <button type="button" class="btn btn-success">글쓰기</button>
+                    </div>         
+                <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
+                    <button type="button" class="btn btn-success"><b>글쓰기</b></button>
                 </div>
             </div>
+                <nav class="header__menu" style="text-align: center; display: contents;">
+                    <ul>
+                        <li class="active"><a href="<%=request.getContextPath()%>/index.html">Home</a></li>
+                        <li><a href="<%=request.getContextPath()%>/shop-grid.html">Shop</a></li>
+                        <li><a href="#">Pages</a>
+                            <ul class="header__menu__dropdown">
+                                <li><a href="<%=request.getContextPath()%>/blog-details_wh.html">Shop Details</a></li>
+                                <li><a href="<%=request.getContextPath()%>/shoping-cart.html">Shoping Cart</a></li>
+                                <li><a href="<%=request.getContextPath()%>/package_country.html">Package</a></li>
+                                <li><a href="<%=request.getContextPath()%>/blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="<%=request.getContextPath()%>/blog.html">Blog</a></li>
+                        <li><a href="<%=request.getContextPath()%>/contact.html">Contact</a></li>
+                    </ul>
+                    
+                </nav>
+            
         </div>
     </header>
     <!-- 헤더 -->

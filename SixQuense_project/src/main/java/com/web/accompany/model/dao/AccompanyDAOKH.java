@@ -1,6 +1,6 @@
 package com.web.accompany.model.dao;
 
-import static com.web.common.JDBCTemplate.close;
+import static com.web.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import com.web.accompany.model.dto.AccompanyDTO;
 public class AccompanyDAOKH {
 	private Properties sql=new Properties();
 	{
-		String path=AccompanyDAOKH.class.getResource("/sql/accompany_sql.properties").getPath();
+		String path=AccompanyDAOKH.class.getResource("/sql/accompany/accompany_sql.properties").getPath();
 		try(FileReader fr=new FileReader(path)) {
 			sql.load(fr);
 		}catch(IOException e) {
@@ -33,7 +33,7 @@ public class AccompanyDAOKH {
 		ResultSet rs=null;
 		List<AccompanyDTO> result=new ArrayList<>();
 		try {
-			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyAll"));
+			pstmt=conn.prepareCall(sql.getProperty("selectAll"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
@@ -50,14 +50,14 @@ public class AccompanyDAOKH {
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
 		return AccompanyDTO.builder()
 					.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-					.accompanyTitle(rs.getString("ACCOMPANY_CONTENT"))
-					.accompanyContent(rs.getString("accompanyContent"))
-					.accompanyCount(rs.getInt("accompanyCount"))
-					.accompanyDate(rs.getDate("accompanyDate"))
-					.memberNo(rs.getInt("memberNo"))
-					.accompanyReadCount(rs.getInt("accompanyReadCount"))
-					.coordinateNo(rs.getInt("coordnateNo"))
-					.openChattingLink(rs.getString("openChattingLink"))
+					.accompanyTitle(rs.getString("ACCOMPANY_TITLE"))
+					.accompanyContent(rs.getString("ACCOMPANY_CONTENT"))
+					.accompanyCount(rs.getInt("ACCOMPANY_COUNT"))
+					.accompanyDate(rs.getDate("ACCOMPANY_DATE"))
+					.memberNo(rs.getInt("MEMBER_NO"))
+					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
+					.coordinateNo(rs.getInt("COORDINATE_NO"))
+					.openChattingLink(rs.getString("OPENCHATTING_LINK"))
 					.build();
 	}
 }

@@ -1,7 +1,6 @@
 package com.web.accompany.service;
 
-import static com.web.common.JDBCTemplate.close;
-import static com.web.common.JDBCTemplate.getConnection;
+import static com.web.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -17,6 +16,11 @@ public class AccompanyServiceKH {
 		public List<AccompanyDTO> selectAccompanyAll(){
 			Connection conn=getConnection();
 			List<AccompanyDTO> a=dao.selectBoardAll(conn);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
 			close(conn);
 			return	a;
 		}

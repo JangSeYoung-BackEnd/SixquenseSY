@@ -15,17 +15,14 @@ public class AccompanyServiceWH {
 		
 		
 		//글을 클릭했을 때 해당하는 글번호로 조회하는 메소드 
-		public AccompanyDTO selectBoardByNo(int no, boolean readResult) {
+		public AccompanyDTO selectBoardByNo(int no) {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
-			
-			if(accompanyView!=null &&!readResult) {
+			if(accompanyView!=null) {
 				int result= dao.updateAccompanyReadCount(conn,no);
 				if(result>0) {
 					commit(conn);
-					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount());
-				}
-				else rollback(conn);
+				}else rollback(conn);
 			}
 			close(conn);
 			return accompanyView;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.accompany.service.AccompanyService;
+import com.web.accompany.service.AccompanyServiceWH;
 
 /**
  * Servlet implementation class AccompanyViewServlet
@@ -59,9 +59,10 @@ public class AccompanyViewServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		
-		AccompanyDTO a = new AccompanyService().selectBoardByNo(no,readResult);
+		AccompanyDTO a = new AccompanyServiceWH().selectBoardByNo(no,readResult);
+		System.out.println(a);
 		//이 글번호에 대한 댓글들을 List에 저장함.
-		List<AccompanyComment> comments= new AccompanyService().selectAccompanyComment(no);
+		List<AccompanyComment> comments= new AccompanyServiceWH().selectAccompanyComment(no);
 		
 		
 		request.setAttribute("comments", comments);

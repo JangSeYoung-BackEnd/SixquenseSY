@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductViewServlet
+ * Servlet implementation class MakeOrderServlet
  */
-@WebServlet("/product/productview.do")
-public class ProductViewServlet extends HttpServlet {
+@WebServlet("/product/makeorder.do")
+public class MakeOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductViewServlet() {
+    public MakeOrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +28,8 @@ public class ProductViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		//상품 상 jsp로 이동
-		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/views/product/productpayment.jsp").forward(request, response);
 	}
 
 	/**

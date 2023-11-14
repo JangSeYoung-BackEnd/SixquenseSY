@@ -99,9 +99,10 @@
             <div class="row featured__filter">
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic" data-setbg=""><img src="./img/eastsouthasia/다낭.png"
-                                width="250px;"
-                                height="265px">
+                        <div class="featured__item__pic" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/다낭.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -115,9 +116,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg=""><img src="./img/eastsouthasia/방.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/방.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -131,9 +133,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/대만.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/대만.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -147,9 +150,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/보라카이.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/보라카이.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -163,9 +167,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/보홀.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/보홀.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -179,9 +184,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/세부클.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/세부클.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -195,9 +201,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/코타키나발루.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/코타키나발루.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -211,9 +218,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/푸켓.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/푸켓.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -227,9 +235,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg"><img src="./img/eastsouthasia/호치민.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/eastsouthasia/호치민.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -243,9 +252,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg=""><img src="./img/japen/도쿄.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/japen/도쿄.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -259,9 +269,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg=""><img src="./img/japen/삿포르.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/japen/삿포르.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -275,9 +286,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg=""><img src="./img/japen/오사카교토.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/japen/오사카교토.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -291,9 +303,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg=""><img src="./img/japen/오키나와.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/japen/오키나와.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -307,9 +320,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg"><img src="./img/europe/스위스.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/europe/스위스.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -323,9 +337,11 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg"><img src="./img/europe/스페인.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                        
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/europe/스페인.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -339,9 +355,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg"><img src="./img/europe/영국.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/europe/영국.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -355,9 +372,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg"><img src="./img/europe/이탈리아.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/europe/이탈리아.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -371,9 +389,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg"><img src="./img/europe/프랑스.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/europe/프랑스.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -387,9 +406,8 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg"><img src="./img/america/미동부.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                        <img src="./img/america/미동부.png"width="250px;"height="265px">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -403,9 +421,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg"><img src="./img/america/미서부.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/america/미서부.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -419,9 +438,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg"><img src="./img/america/캐나다.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/america/캐나다.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -435,9 +455,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg"><img src="./img/america/하와이.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/america/하와이.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -451,9 +472,10 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg"><img src="./img/america/호주.png"
-                            width="250px;"
-                            height="265px">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/america/호주.png"width="250px;"height="265px">
+                        </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>

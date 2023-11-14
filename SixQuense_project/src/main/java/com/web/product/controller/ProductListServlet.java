@@ -27,7 +27,7 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
 	}
 
 	/**

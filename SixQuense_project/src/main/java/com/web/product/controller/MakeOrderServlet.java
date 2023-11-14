@@ -29,7 +29,7 @@ public class MakeOrderServlet extends HttpServlet {
 		
 		
 		
-		request.getRequestDispatcher("/views/product/productpayment.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/syproductcart.jsp").forward(request, response);
 	}
 
 	/**

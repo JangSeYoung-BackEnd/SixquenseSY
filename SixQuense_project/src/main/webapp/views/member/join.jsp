@@ -1,19 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
- <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_sh.css">
-</head>
 <style>
-.logo{
-     display: flex;
-     justify-content: center;
-     padding-top: 10px;
- }
-        
+/*회원가입*/
+.sign-up{
+    margin: 3px;
+    font-size: 14px;
+}
+/*가로 800px 이상일때*/
+@media(min-width : 800px)
+{
+    .main{
+        width: 460px;
+        margin: auto;
+    }
+
+/*언어설정*/
+.select-lang{
+    margin-top: 20px;
+    width: 550px;
+    padding-right: 10px;
+}
+/*IP보안 표시*/
+#ip-check{
+    margin-right: 7px;
+    float: right;
+    display:block;
+}
+
+/*저작권 표시*/
+footer{
+    display:block;
+}
+
+}
+
+
 /*회원가입 부분*/
 .main-signup{
     text-align: center;
@@ -162,11 +183,12 @@ h3{
     font-size: 15px;
     outline:none;
     cursor: pointer;
-}       
+}
+
+
+
+
 </style>
-
-
-
 
 
 
@@ -184,8 +206,6 @@ h3{
                 </a>
             </div>
         </header>
-        
-F
         <!-- 시퀀스 회원가입 -->
         <section>
             <div>
@@ -291,8 +311,7 @@ F
                 </div>
             </div>
         </section>
-            </div>
+         
         </section>
 </body>
-
 </html>

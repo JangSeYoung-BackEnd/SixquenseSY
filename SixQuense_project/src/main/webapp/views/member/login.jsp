@@ -1,37 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
- <link rel="stylesheet" href="style_sh.css">
-</head>
-<style>
-	.logo{
-		display: flex;
-		justify-content: center;
-		padding-top: 10px;
-		margin-top: 200px;
-	}
-	.outBox{
-		margin-top:5px !important;
-	}
-	.loginbtn-container{
-		margin-top: 3%;
-		display: flex;
-		justify-content: space-between;
-	}
-	.login-btn-wrap{
-		width:40%;
-		height:30px;
-		display: flex;
-		justify-content: space-between;	
-	}
-	
 
-        /* 첫번째 로그인 페이지 */
+/* 첫번째 로그인 페이지 */
 /* 아이디 */
+<Style>
 .outBox {margin:50px auto; padding:20px; max-width:320px; border:1px solid #999; border-radius:6px;}
 .outBox .inputBox {position:relative; height:50px;}
 .outBox .inputBox input[type="text"] {padding:0 10px; width:100%; height:50px; font-size:14px; box-sizing:border-box; border:1px solid #999; outline:none;}
@@ -49,8 +21,12 @@
 .outBox.existence .inputBox input[type="text"] {border:2px solid red;}
 .outBox .inputBox input[type="text"]:focus + label,
 .outBox.existence .inputBox label {color:red; transform:scale(.85) translate(-10px, -48px);}
-              
- /* 간편 로그인  */
+
+
+
+
+
+/* 간편 로그인  */
 .hr-sect {
     display: flex;
     flex-basis: 100%;
@@ -69,14 +45,6 @@
     line-height: 0px;
     margin: 0px 16px;
   }
-/*간편 로그인 이미지 용가리 */
-.easy{
-	display: flex;
-		margin-left: auto;
-		margin-right: auto;
-	justify-content: space-evenly;
-		
-} 
 
 /*회원가입*/
 .sign-up{
@@ -85,13 +53,32 @@
 }
 /*가로 800px 이상일때*/
 @media(min-width : 800px)
-{}
-.main{
-    width: 460px;
-    margin: auto;
-}	
-</style>
+{
+    .main{
+        width: 460px;
+        margin: auto;
+    }
 
+/*언어설정*/
+.select-lang{
+    margin-top: 20px;
+    width: 550px;
+    padding-right: 10px;
+}
+/*IP보안 표시*/
+#ip-check{
+    margin-right: 7px;
+    float: right;
+    display:block;
+}
+
+/*저작권 표시*/
+footer{
+    display:block;
+}
+
+}
+</Style>
 
 
 
@@ -137,9 +124,8 @@
 			</a>
 		
 			
-		</form>
-		</div>
-		
+			</form>
+			</div>
+			
 	</section>
-</body>
 </html>

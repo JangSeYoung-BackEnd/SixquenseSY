@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+
+
 <%
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
 
@@ -312,5 +314,7 @@ button:hover {
 		}
 		
 	</script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+
  <%@ include file="/views/common/footer.jsp"%>

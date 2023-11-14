@@ -36,13 +36,13 @@ public class AccompanyViewServlet extends HttpServlet {
 		//글번호를 받아서 조회하도록 한다. 
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		//조회수 부분 
+		//조회수 부분 -쿠키를 가져옴 
 		Cookie[] cookies = request.getCookies();
 		String readAccompany="";
 		boolean readResult = false; //읽지 않았다.
 		for(Cookie c : cookies) {
 			String name = c.getName();
-			if(name.equals("readBoard")) {
+			if(name.equals("readAccompany")) {
 				readAccompany = c.getValue();
 				if(readAccompany.contains("|"+no+"|")) {
 					//contain인 애를 찾았다 -> 그전에 읽어었다.
@@ -62,12 +62,13 @@ public class AccompanyViewServlet extends HttpServlet {
 		AccompanyDTO a = new AccompanyService().selectBoardByNo(no,readResult);
 		//이 글번호에 대한 댓글들을 List에 저장함.
 		List<AccompanyComment> comments= new AccompanyService().selectAccompanyComment(no);
+		
+		
 		request.setAttribute("comments", comments);
 		request.setAttribute("board", a);
 		request.getRequestDispatcher("/views/accompany/accompanyview.jsp").forward(request, response);
 
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

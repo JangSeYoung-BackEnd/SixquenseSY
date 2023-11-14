@@ -1,7 +1,6 @@
 package com.web.accompany.service;
 
-import static com.web.common.JDBCTemplate.close;
-import static com.web.common.JDBCTemplate.getConnection;
+import static com.web.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 import com.web.accompany.model.dao.AccompanyDAO;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.common.JDBCTemplate;
+
 
 public class AccompanyService {
 		private AccompanyDAO dao=new AccompanyDAO();
@@ -29,10 +28,10 @@ public class AccompanyService {
 			if(accompanyView!=null &&!readResult) {
 				int result= dao.updateAccompanyReadCount(conn,no);
 				if(result>0) {
-					JDBCTemplate.commit(conn);
+					commit(conn);
 					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount());
 				}
-				else JDBCTemplate.rollback(conn);
+				else rollback(conn);
 			}
 			close(conn);
 			return accompanyView;

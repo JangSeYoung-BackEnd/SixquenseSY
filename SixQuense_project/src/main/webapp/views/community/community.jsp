@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%@ page import="java.util.List, com.web.accompany.model.dto.AccompanyDTO" %>
+<%@ page import="java.util.List, com.web.accompany.model.dto.CommunityDTO" %>
 <%
-	List<AccompanyDTO> accompanys=(List<AccompanyDTO>)request.getAttribute("accompanys");
+	List<CommunityDTO> communitys=(List<CommunityDTO>)request.getAttribute("communitys");
 %>
 <style>
     .menu {
@@ -111,15 +111,15 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>동행</h2>
+                            <h2>여행리뷰</h2>
                         </div>
                         <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
                         <button onclick="" class="recent-btn">최신순</button>
                         <button onclick="" class="popularity-btn">인기순</button>
                     </div>
                     <div class="row">
-                    	<% if(!accompanys.isEmpty()){ 
-                    		for(AccompanyDTO a:accompanys){%>
+                    	<% if(!communitys.isEmpty()){ 
+                    		for(CommunityDTO c:communitys){%>
 		                        <div class="col-lg-4 col-md-6 col-sm-6">
 		                            <div class="product__item">
 		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/img/accompany/traveldata.jpg" style="border-radius: 20%; ">

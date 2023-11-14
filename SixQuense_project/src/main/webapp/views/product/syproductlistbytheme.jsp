@@ -23,9 +23,9 @@
 <section class="body">
     <h4>대륙 카테고리</h4>
     <ul>
-        <li class="continent"><a href="#">동남아·대만</a>
+        <li class="continent"><a href="#">[동남아·대만]</a>
             <ul class="sub-menu">
-                <li><a href="#">다낭</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">다낭</a></li>
                 <li><a href="#">방콕</a></li>
                 <li><a href="#">대만</a></li>
                 <li><a href="#">보라카이</a></li>
@@ -37,7 +37,7 @@
                 <li><a href="#">푸켓</a></li>
             </ul>
         </li>
-        <li class="continent"><a href="#">일본</a>
+        <li class="continent"><a href="#">[일본]</a>
             <ul class="sub-menu">
                 <li><a href="#">도쿄</a></li>
                 <li><a href="#">삿포르</a></li>
@@ -45,7 +45,7 @@
                 <li><a href="#">오키나와</a></li>
             </ul>
         </li>
-        <li class="continent"><a href="#">유럽</a>
+        <li class="continent"><a href="#">[유럽]</a>
             <ul class="sub-menu">
                 <li><a href="#">스위스</a></li>
                 <li><a href="#">스페인</a></li>
@@ -54,7 +54,7 @@
                 <li><a href="#">프랑스</a></li>
             </ul>
         </li>
-        <li class="continent"><a href="#">미주·캐나다·대양주</a>
+        <li class="continent"><a href="#">[미주·캐나다·대양주]</a>
             <ul class="sub-menu">
                 <li><a href="#">미동부</a></li>
                 <li><a href="#">미서부</a></li>

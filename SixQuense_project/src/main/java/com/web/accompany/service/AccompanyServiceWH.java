@@ -1,38 +1,28 @@
 package com.web.accompany.service;
 
-import static com.web.common.JDBCTemplate.close;
-import static com.web.common.JDBCTemplate.getConnection;
+import static com.web.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
 
-import com.web.accompany.model.dao.AccompanyDAO;
+import com.web.accompany.model.dao.AccompanyWH;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.common.JDBCTemplate;
 
-public class AccompanyService {
-		private AccompanyDAO dao=new AccompanyDAO();
+
+public class AccompanyServiceWH {
+		private AccompanyWH dao=new AccompanyWH();
 		
-		public List<AccompanyDTO> selectAccompanyAll(){
-			Connection conn=getConnection();
-			List<AccompanyDTO> a=dao.selectBoardAll(conn);
-			close(conn);
-			return	a;
-		}
 		
 		//글을 클릭했을 때 해당하는 글번호로 조회하는 메소드 
-		public AccompanyDTO selectBoardByNo(int no, boolean readResult) {
+		public AccompanyDTO selectBoardByNo(int no) {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
-			
-			if(accompanyView!=null &&!readResult) {
+			if(accompanyView!=null) {
 				int result= dao.updateAccompanyReadCount(conn,no);
 				if(result>0) {
-					JDBCTemplate.commit(conn);
-					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount());
-				}
-				else JDBCTemplate.rollback(conn);
+					commit(conn);
+				}else rollback(conn);
 			}
 			close(conn);
 			return accompanyView;

@@ -76,7 +76,7 @@
                  <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
                         <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/icon/홈.png" width="25px"> 홈</a></li>
-                        <li><a href="#"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
+                        <li><a href= "<%=request.getContextPath() %>/product/productmain.do"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href= #>상품</a></li>
                                 <li><a href= #>상품</a></li>

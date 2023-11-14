@@ -37,7 +37,7 @@ public class AccompanyWH {
 					.accompanyDate(rs.getDate("accompanyDate"))
 					.memberNo(rs.getInt("memberNo"))
 					.accompanyReadCount(rs.getInt("accompanyReadCount"))
-					.coordnateNo(rs.getInt("coordnateNo"))
+					.coordinateNo(rs.getInt("coordnateNo"))
 					.openChattingLink(rs.getString("openChattingLink"))
 					.build();
 	}

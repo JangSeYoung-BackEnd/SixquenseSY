@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import lombok.Builder;
 import lombok.Data;
+
+
 @Data
 @Builder
 public class AccompanyComment {
@@ -14,8 +16,4 @@ public class AccompanyComment {
 	private Date accompanyComtDate;
 	private int accompanyNo;
 	private int MemberNo;
-	
-	
-	
-	
 }

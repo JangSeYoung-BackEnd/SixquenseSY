@@ -5,6 +5,8 @@ import java.sql.Date;
 import lombok.Builder;
 import lombok.Data;
 
+
+
 @Data
 @Builder
 public class AccompanyDTO {
@@ -15,6 +17,7 @@ public class AccompanyDTO {
 	private Date accompanyDate;
 	private int memberNo;
 	private int accompanyReadCount;
-	private int coordnateNo;
+	private int coordinateNo;
 	private String openChattingLink;
 }
+

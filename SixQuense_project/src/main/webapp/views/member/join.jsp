@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="style_sh.css">
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style_sh.css">
 </head>
 <style>
         .logo{
@@ -26,7 +26,7 @@
                 </a>
             </div>
         </header>
-
+F
         <!-- 시퀀스 회원가입 -->
         <section>
             <div>

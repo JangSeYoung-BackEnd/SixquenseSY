@@ -70,6 +70,7 @@
 						sit amet quam vehicula elementum sed sit amet dui. Sed porttitor
 						lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
 						sed sit amet dui. Proin eget tortor risus.</p>
+					<form action="<%=request.getContextPath()%>/product/productview.do">
 					<div class="product__details__quantity">
 						<div class="date-container">
 							<input type="date" id="travel_date" name="travel_date"
@@ -83,10 +84,11 @@
 					</div>
 
 					<div class="button-container">
-						<a href="#" class="primary-btn">예약하기</a>
+						<input type="button" class="primary-btn" onclick="" value="예약하기">
 						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
 							class="icon_heart_alt"></span> 위시리스트에 담기</a>
 					</div>
+					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
 					<script>
 						function checkDate() {

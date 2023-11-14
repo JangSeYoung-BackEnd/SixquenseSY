@@ -67,7 +67,7 @@ p {
 									<a href="#">패키지/투어 이름1</a>
 								</h5>
 								<p>패키지 내용1</p>
-								<a href="#" class="blog__btn"> 199,000원 <span
+								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 199,000원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
@@ -90,7 +90,7 @@ p {
 									<a href="#">패키지/투어 이름2</a>
 								</h5>
 								<p>패키지 내용2</p>
-								<a href="#" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
+								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
@@ -111,7 +111,7 @@ p {
 									<a href="#">패키지/투어 이름3</a>
 								</h5>
 								<p>패키지 내용3</p>
-								<a href="#" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
+								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">

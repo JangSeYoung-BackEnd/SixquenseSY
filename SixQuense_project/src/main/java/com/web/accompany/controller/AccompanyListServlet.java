@@ -1,23 +1,28 @@
 package com.web.accompany.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.service.AccompanyService;
+
 /**
  * Servlet implementation class AccompanySelectAllServlet
  */
 @WebServlet("/accompany/accompanylist.do")
-public class AccompanySelectAllServlet extends HttpServlet {
+public class AccompanyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanySelectAllServlet() {
+    public AccompanyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +31,10 @@ public class AccompanySelectAllServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/accompany/acconmpanylist.jsp").forward(request, response);
-		
-		
+		List<AccompanyDTO> accompanys=new AccompanyService().selectAccompanyAll();
+		System.out.println(accompanys);
+		request.setAttribute("accompanys", accompanys);
+		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);
 	}
 
 	/**

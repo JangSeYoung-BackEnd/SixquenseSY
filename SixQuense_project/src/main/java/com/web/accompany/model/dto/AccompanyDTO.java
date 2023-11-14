@@ -15,6 +15,6 @@ public class AccompanyDTO {
 	private Date accompanyDate;
 	private int memberNo;
 	private int accompanyReadCount;
-	private int coordnateNo;
+	private int coordinateNo;
 	private String openChattingLink;
 }

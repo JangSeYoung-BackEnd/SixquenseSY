@@ -32,17 +32,17 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//int coordinateNO = request.getParameter("coordinateNo");
+		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
 		
-		//List<ProductDto> bestProduct = new ProductService().selectBestproductByCountry(coordinateNO);
+		List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
 		
-		//List<ProductDto> recentProduct = new ProductService().selectRecentproductByCountry(coordinateNO);
+		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
 		
-		//List<ProductDto> dicountProduct = new ProductService().selectDicountproductByCountry(coordinateNO);
+		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
 		
-		//request.setAttribute("recentProduct", recentProduct);
-		//request.setAttribute("bestProduct", bestProduct);
-		//request.setAttribute("dicountProduct", dicountProduct);
+		request.setAttribute("recentProducts", recentProducts);
+		//request.setAttribute("bestProducts", bestProducts);
+		//request.setAttribute("dicountProducts", dicountProducts);
 		
 	
 		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);

@@ -73,6 +73,54 @@ public class ProductDao {
 		return recentProducts;
 	}
 	
+	//할인율로 조회해서 가져오는 메소드
+		public List<ProductDto> selectDicountproductByCountry(Connection conn, int coodinateNo) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<ProductDto> discountProducts = null;
+			try {
+				pstmt = conn.prepareStatement(sql.getProperty("selectDiscountproductAndImageByCoun"));
+				pstmt.setInt(1, coodinateNo);
+				rs = pstmt.executeQuery();
+				if(rs.next()) addProductAndImage(discountProducts,rs);
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return discountProducts;
+		}
+		
+		//베스트 상품 조회해서 가져오는 메소드
+				public List<ProductDto> selectBestproductByCountry(Connection conn, int coodinateNo) {
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					List<ProductDto> bestProducts = null;
+					try {
+						pstmt = conn.prepareStatement(sql.getProperty("selectBestproductAndImageByCoun"));
+						pstmt.setInt(1, coodinateNo);
+						rs = pstmt.executeQuery();
+						if(rs.next()) addProductAndImage(bestProducts,rs);
+					}catch(SQLException e){
+						e.printStackTrace();
+					}finally {
+						close(rs);
+						close(pstmt);
+					}
+					return bestProducts;
+				}
+				
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//첨부파일이 있는 상품 조회 가능하게 하는 메소드 
 	private void addProductAndImage(List<ProductDto> products, ResultSet rs) throws SQLException{
 		int pk = rs.getInt("product_no");

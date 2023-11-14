@@ -25,7 +25,7 @@
     <ul>
         <li class="continent"><a href="#">[동남아·대만]</a>
             <ul class="sub-menu">
-                <li><a href="#">다낭</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">다낭</a></li>
                 <li><a href="#">방콕</a></li>
                 <li><a href="#">대만</a></li>
                 <li><a href="#">보라카이</a></li>

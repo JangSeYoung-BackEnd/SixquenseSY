@@ -11,7 +11,7 @@ import lombok.Data;
 public class Coordinate {
 	private int coordinateNo;
 	private String nation;
-	private int latitude;
-	private int longitude;
+	private double latitude;
+	private double longitude;
 	private Continent continent; 
 }

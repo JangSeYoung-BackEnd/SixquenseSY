@@ -2,6 +2,9 @@ package com.web.accompany.model.dto;
 
 import java.sql.Date;
 
+import lombok.Builder;
+import lombok.Data;
+
 
 
 @Data

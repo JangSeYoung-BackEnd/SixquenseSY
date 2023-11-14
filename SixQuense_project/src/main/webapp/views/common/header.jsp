@@ -42,16 +42,14 @@
 
 <body>
 	<!-- 페이지 넘어갈때 로딩바 -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+	
 
 	<!--style="position: fixed; z-index: 999; background-color: white;-->
     <!-- 헤더 -->
     <header class="header" style="display: flex; justify-content: center;">
-        <div class="container" style="position: fixed; z-index: 999; background-color: white;">
-            <div class="row">
-                <div class="col-lg-3">
+        <div style="position: fixed; z-index: 999; background-color: white;">
+            <div class="row" style="display: flex; justify-content: center;">
+                <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" width="100%"></a>
                     </div>
@@ -85,8 +83,8 @@
                         </li>
                         <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a>
                         	<ul class="header__menu__dropdown">
-                                <li><a href= #>동행</a></li>
-                                <li><a href= #>여행리뷰</a></li>
+                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">동행</a></li>
+                                <li><a href= "<%=request.getContextPath() %>/community/communitylist.do">여행리뷰</a></li>
                             </ul>
                         </li>
                         <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
@@ -95,3 +93,4 @@
         </div>
     </header>
     <!-- 헤더 -->
+    <html>

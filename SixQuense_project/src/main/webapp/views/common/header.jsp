@@ -85,8 +85,8 @@
                         </li>
                         <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a>
                         	<ul class="header__menu__dropdown">
-                                <li><a href= #>동행</a></li>
-                                <li><a href= #>여행리뷰</a></li>
+                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">동행</a></li>
+                                <li><a href= "<%=request.getContextPath() %>/community/communitylist.do">여행리뷰</a></li>
                             </ul>
                         </li>
                         <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>

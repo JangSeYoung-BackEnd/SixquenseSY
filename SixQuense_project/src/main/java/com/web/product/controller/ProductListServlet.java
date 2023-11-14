@@ -34,12 +34,15 @@ public class ProductListServlet extends HttpServlet {
 		
 		//int coordinateNO = request.getParameter("coordinateNo");
 		
-		//ProductDto bestProduct = new ProductService().selectBestproductByCountry(coordinateNO);
+		//List<ProductDto> bestProduct = new ProductService().selectBestproductByCountry(coordinateNO);
 		
-		//ProductDto recentProduct = new ProductService().selectRecentproductByCountry(coordinateNO);
+		//List<ProductDto> recentProduct = new ProductService().selectRecentproductByCountry(coordinateNO);
 		
-		//ProductDto dicountProduct = new ProductService().selectDicountproductByCountry(coordinateNO);
+		//List<ProductDto> dicountProduct = new ProductService().selectDicountproductByCountry(coordinateNO);
 		
+		//request.setAttribute("recentProduct", recentProduct);
+		//request.setAttribute("bestProduct", bestProduct);
+		//request.setAttribute("dicountProduct", dicountProduct);
 		
 	
 		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);

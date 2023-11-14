@@ -11,6 +11,8 @@ public class ProductorderinfoDto {
 	private int OrderNo;
 	private int OrderCount;
 	private Date OrderDate;
+	private int MemberNO;
+	private int ProductNo;
 	private BookinginfoDto bookinginfo;
 	private ProductpaymentDto payment; //결제
 }

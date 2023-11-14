@@ -15,8 +15,4 @@ public class AccompanyComment {
 	private Date accompanyComtDate;
 	private int accompanyNo;
 	private int MemberNo;
-	
-	
-	
-	
 }

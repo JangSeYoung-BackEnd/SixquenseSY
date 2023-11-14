@@ -15,5 +15,6 @@ public class ProductsreviewDto {
 	private Date CommentDate;
 	private int CommentRef; //대댓글
 	private int CommentLevel;
+	private int ProductNo;
 	private List<ProductreviewattachmentDto> attachment; //리뷰첨부파일
 }

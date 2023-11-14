@@ -1,11 +1,16 @@
 package com.web.product.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.web.product.dto.ProductDto;
+import com.web.product.model.service.ProductService;
 
 /**
  * Servlet implementation class ProductListServlet
@@ -26,8 +31,18 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//int coordinateNO = request.getParameter("coordinateNo");
+		
+		//ProductDto bestProduct = new ProductService().selectBestproductByCountry(coordinateNO);
+		
+		//ProductDto recentProduct = new ProductService().selectRecentproductByCountry(coordinateNO);
+		
+		//ProductDto dicountProduct = new ProductService().selectDicountproductByCountry(coordinateNO);
+		
+		
 	
-		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
 	}
 
 	/**

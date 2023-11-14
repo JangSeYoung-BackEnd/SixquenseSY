@@ -43,6 +43,7 @@
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">삿포르</a></li>
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오사카/교토</a></li>
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오키나와</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">후쿠오카</a></li>
             </ul>
         </li>
         <li class="continent"><a href="#">[유럽]</a>
@@ -92,7 +93,7 @@
 							        <h4>최근 상품들</h4>
 							        <div class="latest-product__slider owl-carousel">
 							            <div class="latest-prdouct__slider__item">
-							                <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+							                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
 							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 							                    </div>
@@ -101,7 +102,7 @@
 							                        <span>$패키지 가격</span>
 							                    </div>
 							                </a>
-                                        <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
 							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 							                    </div>
@@ -110,7 +111,7 @@
 							                        <span>$패키지 가격</span>
 							                    </div>
 							                </a>
-                                        <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
 							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 							                    </div>
@@ -121,7 +122,7 @@
 							                </a>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
-								    <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+								    <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -130,7 +131,7 @@
 								            <span>$패키지 가격2</span>
 								        </div>
 								    </a>
-                                        <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -139,7 +140,7 @@
 								            <span>$패키지 가격2</span>
 								        </div>
 								    </a>
-                                        <a href="<%=request.getContextPath() %>/product/productlist.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -165,7 +166,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -181,7 +182,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                          <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -196,7 +197,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -211,7 +212,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -226,7 +227,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -241,7 +242,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                          <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productlist.do">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>

@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
-<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Checkout</h2> 
-                        <div class="breadcrumb__option">
-                            <a href="<%=request.getContextPath() %>/index.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</section>
-    <!-- Breadcrumb Section End -->
-    <!-- Checkout Section Begin -->
-<section class="checkout spad">
-	<div id="htmlcontainer">
-	
+	pageEncoding="UTF-8"%>  
+ <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
                 <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
@@ -37,45 +16,49 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" value="홍길동" readonly >
+                                        <input type="text" placeholder="홍길동" >
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>성별</p>
-                                    <input type="text" value="남" readonly >
+                                    <input type="text" value="남" >
                                 </div>
                             </div>
                             </div>
                             <div class="checkout__input">
                                 <p>닉네임</p>
-                                <input type="text" value="길동길동" readonly    >
+                                <input type="text" placeholder="길동길동"   >
                             </div>
-                             <div class="checkout__input">
+                            <div class="checkout__input">
                                 <p>비밀번호</p>
-                                <input type="text" value="**********" readonly>
+                                <input type="text" placeholder="">
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
-                                <input type="text" value="" readonly>
+                                <input type="text" placeholder="" >
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
-                                <input type="text" placeholder="1569" class="checkout__input__add" readonly>
-                                <input type="text" placeholder="12월/31일" readonly>
+                                <input type="text" placeholder="1569" class="checkout__input__add" >
+                                <input type="text" placeholder="12월/31일" >
                             </div>
                             <div class="checkout__input">
                                 <p>가입날짜</p>
-                                <input type="text" value="2023/11/11" readonly>
+                                <input type="text" placeholder="2023/11/11" >
+                            </div>
+                            <div class="checkout__input">
+                                <p>전화번호</p>
+                                <input type="text" placeholder="010-1234-5678" >
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none;"></textarea>
+                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;">
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" checked>
+                                    <input type="checkbox" id="acc">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -191,5 +174,3 @@
 		});
 	});		
 	</script>
-    <!-- Checkout Section End -->
-<%@ include file="/views/common/footer.jsp"%>

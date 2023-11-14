@@ -11,4 +11,5 @@ public class ProductrefundDto {
 	private String RefundStaus;
 	private Date RefundResultDate;
 	private Date RefundApplyDate;
+	private String PaymentId;
 }

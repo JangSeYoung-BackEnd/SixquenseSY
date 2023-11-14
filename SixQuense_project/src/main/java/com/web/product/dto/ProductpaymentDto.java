@@ -12,5 +12,6 @@ public class ProductpaymentDto {
 	private Date payment_date;
 	private int total_amount;
 	private String payment_status;
+	private int orderNo;
 	private ProductrefundDto refund;
 }

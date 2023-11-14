@@ -148,7 +148,10 @@
                         <input type="text" id="englishLastName" name="englishLastName" required>
                       </div>
                     </div>
-                  
+                  	<div>
+                  		<label for="name">전화번호:</label>
+                    <input type="text" id="name" name="name" required>
+                  	</div>
                     <div class="flex-container">
                       <div>
                         <label for="birthDate">생년월일:</label>
@@ -210,7 +213,7 @@
                         justify-content: space-between;
                     }
                 </style>
-                <form>
+                <form action="product/bookinginfo.do" method="post">
                     <h2>여행자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
@@ -224,6 +227,10 @@
                         <label for="englishLastName">영문 성:</label>
                         <input type="text" id="englishLastName" name="englishLastName" required>
                       </div>
+                    </div>
+                    <div>
+                    <label for="name">전화번호:</label>
+                    <input type="text" id="name" name="name" required>
                     </div>
                   
                     <div class="flex-container">

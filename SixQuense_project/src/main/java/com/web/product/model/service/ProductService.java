@@ -1,6 +1,15 @@
 package com.web.product.model.service;
 
+import static com.web.common.JDBCTemplate.*;
+
+import java.sql.Connection;
+
+import com.web.product.dao.ProductDao;
+import com.web.product.dto.ProductDto;
+
 public class ProductService {
+	
+	private ProductDao dao = new ProductDao();
 	
 	//할인율 있는 상품 조회
 	//public List<Product> selectProductByDiscount(double productDiscountRate){
@@ -8,9 +17,22 @@ public class ProductService {
 	//}
 	
 	//나라별 패키지 상품 조회
-	//public List<Product> selectProductByCountry(int coordinateNo){
-		
-	//}
+	/*
+	 * public ProductDto selectBestproductByCountry(int coordinateNO){ Connection
+	 * conn = getConnection(); ProductDto bestProduct =
+	 * dao.selectBestproductByCountry(conn, coordinateNO); close(conn); return
+	 * bestProduct; }
+	 * 
+	 * public ProductDto selectRecentproductByCountry(int coordinateNO){ Connection
+	 * conn = getConnection(); ProductDto recentProduct =
+	 * dao.selectRecentproductByCountry(conn, coordinateNO); close(conn); return
+	 * recentProduct; }
+	 * 
+	 * public ProductDto selectDiscountproductByCountry(int coordinateNO){
+	 * Connection conn = getConnection(); ProductDto discountProduct =
+	 * dao.selectDiscountproductByCountry(conn, coordinateNO); close(conn); return
+	 * discountProduct; }
+	 */
 	
 	//상품번호별 조회, 조회수 관련
 	//public Product selectProductByNo(int boardNo, boolean readResult) {

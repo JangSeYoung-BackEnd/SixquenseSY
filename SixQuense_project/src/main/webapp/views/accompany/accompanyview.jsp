@@ -1,9 +1,18 @@
  <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
+  <%@page import="com.web.accompany.model.dto.Continent"%>
+  <%@page import="com.web.accompany.model.dto.Coordinate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+
+
 <%
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	double latitude= b.getCoordinate().getLatitude();
+	double longitude = b.getCoordinate().getLongitude();
+	System.out.println(latitude);
+	System.out.println(longitude);
+
 
 %>
 
@@ -111,14 +120,21 @@ button:hover {
 
 <script>
    function myMap(){
-      var mapOptions = { 
-            center:new google.maps.LatLng(51.508742, -0.120850),
-            zoom:5
-      };
- 
-      var map = new google.maps.Map( 
-             document.getElementById("googleMap") 
-            , mapOptions );
+	   /* var board = ${request.getAttribute("board")};
+	   console.log(latitude,longitude)
+	      
+	   	var coordinate = board.coordinate; */
+		var latitude1 =  <%= latitude %>;
+	    var longitude1 = <%= longitude %>;
+	    console.log(latitude1,longitude1)
+        var mapOptions = { 
+	            center:new google.maps.LatLng(latitude1, longitude1),
+	            zoom:5
+	      };
+	 
+	      var map = new google.maps.Map( 
+	             document.getElementById("googleMap") , mapOptions );
+	      
    }
 </script> 
 

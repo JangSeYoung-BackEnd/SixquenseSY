@@ -34,7 +34,7 @@ public class CommunityListServelt extends HttpServlet {
 		List<CommunityDTO> communitys=new CommunityService().selectCommunityAll();
 		System.out.println(communitys);
 		request.setAttribute("communitys", communitys);
-		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/community/communitylist.jsp").forward(request, response);
 		
 	}
 

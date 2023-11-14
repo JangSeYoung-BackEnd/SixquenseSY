@@ -1,84 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
-<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Checkout</h2> 
-                        <div class="breadcrumb__option">
-                            <a href="<%=request.getContextPath() %>/index.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</section>
+	pageEncoding="UTF-8"%>  
     <!-- Breadcrumb Section End -->
+
     <!-- Checkout Section Begin -->
-<section class="checkout spad">
-	<div id="htmlcontainer">
-	
+    <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
+                <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="
                             width: 165px;
                             padding-left: 0px;
                             margin-left: 294px;
                             margin-bottom: 25px;">
-                            <p style="width: 750px;"> 홍 길 동</p>
-                <form action="#">
+                            
+                            <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>이름</p>
-                                        <input type="text" value="홍길동" readonly >
-                                    </div>
+                            <div class="checkout__input">
+                                <p style="font-size: xx-large;">나의 위시리스트</p>
+                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                    안에 사진 및 설명
                                 </div>
-                                <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>성별</p>
-                                    <input type="text" value="남" readonly >
+                                <hr />
+                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                    안에 사진 및 설명
                                 </div>
+                                <hr />
+                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                    안에 사진 및 설명
+                                </div>
+                                <hr />
                             </div>
-                            </div>
-                            <div class="checkout__input">
-                                <p>닉네임</p>
-                                <input type="text" value="길동길동" readonly    >
-                            </div>
-                             <div class="checkout__input">
-                                <p>비밀번호</p>
-                                <input type="text" value="**********" readonly>
-                            </div>
-                            <div class="checkout__input">
-                                <p>비밀번호 확인</p>
-                                <input type="text" value="" readonly>
-                            </div>
-                            <div class="checkout__input">
-                                <p>생년월일</p>
-                                <input type="text" placeholder="1569" class="checkout__input__add" readonly>
-                                <input type="text" placeholder="12월/31일" readonly>
-                            </div>
-                            <div class="checkout__input">
-                                <p>가입날짜</p>
-                                <input type="text" value="2023/11/11" readonly>
-                            </div>
-                            <div class="checkout__input">
-                                <p>자기소개</p>
-                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none;"></textarea>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" checked>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+                            
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
@@ -191,5 +143,3 @@
 		});
 	});		
 	</script>
-    <!-- Checkout Section End -->
-<%@ include file="/views/common/footer.jsp"%>

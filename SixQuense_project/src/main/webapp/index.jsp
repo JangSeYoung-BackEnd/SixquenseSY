@@ -318,6 +318,23 @@
                         </div>
                     </div>
                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <img src="./img/japen/후쿠오카.png"width="250px;"height="265px">
+                        </a>
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#"><b>후쿠오카</b></a></h6>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">

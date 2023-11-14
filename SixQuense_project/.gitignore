@@ -2,4 +2,8 @@ src/main/webapp/WEB-INF/classes/
 src/main/resource/
 /.settings/
 /bin/
+<<<<<<< HEAD
 /.settings/
+=======
+/.settings/
+>>>>>>> refs/heads/test

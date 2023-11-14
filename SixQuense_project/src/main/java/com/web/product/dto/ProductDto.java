@@ -9,18 +9,21 @@ import lombok.Data;
 @Data
 @Builder
 public class ProductDto {
-	private int PrdouctNo;
+	private int ProductNo;
 	private String ProductName;
 	private int ProductReadcount;
 	private Date ProductInsertdate;
 	private int MinCount;
 	private int MaxCount;
 	private int ProductPrice;
-	private int ProductDiscountRate;
+	private int GuideNo;
+	private double ProductDiscountRate;
 	private String ProductDetail;
 	private int ProductDuration;
-	private String ProductDay;
+	private String[] ProductDay;
+	private int CoodinateNo;
 	private String EditorNote;
+
 	
 	private List<ProductsreviewDto> review; //상품리뷰
 	private List<ProductattachmentDto> attachment; //상품첨부파일

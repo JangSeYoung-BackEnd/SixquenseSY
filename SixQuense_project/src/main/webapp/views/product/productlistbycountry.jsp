@@ -8,9 +8,7 @@
 	font-size: 14px; ! important;
 	margin: 20px 0px; ! important;
 	padding: 10px 16px; ! important;
-	width: 1106px;
-	!
-	important;
+	width: 1106px; !important;
 }
 
 p {

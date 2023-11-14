@@ -17,7 +17,7 @@ import com.web.accompany.service.AccompanyService;
 /**
  * Servlet implementation class AccompanyViewServlet
  */
-@WebServlet("/AccompanyView.do")
+@WebServlet("/accompany/accompanyview.do")
 public class AccompanyViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

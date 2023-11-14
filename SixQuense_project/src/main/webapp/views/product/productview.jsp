@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
@@ -70,7 +70,7 @@
 						sit amet quam vehicula elementum sed sit amet dui. Sed porttitor
 						lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
 						sed sit amet dui. Proin eget tortor risus.</p>
-					<form action="<%=request.getContextPath()%>/product/productview.do">
+					<form action="<%=request.getContextPath()%>/product/makeorder.do">
 					<div class="product__details__quantity">
 						<div class="date-container">
 							<input type="date" id="travel_date" name="travel_date"
@@ -84,7 +84,7 @@
 					</div>
 
 					<div class="button-container">
-						<input type="button" class="primary-btn" onclick="" value="예약하기">
+						<input type="submit" class="primary-btn" onclick="" value="예약하기">
 						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
 							class="icon_heart_alt"></span> 위시리스트에 담기</a>
 					</div>
@@ -235,14 +235,7 @@
 										onclick="showRefundPolicy()"> 환불 규정 상세 보기 (클릭)</a>
 								</p>
 							</div>
-							<!-- 모달 -->
-							<div id="myModal" class="modal">
-								<div class="modal-content">
-									<!-- 환불 규정 내용을 여기에 추가 -->
-									환불 규정 상세 내용이 여기에 나와야 합니다. <br>
-									<button onclick="closeModal()">닫기</button>
-								</div>
-							</div>
+				
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">

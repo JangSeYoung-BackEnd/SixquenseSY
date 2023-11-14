@@ -27,9 +27,7 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
-		//나라,도시별 패키지 출력 화면 jsp로 이동
-		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
 	}
 
 	/**

@@ -17,6 +17,8 @@ import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 
 
 public class AccompanyDAOKH {
@@ -47,6 +49,24 @@ public class AccompanyDAOKH {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public int insertAccompany(Connection conn, AccompanyDTO a, String nation) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertAccompany"));
+			pstmt.setString(1, a.getAccompanyContent());
+			pstmt.setString(2, userId);
+			pstmt.setString(3, a.getOpenChattingLink());
+			pstmt.setString(4, nation);
+			pstmt.setString(5, a.getAttachment());
+			pstmt.setString(6, a.getAttachment());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}return result;
 	}
 	
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{

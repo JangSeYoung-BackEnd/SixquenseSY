@@ -50,10 +50,7 @@ public class CommunityDAO {
 					.travelReviewContent(rs.getString(""))
 					.travelReviewDate(rs.getDate(""))
 					.travelReviewReadCount(rs.getInt(""))
-					.member(getMember(rs))
+					.member(new Member())
 					.build();
-	}
-	public Member getMember(ResultSet rs) throws SQLException{
-		reuturn 
 	}
 }

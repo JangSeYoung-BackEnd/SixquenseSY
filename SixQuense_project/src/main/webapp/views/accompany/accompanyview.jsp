@@ -1,7 +1,18 @@
+ <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+
+%>
+
+
+
 <style>
+div#googleMap img{
+	border-radius:0;
+}
 #likeButtonContainer {
 	text-align: center; /* 이 부분을 추가하여 내용을 가운데로 정렬합니다. */
 }
@@ -97,9 +108,24 @@ button:hover {
 	background-color: #07950cec;
 	}
 </style>
+
+<script>
+   function myMap(){
+      var mapOptions = { 
+            center:new google.maps.LatLng(51.508742, -0.120850),
+            zoom:5
+      };
+ 
+      var map = new google.maps.Map( 
+             document.getElementById("googleMap") 
+            , mapOptions );
+   }
+</script> 
+
+
 <body>
 	<!-- Blog Details Section Begin -->
-	<section class="blog-details spad" style="padding-top:250px";>
+	<section class="blog-details spad" style="padding-top:250px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-5 order-md-1 order-2">
@@ -107,14 +133,14 @@ button:hover {
 						<div class="col-lg-12 blog__details__author">
 							<div class="row">
 								<div class="blog__details__author__pic col-sm-4">
-									<img src="img/blog/details/details-author.jpg" alt="">
+									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="">
 								</div>
 								<div class="blog__details__author__text col-sm-6">
 									<div class="row">
 										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">Michael
 											Scofield</div>
 										<div class="item col-sm-4">
-											<img id="followButton" src="/img/팔로우(빈거).png" alt="팔로우 버튼"
+											<img id="followButton" src="<%=request.getContextPath()%>/img/팔로우(빈거).png" alt="팔로우 버튼"
 												onclick="toggleImage()" width="30" height="30">
 										</div>
 									</div>
@@ -131,21 +157,21 @@ button:hover {
 							<div class="blog__sidebar__recent">
 								<a href="#" class="blog__sidebar__recent__item">
 									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-1.jpg" alt="">
+										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
 									</div>
 									<div class="blog__sidebar__recent__item__text">
 										<h6>아이디</h6>
 									</div>
 								</a> <a href="#" class="blog__sidebar__recent__item">
 									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-2.jpg" alt="">
+										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
 									</div>
 									<div class="blog__sidebar__recent__item__text">
 										<h6>아이디</h6>
 									</div>
 								</a> <a href="#" class="blog__sidebar__recent__item">
 									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-3.jpg" alt="">
+										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
 									</div>
 									<div class="blog__sidebar__recent__item__text">
 										<h6>아이디</h6>
@@ -155,40 +181,28 @@ button:hover {
 						</div>
 					</div>
 				</div>
-				<script>
-					function confirmAccompany() {
-						var confirmed = confirm("동행을 신청하시겠습니까?");
-
-						if (confirmed) {
-							alert("동행이 신청되었습니다!");
-						} else {
-							alert("동행 신청이 취소되었습니다.");
-						}
-					}
-				</script>
 				<div class="col-lg-8 col-md-7 order-md-1 order-1">
 					<div>
-						<span>제목</span> <select name="lunch">
+						<span style="font-size: larger; font-weight: bolder;"><%=b.getAccompanyTitle() %></span> <select name="accompany">
+					<%-- 	<%=b.getBoardTitle()%>  --%>
+					<!-- 분기 처리하기 만약에 ~  -->
 							<option value="모집중">모집중</option>
 							<option value="마감">마감</option>
 						</select>
 					</div>
 					<div class="blog__details__text">
-						<img
-							src="https://post-phinf.pstatic.net/MjAxOTA4MjdfMTE2/MDAxNTY2ODc4NTM1MTI3.t2v2BCOumxl1AUfevExRDFtCzQ7nasvUmFEtJfmMElog.fK67P3SAN7_zr_rxQmQaCn9a9dFZJhTugeZe6D_gCo4g.JPEG/%EC%8B%9C%EC%95%A0%ED%8B%80_%EC%9E%90%EC%9C%A0%EC%97%AC%ED%96%89_%EC%9D%BC%EC%A0%95_01.jpg?type=w800_q75"
-							alt="">
-						<p>내용 내용 내용 시애틀에서 동행 할 사람 궈함 ~ ~~~</p>
-
+						<div style="display:flex;">
+						<!-- 댓글처럼 따로 데이터를 불러서 사진 파일 들고오기  -->
+							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
+						</div>
 					</div>
-					<div id="likeButtonContainer">
-						<span> <img id="likeButton" src="/img/투명손가락.png"
-							alt="좋아요 버튼" onclick="likeButton()" width="40" height="40">
-						</span> <span> 카운트 </span>
+					<div>
+						<p><%=b.getAccompanyContent() %></p>
 					</div>
-
 					<div style="display: flex;">
-						<div>글쓴날</div>
-						<div>조회수</div>
+						<div><%=b.getAccompanyDate()%></div>
+						<div><%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
 						<h3>comment</h3>
@@ -204,7 +218,8 @@ button:hover {
 			</div>
 		</div>
 	</section>
-
+	                
+<!------------------------프로필 Popup 부분 ------------------------>
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
@@ -212,7 +227,6 @@ button:hover {
 			<div id="profileInfo">
 				<!-- 프로필 정보를 추가하세요 -->
 				<p>아이디 넣는 곳 John Doe</p>
-
 				<p>여기는 소개글 적는 곳</p>
 				<button id="reportButton" onclick="openReportPopup()">신고하기</button>
 				<button id="blockButton">차단하기</button>
@@ -220,61 +234,65 @@ button:hover {
 			</div>
 		</div>
 	</div>
-
+	
+<!------------------------신고하기 Popup 부분 ------------------------>	
 	<div id="reportPopup" class="popup">
 		<div class="popup-content">
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
 			<div class="checkbox-group">
-				<label> <input type="checkbox" value="스팸"> 스팸
-				</label> <label> <input type="checkbox" value="욕설"> 욕설
-				</label> <label> <input type="checkbox" value="불쾌한 콘텐츠"> 불쾌한
-					콘텐츠
-				</label> <label> <input type="checkbox" value="text"> 기타
+				<label> <input type="checkbox" value="스팸"> 스팸 </label> 
+				<label> <input type="checkbox" value="욕설"> 욕설 </label> 
+				<label> <input type="checkbox" value="불쾌한 콘텐츠"> 불쾌한 콘텐츠 </label> 
+				<label> <input type="checkbox" value="text"> 기타
 				</label>
-
 			</div>
-			<textarea id="reportReason"></textarea>
-			<button onclick="submitReport()">제출</button>
+			<div>
+				<textarea id="reportReason"></textarea>
+				<button onclick="submitReport()">제출</button>
+			</div>
 		</div>
 	</div>
 </body>
+
+<!-- javaScript 부분   -->
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var openButton = document.getElementById('openProfilePopup');
-			var profilePopup = document.getElementById('profilePopup');
-			var closeButton = document.getElementById('closeProfilePopup');
+	/* 동행 신청 */
+	function confirmAccompany() {
+		var confirmed = confirm("동행을 신청하시겠습니까?");
 
-			openButton.addEventListener('click', function() {
-				profilePopup.style.display = 'block';
-			});
+		if (confirmed) {
+			alert("동행이 신청되었습니다!");
+		} else {
+			alert("동행 신청이 취소되었습니다.");
+		}
+	}
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		var openButton = document.getElementById('openProfilePopup');
+		var profilePopup = document.getElementById('profilePopup');
+		var closeButton = document.getElementById('closeProfilePopup');
 
-			closeButton.addEventListener('click', function() {
-				profilePopup.style.display = 'none';
-			});
+		openButton.addEventListener('click', function() {
+			profilePopup.style.display = 'block';
 		});
+		closeButton.addEventListener('click', function() {
+			profilePopup.style.display = 'none';
+		});
+	});
+		
 		var isFilled = false;
-
 		function toggleImage() {
 			var button = document.getElementById('followButton');
 			if (isFilled) {
-				button.src = "/img/팔로우(빈거).png";
+				button.src = "<%=request.getContextPath()%>/img/팔로우(빈거).png";
 			} else {
-				button.src = "/img/팔로우.png";
+				button.src = "<%=request.getContextPath()%>/img/팔로우.png";
 			}
-			isFilled = !isFilled; // 이미지 상태를 토글
+			isFilled = !isFilled; 
 		}
-		function likeButton() {
-			var button = document.getElementById('likeButton');
-			if (isFilled) {
-				button.src = "/img/투명손가락.png";
-			} else {
-				button.src = "/img/검은손가락.png";
-			}
-			isFilled = !isFilled; // 이미지 상태를 토글
-		}
-
+/* 신고하기  부분  */
 		function openReportPopup() {
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'block';
@@ -292,5 +310,9 @@ button:hover {
 
 			// 신고 팝업 닫기
 		}
+		
 	</script>
-<%@ include file="/views/common/footer.jsp"%>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+
+ <%@ include file="/views/common/footer.jsp"%>

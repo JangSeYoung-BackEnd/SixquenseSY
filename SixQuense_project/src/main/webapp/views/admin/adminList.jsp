@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<!-- 수정 -->
 <body class="sb-nav-fixed">
+<section style="padding-top:80px">
 	<main class="mt-5 pt-5">
 	<div class="container-fluid px-4" style="width : 1170px;">
 		<h1 class="mt-4">Board List</h1>
@@ -38,6 +40,7 @@
 		</div>
 	</div>
 	</main>
+	</section>
 </body>
 
 <%@ include file="/views/common/footer.jsp"%>

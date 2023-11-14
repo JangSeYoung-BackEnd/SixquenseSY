@@ -14,6 +14,8 @@ import java.util.Properties;
 
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.Continent;
+import com.web.accompany.model.dto.Coordinate;
 
 
 
@@ -37,10 +39,26 @@ public class AccompanyWH {
 					.accompanyDate(rs.getDate("ACCOMPANY_DATE"))
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
-					.coordinateNo(rs.getInt("COORDINATE_NO"))
-					.openChattingLink(rs.getString("OPENCHATTING_LINK"))
+					.coordinate(getCoodinate(rs))
 					.build();
 	}
+	public Coordinate getCoodinate(ResultSet rs) throws SQLException{
+		return Coordinate.builder()
+				.coordinateNo(rs.getInt("COORDINATE_NO"))
+				.nation(rs.getString("NATION"))
+				.latitude(rs.getInt("LATITUDE"))
+				.longitude(rs.getInt("LONGITUDE"))
+				.continent(getContinent(rs))
+				.build();
+	}
+	
+	private Continent getContinent(ResultSet rs) throws SQLException{
+		return Continent.builder()
+				.continentNo(rs.getInt("CONTINENT_NO"))
+				.continentName(rs.getString("CONTINENT_NAME"))
+				.build();
+	}
+	
 	
 	//게시물 번호를 받아서 게시물을 가져오는 메소드 
 	public AccompanyDTO selectAccompanyByNo(Connection conn, int no) {

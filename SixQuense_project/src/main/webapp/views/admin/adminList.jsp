@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<!-- 수정 -->
 <body class="sb-nav-fixed">
 <section style="padding-top:80px">
 	<main class="mt-5 pt-5">

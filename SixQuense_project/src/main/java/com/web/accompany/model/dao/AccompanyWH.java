@@ -20,7 +20,7 @@ import com.web.accompany.model.dto.AccompanyDTO;
 public class AccompanyWH {
 	private Properties sql=new Properties();
 	{
-		String path=AccompanyWH.class.getResource("/sql/accompany_sql.properties").getPath();
+		String path=AccompanyWH.class.getResource("/sql/accompany/accompany_sql.properties").getPath();
 		try(FileReader fr=new FileReader(path)) {
 			sql.load(fr);
 		}catch(IOException e) {

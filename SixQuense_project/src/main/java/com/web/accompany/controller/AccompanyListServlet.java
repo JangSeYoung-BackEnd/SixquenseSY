@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.accompany.service.AccompanyService;
+import com.web.accompany.service.AccompanyServiceKH;
 
 /**
  * Servlet implementation class AccompanySelectAllServlet
@@ -31,7 +31,7 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<AccompanyDTO> accompanys=new AccompanyService().selectAccompanyAll();
+		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
 		System.out.println(accompanys);
 		request.setAttribute("accompanys", accompanys);
 		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);

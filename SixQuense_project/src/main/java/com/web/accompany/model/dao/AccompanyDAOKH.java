@@ -17,10 +17,10 @@ import com.web.accompany.model.dto.AccompanyDTO;
 
 
 
-public class AccompanyDAO {
+public class AccompanyDAOKH {
 	private Properties sql=new Properties();
 	{
-		String path=AccompanyDAO.class.getResource("/sql/accompany_sql.properties").getPath();
+		String path=AccompanyDAOKH.class.getResource("/sql/accompany_sql.properties").getPath();
 		try(FileReader fr=new FileReader(path)) {
 			sql.load(fr);
 		}catch(IOException e) {

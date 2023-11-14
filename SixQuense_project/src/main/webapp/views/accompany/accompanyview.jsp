@@ -312,6 +312,7 @@ button:hover {
 		}
 		
 	</script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
 
  <%@ include file="/views/common/footer.jsp"%>

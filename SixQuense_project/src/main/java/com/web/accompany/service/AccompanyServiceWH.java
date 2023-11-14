@@ -18,6 +18,7 @@ public class AccompanyServiceWH {
 		public AccompanyDTO selectBoardByNo(int no) {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
+
 			close(conn);
 			return accompanyView;
 		}

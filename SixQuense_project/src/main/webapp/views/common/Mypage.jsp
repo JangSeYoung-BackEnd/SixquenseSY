@@ -16,11 +16,12 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
     <!-- Breadcrumb Section End -->
-	<div id="htmlcontainer">
     <!-- Checkout Section Begin -->
-    <section class="checkout spad">
+<section class="checkout spad">
+	<div id="htmlcontainer">
+	
         <div class="container">
             <div class="checkout__form">
                 <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
@@ -78,12 +79,8 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="checkout__input">
-                                <p>계좌관리</p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
                         </div>
+                        <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
                                 <div class="col-lg-3">
                                     <div class="hero__categories">
@@ -92,12 +89,12 @@
                                             <span>메뉴</span>
                                         </div> 
                                         <div id="Listlist"> 
-                                        <ul style="width: 292px; height: 870px0;">
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                        <ul style="width: 292px; height: 870px;">
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="check&cancelBtn">결제상품 조회&취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회&취소</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
                                             <button id="wishBtn">위시리스트</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">
@@ -113,85 +110,86 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                   
-                </form>
-                </div>
-            </div>
-        </div>
-	<script>
-		$("#updateBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
+                    	</div>
+                     </div>   	
+                	</form>
+                	</div>
+            	</div>
+        	</div>
+</section>
+<script>
+	$("#updateBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/update.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
 			});
-		});
-		$("#check&cancelBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
-		$("#wishBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
-		$("#alarmBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
-		$("#wenttripBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
-		$("#mywirteBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
-		$("#questionBtn").click(e=>{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/서블릿 주소",
-				dataType:"html",
-				success:function(data){
-						console.log(data);
-						$("#htmlcontainer").html(data);
-					}
-			});
-		});
+		});		
+		
 	</script>
-    </section>
-
+<script>
+	$("#wishBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/Wish.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
+			});
+		});		
+		
+	</script>
+	<script>
+	$("#checkcancelBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ProductList.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
+		});
+	});		
+	</script>
+   <script>
+	$("#wenttripBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/Wenttrip.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
+		});
+	});		
+	</script>
+	 <script>
+	$("#mywirteBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mywrite.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
+		});
+	});		
+	</script>
+	<script>
+	$("#questionBtn").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/question.do",
+			dataType:"html",
+			success:function(data){
+					console.log(data);
+					$("#htmlcontainer").html(data);
+				}
+		});
+	});		
+	</script>
     <!-- Checkout Section End -->
 <%@ include file="/views/common/footer.jsp"%>

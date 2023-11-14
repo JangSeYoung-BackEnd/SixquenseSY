@@ -42,9 +42,7 @@
 
 <body>
 	<!-- 페이지 넘어갈때 로딩바 -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+	
 
 	<!--style="position: fixed; z-index: 999; background-color: white;-->
     <!-- 헤더 -->
@@ -95,3 +93,4 @@
         </div>
     </header>
     <!-- 헤더 -->
+    <html>

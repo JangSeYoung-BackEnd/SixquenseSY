@@ -2,13 +2,14 @@ package com.web.product.model.service;
 
 import static com.web.common.JDBCTemplate.close;
 import static com.web.common.JDBCTemplate.getConnection;
+import static com.web.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.web.product.dao.ProductDao;
 import com.web.product.dto.ProductDto;
-import com.web.product.dto.ProductattachmentDto;
+import com.web.product.dto.ProductsreviewDto;
 
 public class ProductService {
 
@@ -19,7 +20,7 @@ public class ProductService {
 
 	// }
 
-	//나라별 패키지 상품 조회
+	// 나라별 패키지 상품 조회
 
 	/*
 	 * public ProductDto selectBestproductByCountry(int coordinateNO) { Connection
@@ -28,11 +29,11 @@ public class ProductService {
 	 * bestProduct; }
 	 */
 
-	//나라별 최신상품 리스트 가져오기
+	// 나라별 최신상품 리스트 가져오기
 	public List<ProductDto> selectRecentproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();
 		List<ProductDto> recentProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
-		
+
 //		recentProducts.forEach(e->{
 //			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
 //			e.setAttachment(images);
@@ -40,28 +41,74 @@ public class ProductService {
 		close(conn);
 		return recentProducts;
 	}
-	
-	//나라별 할인상품 리스트 가져오기
+
+	// 나라별 할인상품 리스트 가져오기
+	public List<ProductDto> selectDicountproductByCountry(int coordinateNo) {
+		Connection conn = getConnection();
+		List<ProductDto> discountProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+
+//		discountProducts.forEach(e -> {
+//			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
+//			e.setAttachment(images);
+//		});
+		close(conn);
+		return discountProducts;
+	}
+
+	// 나라별 베스트 상품 리스트 가져오기
+
 	/*
-	 * public List<ProductDto> selectDicountproductByCountry(int coordinateNo){
-	 * Connection conn = getConnection(); List<ProductDto> discountProducts =
-	 * dao.selectRecentproductByCountry(conn, coordinateNo);
+	 * public List<ProductDto> selectBestproductByCountry(int coordinateNo, boolean
+	 * readResult) { Connection conn = getConnection(); List<ProductDto>
+	 * bestProducts = dao.selectRecentproductByCountry(conn, coordinateNo); if()
 	 * 
-	 * discountProducts.forEach(e->{ List<ProductattachmentDto> images =
-	 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
-	 * close(conn); return discountProducts; }
-	 */
-	
-	//나라별 베스트 상품 리스트 가져오기
-	/*
-	 * public List<ProductDto> selectBestproductByCountry(int coordinateNo){
-	 * Connection conn = getConnection(); List<ProductDto> bestProducts =
-	 * dao.selectRecentproductByCountry(conn, coordinateNo);
 	 * 
-	 * bestProducts.forEach(e->{ List<ProductattachmentDto> images =
+	 * bestProducts.forEach(e -> { List<ProductattachmentDto> images =
 	 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
+	 * 
 	 * close(conn); return bestProducts; }
 	 */
+	
+	//번호별 상품 가져오는 메소드
+	public ProductDto selectProductByNo(int productNo, boolean readResult) {
+		Connection conn=getConnection();
+		ProductDto product = dao.selectProductByNo(conn, productNo);
+		if(product!=null&&!readResult) {
+			int result=dao.updateProductReadCount(conn,productNo);
+			if(result>0) {
+				commit(conn);
+				product.setProductReadcount(product.getProductReadcount()+1);
+			}else rollback(conn);
+		}
+		close(conn);
+		return product;
+		};
+
+	//댓글 입력하는 메소드
+	/*
+	 * public int insertBoardComment(ProductsreviewDto pr) { Connection
+	 * conn=getConnection(); int result=dao.insertBoardComment(conn,pr);
+	 * if(result>0) commit(conn); else rollback(conn); close(conn); return result; }
+	 */
+	
+	//댓글 조회하는 메소드
+	/*
+	 * public List<ProductsreviewDto> selectProductComment(int productNo){
+	 * Connection conn=getConnection(); List<ProductsreviewDto> comments =
+	 * dao.selectBoardComment(conn, productNo); close(conn); return comments;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	 * public ProductDto selectDiscountproductByCountry(int coordinateNO) {

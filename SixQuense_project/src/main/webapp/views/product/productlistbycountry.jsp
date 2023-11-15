@@ -91,7 +91,7 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="latest">
 							<div class="blog__item__pic">
-								<img src="<%=request.getContextPath() %>/img/product/japan/fukuoka/<%=rp.getAttachment().get(0).getOrginalFilename() %>" alt="고양이">
+								<img src="<%=request.getContextPath() %>/img/product/<%=rp.getAttachment().get(0).getOrginalFilename() %>" alt="고양이">
 							</div>
 							<div class="blog__item__text">
 								<h5>
@@ -112,7 +112,7 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="special">
 							<div class="blog__item__pic">
-								<img src="<%=request.getContextPath() %>/img/product/japan/fukuoka/<%=dp.getAttachment().get(0).getOrginalFilename() %>" alt="">
+								<img src="<%=request.getContextPath() %>/img/product/<%=dp.getAttachment().get(0).getOrginalFilename() %>" alt="">
 							</div>
 							<div class="blog__item__text">
 								<h5>

@@ -1,5 +1,6 @@
 package com.web.product.SYcontroller;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.SYservice.BookingService;
 import com.web.product.dto.BookinginfoDto;
+import com.web.product.syservice.BookingService;
 
 /**
  * Servlet implementation class ProductPackageOrderEndServlet

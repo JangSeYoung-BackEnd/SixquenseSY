@@ -30,40 +30,20 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 	}
-///	public List<Prodcuct> selectBoard(Connection conn){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		List<Prodcuct> result=new ArrayList<>();
-//		try {
-//			pstmt=conn.prepareCall(sql.getProperty("selectBoard"));
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {
-//				result.add(getProduct(rs));
-//			}
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return result;
-//	}
-	/*
-	 * private Product getProduct(ResultSet rs) throws SQLException {
-	 * return.builder()
-	 * 
-	 * }
-	 */
+
 	
 	//최신순으로 조회해서 가져오는 메소드
 	public List<ProductDto> selectRecentproductByCountry(Connection conn, int coodinateNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<ProductDto> recentProducts = null;
+		List<ProductDto> recentProducts = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectRecentproductAndImageByCoun"));
 			pstmt.setInt(1, coodinateNo);
 			rs = pstmt.executeQuery();
-			if(rs.next()) addProductAndImage(recentProducts,rs);
+			while(rs.next()) {
+				addProductAndImage(recentProducts,rs);
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
@@ -74,52 +54,38 @@ public class ProductDao {
 	}
 	
 	//할인율로 조회해서 가져오는 메소드
-		public List<ProductDto> selectDicountproductByCountry(Connection conn, int coodinateNo) {
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			List<ProductDto> discountProducts = null;
-			try {
-				pstmt = conn.prepareStatement(sql.getProperty("selectDiscountproductAndImageByCoun"));
-				pstmt.setInt(1, coodinateNo);
-				rs = pstmt.executeQuery();
-				if(rs.next()) addProductAndImage(discountProducts,rs);
-			}catch(SQLException e){
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
-			}
-			return discountProducts;
-		}
+//		public List<ProductDto> selectDicountproductByCountry(Connection conn, int coodinateNo) {
+//			PreparedStatement pstmt = null;
+//			ResultSet rs = null;
+//			List<ProductDto> discountProducts = null;
+//			try {
+//				pstmt = conn.prepareStatement(sql.getProperty("selectDiscountproductAndImageByCoun"));
+//				pstmt.setInt(1, coodinateNo);
+//				rs = pstmt.executeQuery();
+//				if(rs.next()) addProductAndImage(discountProducts,rs);
+//			}catch(SQLException e){
+//				e.printStackTrace();
+//			}finally {
+//				close(rs);
+//				close(pstmt);
+//			}
+//			return discountProducts;
+//		}
 		
-		//베스트 상품 조회해서 가져오는 메소드
-				public List<ProductDto> selectBestproductByCountry(Connection conn, int coodinateNo) {
-					PreparedStatement pstmt = null;
-					ResultSet rs = null;
-					List<ProductDto> bestProducts = null;
-					try {
-						pstmt = conn.prepareStatement(sql.getProperty("selectBestproductAndImageByCoun"));
-						pstmt.setInt(1, coodinateNo);
-						rs = pstmt.executeQuery();
-						if(rs.next()) addProductAndImage(bestProducts,rs);
-					}catch(SQLException e){
-						e.printStackTrace();
-					}finally {
-						close(rs);
-						close(pstmt);
-					}
-					return bestProducts;
-				}
+		/*
+		 * //베스트 상품 조회해서 가져오는 메소드 public List<ProductDto>
+		 * selectBestproductByCountry(Connection conn, int coodinateNo) {
+		 * PreparedStatement pstmt = null; ResultSet rs = null; List<ProductDto>
+		 * bestProducts = null; try { pstmt =
+		 * conn.prepareStatement(sql.getProperty("selectBestproductAndImageByCoun"));
+		 * pstmt.setInt(1, coodinateNo); rs = pstmt.executeQuery(); if(rs.next())
+		 * addProductAndImage(bestProducts,rs); }catch(SQLException e){
+		 * e.printStackTrace(); }finally { close(rs); close(pstmt); } return
+		 * bestProducts; }
+		 */
 				
 		
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	//첨부파일이 있는 상품 조회 가능하게 하는 메소드 
 	private void addProductAndImage(List<ProductDto> products, ResultSet rs) throws SQLException{
@@ -167,12 +133,12 @@ public class ProductDao {
 	public static ProductDto getProduct(ResultSet rs) throws SQLException {
 		return ProductDto.builder()
 				.ProductNo(rs.getInt("product_no"))
-				.ProductName(rs.getString("productName"))
+				.ProductName(rs.getString("product_name"))
 				.ProductReadcount(rs.getInt("product_readcount"))
 				.ProductInsertdate(rs.getDate("product_insertdate"))
 				.MinCount(rs.getInt("min_count"))
 				.MaxCount(rs.getInt("max_count"))
-				.ProductPrice(rs.getInt("product_price"))
+				.ProductPrice(rs.getInt("prodcut_price"))
 				.GuideNo(rs.getInt("guide_no"))
 				.ProductDiscountRate(rs.getDouble("product_discount_rate"))
 				.ProductDetail(rs.getString("product_detail"))
@@ -180,7 +146,7 @@ public class ProductDao {
 				.ProductDay(rs.getString("product_day").split(","))
 				.CoodinateNo(rs.getInt("coordinate_no"))
 				.EditorNote(rs.getString("editor_note"))
-				.attachment(new ArrayList())
+				.attachment(new ArrayList<ProductattachmentDto>())
 				.build();
 	}
 

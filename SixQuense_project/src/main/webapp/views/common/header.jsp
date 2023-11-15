@@ -57,16 +57,9 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-	<!-- Js Plugins -->
-    <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.slicknav.js"></script>
-    <script src="<%=request.getContextPath()%>/js/mixitup.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/main.js"></script>
 	
+	
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 
 <body>
 	<!-- 페이지 넘어갈때 로딩바 -->

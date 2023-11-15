@@ -48,17 +48,17 @@
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="img/product/details/product-details-1.jpg" alt="">
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>" alt="">
 					</div>
 					<div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
-							src="img/product/details/thumb-1.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
-							src="img/product/details/thumb-2.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-5.jpg"
-							src="img/product/details/thumb-3.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
-							src="img/product/details/thumb-4.jpg" alt="">
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
 					</div>
 				</div>
 			</div>

@@ -56,13 +56,14 @@ public class ProductDao {
 	public List<ProductDto> selectDicountproductByCountry(Connection conn, int coodinateNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<ProductDto> discountProducts = null;
+		List<ProductDto> discountProducts = new ArrayList<ProductDto>();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectDiscountproductAndImageByCoun"));
 			pstmt.setInt(1, coodinateNo);
 			rs = pstmt.executeQuery();
-			if (rs.next())
+			while (rs.next()) {
 				addProductAndImage(discountProducts, rs);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -76,13 +77,15 @@ public class ProductDao {
 	public List<ProductDto> selectBestproductByCountry(Connection conn, int coodinateNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<ProductDto> bestProducts = null;
+		List<ProductDto> bestProducts = new ArrayList<ProductDto>();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectBestproductAndImageByCoun"));
 			pstmt.setInt(1, coodinateNo);
 			rs = pstmt.executeQuery();
-			if (rs.next())
+			while(rs.next()) {
 				addProductAndImage(bestProducts, rs);
+			}
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -96,19 +99,21 @@ public class ProductDao {
 	public ProductDto selectProductByNo(Connection conn, int productNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ProductDto product = null;
+		List<ProductDto> products = new ArrayList<ProductDto>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectProductByNo"));
 			pstmt.setInt(1, productNo);
 			rs=pstmt.executeQuery();
-			if(rs.next()) product=getProduct(rs);
+			while(rs.next()) {
+				addProductAndImage(products, rs);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		return product;
+		return products.get(0);
 	}
 	
 	//조회수 변경하는 메소드
@@ -229,8 +234,10 @@ public class ProductDao {
 	// 상품 첨부파일 구체화 하는 메소드
 	public static ProductattachmentDto getImage(ResultSet rs) throws SQLException {
 
-		return ProductattachmentDto.builder().ProductNo(rs.getInt("product_no"))
-				.OrginalFilename(rs.getString("original_filename")).RenameFilename(rs.getString("rename_filename"))
+		return ProductattachmentDto.builder()
+				.OrginalFilename(rs.getString("original_filename"))
+				.RenameFilename(rs.getString("rename_filename"))
+				.ProductNo(rs.getInt("product_no"))
 				.build();
 	}
 

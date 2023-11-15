@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <style>
+	img{
+		border-radius:0%;
+	}
     .contury{
         /* border:1px solid black; */
         font-size: 13px;
@@ -96,12 +99,12 @@
                 <div>
                     <input type="text" id="kakao-link" name="kakao-link" placeholder="카카오톡 링크 적어주세요!" style="width: 700px; border:solid gainsboro;">
                 </div>
-                <div class="col-lg-12 file-btn" onclick="openFileDialog()">
                     <input type="file" id="accompany-file" name="accompany-file" accept="image/bmp,image/gif,image/jpg,image/jpeg,image/png,image/raw,image/tif,image/heif,image/heic,image/mp4,image/avi,image/mov,image/wmv,image/mkv,image/mpg,image/rm,image/asf,image/m4v,image/mpeg,image/mpg" style="display: none; margin: 0px; padding: 0px;">
-                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
+                <div class="col-lg-12 file-btn" onclick="openFileDialog()">
+                    <svg class="" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.54397C0 2.92984 2.93584 0 6.55738 0H43.4426C47.0642 0 50 2.92983 50 6.54397V43.456C50 47.0702 47.0642 50 43.4426 50H6.55738C2.93584 50 0 47.0702 0 43.456V6.54397ZM6.55738 2.86299C4.52026 2.86299 2.86885 4.51102 2.86885 6.54397V43.456C2.86885 45.489 4.52026 47.137 6.55738 47.137H9.23315L32.1003 23.5656C34.6482 20.9392 38.8581 20.9052 41.4483 23.4901L47.1311 29.1613V6.54397C47.1311 4.51102 45.4797 2.86299 43.4426 2.86299H6.55738ZM43.4426 47.137H13.2262L34.1615 25.557C35.5947 24.0796 37.9627 24.0605 39.4197 25.5145L47.1311 33.2102V43.456C47.1311 45.489 45.4797 47.137 43.4426 47.137ZM11.5779 17.1268C11.5779 14.1056 14.032 11.6564 17.0594 11.6564C20.0868 11.6564 22.541 14.1056 22.541 17.1268C22.541 20.148 20.0868 22.5971 17.0594 22.5971C14.032 22.5971 11.5779 20.148 11.5779 17.1268ZM17.0594 8.79346C12.4476 8.79346 8.70902 12.5244 8.70902 17.1268C8.70902 21.7292 12.4476 25.4601 17.0594 25.4601C21.6712 25.4601 25.4098 21.7292 25.4098 17.1268C25.4098 12.5244 21.6712 8.79346 17.0594 8.79346Z" fill="#DBDBDB"></path>
                     </svg>
-                    <p class="sc-9332fd40-1 besauD">배경사진을 선택해주세요</p>
+                    <span>배경사진을 선택해주세요</span>
                 </div>
                 <div>
                     <textarea id="accompany-content" name="accompany-content" placeholder="1. 현재 동행이 있나요?&#13;&#10;ex)혼자에에요/동행 1명이 있어요.&#13;&#10;&#13;&#10;2.어떤 동행을 찾고 있나요?&#13;&#10;ex)맛집 돌아다니는거 좋아하는 20대 여성/남성 동행 구해요!&#13;&#10;&#13;&#10;3. 원하는 여행코스가있다면 적어주세요!&#13;&#10;&#13;&#10;&#13;&#10;글을 작성해주세요(1000자이내)" cols="150" rows="20" maxlength="1000" wrap="on" style="border:solid gainsboro; resize: none;" ></textarea>
@@ -187,15 +190,15 @@
 		  });
 		});
 		$("#accompany-file").change(e => {
-		    $.each(e.target.files, (i, f) => { // 오타: targetfile → target.files
+		    $.each(e.target.files, (i, f) => {
 		        const filereader = new FileReader();
 		        filereader.readAsDataURL(f);
 		        filereader.onload = (e) => {
 		            console.log(e.target.result);
-		            $(".file-btn").attr("display", "none"); // 오타: attr → css
+		            $(".file-btn").attr("display", "none");
 		            const path = e.target.result;
-		            const img = $("<img>").attr({ "src": path, "width": "1085px", "height": "300px" });
-		            $("#your-container-id").append(img); // 오타: $("#") → $("#your-container-id")
+		            const img = $("<img>").attr({ "src": path, "width": "1085px", "height": "300px" }).on("click",openFileDialog);
+		            $(".file-btn").html(img);
 		        }
 		    });
 		});

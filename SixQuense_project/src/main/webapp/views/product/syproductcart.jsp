@@ -6,41 +6,95 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script>
-    var IMP = window.IMP; 
-    IMP.init("imp88100268"); 
-  
-    const today = new Date();   
-    const hours = today.getHours(); // 시
-    const minutes = today.getMinutes();  // 분
-    const seconds = today.getSeconds();  // 초
-    const milliseconds = today.getMilliseconds();
-    const makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
+				var IMP = window.IMP; 
+				IMP.init("imp88100268"); 
+				
+				const today = new Date();   
+				const hours = today.getHours(); // 시
+				const minutes = today.getMinutes();  // 분
+				const seconds = today.getSeconds();  // 초
+				const milliseconds = today.getMilliseconds();
+				const makeMerchantUid = hours +  minutes + seconds + milliseconds;
 
-    function paymentButton() {
-        var infocheckbox = document.getElementById("infocheckbox");
-        if (!infocheckbox.checked) {
-            return;
-        }
-
-        IMP.request_pay({
-            pg : 'kakaopay',
-            merchant_uid: "IMP"+makeMerchantUid, 
-            name : '으악으악',
-            amount : 1004,
-            buyer_email : 'sixquence',
-            buyer_name : '장세영',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : 'gdacadamey',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
-            }
-        });
-    }
+				function paymentButton() {
+				    var infocheckbox = document.getElementById("infocheckbox");
+				    if (!infocheckbox.checked) {
+				        return;
+				    }
+				    
+				    var cardRadio = document.querySelector('input[name="payment"][value="card"]');
+				    var kakaopayRadio = document.querySelector('input[name="payment"][value="kakaopay"]');
+				    
+				    if (cardRadio.checked) {
+				        payment_card();
+				    } else if (kakaopayRadio.checked) {
+				        payment_kakaopay();
+				    } else {
+				        alert("결제 방법을 선택해주세요.");
+				    }
+				}
+        
+			function payment_kakaopay() {
+			    IMP.request_pay({
+			        pg : 'kakaopay',
+			        merchant_uid: "IMP"+makeMerchantUid, 
+			        name : $("div.shoping__cart__item>h3").text(),
+			        amount : Number($("td.shoping__cart__item__close").text()),
+			        buyer_email : 'sixquence',
+			        buyer_name : '장세영',
+			        buyer_tel : '010-1234-5678',
+			        buyer_addr : 'gdacadamey',
+			        buyer_postcode : '123-456'
+			    }, function (rsp) { // callback
+			        if (rsp.success) {
+			            //주문정보 저장
+			            $("#orderInfo").submit();
+			        } else {
+			            console.log(rsp);
+			        }
+			    });
+			}
+			function payment_card() {
+			    IMP.request_pay({
+			        pg : "kcp.AO09C", // 결제사명.PG상점아이디
+			        pay_method : "card", // 지불방법
+			        merchant_uid: "1234567", // 주문번호가 들어가야함.
+			        name : $("div.shoping__cart__item>h3").text(), // 결제창에 노출될 상품명
+			        amount: Number($("td.shoping__cart__item__close").text()), // 결제 금액
+			        buyer_email : "mkty0328@gmail.com", // 주문자 email
+			        buyer_name : "홍길동", // 주문자 이름
+			        buyer_tel : "01064269887", // 주문자 전화번호
+			        buyer_addr : "경기도 안양시 만안구", // 주문자 주소
+			        buyer_postcode : "139-91", // 주문자 우편번호
+			    }, function(rsp){ // callback함수
+			        if(rsp.success){
+			            $.ajax({
+			                url : "<%=request.getContextPath()%>/paydemo.do",
+			                type : "POST",
+			                dataType : "json",
+			                data : {
+			                    imp_uid : rsp.imp_uid,
+			                    merchant_uid : rsp.merchant_uid,
+			                    paid_amount : rsp.paid_amount,
+			                    apply_num : rsp.apply_num
+			                },
+			                success : function(data){
+			                    Swal.fire({
+			                        title: "결제 완료",
+			                        text: "주문번호 : "+merchant_uid,
+			                        icon: "success"
+			                    });
+			                }
+			            });
+			        }else{
+			            Swal.fire({
+			                title: "결제 실패",
+			                text: rsp.error_msg,
+			                icon: "error"
+			            });
+			        }
+			    });
+			}
 </script>
 <section class="body">
     <div style="display: flex;margin-top:170px;">
@@ -110,7 +164,7 @@
                         <td>
                           <div class="shoping__cart__item">
                           <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-                            <h3>패키지 제목</h3>
+                            <h3>후쿠오카 패키지 제목</h3>
                           </div>
                         </td>
                         <td class="shoping__cart__price">
@@ -120,7 +174,7 @@
                           수량
                         </td>
                         <td class="shoping__cart__item__close">
-                          총합
+                          500
                         </td>
                       </tr>
                     </tbody>
@@ -133,7 +187,7 @@
                 <div class="col-lg-12">  
                 </div>
                 <div class="form-container">
-                <form>
+                <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
                     <h2>예약자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
@@ -164,7 +218,7 @@
                       <option value="male">남성</option>
                       <option value="female">여성</option>
                     </select>
-                    <button type="submit">정보 제출</button>
+                    
                   </form>
                   
                   <style>
@@ -245,7 +299,7 @@
                       <option value="male">남성</option>
                       <option value="female">여성</option>
                     </select>
-                    <button type="submit">정보 제출</button>
+                    
                   </form>
             </div>
         </div>
@@ -401,8 +455,8 @@
         </div>
 
         <div>
-          <h5 onclick="toggleCancellationPolicy()">예약 취소 규정 보기/숨기기</h5>
-            <div id="cancellationPolicy">
+          <h5 onclick="toggleCancellationPolicy()">예약 취소 규정 보기/숨기기</h5><hr>
+            <div id="cancellationPolicy" style="display:none;">
               <p>▶여행자의 여행계약 해제 요청 시 여행약관에 의거하여 취소료가 부과됩니다◀</p>
               <p>제16조(여행출발 전 계약해제)</p>
               <p>여행개시 30일전까지( ～30) 통보 시 - 계약금 환급</p>
@@ -423,14 +477,21 @@
               <p>취소수수료 발생일은 영업일 기준으로 산정됩니다.(주말,공휴일 제외)</p>
               <p>업무시간 외 접수한 경우에는 익일(영업일이 아닌 경우 다음 영업일)에 접수한 것으로 간주됩니다.</p>
               <p>업무시간은 월-금 09:00~18:00 (주말,공휴일 제외)</p>
-              <p>(예: 토/일/월 출발 상품은 금요일 업무종료 이후 취소시 당일 취소로 간주됩니다.)</p>
+              <p>(예: 토/일/월 출발 상품은 금요일 업무종료 이후 취소시 당일 취소로 간주됩니다.)</p><hr>
             </div>
         </div>
+        	<div style="display: flex; align-items: center;">
+			    <input type="radio" name="payment" value="card">
+			    <img src="<%=request.getContextPath()%>/img/SYPAY/cardpayment.png" style="width: 50px; height: 50px;">
+			    <h5>카드결제</h5>
+			</div>
+			<div style="display: flex; align-items: center;">
+			    <input type="radio" name="payment" value="kakaopay">
+			    <img src="<%=request.getContextPath()%>/img/SYPAY/payment_icon_yellow_small.png" style="width: 50px; height: 50px;">
+			    <h5>카카오페이</h5>
+			</div>
               <div>
                 <button id="paymentButton" onclick="paymentButton()">결제하기</button>
-              </div>
-              <div>
-              	<button id="nhnpaymentButton" onclick="nhnpaymentButton()">결제하기</button>
               </div>
       </div>
 </section>
@@ -477,7 +538,7 @@
     .modal {
         display: none;
         position: fixed;
-        z-index: 1;
+        z-index: 9999;
         padding-top: 15%; /* 수직 위치를 조절합니다 */
         left: 0;
         top: 0;

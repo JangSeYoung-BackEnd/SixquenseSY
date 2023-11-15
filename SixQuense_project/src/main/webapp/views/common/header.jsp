@@ -39,6 +39,17 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+	
+	<!-- Js Plugins -->
+    <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.slicknav.js"></script>
+    <script src="<%=request.getContextPath()%>/js/mixitup.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/main.js"></script>
+	
 
 <body>
 	<!-- 페이지 넘어갈때 로딩바 -->
@@ -60,13 +71,15 @@
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
-                    <div class="header__cart" style="margin-left: 60px;">
-                        <ul>
-                            <div class="header__top__right"><div class="header__top__right__auth">
-                                <button type="button" class="btn btn-success"><a href="/login.html"></i><b style="color: white;">로그인</b></a></button>
-                            </div>
-                        </ul>
-                    </div>         
+                    <nav class="header__menu" style="text-align: center; display: contents;">
+                    <ul>
+                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/로그인 아이콘.png" width="50px;"></a>
+                        	<ul class="header__menu__dropdown" style="padding-ti">
+                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">MYPAGE</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
                     <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>
@@ -75,11 +88,6 @@
                     <ul>
                         <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/icon/홈.png" width="25px"> 홈</a></li>
                         <li><a href= "<%=request.getContextPath() %>/product/productmain.do"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href= #>상품</a></li>
-                                <li><a href= #>상품</a></li>
-
-                            </ul>
                         </li>
                         <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a>
                         	<ul class="header__menu__dropdown">
@@ -87,7 +95,7 @@
                                 <li><a href= "<%=request.getContextPath() %>/community/communitylist.do">여행리뷰</a></li>
                             </ul>
                         </li>
-                        <li><a href= "#"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
+                        <li><a href= "<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/img/icon/헤더 문의.png" width="25px;"> 문의사항</a></li>
                     </ul>
                 </nav>
         </div>

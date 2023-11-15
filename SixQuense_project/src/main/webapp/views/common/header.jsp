@@ -39,7 +39,6 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-	
 	<!-- Js Plugins -->
     <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -73,11 +72,9 @@
                     </div>
                     <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
-                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/로그인 아이콘.png" width="50px;"></a>
-                        	<ul class="header__menu__dropdown" style="padding-ti">
-                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">MYPAGE</a></li>
-                            </ul>
-                        </li>
+                        <div class="header__top__right"><div class="header__top__right__auth">
+                                <button type="button" class="btn btn-success"><a href="#"></i><b style="color: white;">로그인</b></a></button>
+                        </div>
                     </ul>
                 </nav>
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">

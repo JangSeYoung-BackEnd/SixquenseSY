@@ -34,11 +34,11 @@ public class ProductListServlet extends HttpServlet {
 		
 		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
 		
-		List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
+		//List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
 		
 		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
 		
-		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
+		//List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
 		
 		request.setAttribute("recentProducts", recentProducts);
 		//request.setAttribute("bestProducts", bestProducts);

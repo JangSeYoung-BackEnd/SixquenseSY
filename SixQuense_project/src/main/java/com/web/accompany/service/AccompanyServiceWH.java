@@ -39,6 +39,7 @@ public class AccompanyServiceWH {
 			Connection conn= getConnection();
 			List <AccompanyComment> list = dao.selectAccompanyComment(conn,no);
 			close(conn);
+			//System.out.println(list+"dao");
 			return list;
 		}
 

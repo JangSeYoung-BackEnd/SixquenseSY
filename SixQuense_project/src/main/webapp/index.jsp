@@ -336,7 +336,7 @@
                  <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=10">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
                         <img src="./img/japen/후쿠오카.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -812,4 +812,4 @@
 
 
 
-<%@ include file="/views/common/footer.jsp"%>
+<%-- <%@ include file="/views/common/footer.jsp"%> --%>

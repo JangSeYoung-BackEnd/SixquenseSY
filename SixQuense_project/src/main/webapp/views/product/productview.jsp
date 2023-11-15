@@ -72,17 +72,19 @@
 					</div>
 					<div class="product__details__price"><%=product.getProductPrice() %>원</div>
 					<p style="text-align: left"><%=product.getEditorNote() %></p>
-					<form action="<%=request.getContextPath()%>/product/makeorder.do">
+					<form action="<%=request.getContextPath()%>/product/makeorder.do" method="post">
+					<input type="hidden" name="productNo" value="<%= product.getProductNo() %>">
 					<div class="product__details__quantity">
 						<div class="date-container">
 							<input type="date" id="travel_date" name="travel_date"
 								onchange="checkDate()">
 						</div>
-						<div class="quantity">
-							<div class="pro-qty">
-								<input type="text" value="1">
-							</div>
-						</div>
+						<select class="form-select" aria-label="Default select example" name="selectOption">
+						  <option selected>Open this select menu</option>
+						  <option value="1">One</option>
+						  <option value="2">Two</option>
+						  <option value="3">Three</option>
+						</select>
 					</div>
 
 					<div class="button-container">

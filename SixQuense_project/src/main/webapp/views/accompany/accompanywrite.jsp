@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="row">
-            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do" method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do?useId=<%=loginMember.getUserId() %>" method="post" enctype="multipart/form-data">
                 <div>
                     <input type="text" id="accompany-title" name="accompany-title" placeholder="제목 : 여행지/날짜/제목내용 으로 작성해주세요" style="width: 700px; border:solid gainsboro; margin-bottom: 10px;"">
                 </div>
@@ -168,10 +168,10 @@
                 }
             });
         });
+        //클릭해서 바로 보내는 개념이 아닌, AJAX로 모든 등록 게시글 파일 보내는 방식으로 수정
 		document.addEventListener('DOMContentLoaded', function () {
 		  	const conturyDivs = document.querySelectorAll('.contury div');
-		
-		  conturyDivs.forEach(function (div) {
+		  	conturyDivs.forEach(function (div) {
 		    div.addEventListener('click', function () {
 		      const clickedText = div.innerText;
 		      console.log('Clicked Text:', clickedText);
@@ -185,7 +185,6 @@
 		      const data = 'clickedText=' + encodeURIComponent(clickedText);
 		      // 요청을 전송
 		      nationdata.send(data);
-		      
 		    });
 		  });
 		});

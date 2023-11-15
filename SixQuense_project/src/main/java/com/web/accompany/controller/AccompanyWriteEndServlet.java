@@ -51,6 +51,7 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 			String nation=mr.getParameter("clickedText");
 			String ori=mr.getFilesystemName("accompany-file");
 			String rename=mr.getFilesystemName("accompany-file");
+			String userId=request.getParameter("useId");
 			AccompanyDTO a=AccompanyDTO.builder()
 					.accompanyTitle(title)
 					.accompanyContent(content)
@@ -58,9 +59,9 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 					.originalFilename(ori)
 					.renameFilename(rename)
 					.build();
-			int result=new AccompanyServiceKH().insertAccompany(a,nation);
+			int result=new AccompanyServiceKH().insertAccompany(a,nation,userId);
 		}		
-		request.getRequestDispatcher("/accompany/accompanylist.jsp").forward(request, response);
+		request.getRequestDispatcher(request.getContextPath()+"/accompany/accompanylist.do").forward(request, response);
 	}
 
 	/**

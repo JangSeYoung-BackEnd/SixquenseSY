@@ -25,9 +25,9 @@ public class AccompanyServiceKH {
 			return	a;
 		}
 		
-		public int insertAccompany(AccompanyDTO a, String nation) {
+		public int insertAccompany(AccompanyDTO a, String nation, String userId) {
 			Connection conn=getConnection();
-			int result=dao.insertAccompany(conn, a, nation);
+			int result=dao.insertAccompany(conn, a, nation, userId);
 			if(result>0) commit(conn);
 			else rollback(conn);
 			close(conn);

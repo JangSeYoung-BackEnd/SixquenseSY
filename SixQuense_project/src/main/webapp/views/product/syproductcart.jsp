@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.ProductDto" %>
 <%@ include file="/views/common/header.jsp"%>
+
+<% ProductDto product = (ProductDto)request.getAttribute("product"); %>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->

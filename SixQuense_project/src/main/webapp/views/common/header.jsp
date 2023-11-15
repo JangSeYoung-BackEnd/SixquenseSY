@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import ="com.web.member.dto.Member"%>
+<%
+
+	Member loginMember=(Member)session.getAttribute("loginMember");
+	System.out.println(loginMember);
+	Cookie[] cookies=request.getCookies();
+	String saveId=null;
+	if(cookies!=null){
+		for(Cookie c:cookies){
+			String name=c.getName();
+			if(name.equals("saveId")){
+				saveId=c.getValue();
+				break;
+			}
+		}
+	}
+%>
+	
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -70,7 +88,6 @@
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
-<<<<<<< HEAD
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
                             <div class="header__top__right"><div class="header__top__right__auth">
@@ -78,15 +95,6 @@
                             </div>
                         </ul>
                     </div>         
-=======
-                    <nav class="header__menu" style="text-align: center; display: contents;">
-                    <ul>
-                        <div class="header__top__right"><div class="header__top__right__auth">
-                                <button type="button" class="btn btn-success"><a href="#"></i><b style="color: white;">로그인</b></a></button>
-                        </div>
-                    </ul>
-                </nav>
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
                     <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>

@@ -116,6 +116,9 @@ button {
 button:hover {
 	background-color: #07950cec;
 	}
+#commentText{
+	width :640px
+}
 </style>
 
 <script>
@@ -136,6 +139,7 @@ button:hover {
 	             document.getElementById("googleMap") , mapOptions );
 	      
    }
+   
 </script> 
 
 
@@ -218,7 +222,7 @@ button:hover {
 					</div>
 					<div style="display: flex;">
 						<div><%=b.getAccompanyDate()%></div>
-						<div><%=b.getAccompanyReadCount()%></div>
+						<div>조회수 <%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
 						<h3>comment</h3>
@@ -226,8 +230,15 @@ button:hover {
 						<br>
 						<div class="comments" id="comments"></div>
 						<div class="comment-form">
+						<form action = "<%=request.getContextPath() %>/accompany/insertaccompanycomment.do" method="post">
+							<input type="hidden" name="accompanyNo" value="<%=b.getAccompanyNo()%>">
+							<input type="hidden" name="level" value="1">
+							<input type="hidden" name="writer" value="<%=b.getAccompanyNo()%>">
+							<input type="hidden" name="accompanyCommentRef" value="0">
+							
 							<input type="text" id="commentText" placeholder="댓글을 입력하세요">
-							<button onclick="addComment()">댓글 추가</button>
+							<button type="submit" id="btn-insert">댓글 추가</button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -329,6 +340,6 @@ button:hover {
 		
 	</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> -->
 
  <%@ include file="/views/common/footer.jsp"%>

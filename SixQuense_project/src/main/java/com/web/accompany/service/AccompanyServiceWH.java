@@ -15,10 +15,20 @@ public class AccompanyServiceWH {
 		
 		
 		//글을 클릭했을 때 해당하는 글번호로 조회하는 메소드 
-		public AccompanyDTO selectBoardByNo(int no) {
+		public AccompanyDTO selectBoardByNo(int no, boolean readResult) {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
-
+			
+			//만약에 게시글이 null이 아니면 조회수 올리기 
+			if(accompanyView!=null&&!readResult) {
+				int result=dao.updateAccompanyReadCount(conn, no);
+				
+				if(result>0) {
+					commit(conn);
+					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount()+1);
+				}
+				else rollback(conn);
+			}
 			close(conn);
 			return accompanyView;
 		}
@@ -30,5 +40,18 @@ public class AccompanyServiceWH {
 			List <AccompanyComment> list = dao.selectAccompanyComment(conn,no);
 			close(conn);
 			return list;
+		}
+
+
+		public int insertAccompanyComment(AccompanyComment ac) {
+			Connection conn = getConnection();
+			int result = dao.insertAccompanyComment(conn,ac);
+			if(result > 0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+			
+			
+			
 		}
 }

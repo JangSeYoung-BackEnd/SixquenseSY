@@ -10,10 +10,6 @@
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
-	System.out.println(latitude);
-	System.out.println(longitude);
-
-
 %>
 
 
@@ -116,6 +112,9 @@ button {
 button:hover {
 	background-color: #07950cec;
 	}
+#commentText{
+	width :640px
+}
 </style>
 
 <script>
@@ -136,6 +135,7 @@ button:hover {
 	             document.getElementById("googleMap") , mapOptions );
 	      
    }
+   
 </script> 
 
 
@@ -218,7 +218,7 @@ button:hover {
 					</div>
 					<div style="display: flex;">
 						<div><%=b.getAccompanyDate()%></div>
-						<div><%=b.getAccompanyReadCount()%></div>
+						<div>조회수 <%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
 						<h3>comment</h3>
@@ -226,15 +226,29 @@ button:hover {
 						<br>
 						<div class="comments" id="comments"></div>
 						<div class="comment-form">
-							<input type="text" id="commentText" placeholder="댓글을 입력하세요">
-							<button onclick="addComment()">댓글 추가</button>
+						<form action = "<%=request.getContextPath() %>/accompany/insertaccompanycomment.do" method="post">
+							<input type="hidden" name="accompanyNo" value="<%=b.getAccompanyNo()%>">
+							<input type="hidden" name="level" value="1">
+							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
+							<input type="hidden" name="accompanyCommentRef" value="0">
+							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요">
+							<button type="submit" id="btn-insert">댓글 추가</button>
+						</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	                
+	    <script>
+	    $(".comment-form>form>input[name=content]").focus(e=>{
+	    	if(<%=loginMember==null%>){
+	    		/* 로그인이 안됐을 때  */
+	    		alert("로그인 후 이용할 수 있는 서비스입니다.")
+	    		
+	    	}
+	    });
+	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
@@ -329,6 +343,6 @@ button:hover {
 		
 	</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>  -->
 
  <%@ include file="/views/common/footer.jsp"%>

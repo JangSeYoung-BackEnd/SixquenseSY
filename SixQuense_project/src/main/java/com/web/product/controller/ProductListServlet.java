@@ -38,11 +38,11 @@ public class ProductListServlet extends HttpServlet {
 		
 		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
 		
-		//List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
+		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
 		
 		request.setAttribute("recentProducts", recentProducts);
 		//request.setAttribute("bestProducts", bestProducts);
-		//request.setAttribute("dicountProducts", dicountProducts);
+		request.setAttribute("dicountProducts", dicountProducts);
 		
 	
 		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);

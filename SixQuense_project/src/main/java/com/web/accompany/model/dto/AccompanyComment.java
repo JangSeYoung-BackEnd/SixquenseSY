@@ -1,7 +1,6 @@
 package com.web.accompany.model.dto;
 
-import java.sql.Date;
-
+import java.sql.Date; 
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,5 +14,5 @@ public class AccompanyComment {
 	private int accompanyComtRef;
 	private Date accompanyComtDate;
 	private int accompanyNo;
-	private int MemberNo;
+	private String userId;	
 }

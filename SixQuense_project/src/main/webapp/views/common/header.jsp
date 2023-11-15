@@ -95,14 +95,16 @@
                     <img src="<%=request.getContextPath()%>/img/icon/로그인아이콘.png" style="width: 40px">
                     </a>
                 </div>
-                <div class="logoutBtn">
-				<input type="button" 
+                <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px; margin-top: 30px;">
+                    <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"
+                    style="width: 120px; height: 44px; margin-bottom: 25px;"><b>글쓰기</b></button>
+                </div>
+                <div class="logoutBtn" style=" margin-top: 30px; margin-left: 20px;">
+				<input type="button" class="btn btn-secondary"
 					onclick="location.replace('<%=request.getContextPath()%>/logout.do');" 
 					value="로그아웃">
 				</div>         
-                <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px; margin-top: 30px;">
-                    <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
-                </div>
+                
                 <%} %>
             </div>
                  <nav class="header__menu" style="text-align: center; display: contents;">

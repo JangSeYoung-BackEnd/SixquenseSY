@@ -1,51 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script>
-    var IMP = window.IMP; 
-    IMP.init("imp88100268"); 
-  
-    const today = new Date();   
-    const hours = today.getHours(); // 시
-    const minutes = today.getMinutes();  // 분
-    const seconds = today.getSeconds();  // 초
-    const milliseconds = today.getMilliseconds();
-    const makeMerchantUid = hours +  minutes + seconds + milliseconds;
-    
+            var IMP = window.IMP; 
+            IMP.init("imp88100268"); 
+            
+            const today = new Date();   
+            const hours = today.getHours(); // 시
+            const minutes = today.getMinutes();  // 분
+            const seconds = today.getSeconds();  // 초
+            const milliseconds = today.getMilliseconds();
+            const makeMerchantUid = hours +  minutes + seconds + milliseconds;
 
-    function paymentButton() {
-        var infocheckbox = document.getElementById("infocheckbox");
-        if (!infocheckbox.checked) {
-            return;
-        }
-
-        IMP.request_pay({
-            pg : 'kakaopay',
-            merchant_uid: "IMP"+makeMerchantUid, 
-            name : '으악으악',
-            amount : 1004,
-            buyer_email : 'sixquence',
-            buyer_name : '장세영',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : 'gdacadamey',
-            buyer_postcode : '123-456'
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                console.log(rsp);
-            } else {
-                console.log(rsp);
+            function paymentButton() {
+                var infocheckbox = document.getElementById("infocheckbox");
+                if (!infocheckbox.checked) {
+                    return;
+                }
+                
+                var cardRadio = document.querySelector('input[name="payment"][value="card"]');
+                var kakaopayRadio = document.querySelector('input[name="payment"][value="kakaopay"]');
+                
+                if (cardRadio.checked) {
+                    payment_card();
+                } else if (kakaopayRadio.checked) {
+                    payment_kakaopay();
+                } else {
+                    alert("결제 방법을 선택해주세요.");
+                }
             }
-        });
-    }
+        
+         function payment_kakaopay() {
+             IMP.request_pay({
+                 pg : 'kakaopay',
+                 merchant_uid: "IMP"+makeMerchantUid, 
+                 name : $("div.shoping__cart__item>h3").text(),
+                 amount : Number($("td.shoping__cart__item__close").text()),
+                 buyer_email : 'sixquence',
+                 buyer_name : '장세영',
+                 buyer_tel : '010-1234-5678',
+                 buyer_addr : 'gdacadamey',
+                 buyer_postcode : '123-456'
+             }, function (rsp) { // callback
+                 if (rsp.success) {
+                     //주문정보 저장
+                     $("#orderInfo").submit();
+                 } else {
+                     console.log(rsp);
+                 }
+             });
+         }
+         function payment_card() {
+             IMP.request_pay({
+                 pg : "kcp.AO09C", // 결제사명.PG상점아이디
+                 pay_method : "card", // 지불방법
+                 merchant_uid: "1234567", // 주문번호가 들어가야함.
+                 name : $("div.shoping__cart__item>h3").text(), // 결제창에 노출될 상품명
+                 amount: Number($("td.shoping__cart__item__close").text()), // 결제 금액
+                 buyer_email : "mkty0328@gmail.com", // 주문자 email
+                 buyer_name : "홍길동", // 주문자 이름
+                 buyer_tel : "01064269887", // 주문자 전화번호
+                 buyer_addr : "경기도 안양시 만안구", // 주문자 주소
+                 buyer_postcode : "139-91", // 주문자 우편번호
+             }, function(rsp){ // callback함수
+                 if(rsp.success){
+                     $.ajax({
+                         url : "<%=request.getContextPath()%>/paydemo.do",
+                         type : "POST",
+                         dataType : "json",
+                         data : {
+                             imp_uid : rsp.imp_uid,
+                             merchant_uid : rsp.merchant_uid,
+                             paid_amount : rsp.paid_amount,
+                             apply_num : rsp.apply_num
+                         },
+                         success : function(data){
+                             Swal.fire({
+                                 title: "결제 완료",
+                                 text: "주문번호 : "+merchant_uid,
+                                 icon: "success"
+                             });
+                         }
+                     });
+                 }else{
+                     Swal.fire({
+                         title: "결제 실패",
+                         text: rsp.error_msg,
+                         icon: "error"
+                     });
+                 }
+             });
+         }
 </script>
 <section class="body">
     <div style="display: flex;margin-top:170px;">
     <section class="set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
+        <div class="containerbox">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
@@ -60,7 +114,7 @@
         </div>
     </section>
     <section class="col-lg-6">
-        <div class="container">
+        <div class="containerbox">
             <style>
               .shoping__cart__item {
                 display: flex;
@@ -110,7 +164,7 @@
                         <td>
                           <div class="shoping__cart__item">
                           <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-                            <h3>패키지 제목</h3>
+                            <h3>후쿠오카 패키지 제목</h3>
                           </div>
                         </td>
                         <td class="shoping__cart__price">
@@ -120,7 +174,7 @@
                           수량
                         </td>
                         <td class="shoping__cart__item__close">
-                          총합
+                          500
                         </td>
                       </tr>
                     </tbody>
@@ -132,13 +186,13 @@
             <div class="row">
                 <div class="col-lg-12">  
                 </div>
-                <div class="form-container">
-                <form>
+                <div class="form-containerbox">
+                <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
                     <h2>예약자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
                   
-                    <div class="flex-container">
+                    <div class="flex-containerbox">
                       <div>
                         <label for="englishFirstName">영문 이름:</label>
                         <input type="text" id="englishFirstName" name="englishFirstName" required>
@@ -148,8 +202,11 @@
                         <input type="text" id="englishLastName" name="englishLastName" required>
                       </div>
                     </div>
-                  
-                    <div class="flex-container">
+                     <div>
+                        <label for="name">전화번호:</label>
+                    <input type="text" id="name" name="name" required>
+                     </div>
+                    <div class="flex-containerbox">
                       <div>
                         <label for="birthDate">생년월일:</label>
                         <input type="date" id="birthDate" name="birthDate" required>
@@ -161,7 +218,7 @@
                       <option value="male">남성</option>
                       <option value="female">여성</option>
                     </select>
-                    <button type="submit">정보 제출</button>
+                    
                   </form>
                   
                   <style>
@@ -172,7 +229,9 @@
                         box-sizing: border-box;
                         background-color: #f5f5f5;
                     }
-                
+                   #orderInfo{
+                      
+                   }
                     label {
                         display: block;
                         margin-bottom: 8px;
@@ -186,7 +245,7 @@
                         box-sizing: border-box;
                     }
                 
-                    .flex-container {
+                    .flex-containerbox {
                         display: flex;
                         justify-content: space-between;
                         margin-bottom: 16px;
@@ -204,18 +263,18 @@
                     button:hover {
                         background-color: #45a049;
                     }
-                    .form-container{
+                    .form-containerbox{
                         display: flex;
                         width:100%;
                         justify-content: space-between;
                     }
                 </style>
-                <form>
+                <form action="product/bookinginfo.do" method="post">
                     <h2>여행자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
                   
-                    <div class="flex-container">
+                    <div class="flex-containerbox">
                       <div>
                         <label for="englishFirstName">영문 이름:</label>
                         <input type="text" id="englishFirstName" name="englishFirstName" required>
@@ -225,8 +284,12 @@
                         <input type="text" id="englishLastName" name="englishLastName" required>
                       </div>
                     </div>
+                    <div>
+                    <label for="name">전화번호:</label>
+                    <input type="text" id="name" name="name" required>
+                    </div>
                   
-                    <div class="flex-container">
+                    <div class="flex-containerbox">
                       <div>
                         <label for="birthDate">생년월일:</label>
                         <input type="date" id="birthDate" name="birthDate" required>
@@ -238,14 +301,10 @@
                       <option value="male">남성</option>
                       <option value="female">여성</option>
                     </select>
-                    <button type="submit">정보 제출</button>
+                    
                   </form>
             </div>
         </div>
-        <div class="button-container">
-						<button type="button" class="btn btn-secondary btn-lg btn-block" width="1160px">다른
-							지역 둘러보기</button>
-					</div>
           <style>
             form {
                 max-width: 600px;
@@ -268,11 +327,11 @@
     <hr>
 
     <div>
-    	<div style="display:flex;align-item:center;justify-content:space-between;">
-        	<p class="consent">개인정보 수집 및 이용동의</p>
-            <button class="consent" onclick="showModal()" style="padding: 2px 4px;">필수</button>
+       <div style="display:flex;align-item:center;justify-content:space-between;">
+           <p class="consent">개인정보 수집 및 이용동의</p>
+            <button class="consent" onclick="showModal()" style="padding: 2px 4px; margin-left: 100px; height: 34px;">필수</button>
             <div style="display:flex;align-item:center;justify-content:center">
-            	<input type="checkbox" id="personalInfoConsent" onchange="checkConsent()">
+               <input type="checkbox" id="personalInfoConsent" onchange="checkConsent()">
             </div>
          </div>
          <div id="termsModal" class="modal">
@@ -280,16 +339,16 @@
                 <span class="close">&times;</span>
                 <h4>개인정보 수집 및 이용동의 (필수)</h4>
                 <p>
-            	1. 개인정보 수집 및 이용목적:<br>
-            	상품 제공 계약의 성립, 계약 관련 동의 또는 철회 본인 의사 확인, 대금환불, 상품배송, 고객상담<br>
-            	<br>
-            	2. 개인정보 수집 항목:<br>
-            	· 예약자 정보 : 이름, 이메일, 휴대폰번호, 영문이름(일부 상품)<br>
-            	· 여행자 정보 : 이름, 영문이름(일부 상품)<br>
-            	· 추가 예약 정보 : 성별(일부 상품), 생년월일(일부 상품), 카카오톡ID(일부 상품)<br>
-            	<br>
-            	3. 보유 및 이용기간:<br>
-            	회원 탈퇴시 까지(단, 관계 법령에 따름)
+               1. 개인정보 수집 및 이용목적:<br>
+               상품 제공 계약의 성립, 계약 관련 동의 또는 철회 본인 의사 확인, 대금환불, 상품배송, 고객상담<br>
+               <br>
+               2. 개인정보 수집 항목:<br>
+               · 예약자 정보 : 이름, 이메일, 휴대폰번호, 영문이름(일부 상품)<br>
+               · 여행자 정보 : 이름, 영문이름(일부 상품)<br>
+               · 추가 예약 정보 : 성별(일부 상품), 생년월일(일부 상품), 카카오톡ID(일부 상품)<br>
+               <br>
+               3. 보유 및 이용기간:<br>
+               회원 탈퇴시 까지(단, 관계 법령에 따름)
         </p>
                 <button onclick="confirmConsent('termsModal', 'personalInfoConsent')">확인</button>
             </div>
@@ -297,57 +356,57 @@
          
          <div style="display:flex;align-item:center;justify-content:space-between;">   
         <p class="consent">개인정보 제공 동의</p>
-            <button class="consent" onclick="showModal2()" style="padding: 2px 4px;">필수</button>
+            <button class="consent" onclick="showModal2()" style="padding: 2px 4px; margin-left: 150px; height: 34px;">필수</button>
             <div>
-           		 <input type="checkbox" id="infoProvidingConsent" onchange="checkConsent()">            
+                  <input type="checkbox" id="infoProvidingConsent" onchange="checkConsent()">            
             </div>
          </div>
          <div id="termsModal2" class="modal">
-     	<div class="modal-content">
+        <div class="modal-content">
                 <span class="close">&times;</span>
                 <h4>개인정보 제공 동의 (필수)</h4>
                 <p>
-            	1. 개인 정보를 제공받는자<br>
-				· B2B단거리상품팀<br>
-				2. 제공하는 개인정보 항목<br>
-				· 예약자 정보 (이름, 이메일, 휴대폰번호, 영문이름(일부 상품)), 여행자 정보(이름, 영문이름(일부 상품)), 추가 예약 정보 (성별(일부 상품), 생년월일(일부 상품), 카카오톡ID(일부 상품))
-				<br>
-				3. 개인정보를 제공받는 자의 이용 목적<br>
-				· 판매자와 구매자 거래, 상품배송, 고객관리(고객상담/불만처리)
-				<br>
-				4. 보유 및 이용기간
-				· 여행 완료 후 5일까지
-        		</p>
+               1. 개인 정보를 제공받는자<br>
+            · B2B단거리상품팀<br>
+            2. 제공하는 개인정보 항목<br>
+            · 예약자 정보 (이름, 이메일, 휴대폰번호, 영문이름(일부 상품)), 여행자 정보(이름, 영문이름(일부 상품)), 추가 예약 정보 (성별(일부 상품), 생년월일(일부 상품), 카카오톡ID(일부 상품))
+            <br>
+            3. 개인정보를 제공받는 자의 이용 목적<br>
+            · 판매자와 구매자 거래, 상품배송, 고객관리(고객상담/불만처리)
+            <br>
+            4. 보유 및 이용기간
+            · 여행 완료 후 5일까지
+              </p>
                 <button onclick="confirmConsent('termsModal2', 'infoProvidingConsent')">확인</button>
             </div>
         </div>
-     	
-     	
-     	<div style="display:flex;align-item:center;justify-content:space-between;">   
+        
+        
+        <div style="display:flex;align-item:center;justify-content:space-between;">   
         <p class="consent">고유식별정보 제공 동의</p>
-            <button class="consent" onclick="showModal3()" style="padding: 2px 4px;">필수</button>
+            <button class="consent" onclick="showModal3()" style="padding: 2px 4px; margin-left: 117px; height: 34px;">필수</button>
             <div>
-            	<input type="checkbox" id="identificationConsent" onchange="checkConsent()">            
+               <input type="checkbox" id="identificationConsent" onchange="checkConsent()">            
             </div>
         </div>
         <div id="termsModal3" class="modal">
-     	<div class="modal-content">
+        <div class="modal-content">
                 <span class="close">&times;</span>
-				<table>
-				  <tr>
-				    <th>제공 받는자</th>
-				    <th>제공 목적</th>
-				    <th>제공 정보</th>
-				    <th>보유 및 이용 기간</th>
-				  </tr>
-				  <tr>
-				    <td>B2B단거리상품팀</td>
-				    <td>현지 여행진행 및 고객 관리</td>
-				    <td>여권 번호, 여권발행국, 여권만료일</td>
-				    <td>예약 확정 후 3개월까지</td>
-				  </tr>
-				</table>
-				<p>고유식별정보 제공 동의를 거부할 수 있으며, 거부시 서비스 이용이 제한됩니다.</p>
+            <table>
+              <tr>
+                <th>제공 받는자</th>
+                <th>제공 목적</th>
+                <th>제공 정보</th>
+                <th>보유 및 이용 기간</th>
+              </tr>
+              <tr>
+                <td>B2B단거리상품팀</td>
+                <td>현지 여행진행 및 고객 관리</td>
+                <td>여권 번호, 여권발행국, 여권만료일</td>
+                <td>예약 확정 후 3개월까지</td>
+              </tr>
+            </table>
+            <p>고유식별정보 제공 동의를 거부할 수 있으며, 거부시 서비스 이용이 제한됩니다.</p>
                 <button onclick="confirmConsent('termsModal3', 'identificationConsent')">확인</button>
             </div>
         </div>
@@ -355,47 +414,47 @@
         
         <div style="display:flex;align-item:center;justify-content:space-between;">
         <p class="consent">고유식별정보 수집 및 이전 동의</p>
-            <button class="consent" onclick="showModal4()" style="padding: 2px 4px;">필수</button>
+            <button class="consent" onclick="showModal4()" style="padding: 2px 4px; margin-left: 60px; height: 34px;">필수</button>
             <div>
-            	<input type="checkbox" id="identificationTransferConsent" onchange="checkConsent()">            
+               <input type="checkbox" id="identificationTransferConsent" onchange="checkConsent()">            
             </div>
-    	</div>
-    	<div id="termsModal4" class="modal">
-     	<div class="modal-content">
+       </div>
+       <div id="termsModal4" class="modal">
+        <div class="modal-content">
                 <span class="close">&times;</span>
                 <table>
-				  <thead>
-				    <tr>
-				      <th>수집목적</th>
-				      <th>수집항목</th>
-				      <th>보유기간</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td>상품/서비스의 예약 또는 배송 업무 처리 및 고객상담/해피콜, 맞춤형 컨텐츠 및 서비스 제공</td>
-				      <td>여권번호, 여권발행국, 여권만료일</td>
-				      <td>회원탈퇴시까지(단, 관계 법령에 따름)</td>
-				    </tr>
-				    <tr>
-				      <td>여행자 정보 등록 및 관리</td>
-				      <td>여권번호, 여권발행국, 여권만료일</td>
-				      <td>회원탈퇴 혹은 여행자정보 삭제시까지</td>
-				    </tr>
-				  </tbody>
-				</table>
+              <thead>
+                <tr>
+                  <th>수집목적</th>
+                  <th>수집항목</th>
+                  <th>보유기간</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>상품/서비스의 예약 또는 배송 업무 처리 및 고객상담/해피콜, 맞춤형 컨텐츠 및 서비스 제공</td>
+                  <td>여권번호, 여권발행국, 여권만료일</td>
+                  <td>회원탈퇴시까지(단, 관계 법령에 따름)</td>
+                </tr>
+                <tr>
+                  <td>여행자 정보 등록 및 관리</td>
+                  <td>여권번호, 여권발행국, 여권만료일</td>
+                  <td>회원탈퇴 혹은 여행자정보 삭제시까지</td>
+                </tr>
+              </tbody>
+            </table>
 
-				<button onclick="confirmConsent('termsModal4', 'identificationTransferConsent')">확인</button>
+            <button onclick="confirmConsent('termsModal4', 'identificationTransferConsent')">확인</button>
             </div>
         </div>
-    	
+       
         <div class="infocheck" style="border: 2px solid grey";>
               "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"<input type="checkbox" id="infocheckbox">
         </div>
 
         <div>
-          <h5 onclick="toggleCancellationPolicy()">예약 취소 규정 보기/숨기기</h5>
-            <div id="cancellationPolicy">
+          <h5 onclick="toggleCancellationPolicy()">예약 취소 규정 보기/숨기기</h5><hr>
+            <div id="cancellationPolicy" style="display:none;">
               <p>▶여행자의 여행계약 해제 요청 시 여행약관에 의거하여 취소료가 부과됩니다◀</p>
               <p>제16조(여행출발 전 계약해제)</p>
               <p>여행개시 30일전까지( ～30) 통보 시 - 계약금 환급</p>
@@ -416,14 +475,21 @@
               <p>취소수수료 발생일은 영업일 기준으로 산정됩니다.(주말,공휴일 제외)</p>
               <p>업무시간 외 접수한 경우에는 익일(영업일이 아닌 경우 다음 영업일)에 접수한 것으로 간주됩니다.</p>
               <p>업무시간은 월-금 09:00~18:00 (주말,공휴일 제외)</p>
-              <p>(예: 토/일/월 출발 상품은 금요일 업무종료 이후 취소시 당일 취소로 간주됩니다.)</p>
+              <p>(예: 토/일/월 출발 상품은 금요일 업무종료 이후 취소시 당일 취소로 간주됩니다.)</p><hr>
             </div>
         </div>
+           <div style="display: flex; align-items: center; margin-bottom: 30px;">
+             <input type="radio" name="payment" value="card" style="width: 50px; margin-top: 10px; margin-left: 20px;">
+             <img src="<%=request.getContextPath()%>/img/SYPAY/cardpayment.png" style="width: 50px; height: 50px;">
+             <h5>카드결제</h5>
+         </div>
+         <div style="display: flex; align-items: center;">
+             <input type="radio" name="payment" value="kakaopay" style="width: 50px; margin-top: 10px; margin-left: 20px;">
+             <img src="<%=request.getContextPath()%>/img/SYPAY/payment_icon_yellow_small.png" style="width: 50px;">
+             <h5>카카오페이</h5>
+         </div>
               <div>
-                <button id="paymentButton" onclick="paymentButton()">결제하기</button>
-              </div>
-              <div>
-              	<button id="nhnpaymentButton" onclick="nhnpaymentButton()">결제하기</button>
+                <button id="paymentButton" onclick="paymentButton()" style="margin-top: 35px; margin-left: 250px; width: 100px;">결제하기</button>
               </div>
       </div>
 </section>
@@ -449,7 +515,7 @@
       box-sizing: border-box;
     }
 
-    .flex-container {
+    .flex-containerbox {
       display: flex;
       justify-content: space-between;
       gap: 16px;
@@ -470,7 +536,7 @@
     .modal {
         display: none;
         position: fixed;
-        z-index: 1;
+        z-index: 9999;
         padding-top: 15%; /* 수직 위치를 조절합니다 */
         left: 0;
         top: 0;

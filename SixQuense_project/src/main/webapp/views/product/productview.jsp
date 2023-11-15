@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
@@ -13,7 +12,9 @@
 	letter-spacing: 2px;
 	width: 290px;
 	text-align: center;
-	padding: 15px 28px 10px; !important;
+	padding: 15px 28px 10px;
+	!
+	important;
 }
 
 .icon_heart_alt::before {
@@ -26,12 +27,12 @@
 }
 
 .btn-group-lg>.btn, .btn-lg {
-	font-size: 14px; !important;
-	margin: 20px 0px; !important;
-	padding: 10px 16px; !important;
+	font-size: 14px; ! important;
+	margin: 20px 0px; ! important;
+	padding: 10px 16px;
+	!
+	important;
 }
-
-
 </style>
 <!-- Product Details Section Begin -->
 <section class="product-details spad" style="padding-top: 250px";>
@@ -69,9 +70,11 @@
 						sit amet quam vehicula elementum sed sit amet dui. Sed porttitor
 						lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
 						sed sit amet dui. Proin eget tortor risus.</p>
+					<form action="<%=request.getContextPath()%>/product/makeorder.do">
 					<div class="product__details__quantity">
 						<div class="date-container">
-							<input type="date" id="travel_date" name="travel_date">
+							<input type="date" id="travel_date" name="travel_date"
+								onchange="checkDate()">
 						</div>
 						<div class="quantity">
 							<div class="pro-qty">
@@ -81,10 +84,35 @@
 					</div>
 
 					<div class="button-container">
-						<a href="#" class="primary-btn">예약하기</a> <a href="#"
-							class="heart-icon" onclick="toggleHeartIcon(this)"><span
+						<input type="submit" class="primary-btn" onclick="" value="예약하기">
+						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
 							class="icon_heart_alt"></span> 위시리스트에 담기</a>
 					</div>
+					</form>
+					<!-- 데이트 넣어야만 예약버튼 되도록 -->
+					<script>
+						function checkDate() {
+							var dateInput = document
+									.getElementById("travel_date");
+							var reserveLink = document
+									.querySelector(".primary-btn");
+							if (!dateInput.checked){
+								 reserveLink.removeAttribute("href");
+								reserveLink.style.backgroundColor = 'grey';
+								reserveLink.style.cursor = 'none';
+							}
+
+						};
+					</script>
+
+
+
+
+
+
+
+
+
 					<div style="width: 290px; height: 51px; text-align: center;">
 						<b style="color: darkgrey; font-size: 13px;"><span
 							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
@@ -184,35 +212,30 @@
 							<div class="product__details__tab__desc">
 								<h6>이용 안내</h6>
 								<p style="text-align: left">
-								★ 만나는 시간까지, 늦지 않게 나와주시기 바랍니다. 대기 없이 정시 출발입니다. 원활한 투어 진행을 위해 중간합류는 절대 불가합니다.<br>
-								★ 투어 전 가이드가 개별 연락을 드리지 않습니다. 많은 분들과 함께하는 단체 투어로, 가이드의 개인 연락처는 전달해드리지 않는 점 양해부탁드립니다<br>
-								★ 최소 출발 인원을 확인 부탁드립니다. 최소 출발 인원 미달 시 취소될 수 있습니다.<br>
-								해당 경우에는 투어일 기준 최소 7일 전까지 날짜 변경 제안 또는 전액 환불을 진행합니다</p>
-								<p style="text-align: left">★중요 안내★<br>
-								예약확정과 출발확정은 동일 개념이 아닙니다. 투어 출발은 최소인원 이상의 모객이 이루어진 경우 진행됩니다.<br>
-								만나는 시간으로부터 최대 10분까지 대기가 가능합니다. (지각시 노쇼)<br>
-								투어 출발 후 중간 합류 및 환불 불가합니다.<br>
-								별도의 바우처를 보내드리오지 않사오니 집결 시간 및 장소를 다시 한번 확인부탁드립니다.
+									★ 만나는 시간까지, 늦지 않게 나와주시기 바랍니다. 대기 없이 정시 출발입니다. 원활한 투어 진행을 위해
+									중간합류는 절대 불가합니다.<br> ★ 투어 전 가이드가 개별 연락을 드리지 않습니다. 많은 분들과
+									함께하는 단체 투어로, 가이드의 개인 연락처는 전달해드리지 않는 점 양해부탁드립니다<br> ★ 최소 출발
+									인원을 확인 부탁드립니다. 최소 출발 인원 미달 시 취소될 수 있습니다.<br> 해당 경우에는 투어일
+									기준 최소 7일 전까지 날짜 변경 제안 또는 전액 환불을 진행합니다
+								</p>
+								<p style="text-align: left">
+									★중요 안내★<br> 예약확정과 출발확정은 동일 개념이 아닙니다. 투어 출발은 최소인원 이상의 모객이
+									이루어진 경우 진행됩니다.<br> 만나는 시간으로부터 최대 10분까지 대기가 가능합니다. (지각시 노쇼)<br>
+									투어 출발 후 중간 합류 및 환불 불가합니다.<br> 별도의 바우처를 보내드리오지 않사오니 집결 시간 및
+									장소를 다시 한번 확인부탁드립니다.
 								</p>
 							</div>
 							<div class="product__details__tab__desc">
 								<h6>취소 및 환불 안내</h6>
-								<p style="text-align: left"><strong>1. 일반 규정</strong><br>
-								-  투어일 기준 7일 전 (영업시간 기준) 취소 신청 시 전액 환불    <br>                        
-								-  투어일 기준 6일~당일 노쇼(No show) 시 전액 환불 불가<br><br>
-								<strong>2. 예외 규정</strong><br>
-								환불 가능 조건 및 파업, 천재지변, 투어 지연등의 세부 규정은 다음의 링크를 통해 확인해주세요.<br>
-								<a href="" onclick="showRefundPolicy()"> 환불 규정 상세 보기 (클릭)</a></p>
+								<p style="text-align: left">
+									<strong>1. 일반 규정</strong><br> - 투어일 기준 7일 전 (영업시간 기준) 취소
+									신청 시 전액 환불 <br> - 투어일 기준 6일~당일 노쇼(No show) 시 전액 환불 불가<br>
+									<br> <strong>2. 예외 규정</strong><br> 환불 가능 조건 및 파업,
+									천재지변, 투어 지연등의 세부 규정은 다음의 링크를 통해 확인해주세요.<br> <a href=""
+										onclick="showRefundPolicy()"> 환불 규정 상세 보기 (클릭)</a>
+								</p>
 							</div>
-							<!-- 모달 -->
-							<div id="myModal" class="modal">
-							    <div class="modal-content">
-							        <!-- 환불 규정 내용을 여기에 추가 -->
-							        환불 규정 상세 내용이 여기에 나와야 합니다.
-							        <br>
-							        <button onclick="closeModal()">닫기</button>
-							    </div>
-							</div>
+				
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
@@ -229,12 +252,12 @@
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
 												id="floatingTextarea2" style="height: 100px; resize: none"></textarea>
 											<button type="button" class="btn btn-success"
-												style="margin-left: 10px; text-size:5px">등록</button>
+												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
-										<div id="comment-editor-button"
-											style="margin-top: 10px;"
+										<div id="comment-editor-button" style="margin-top: 10px;"
 											height=80px;>
-											 <input type="file" id="inputImage" accept="image/gif,image/jpeg,image/png" value="사진 첨부 파일">
+											<input type="file" id="inputImage"
+												accept="image/gif,image/jpeg,image/png" value="사진 첨부 파일">
 											<!-- 사진 있을때 파일명 보여줌 -->
 											<%-- <%if(b.getReFname()!=null){ %>
 														<img src="<%=request.getContextPath() %>/images/file.png" width="25">
@@ -249,34 +272,35 @@
 								<div class="container mt-3">
 									<table class="table">
 										<tbody>
-										<%-- <%for(BoardComment bc:comments){ %> --%>
-										<%-- <%if(bc.getLevel()==1) {%> --%>
-										<tr class="level1">
-											<td><sub class="comment-writer">회원명</sub> <sub
-												class="comment-date">등록일<br> 리뷰내용</td>
-											<td>
-												<div style="display:flex">
-												<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용--> <!-- 이벤트 함수 실행할때 코멘트 번호 id,value로 가져오기 -->
-													<button class="btn-reply" value="">답글</button>
-													<button class="btn-delete">삭제</button>
-												</div>
-											</td>
-										</tr>
-										<%-- 	<%}else{ %> --%>
-										<tr class="level2">
-											<td><sub class="comment-writer">회원명</sub> <sub
-												class="comment-date"></sub>등록일<br> 대댓글내용</td>
-											<td>
-										</tr>
-										<%-- 		<%} %> --%>
-										<%-- <%} %> --%>
-										<!-- }else{ %> -->
-										<tr>
-											<td width=1140px; height=100px; style="text-align: center;">작성된
-												여행 후기가 없습니다</td>
-										</tr>
-										<%-- <%} %> --%>
-										 </tbody>
+											<%-- <%for(BoardComment bc:comments){ %> --%>
+											<%-- <%if(bc.getLevel()==1) {%> --%>
+											<tr class="level1">
+												<td><sub class="comment-writer">회원명</sub> <sub
+													class="comment-date">등록일<br> 리뷰내용</td>
+												<td>
+													<div style="display: flex">
+														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
+														<!-- 이벤트 함수 실행할때 코멘트 번호 id,value로 가져오기 -->
+														<button class="btn-reply" value="">답글</button>
+														<button class="btn-delete">삭제</button>
+													</div>
+												</td>
+											</tr>
+											<%-- 	<%}else{ %> --%>
+											<tr class="level2">
+												<td><sub class="comment-writer">회원명</sub> <sub
+													class="comment-date"></sub>등록일<br> 대댓글내용</td>
+												<td>
+											</tr>
+											<%-- 		<%} %> --%>
+											<%-- <%} %> --%>
+											<!-- }else{ %> -->
+											<tr>
+												<td width=1140px; height=100px; style="text-align: center;">작성된
+													여행 후기가 없습니다</td>
+											</tr>
+											<%-- <%} %> --%>
+										</tbody>
 									</table>
 								</div>
 								<br>
@@ -331,5 +355,4 @@
 		
 	})
 </script> --%>
-
 <%@ include file="/views/common/footer.jsp"%>

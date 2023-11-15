@@ -1,12 +1,21 @@
+ <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
+  <%@page import="com.web.accompany.model.dto.Continent"%>
+  <%@page import="com.web.accompany.model.dto.Coordinate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="/views/common/header.jsp"%>
+
+
 <%
-	/* 게시글 정보를 불러옴 +  댓글의 정보를 불러옴. */
-	/* Board b = (Board) request.getAttribute("board");
-	List<BoardComment> comments = (List<BoardComment>) request.getAttribute("comments"); */
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	double latitude= b.getCoordinate().getLatitude();
+	double longitude = b.getCoordinate().getLongitude();
+	System.out.println(latitude);
+	System.out.println(longitude);
+
+
 %>
+
 
 
 <style>
@@ -31,7 +40,7 @@ textarea {
 .popup {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 9999;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -111,14 +120,21 @@ button:hover {
 
 <script>
    function myMap(){
-      var mapOptions = { 
-            center:new google.maps.LatLng(51.508742, -0.120850),
-            zoom:5
-      };
- 
-      var map = new google.maps.Map( 
-             document.getElementById("googleMap") 
-            , mapOptions );
+	   /* var board = ${request.getAttribute("board")};
+	   console.log(latitude,longitude)
+	      
+	   	var coordinate = board.coordinate; */
+		var latitude1 =  <%= latitude %>;
+	    var longitude1 = <%= longitude %>;
+	    console.log(latitude1,longitude1)
+        var mapOptions = { 
+	            center:new google.maps.LatLng(latitude1, longitude1),
+	            zoom:5
+	      };
+	 
+	      var map = new google.maps.Map( 
+	             document.getElementById("googleMap") , mapOptions );
+	      
    }
 </script> 
 
@@ -183,7 +199,7 @@ button:hover {
 				</div>
 				<div class="col-lg-8 col-md-7 order-md-1 order-1">
 					<div>
-						<span style="font-size: larger; font-weight: bolder;">제목 </span> <select name="accompany">
+						<span style="font-size: larger; font-weight: bolder;"><%=b.getAccompanyTitle() %></span> <select name="accompany">
 					<%-- 	<%=b.getBoardTitle()%>  --%>
 					<!-- 분기 처리하기 만약에 ~  -->
 							<option value="모집중">모집중</option>
@@ -192,16 +208,17 @@ button:hover {
 					</div>
 					<div class="blog__details__text">
 						<div style="display:flex;">
+						<!-- 댓글처럼 따로 데이터를 불러서 사진 파일 들고오기  -->
 							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
 							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
 						</div>
 					</div>
 					<div>
-						<p>내용 내용 내용 시애틀에서 동행 할 사람 궈함 ~ ~~~</p>
+						<p><%=b.getAccompanyContent() %></p>
 					</div>
 					<div style="display: flex;">
-						<div>글쓴날</div>
-						<div>조회수</div>
+						<div><%=b.getAccompanyDate()%></div>
+						<div><%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
 						<h3>comment</h3>
@@ -311,6 +328,7 @@ button:hover {
 		}
 		
 	</script>
-<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
- -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>
+
  <%@ include file="/views/common/footer.jsp"%>

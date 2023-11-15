@@ -10,4 +10,5 @@ import lombok.Data;
 public class ProductdateDto {
 	private Date ProductDate;
 	private String ProductSoldoutYn;
+	private int ProductNo;
 }

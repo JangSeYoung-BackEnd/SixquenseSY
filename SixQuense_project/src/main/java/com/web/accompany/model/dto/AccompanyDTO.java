@@ -1,6 +1,7 @@
 package com.web.accompany.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,9 @@ public class AccompanyDTO {
 	private Date accompanyDate;
 	private int memberNo;
 	private int accompanyReadCount;
-	private int coordnateNo;
+	private Coordinate coordinate;//좌표 번호 
 	private String openChattingLink;
+	private String originalFilename; //첨부 파일불러오기
+	private String renameFilename; //첨부 파일불러오기
 }
+

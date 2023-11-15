@@ -68,7 +68,7 @@
                         </ul>
                     </div>         
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
-                    <button type="button" class="btn btn-success"><b>글쓰기</b></button>
+                    <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>
             </div>
                  <nav class="header__menu" style="text-align: center; display: contents;">

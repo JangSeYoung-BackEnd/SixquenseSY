@@ -24,4 +24,14 @@ public class AccompanyServiceKH {
 			close(conn);
 			return	a;
 		}
+		
+		public int insertAccompany(AccompanyDTO a, String nation) {
+			Connection conn=getConnection();
+			int result=dao.insertAccompany(conn, a, nation);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+			
+		}
 }

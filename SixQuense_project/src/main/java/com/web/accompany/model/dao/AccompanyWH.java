@@ -9,9 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import com.web.accompany.model.dto.AccompanyAttachment;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.Continent;
@@ -39,15 +41,28 @@ public class AccompanyWH {
 					.accompanyDate(rs.getDate("ACCOMPANY_DATE"))
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
-					.coordinate(getCoodinate(rs))
+					.coordinate(getCoordinate(rs))		
+					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
+					.renameFilename(rs.getString("RENAME_FILENAME"))
 					.build();
 	}
-	public Coordinate getCoodinate(ResultSet rs) throws SQLException{
+	
+	private List<AccompanyAttachment> getAttachment(ResultSet rs) throws SQLException {
+	    return Collections.singletonList(
+	        AccompanyAttachment.builder()
+	            .originalFilename(rs.getString("ORIGINAL_FILENAME"))
+	            .renameFilename(rs.getString("RENAME_FILENAME"))
+	            .build()
+	    );
+	}
+
+	
+	public Coordinate getCoordinate(ResultSet rs) throws SQLException{
 		return Coordinate.builder()
 				.coordinateNo(rs.getInt("COORDINATE_NO"))
 				.nation(rs.getString("NATION"))
-				.latitude(rs.getInt("LATITUDE"))
-				.longitude(rs.getInt("LONGITUDE"))
+				.latitude(rs.getDouble("LATITUDE"))
+				.longitude(rs.getDouble("LONGITUDE"))
 				.continent(getContinent(rs))
 				.build();
 	}

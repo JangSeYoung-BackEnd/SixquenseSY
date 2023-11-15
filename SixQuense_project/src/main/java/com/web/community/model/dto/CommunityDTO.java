@@ -13,6 +13,6 @@ public class CommunityDTO {
 	private String travelReviewContent;
 	private Date travelReviewDate;
 	private int travelReviewReadCount;
-	private Member member;
+	private int memberNo;
 	private List<TravelReviewAttachmentDTO> travelReviewFile;
 }

@@ -263,7 +263,12 @@ img {
 	margin-top: 20px;
 	text-align: end;
 }
-
+#mouse-over-label:hover ~ .menubars { 
+	display: block; 
+} 
+.menubars { 
+	display: none; 
+}
 /*------------------------------------------------------*/
 input:focus,
 select:focus,
@@ -641,7 +646,7 @@ ol {
 	padding: 5px 15px;
 }
 
-.header__menu ul li.active a {
+.header__menu ul li {
 	color: #7fad39;
 }
 

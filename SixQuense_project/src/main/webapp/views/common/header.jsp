@@ -39,7 +39,6 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-	
 	<!-- Js Plugins -->
     <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -71,15 +70,23 @@
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
+<<<<<<< HEAD
+                    <div class="header__cart" style="margin-left: 60px;">
+                        <ul>
+                            <div class="header__top__right"><div class="header__top__right__auth">
+                                <button type="button" class="btn btn-success"><a href="<%=request.getContextPath() %>/loginpage.do"></i><b style="color: white;">로그인</b></a></button>
+                            </div>
+                        </ul>
+                    </div>         
+=======
                     <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
-                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/로그인 아이콘.png" width="50px;"></a>
-                        	<ul class="header__menu__dropdown" style="padding-ti">
-                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">MYPAGE</a></li>
-                            </ul>
-                        </li>
+                        <div class="header__top__right"><div class="header__top__right__auth">
+                                <button type="button" class="btn btn-success"><a href="#"></i><b style="color: white;">로그인</b></a></button>
+                        </div>
                     </ul>
                 </nav>
+>>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
                     <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>

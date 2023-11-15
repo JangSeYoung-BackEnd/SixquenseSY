@@ -33,39 +33,35 @@ public class ProductService {
 		Connection conn = getConnection();
 		List<ProductDto> recentProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
 		
-		recentProducts.forEach(e->{
-			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
-			e.setAttachment(images);
-		});
+//		recentProducts.forEach(e->{
+//			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
+//			e.setAttachment(images);
+//		});
 		close(conn);
 		return recentProducts;
 	}
 	
 	//나라별 할인상품 리스트 가져오기
-	public List<ProductDto> selectDicountproductByCountry(int coordinateNo){
-		Connection conn = getConnection();
-		List<ProductDto> discountProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
-		
-		discountProducts.forEach(e->{
-			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
-			e.setAttachment(images);
-		});
-		close(conn);
-		return discountProducts;
-	}
+	/*
+	 * public List<ProductDto> selectDicountproductByCountry(int coordinateNo){
+	 * Connection conn = getConnection(); List<ProductDto> discountProducts =
+	 * dao.selectRecentproductByCountry(conn, coordinateNo);
+	 * 
+	 * discountProducts.forEach(e->{ List<ProductattachmentDto> images =
+	 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
+	 * close(conn); return discountProducts; }
+	 */
 	
 	//나라별 베스트 상품 리스트 가져오기
-	public List<ProductDto> selectBestproductByCountry(int coordinateNo){
-		Connection conn = getConnection();
-		List<ProductDto> bestProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
-		
-		bestProducts.forEach(e->{
-			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
-			e.setAttachment(images);
-		});
-		close(conn);
-		return bestProducts;
-	}
+	/*
+	 * public List<ProductDto> selectBestproductByCountry(int coordinateNo){
+	 * Connection conn = getConnection(); List<ProductDto> bestProducts =
+	 * dao.selectRecentproductByCountry(conn, coordinateNo);
+	 * 
+	 * bestProducts.forEach(e->{ List<ProductattachmentDto> images =
+	 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
+	 * close(conn); return bestProducts; }
+	 */
 
 	/*
 	 * public ProductDto selectDiscountproductByCountry(int coordinateNO) {

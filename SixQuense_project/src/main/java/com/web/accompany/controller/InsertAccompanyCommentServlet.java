@@ -30,11 +30,13 @@ public class InsertAccompanyCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	int boardNo=Integer.parseInt(request.getParameter("accompanyNo"));
 	int level = Integer.parseInt(request.getParameter("level"));
 	String writer= request.getParameter("writer");
 	String content =request.getParameter("content");
 	int accompanyCommentRef = Integer.parseInt(request.getParameter("accompanyCommentRef"));
+	System.out.println(boardNo+level+writer+content+accompanyCommentRef);
 	
 	AccompanyComment ac= AccompanyComment.builder()
 			.accompanyComtLevel(level)
@@ -43,8 +45,9 @@ public class InsertAccompanyCommentServlet extends HttpServlet {
 			.accompanyNo(boardNo)
 			.userId(writer)
 			.build();
-		
+		System.out.println(ac);
 		int result = new AccompanyServiceWH().insertAccompanyComment(ac);
+		System.out.println(result);
 		//절대경로로 작성 + 댓글 작성시 게시물 번호를 넘겨주면서 그글에 계속 남아있도록 한다. 
 		response.sendRedirect(request.getContextPath()+"/accompany/accompanyview.do?no="+boardNo);
 		

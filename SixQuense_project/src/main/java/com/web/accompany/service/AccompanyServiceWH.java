@@ -50,8 +50,6 @@ public class AccompanyServiceWH {
 			else rollback(conn);
 			close(conn);
 			return result;
-			
-			
-			
+
 		}
 }

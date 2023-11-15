@@ -142,6 +142,8 @@ public class AccompanyWH {
 			pstmt.setString(3,ac.getAccompanyComtRef()==0?null:String.valueOf(ac.getAccompanyComtRef()));
 			pstmt.setInt(4,ac.getAccompanyNo());
 			pstmt.setString(5,ac.getUserId());
+			result=pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

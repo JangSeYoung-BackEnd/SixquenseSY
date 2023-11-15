@@ -18,6 +18,7 @@ public class AccompanyDTO {
 	private int accompanyReadCount;
 	private Coordinate coordinate;//좌표 번호 
 	private String openChattingLink;
-	private String attachment; //첨부 파일불러오기
+	private String originalFilename; //첨부 파일불러오기
+	private String renameFilename; //첨부 파일불러오기
 }
 

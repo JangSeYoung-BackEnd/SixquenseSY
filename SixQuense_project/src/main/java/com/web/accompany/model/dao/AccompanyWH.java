@@ -42,6 +42,8 @@ public class AccompanyWH {
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
 					.coordinate(getCoordinate(rs))		
+					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
+					.renameFilename(rs.getString("RENAME_FILENAME"))
 					.build();
 	}
 	

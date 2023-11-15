@@ -4,7 +4,6 @@ import static com.web.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +33,7 @@ public class CommunityDAO {
 			pstmt=conn.prepareStatement(sql.getProperty(""));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(getCommunityDTO());
+				result.add(getCommunityDTO(rs));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -44,13 +43,13 @@ public class CommunityDAO {
 		}
 		return result;
 	}
-	public List<CommunityDTO> getCommunityDTO(ResultSet rs) throws SQLException {
+	public CommunityDTO getCommunityDTO(ResultSet rs) throws SQLException {
 		return CommunityDTO.builder()
-					.travelReviewNo(rs.getInt(""))
-					.travelReviewContent(rs.getString(""))
-					.travelReviewDate(rs.getDate(""))
-					.travelReviewReadCount(rs.getInt(""))
-					.member(new Member())
+					.travelReviewNo(rs.getInt("TRAVEL_REVIEW_NO"))
+					.travelReviewContent(rs.getString("TRAVEL_REVIEW_CONTENT"))
+					.travelReviewDate(rs.getDate("TRAVEL_REVIEW_DATE"))
+					.travelReviewReadCount(rs.getInt("TRAVEL_REVIEW_READCOUNT"))
+					.memberNo(rs.getInt("MEMBER_NO"))
 					.build();
 	}
 }

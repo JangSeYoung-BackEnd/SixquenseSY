@@ -60,8 +60,8 @@ public class AccompanyDAOKH {
 			pstmt.setString(2, userId);
 			pstmt.setString(3, a.getOpenChattingLink());
 			pstmt.setString(4, nation);
-			pstmt.setString(5, a.getAttachment());
-			pstmt.setString(6, a.getAttachment());
+			pstmt.setString(5, a.getOriginalFilename());
+			pstmt.setString(6, a.getRenameFilename());
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -79,6 +79,8 @@ public class AccompanyDAOKH {
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
 					.coordinate(getCoodinate(rs))
+					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
+					.renameFilename(rs.getString("RENAME_FILENAME"))
 					.build();
 	}
 	public Coordinate getCoodinate(ResultSet rs) throws SQLException{

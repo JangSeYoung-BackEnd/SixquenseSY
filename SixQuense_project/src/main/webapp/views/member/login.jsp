@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<Style>
 /* 첫번째 로그인 페이지 */
 /* 아이디 */
-<Style>
 .outBox {margin:50px auto; padding:20px; max-width:320px; border:1px solid #999; border-radius:6px;}
 .outBox .inputBox {position:relative; height:50px;}
 .outBox .inputBox input[type="text"] {padding:0 10px; width:100%; height:50px; font-size:14px; box-sizing:border-box; border:1px solid #999; outline:none;}
@@ -24,8 +24,35 @@
 
 
 
-
-
+/*상단 로고  */
+.logo{
+	display: flex;
+	justify-content: center;
+	padding-top: 10px;
+	margin-top: 200px;
+}
+.outBox{
+	margin-top:5px !important;
+}
+.loginbtn-container{
+	margin-top: 3%;
+	display: flex;
+	justify-content: space-between;
+}
+.login-btn-wrap{
+	width:40%;
+	height:30px;
+	display: flex;
+	justify-content: space-between;	
+}
+	/* 간편 로그인  */
+.easy{
+	display: flex;
+		margin-left: auto;
+		margin-right: auto;
+	justify-content: space-evenly;
+		
+}
 /* 간편 로그인  */
 .hr-sect {
     display: flex;
@@ -77,29 +104,35 @@ footer{
     display:block;
 }
 
+.footer{
+    margin:0 auto;
+    text-align:center;
+    bottom:5px;
+    color:gray;
 }
 </Style>
 
 
 
 <body>
-	<div class="logo">
-		<a href="http://192.168.1.11:5500/main.html" target="_blank" >
-			<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" width="250" height="100"
-				class="image">
-		</a>
-	</div>
+  	<div class="outBox">
+     <div class="inputBox">
+        <input autocomplete="off" 
+          id="userId" name="userId" type="text">
+        <label for="userId">아이디</label>
+     </div>0
+     
     <section class="login-wrap">
 		<div class="outBox">
-			<form>
+			<form action="<%=request.getContextPath()%>/login.do">
 
 			<div class="inputBox">
-				<input type="text" id="sampleId" name="">
-				<label for="sampleId">아이디</label>
+				<input type="text" id="useremail" name="useremail">
+				<label for="useremail">아이디</label>
 			</div>
 			
 			<div class="inputBox">
-				<input type="text" id="USER_PW" name="userpw">
+				<input type="password" id="userpw" name="userpw">
 				<label for="USER_PW">비밀번호</label>
 			</div>
 			
@@ -116,6 +149,7 @@ footer{
 					</span>
 				</div>
 			</div>
+			
 			<!-- 카카오,네이버 로고 이미지 들어 갈곳 -->
 			<div class="hr-sect">간편 로그인</div>
 			<a class="easy">
@@ -126,6 +160,12 @@ footer{
 			
 			</form>
 			</div>
-			
+	</body>
+	
+	<footer class="footer">
+        <div class="footer-info">
+            아이디 찾기 | 비밀번호 찾기 
+        </div>
+    </footer>
 	</section>
 </html>

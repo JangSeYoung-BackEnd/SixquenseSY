@@ -65,7 +65,7 @@
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
                             <div class="header__top__right"><div class="header__top__right__auth">
-                                <button type="button" class="btn btn-success"><a href="/login.html"></i><b style="color: white;">로그인</b></a></button>
+                                <button type="button" class="btn btn-success"><a href="<%=request.getContextPath() %>/loginpage.do"></i><b style="color: white;">로그인</b></a></button>
                             </div>
                         </ul>
                     </div>         

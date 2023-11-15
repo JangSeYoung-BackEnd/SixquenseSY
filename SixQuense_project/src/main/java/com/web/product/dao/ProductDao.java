@@ -172,6 +172,8 @@ public class ProductDao {
 				try {
 					if (rs.getString("original_filename") != null) {
 						e.getAttachment().add(getImage(rs));
+					}if(rs.getString("course_no")!= null) {
+						e.getCourse().add(getCourse(rs));
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -182,7 +184,13 @@ public class ProductDao {
 			if (rs.getString("original_filename") != null) {
 				product.getAttachment().add(getImage(rs));
 				products.add(product);
+			}if(rs.getString("course_no") != null) {
+				product.getCourse().add(getCourse(rs));
+				products.add(product);
 			}
+			
+				
+				
 		}
 	}
 
@@ -224,10 +232,9 @@ public class ProductDao {
 				.ProductDay(rs.getString("product_day").split(","))
 				.CoodinateNo(rs.getInt("coordinate_no"))
 				.EditorNote(rs.getString("editor_note"))
-				.attachment(new ArrayList<ProductattachmentDto>())			/*
-				 * .attachment(new ArrayList<ProductattachmentDto>()) .review(new
-				 * ArrayList<ProductsreviewDto>()) .course(new ArrayList<ProductcourseDto>())
-				 */
+				.attachment(new ArrayList<ProductattachmentDto>())			
+				.review(new ArrayList<ProductsreviewDto>()) 
+				.course(new ArrayList<ProductcourseDto>())
 				.build();
 	}
 
@@ -240,5 +247,19 @@ public class ProductDao {
 				.ProductNo(rs.getInt("product_no"))
 				.build();
 	}
+	
+	public static ProductcourseDto getCourse (ResultSet rs) throws SQLException {
+		return ProductcourseDto.builder()
+				.CourseNo(rs.getInt("course_int"))
+				.CourseName(rs.getString("course_name"))
+				.CourseDetail(rs.getString("course_detail"))
+				.ProductNo(rs.getInt("product_no"))
+				.build();
+	}
+	
+	/*
+	 * public static ProductsreviewDto getReview(ResultSet rs) throws SQLException {
+	 * return ProductsreviewDto.builder() . }
+	 */
 
 }

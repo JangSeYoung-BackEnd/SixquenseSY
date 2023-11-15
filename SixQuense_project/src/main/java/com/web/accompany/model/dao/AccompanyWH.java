@@ -107,8 +107,7 @@ public class AccompanyWH {
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next())result.add(getAccompanyComment(rs));
-			
-			
+			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -116,7 +115,6 @@ public class AccompanyWH {
 			close(pstmt);
 		}
 		return result;
-
 	}
 	
 	//댓글 빌더 
@@ -128,7 +126,7 @@ public class AccompanyWH {
 				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
 				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
 				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.userId(rs.getString("MEMBER_"))
+				.userId(rs.getString("USER_ID"))
 				.build();
 
 	}

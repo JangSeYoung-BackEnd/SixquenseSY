@@ -22,6 +22,8 @@ public class MemberService {
 	public Member selectMemberByEmailAndPw(String useremail, String userpw) {
 		Connection conn=getConnection();
 		Member m=dao.selectMemberByEmailAndPw(conn,useremail,userpw);
+		if(m!=null) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return m;
 	}

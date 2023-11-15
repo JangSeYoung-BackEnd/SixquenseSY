@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%@ page import="java.util.List, com.web.accompany.model.dto.CommunityDTO" %>
+<%@ page import="java.util.List, com.web.community.model.dto.CommunityDTO" %>
 <%
 	List<CommunityDTO> communitys=(List<CommunityDTO>)request.getAttribute("communitys");
 %>
@@ -122,14 +122,14 @@
                     		for(CommunityDTO c:communitys){%>
 		                        <div class="col-lg-4 col-md-6 col-sm-6">
 		                            <div class="product__item">
-		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/img/accompany/traveldata.jpg" style="border-radius: 20%; ">
+		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/" style="border-radius: 20%; ">
 		                                    <ul class="product__item__pic__hover">
 		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
 		                                    </ul>
 		                                </div>
 		                                <div class="product__item__text">
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
+		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=c.getTravelReviewTitle() %></a>
+		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=c.getTravelReviewContent() %></a>
 		                                </div>
 		                            </div>
 		                        </div>

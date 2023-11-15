@@ -3,6 +3,11 @@
 <%
 	List<ProductDto> recentProducts = (List<ProductDto>)request.getAttribute("recentProducts");
 	ProductDto rp = recentProducts.get(0);
+	
+	List<ProductDto> dicountProducts = (List<ProductDto>)request.getAttribute("dicountProducts");
+	ProductDto dp = dicountProducts.get(0);
+	
+	
 %>
 <%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
 <%@ include file="/views/common/header.jsp"%>
@@ -67,7 +72,7 @@ p {
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productview.do">패키지/투어 이름1</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do>">패키지/투어 이름1</a>
 								</h5>
 								<p>패키지 내용1</p>
 								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 199,000원 <span
@@ -90,10 +95,10 @@ p {
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productlist.do"><%=rp.getProductName() %></a>
+									<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=rp.getProductNo()%>"><%=rp.getProductName() %></a>
 								</h5>
 								<p><%=rp.getProductDetail() %></p>
-								<a href="<%=request.getContextPath()%>/product/productlist.do" class="blog__btn"><%=rp.getProductPrice() %> <span class="arrow_right"></span></a>
+								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=rp.getProductNo()%>" class="blog__btn"> <%=rp.getProductPrice() %>원 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
@@ -107,19 +112,19 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="special">
 							<div class="blog__item__pic">
-								<img src="img/blog/blog-2.jpg" alt="">
+								<img src="<%=request.getContextPath() %>/img/product/japan/fukuoka/<%=dp.getAttachment().get(0).getOrginalFilename() %>" alt="">
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productlist.do">패키지/투어 이름3</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=dp.getProductNo()%>"><%=dp.getProductName() %></a>
 								</h5>
-								<p>패키지 내용3</p>
-								<a href="<%=request.getContextPath()%>/product/productlist.do" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
+								<p><%=dp.getProductDetail() %></p>
+								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=dp.getProductNo()%>" class="blog__btn"> <%=dp.getProductPrice() %>원 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p>추천 이유3</p>
+										<p><%=dp.getEditorNote() %></p>
 									</div>
 								</div>
 							</div>

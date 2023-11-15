@@ -42,7 +42,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		
 	
-		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
 	}
 
 	/**

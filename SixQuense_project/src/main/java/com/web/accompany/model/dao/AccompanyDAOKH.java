@@ -17,6 +17,8 @@ import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 
 
 public class AccompanyDAOKH {
@@ -49,6 +51,24 @@ public class AccompanyDAOKH {
 		return result;
 	}
 	
+	public int insertAccompany(Connection conn, AccompanyDTO a, String nation) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertAccompany"));
+			pstmt.setString(1, a.getAccompanyContent());
+			pstmt.setString(2, userId);
+			pstmt.setString(3, a.getOpenChattingLink());
+			pstmt.setString(4, nation);
+			pstmt.setString(5, a.getOriginalFilename());
+			pstmt.setString(6, a.getRenameFilename());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}return result;
+	}
+	
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
 		return AccompanyDTO.builder()
 					.accompanyNo(rs.getInt("ACCOMPANY_NO"))
@@ -59,6 +79,8 @@ public class AccompanyDAOKH {
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
 					.coordinate(getCoodinate(rs))
+					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
+					.renameFilename(rs.getString("RENAME_FILENAME"))
 					.build();
 	}
 	public Coordinate getCoodinate(ResultSet rs) throws SQLException{

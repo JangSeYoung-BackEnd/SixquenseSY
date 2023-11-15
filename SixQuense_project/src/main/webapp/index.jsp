@@ -37,35 +37,50 @@
             <div class="row">
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=""><img src="./img/eastsouthasia/방.png">
+                        <div class="categories__item set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=34">
+                        <img src="./img/eastsouthasia/방.png">
+                        </a>
                         </div>
                         <div class="categories__item set-bg">
                             <h5><a href="#">방콕</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=""><img src="./img/japen/삿포르.png">
+                        <div class="categories__item set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=13">
+                        <img src="./img/japen/삿포르.png">
+                        </a>
                         </div>
                         <div class="categories__item set-bg">
                             <h5><a href="#">삿포로</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=""><img src="./img/europe/영국.png">
+                        <div class="categories__item set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=15">
+                        <img src="./img/europe/영국.png">
+                        </a>
                         </div>
                         <div class="categories__item set-bg">
                             <h5><a href="#">영국</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=""><img src="./img/america/호주.png">
-                        </div>
-                        <div class="categories__item set-bg">
-                            <h5><a href="#">호주</a></h5>
-                        </div>
-                    </div>
+					    <div class="categories__item set-bg" data-setbg="">
+					        <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=24">
+					            <img src="./img/america/호주.png">
+					        </a>
+					    </div>
+					    <div class="categories__item set-bg">
+					        <h5><a href="#">호주</a></h5>
+					    </div>
+					</div>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=""><img src="./img/america/캐나다.png">
+                        <div class="categories__item set-bg" data-setbg="">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=23">
+                        <img src="./img/america/캐나다.png">
+                        </a>
                         </div>
                         <div class="categories__item set-bg">
                             <h5><a href="#">캐나다</a></h5>
@@ -100,7 +115,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=43">
                         <img src="./img/eastsouthasia/다낭.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -117,7 +132,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=34">
                         <img src="./img/eastsouthasia/방.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -134,7 +149,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=38">
                         <img src="./img/eastsouthasia/대만.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -151,7 +166,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=42">
                         <img src="./img/eastsouthasia/보라카이.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -168,7 +183,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=39">
                         <img src="./img/eastsouthasia/보홀.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -185,7 +200,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=41">
                         <img src="./img/eastsouthasia/세부클.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -202,7 +217,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=37">
                         <img src="./img/eastsouthasia/코타키나발루.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -219,7 +234,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=36">
                         <img src="./img/eastsouthasia/푸켓.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -236,7 +251,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=35">
                         <img src="./img/eastsouthasia/호치민.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -253,7 +268,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=12">
                         <img src="./img/japen/도쿄.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -270,7 +285,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=13">
                         <img src="./img/japen/삿포르.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -287,7 +302,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=11">
                         <img src="./img/japen/오사카교토.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -304,7 +319,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=14">
                         <img src="./img/japen/오키나와.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -321,7 +336,7 @@
                  <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=10">
                         <img src="./img/japen/후쿠오카.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -338,7 +353,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=18">
                         <img src="./img/europe/스위스.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -356,7 +371,7 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
                         
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=19">
                         <img src="./img/europe/스페인.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -373,7 +388,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=15">
                         <img src="./img/europe/영국.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -390,7 +405,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=17">
                         <img src="./img/europe/이탈리아.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -407,7 +422,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables"><!--유럽-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=16">
                         <img src="./img/europe/프랑스.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -439,7 +454,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=20">
                         <img src="./img/america/미서부.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -456,7 +471,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=23">
                         <img src="./img/america/캐나다.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -473,7 +488,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=22">
                         <img src="./img/america/하와이.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -490,7 +505,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood"> <!--미주-->
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=24">
                         <img src="./img/america/호주.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">
@@ -537,7 +552,7 @@
                         <h4>최근 상품</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/대만.png" alt="">
                                     </div>
@@ -546,7 +561,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/도쿄.png" alt="">
                                     </div>
@@ -555,7 +570,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/스위스.png" alt="">
                                     </div>
@@ -566,7 +581,7 @@
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/영국.png" alt="">
                                     </div>
@@ -575,7 +590,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/이탈리아.png" alt="">
                                     </div>
@@ -584,7 +599,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/미동부.png" alt="">
                                     </div>
@@ -602,7 +617,7 @@
                         <h4>베스트 상품</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/오사카교토.png" alt="">
                                     </div>
@@ -611,7 +626,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/캐나다.png" alt="">
                                     </div>
@@ -620,7 +635,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/호주.png" alt="">
                                     </div>
@@ -631,7 +646,7 @@
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/하와이.png" alt="">
                                     </div>
@@ -640,7 +655,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/보라카이.png" alt="">
                                     </div>
@@ -649,7 +664,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/방.png" alt="">
                                     </div>
@@ -667,7 +682,7 @@
                         <h4>리뷰 많은 상품</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/미서부.png" alt="">
                                     </div>
@@ -676,7 +691,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/프랑스.png" alt="">
                                     </div>
@@ -685,7 +700,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/삿포르.png" alt="">
                                     </div>
@@ -696,7 +711,7 @@
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/푸켓.png" alt="">
                                     </div>
@@ -705,7 +720,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/오사카교토.png" alt="">
                                     </div>
@@ -714,7 +729,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/방.png" alt="">
                                     </div>

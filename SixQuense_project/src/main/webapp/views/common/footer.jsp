@@ -29,6 +29,7 @@
         <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
                 <button onclick="#문의 페이지" style="background: none; border: none;">
                     <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
+                    <p>문의사항</p>
                 </button>
             </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
@@ -38,17 +39,6 @@
         </div>
     </footer>
     <!-- 푸터 -->
-    
-    <!-- Js Plugins -->
-    <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.slicknav.js"></script>
-    <script src="<%=request.getContextPath()%>/js/mixitup.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/main.js"></script>
-
 </body>
 
 </html>

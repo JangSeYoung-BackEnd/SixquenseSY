@@ -62,7 +62,7 @@ public class MemberDao {
 				.userPw(rs.getString("user_pw"))
 				.userNn(rs.getString("user_nn"))
 				.userDd(rs.getDate("user_dd"))	
-				.enrollData(rs.getDate("user_data"))
+				.enrollData(rs.getDate("ENROLL_DATE"))
 				.userIntroduce(rs.getString("user_introduce"))
 				.travleType(rs.getString("travle_type"))
 				.gender(rs.getString("gender"))

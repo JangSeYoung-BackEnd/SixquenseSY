@@ -70,7 +70,6 @@
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
-<<<<<<< HEAD
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
                             <div class="header__top__right"><div class="header__top__right__auth">
@@ -78,15 +77,6 @@
                             </div>
                         </ul>
                     </div>         
-=======
-                    <nav class="header__menu" style="text-align: center; display: contents;">
-                    <ul>
-                        <div class="header__top__right"><div class="header__top__right__auth">
-                                <button type="button" class="btn btn-success"><a href="#"></i><b style="color: white;">로그인</b></a></button>
-                        </div>
-                    </ul>
-                </nav>
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
                 <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
                     <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>

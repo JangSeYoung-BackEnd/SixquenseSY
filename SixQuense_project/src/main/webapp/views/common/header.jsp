@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import ="com.web.member.dto.Member"%>
+<%
+
+	Member loginMember=(Member)session.getAttribute("loginMember");
+	System.out.println(loginMember);
+	Cookie[] cookies=request.getCookies();
+	String saveId=null;
+	if(cookies!=null){
+		for(Cookie c:cookies){
+			String name=c.getName();
+			if(name.equals("saveId")){
+				saveId=c.getValue();
+				break;
+			}
+		}
+	}
+%>
+	
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -70,16 +88,29 @@
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
+                    <%if(loginMember==null) {%>
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
                             <div class="header__top__right"><div class="header__top__right__auth">
                                 <button type="button" class="btn btn-success"><a href="<%=request.getContextPath() %>/loginpage.do"></i><b style="color: white;">로그인</b></a></button>
                             </div>
                         </ul>
-                    </div>         
-                <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px;">
+                    </div>
+                    <%}else {%>
+                <div class="mtpageBtn" style="margin-top: 30px; margin-left: 45px;">
+                    <a href="<%=request.getContextPath()%>/views/common/Mypage.jsp" >
+                    <img src="<%=request.getContextPath()%>/img/icon/로그인아이콘.png" style="width: 40px">
+                    </a>
+                </div>
+                <div class="logoutBtn">
+				<input type="button" 
+					onclick="location.replace('<%=request.getContextPath()%>/logout.do');" 
+					value="로그아웃">
+				</div>         
+                <div class="wirtebtn" style="display: flex; align-items: center; margin-left: 70px; margin-top: 30px;">
                     <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/accompnay/accompanywrite.do')"><b>글쓰기</b></button>
                 </div>
+                <%} %>
             </div>
                  <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>

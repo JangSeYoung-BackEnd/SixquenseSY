@@ -144,7 +144,7 @@ public class ProductDao {
 			pstmt.setInt(4, pr.getCommentLevel());
 			pstmt.setInt(5, pr.getProductNo());
 			pstmt.setInt(6, pr.getMemberNo());
-			result=pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -155,17 +155,26 @@ public class ProductDao {
 
 	// 댓글 조회하는 메소드
 
-	/*
-	 * public List<ProductsreviewDto> selectProductComment(Connection conn, int
-	 * productNo) { PreparedStatement pstmt = null; ResultSet rs = null;
-	 * List<ProductsreviewDto> comments = new ArrayList<>(); try { pstmt =
-	 * conn.prepareStatement(sql.getProperty("selectProductComment"));
-	 * pstmt.setInt(1, productNo); rs = pstmt.executeQuery(); while (rs.next()) {
-	 * comments.add(getReview(rs)); } } catch (SQLException e) {
-	 * e.printStackTrace(); } finally { close(rs); close(pstmt); } return comments;
-	 * 
-	 * }
-	 */
+	public List<ProductsreviewDto> selectProductComment(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductsreviewDto> comments = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectProductComment"));
+			pstmt.setInt(1, productNo);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				comments.add(getReview(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return comments;
+
+	}
 
 	// 댓글 숫자 카운트 메소드
 	public int selectProductCountByNo(Connection conn, int productNo) {
@@ -199,7 +208,7 @@ public class ProductDao {
 					if (rs.getInt("course_no") != 0) {
 						e.getCourse().add(getCourse(rs));
 					}
-					if (rs.getInt("product_review_no") != 0) {
+					if (rs.getInt("products_review_no") != 0) {
 						e.getReview().add(getReview(rs));
 					}
 				} catch (SQLException e1) {
@@ -216,7 +225,7 @@ public class ProductDao {
 				product.getCourse().add(getCourse(rs));
 				products.add(product);
 			}
-			if (rs.getInt("product_review_no") != 0) {
+			if (rs.getInt("products_review_no") != 0) {
 				product.getReview().add(getReview(rs));
 				products.add(product);
 			}
@@ -273,7 +282,7 @@ public class ProductDao {
 		return ProductsreviewDto.builder().ProductNo(rs.getInt("product_no")).UserId(rs.getString("user_id"))
 				.CommentContent(rs.getString("comment_content")).CommentDate(rs.getDate("comment_date"))
 				.CommentRef(rs.getInt("comment_ref")).CommentLevel(rs.getInt("comment_level"))
-				.CommentNo(rs.getInt("product_review_no")).memberNo(rs.getInt("member_no")).build();
+				.CommentNo(rs.getInt("products_review_no")).memberNo(rs.getInt("member_no")).build();
 
 	}
 

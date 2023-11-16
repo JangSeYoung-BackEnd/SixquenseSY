@@ -33,7 +33,7 @@ public class ProductCommentInsertServlet extends HttpServlet {
 		int commentLevel=Integer.parseInt(request.getParameter("commentLevel"));
 		String userId=request.getParameter("userId");
 		int memberNo = Integer.parseInt(request.getParameter("member_no"));
-		String content=request.getParameter("floatingTextarea2");
+		String content=request.getParameter("content");
 		int CommentRef=Integer.parseInt(request.getParameter("CommentRef"));
 		
 		ProductsreviewDto pr = ProductsreviewDto.builder()

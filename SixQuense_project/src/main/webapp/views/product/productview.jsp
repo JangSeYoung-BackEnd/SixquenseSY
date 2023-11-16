@@ -229,12 +229,12 @@
 									<form action="<%=request.getContextPath() %>/product/insertComment.do" method="post">
 										<input type="hidden" name="productNo" value="<%=product.getProductNo() %>">
 										<input type="hidden" name="commentLevel" value="1"> 
-										<input type="hidden" name="userId" value="user01"> 
-										<input type="hidden" name="member_no" value="100"> 
+										<input type="hidden" name="userId" value="<%=loginMember.getUserId()%>"> 
+										<input type="hidden" name="member_no" value="<%=loginMember.getUserNo()%>"> 
 										<input type="hidden" name="CommentRef" value="0">										
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
-												id="floatingTextarea2" style="height: 100px; resize: none"></textarea>
+												id="floatingTextarea2" name="content" style="height: 100px; resize: none"></textarea>
 											<button type="submit" class="btn btn-success"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
@@ -245,9 +245,9 @@
 										</div> -->
 									</form>
 								</div>
+								
 								<h6 style="margin-top: 26px;">여행자 후기(후기 갯수)</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
-					<%-- 			 <%if(!comments.isEmpty()){ %>
 								<div class="container mt-3">
 									<table class="table">
 										<tbody>
@@ -273,12 +273,10 @@
 											</tr>
 											 		<%} %> 
 											 <%} %> 
-											 <% }else{ %> 
 											<tr>
 												<td width=1140px; height=100px; style="text-align: center;">작성된
 													여행 후기가 없습니다</td>
 											</tr>
-											 <%} %>  --%>
 										</tbody>
 									</table>
 								</div>

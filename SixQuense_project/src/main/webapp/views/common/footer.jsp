@@ -27,17 +27,18 @@
                 </div>     
             </div>
         <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
+        	<a href= "<%=request.getContextPath()%>/views/common/inquiry.jsp">
                 <button onclick="#문의 페이지" style="background: none; border: none;">
                     <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
                     <p>문의사항</p>
                 </button>
+                </a>
             </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
         <a href="#" id="topbtn">
             <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px" style="margin-right: 12px">
         </a>
         </div>
-       </div> 
     </footer>
     <!-- 푸터 -->
     <!-- Js Plugins -->

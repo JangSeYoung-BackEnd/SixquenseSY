@@ -56,10 +56,6 @@
                                 <input type="text" value="**********" readonly>
                             </div>
                             <div class="checkout__input">
-                                <p>비밀번호 확인</p>
-                                <input type="text" value="" readonly>
-                            </div>
-                            <div class="checkout__input">
                                 <p>생년월일</p>
                                 <input type="text" placeholder="1569" class="checkout__input__add" readonly>
                                 <input type="text" placeholder="12월/31일" readonly>
@@ -79,6 +75,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                            <button>수정</button>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
@@ -90,7 +87,7 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">

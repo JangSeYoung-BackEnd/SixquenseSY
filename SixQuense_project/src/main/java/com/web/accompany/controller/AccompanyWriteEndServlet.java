@@ -44,13 +44,14 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 			String encoding="utf-8";
 			DefaultFileRenamePolicy dfr=new DefaultFileRenamePolicy();
 			MultipartRequest mr=new MultipartRequest(request, path, maxSize,encoding, dfr);
-			
 			String title=mr.getParameter("accompany-title");
 			String content=mr.getParameter("accompany-content");
 			String openchattinglink=mr.getParameter("kakao-link");
-			String nation=mr.getParameter("clickedText");
+			String nation=mr.getParameter("nation");
+			System.out.println(nation);
 			String ori=mr.getFilesystemName("accompany-file");
 			String rename=mr.getFilesystemName("accompany-file");
+			String userId=request.getParameter("useId");
 			AccompanyDTO a=AccompanyDTO.builder()
 					.accompanyTitle(title)
 					.accompanyContent(content)
@@ -58,9 +59,9 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 					.originalFilename(ori)
 					.renameFilename(rename)
 					.build();
-			int result=new AccompanyServiceKH().insertAccompany(a,nation);
+			int result=new AccompanyServiceKH().insertAccompany(a,nation,userId);
 		}		
-		request.getRequestDispatcher("/accompany/accompanylist.jsp").forward(request, response);
+		request.getRequestDispatcher("/accompany/accompanylist.do").forward(request, response);
 	}
 
 	/**

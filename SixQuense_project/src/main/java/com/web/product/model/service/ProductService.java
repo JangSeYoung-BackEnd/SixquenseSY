@@ -15,20 +15,6 @@ public class ProductService {
 
 	private ProductDao dao = new ProductDao();
 
-	// 할인율 있는 상품 조회
-	// public List<Product> selectProductByDiscount(double productDiscountRate){
-
-	// }
-
-	// 나라별 패키지 상품 조회
-
-	/*
-	 * public ProductDto selectBestproductByCountry(int coordinateNO) { Connection
-	 * conn = getConnection(); ProductDto bestProduct =
-	 * dao.selectBestproductByCountry(conn, coordinateNO); close(conn); return
-	 * bestProduct; }
-	 */
-
 	// 나라별 최신상품 리스트 가져오기
 	public List<ProductDto> selectRecentproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();

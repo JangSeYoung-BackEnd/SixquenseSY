@@ -51,7 +51,7 @@ public class AccompanyDAOKH {
 		return result;
 	}
 	
-	public int insertAccompany(Connection conn, AccompanyDTO a, String nation) {
+	public int insertAccompany(Connection conn, AccompanyDTO a, String nation, String userId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {

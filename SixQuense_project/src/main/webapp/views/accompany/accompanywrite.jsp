@@ -92,15 +92,15 @@
             </div>
         </div>
         <div class="row">
-            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do" method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do?useId=<%=loginMember.getUserId() %>" method="post" enctype="multipart/form-data">
                 <div>
-                    <input type="text" id="accompany-title" name="accompany-title" placeholder="제목 : 여행지/날짜/제목내용 으로 작성해주세요" style="width: 700px; border:solid gainsboro; margin-bottom: 10px;"">
+                    <input type="text" id="accompany-title" name="accompany-title" placeholder="제목 : 여행지/날짜/제목내용 으로 작성해주세요" style="width: 700px; border:solid gainsboro; margin-bottom: 10px;">
                 </div>
                 <div>
                     <input type="text" id="kakao-link" name="kakao-link" placeholder="카카오톡 링크 적어주세요!" style="width: 700px; border:solid gainsboro;">
                 </div>
                     <input type="file" id="accompany-file" name="accompany-file" accept="image/bmp,image/gif,image/jpg,image/jpeg,image/png,image/raw,image/tif,image/heif,image/heic,image/mp4,image/avi,image/mov,image/wmv,image/mkv,image/mpg,image/rm,image/asf,image/m4v,image/mpeg,image/mpg" style="display: none; margin: 0px; padding: 0px;">
-                <div class="col-lg-12 file-btn" onclick="openFileDialog()">
+                <div class="col-lg-12 file-btn">
                     <svg class="" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.54397C0 2.92984 2.93584 0 6.55738 0H43.4426C47.0642 0 50 2.92983 50 6.54397V43.456C50 47.0702 47.0642 50 43.4426 50H6.55738C2.93584 50 0 47.0702 0 43.456V6.54397ZM6.55738 2.86299C4.52026 2.86299 2.86885 4.51102 2.86885 6.54397V43.456C2.86885 45.489 4.52026 47.137 6.55738 47.137H9.23315L32.1003 23.5656C34.6482 20.9392 38.8581 20.9052 41.4483 23.4901L47.1311 29.1613V6.54397C47.1311 4.51102 45.4797 2.86299 43.4426 2.86299H6.55738ZM43.4426 47.137H13.2262L34.1615 25.557C35.5947 24.0796 37.9627 24.0605 39.4197 25.5145L47.1311 33.2102V43.456C47.1311 45.489 45.4797 47.137 43.4426 47.137ZM11.5779 17.1268C11.5779 14.1056 14.032 11.6564 17.0594 11.6564C20.0868 11.6564 22.541 14.1056 22.541 17.1268C22.541 20.148 20.0868 22.5971 17.0594 22.5971C14.032 22.5971 11.5779 20.148 11.5779 17.1268ZM17.0594 8.79346C12.4476 8.79346 8.70902 12.5244 8.70902 17.1268C8.70902 21.7292 12.4476 25.4601 17.0594 25.4601C21.6712 25.4601 25.4098 21.7292 25.4098 17.1268C25.4098 12.5244 21.6712 8.79346 17.0594 8.79346Z" fill="#DBDBDB"></path>
                     </svg>
@@ -168,27 +168,37 @@
                 }
             });
         });
-		document.addEventListener('DOMContentLoaded', function () {
-		  	const conturyDivs = document.querySelectorAll('.contury div');
-		
-		  conturyDivs.forEach(function (div) {
-		    div.addEventListener('click', function () {
-		      const clickedText = div.innerText;
-		      console.log('Clicked Text:', clickedText);
-		      // XMLHttpRequest를 생성
-		      const nationdata = new XMLHttpRequest();
-		      // POST 요청을 설정하고 서버의 URL을 지정
-		      nationdata.open('POST', '<%=request.getContextPath()%>/accompnay/accompanywriteend.do', true);
-		      // 요청 헤더 설정
-		      nationdata.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		      // 서버로 보낼 데이터 설정
-		      const data = 'clickedText=' + encodeURIComponent(clickedText);
-		      // 요청을 전송
-		      nationdata.send(data);
-		      
-		    });
-		  });
-		});
+        $(document).ready(function () {
+            // 이벤트 리스너 설정
+            $(".contury div").on("click", function () {
+                const contury = $(this).text();
+                console.log(contury);
+            });
+
+            // 폼 제출 시 실행되는 이벤트 리스너
+            $("form").submit(function (e) {
+                // 폼이 제출될 때의 기본 동작을 막습니다.
+                e.preventDefault();
+
+                // 선택된 나라 텍스트 가져오기
+                const contury = $(".contury div.selected").text();
+
+                // AJAX 요청
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/accompnay/accompanywriteend.do",
+                    type: "post",
+                    data: { nation: contury },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
+            });
+        });
 		$("#accompany-file").change(e => {
 		    $.each(e.target.files, (i, f) => {
 		        const filereader = new FileReader();

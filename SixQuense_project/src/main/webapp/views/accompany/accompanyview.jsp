@@ -1,8 +1,10 @@
- <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
-  <%@page import="com.web.accompany.model.dto.Continent"%>
-  <%@page import="com.web.accompany.model.dto.Coordinate"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="com.web.accompany.model.dto.AccompanyComment"%>
+<%@page import="java.util.List"%>
+<%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
+<%@page import="com.web.accompany.model.dto.Continent"%>
+<%@page import="com.web.accompany.model.dto.Coordinate"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
 
@@ -10,6 +12,7 @@
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
+	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 %>
 
 
@@ -153,8 +156,10 @@ button:hover {
 								</div>
 								<div class="blog__details__author__text col-sm-6">
 									<div class="row">
-										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">Michael
-											Scofield</div>
+										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">
+										아이디값
+										<%-- <%=loginMember.getUserId %> --%>
+										</div>
 										<div class="item col-sm-4">
 											<img id="followButton" src="<%=request.getContextPath()%>/img/팔로우(빈거).png" alt="팔로우 버튼"
 												onclick="toggleImage()" width="30" height="30">
@@ -224,8 +229,42 @@ button:hover {
 						<h3>comment</h3>
 						<br>
 						<br>
-						<div class="comments" id="comments"></div>
-						<div class="comment-form">
+							<div class="comments" id="comments"> 
+							<%if(!comments.isEmpty()){ %>
+								<table id="tbl-comment">
+								<%for(AccompanyComment ac:comments){ 
+									if (ac.getAccompanyComtLevel() == 1) {
+								%>
+									<tr class="level1">
+										<td>
+											<sub class="comment-writer"><%=ac.getUserId() %></sub>
+											<sub class="comment-date"><%=ac.getAccompanyComtDate() %></sub>
+											<br>
+											<%=ac.getAccompanyComtContent() %>
+										</td>
+										<td>
+											<button class="btn-reply" value="<%=ac.getAccompanyComtNo()%>">답글</button>
+											<button class="btn-delete">삭제</button>
+										</td>
+									</tr>
+									<%}else{ %>
+									<tr class="level2">
+										<td>
+											<sub ><%=ac.getUserId() %></sub>
+											<sub><%=ac.getAccompanyComtDate() %></sub>
+											<br>
+											<%=ac.getAccompanyComtContent() %>
+										</td>
+										<td>
+										</td>
+									</tr>
+									<%} 
+								}%>
+								</table>
+								<%}%>
+							</div>
+						
+						<div class="comment-editor">
 						<form action = "<%=request.getContextPath() %>/accompany/insertaccompanycomment.do" method="post">
 							<input type="hidden" name="accompanyNo" value="<%=b.getAccompanyNo()%>">
 							<input type="hidden" name="level" value="1">
@@ -241,13 +280,27 @@ button:hover {
 		</div>
 	</section>
 	    <script>
-	    $(".comment-form>form>input[name=content]").focus(e=>{
+<%-- 	    $(".comment-form>form>input[name=content]").focus(e=>{
 	    	if(<%=loginMember==null%>){
 	    		/* 로그인이 안됐을 때  */
-	    		alert("로그인 후 이용할 수 있는 서비스입니다.")
-	    		
-	    	}
-	    });
+	    		alert("로그인 후 이용할 수 있는 서비스입니다.");
+	        }
+	    }); --%>
+	    $(".btn-reply").click(e=>{
+	    	/* alert("클릭"); */
+	    	/* $(e.target).parents("tr").after($("<tr>").append($("<td>테스트</td>"))) */
+	    	const $tr=$("<tr>");
+			const $td=$("<td>").attr("colspan","2");
+			const $form=$(".comment-editor>form").clone(); //form태그 복사 
+			console.log($form);
+			$form.find("input[name=level]").val("2");
+			$form.find("textarea").attr({"rows":"1","cols":"40"});
+			$form.find("button").removeAttr("id").addClass("btn-insert2");  //버튼의 아이디 속성은 지우고 클래스를 btn-insert2로 해라 
+			$form.find("input[name=accompanyCommentRef]").val($(e.target).val()); //댓글관한 번호가 들어감. 
+			$td.append($form);
+			$tr.append($td);
+			$(e.target).parents("tr").after($tr);
+	    })
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
 	<div id="profilePopup" class="popup">

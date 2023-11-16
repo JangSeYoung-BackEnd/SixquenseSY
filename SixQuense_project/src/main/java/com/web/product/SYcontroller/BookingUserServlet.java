@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.web.member.dto.Member;
-import com.web.product.syservice.BookingUserService;
+import com.web.product.SYservice.BookingUserService;
 
 /**
  * Servlet implementation class BookingUserServlet

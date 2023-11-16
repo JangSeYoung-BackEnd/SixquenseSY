@@ -1,4 +1,4 @@
-package com.web.product.syservice;
+package com.web.product.SYservice;
 
 import static com.web.common.JDBCTemplate.close;
 import static com.web.common.JDBCTemplate.getConnection;
@@ -6,7 +6,7 @@ import static com.web.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 
 import com.web.member.dto.Member;
-import com.web.product.sydao.BookingUserDao;
+import com.web.product.SYdao.BookingUserDao;
 
 public class BookingUserService {
 	private BookingUserDao dao=new BookingUserDao();

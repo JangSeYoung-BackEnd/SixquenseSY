@@ -1,4 +1,4 @@
-package com.web.product.sydao;
+package com.web.product.SYdao;
 
 import static com.web.common.JDBCTemplate.close;
 

@@ -3,7 +3,7 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
-    <section class="checkout spad">
+    <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
                 <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="
@@ -42,7 +42,7 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">

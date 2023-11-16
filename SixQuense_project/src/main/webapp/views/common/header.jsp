@@ -4,7 +4,6 @@
 <%
 
 	Member loginMember=(Member)session.getAttribute("loginMember");
-	System.out.println(loginMember);
 	Cookie[] cookies=request.getCookies();
 	String saveId=null;
 	if(cookies!=null){
@@ -118,7 +117,7 @@
                                 <li><a href= "<%=request.getContextPath() %>/community/communitylist.do">여행리뷰</a></li>
                             </ul>
                         </li>
-                        <li><a href= "<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/img/icon/헤더문의.png" width="25px;"> 문의사항</a></li>
+                        <li><a href= "<%=request.getContextPath()%>/views/common/inquiry.jsp"><img src="<%=request.getContextPath() %>/img/icon/헤더문의.png" width="25px;"> 문의사항</a></li>
                     </ul>
                 </nav>
         </div>

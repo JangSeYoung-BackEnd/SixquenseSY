@@ -1,17 +1,21 @@
 package com.web.member.dao;
 
+import static com.web.common.JDBCTemplate.close;
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.web.common.JDBCTemplate;
 import com.web.member.dto.Member;
-import static com.web.common.JDBCTemplate.*;
 public class MemberDao {
-	
+
 	public List<Member> selectMemberAll(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -54,7 +58,7 @@ public class MemberDao {
 		}
 		return m;
 	}
-
+	
 	private Member getMember(ResultSet rs) throws SQLException{
 		return Member.builder()
 				.userNo(rs.getInt("member_no"))

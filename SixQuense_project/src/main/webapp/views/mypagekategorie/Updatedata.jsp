@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>  
- <section class="checkout spad">
+ <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
-                            width: 165px;
-                            padding-left: 0px;
-                            margin-left: 294px;
-                            margin-bottom: 25px;">
+            <input type="file" id="fileInput" style="display: none;">
+					<button id="btnupload">
+					    <img id="previewImage" src="<%=request.getContextPath() %>/img/icon/수정.png" style="
+					        width: 165px;
+					        padding-left: 0px;
+					        margin-left: 294px;
+					        margin-bottom: 25px;">
+					</button>
                             <p style="width: 750px;"> 홍 길 동</p>
                 <form action="#">
                     <div class="row">
@@ -62,6 +65,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                            <input type="button" value="수정" onclick="<%=request.getContextPath()%>/update.do">
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
@@ -73,7 +77,7 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
@@ -100,6 +104,24 @@
             	</div>
         	</div>
 </section>
+<script>
+    document.getElementById('btnupload').addEventListener('click', function () {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function () {
+        var fileInput = this;
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById('previewImage').src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+</script>
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
@@ -138,6 +160,7 @@
 		});
 	});		
 	</script>
+	
    <script>
 	$("#wenttripBtn").click(e=>{
 		$.ajax({

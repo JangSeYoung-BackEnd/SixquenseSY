@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.SYservice.BookingService;
 import com.web.product.dto.BookinginfoDto;
+import com.web.product.syservice.BookingService;
 
 /**
  * Servlet implementation class ProductPackageOrderEndServlet
@@ -27,6 +27,7 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
      */
     public ProductPackageOrderEndServlet() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 

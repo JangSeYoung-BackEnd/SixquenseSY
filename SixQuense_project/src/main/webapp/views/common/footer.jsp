@@ -37,6 +37,7 @@
             <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px" style="margin-right: 12px">
         </a>
         </div>
+       </div> 
     </footer>
     <!-- 푸터 -->
     <!-- Js Plugins -->

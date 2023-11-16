@@ -39,16 +39,14 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 			throw new BadAccessException("잘못된 접근입니다. 관리자에게 문의하세요 :(");
 		}else {
 			String path=getServletContext().getRealPath("/upload/accompany/");
-			System.out.println(path);
 			int maxSize=1024*1024*100;
 			String encoding="utf-8";
 			DefaultFileRenamePolicy dfr=new DefaultFileRenamePolicy();
 			MultipartRequest mr=new MultipartRequest(request, path, maxSize,encoding, dfr);
-			
 			String title=mr.getParameter("accompany-title");
 			String content=mr.getParameter("accompany-content");
 			String openchattinglink=mr.getParameter("kakao-link");
-			String nation=mr.getParameter("clickedText");
+			String nation=mr.getParameter("nation");
 			String ori=mr.getFilesystemName("accompany-file");
 			String rename=mr.getFilesystemName("accompany-file");
 			String userId=request.getParameter("useId");
@@ -61,7 +59,7 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 					.build();
 			int result=new AccompanyServiceKH().insertAccompany(a,nation,userId);
 		}		
-		request.getRequestDispatcher(request.getContextPath()+"/accompany/accompanylist.do").forward(request, response);
+		request.getRequestDispatcher("/accompany/accompanylist.do").forward(request, response);
 	}
 
 	/**

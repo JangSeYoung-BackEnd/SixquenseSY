@@ -41,72 +41,68 @@ public class ProductService {
 		return discountProducts;
 	}
 
-	// 나라별 베스트 상품 리스트 가져오기
+	// 나라별 베스트 상품(조회수) 리스트 가져오기
 
-	/*
-	 * public List<ProductDto> selectBestproductByCountry(int coordinateNo, boolean
-	 * readResult) { Connection conn = getConnection(); List<ProductDto>
-	 * bestProducts = dao.selectRecentproductByCountry(conn, coordinateNo); if()
-	 * 
-	 * 
-	 * bestProducts.forEach(e -> { List<ProductattachmentDto> images =
-	 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
-	 * 
-	 * close(conn); return bestProducts; }
-	 */
-	
-	//번호별 상품 가져오는 메소드
+	public List<ProductDto> selectBestproductByCountry(int coordinateNo) {
+		Connection conn = getConnection();
+		List<ProductDto> bestProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+
+		/*
+		 * bestProducts.forEach(e -> { List<ProductattachmentDto> images =
+		 * dao.selectImages(conn, e.getProductNo()); e.setAttachment(images); });
+		 */
+
+		close(conn);
+		return bestProducts;
+	}
+
+	// 번호별 상품 가져오는 메소드
 	public ProductDto selectProductByNo(int productNo, boolean readResult) {
-		Connection conn=getConnection();
+		Connection conn = getConnection();
 		ProductDto product = dao.selectProductByNo(conn, productNo);
-		if(product!=null&&!readResult) {
-			int result=dao.updateProductReadCount(conn,productNo);
-			if(result>0) {
+		if (product != null && !readResult) {
+			int result = dao.updateProductReadCount(conn, productNo);
+			if (result > 0) {
 				commit(conn);
-				product.setProductReadcount(product.getProductReadcount()+1);
-			}else rollback(conn);
+				product.setProductReadcount(product.getProductReadcount() + 1);
+			} else
+				rollback(conn);
 		}
 		close(conn);
 		return product;
-		};
+	};
 
-	//댓글 입력하는 메소드
+	// 댓글 입력하는 메소드
+
+	public int insertProductComment(ProductsreviewDto pr) {
+		Connection conn = getConnection();
+		int result = dao.insertProductComment(conn, pr);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	// 댓글 조회하는 메소드
+
 	/*
-	 * public int insertBoardComment(ProductsreviewDto pr) { Connection
-	 * conn=getConnection(); int result=dao.insertBoardComment(conn,pr);
-	 * if(result>0) commit(conn); else rollback(conn); close(conn); return result; }
-	 */
-	
-	//댓글 조회하는 메소드
-	/*
-	 * public List<ProductsreviewDto> selectProductComment(int productNo){
-	 * Connection conn=getConnection(); List<ProductsreviewDto> comments =
-	 * dao.selectBoardComment(conn, productNo); close(conn); return comments;
+	 * public List<ProductsreviewDto> selectProductComment(int productNo) {
+	 * Connection conn = getConnection(); List<ProductsreviewDto> comments =
+	 * dao.selectProductComment(conn, productNo); close(conn); return comments;
 	 * 
 	 * }
 	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	/*
-	 * public ProductDto selectDiscountproductByCountry(int coordinateNO) {
-	 * Connection conn = getConnection(); ProductDto discountProduct =
-	 * dao.selectDiscountproductByCountry(conn, coordinateNO); close(conn); return
-	 * discountProduct; }
-	 */
+	// 댓글 카운트 하는 메소드
+	public int selectProductCountByNo(int productNo) {
+		Connection conn = getConnection();
+		int commentCount = dao.selectProductCountByNo(conn, productNo);
+		close(conn);
+		return commentCount;
 
-	// 상품번호별 조회, 조회수 관련
-	// public Product selectProductByNo(int boardNo, boolean readResult) {
-
-	// }
+	}
 
 	// 상품 등록
 	// public int insertProduct(Product p) {
@@ -125,11 +121,6 @@ public class ProductService {
 	// 리뷰 코멘트 수정
 
 	// 리뷰 코멘트 삭제
-
-	// 상품 번호에 맞는 리뷰 찾기
-	// public List<ProductComment> selectProductComment(int ProductNo){
-
-	// }
 
 	// 주문 등록
 

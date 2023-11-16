@@ -1,10 +1,13 @@
+<%@page import="com.web.product.dto.ProductsreviewDto"%>
 <%@page import="com.web.product.dto.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	ProductDto product = (ProductDto)request.getAttribute("product");
+	List<ProductsreviewDto> comments = (List<ProductsreviewDto>)request.getAttribute("comments");
+	int commentCount = (int)request.getAttribute("commentCount");
 
 %>
-<%@ page import="com.web.product.dto.ProductDto" %>
+<%@ page import="com.web.product.dto.ProductDto, com.web.product.dto.ProductsreviewDto,java.util.List" %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
@@ -68,7 +71,7 @@
 				<div class="product__details__text">
 					<h3><%=product.getProductName() %></h3>
 					<div class="product__details__rating">
-						<span>(리뷰 갯수 reviews)</span>
+						<span><%=commentCount %> reviews</span>
 					</div>
 					<div class="product__details__price"><%=product.getProductPrice() %>원</div>
 					<p style="text-align: left"><%=product.getEditorNote() %></p>
@@ -154,7 +157,7 @@
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#tabs-2" role="tab" aria-selected="false">이용 안내</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(후기갯수)</span></a>
+							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(<%=commentCount %>)</span></a>
 						</li>
 					</ul>
 					<div class="tab-content">
@@ -223,41 +226,36 @@
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
 								<h6>후기 작성</h6>
 								<div class="comment-editor">
-									<form action="" method="post">
-										<input type="hidden" name="boardRef" value="">
-										<!-- 서블릿이 필요한 정보 hidden으로 보내주기 -->
-										<input type="hidden" name="level" value="1"> <input
-											type="hidden" name="writer" value=""> <input
-											type="hidden" name="boardCommentRef" value="0">
+									<form action="<%=request.getContextPath() %>/product/insertComment.do" method="post">
+										<input type="hidden" name="productNo" value="<%=product.getProductNo() %>">
+										<input type="hidden" name="commentLevel" value="1"> 
+										<input type="hidden" name="userId" value="user01"> 
+										<input type="hidden" name="member_no" value="100"> 
+										<input type="hidden" name="CommentRef" value="0">										
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
 												id="floatingTextarea2" style="height: 100px; resize: none"></textarea>
-											<button type="button" class="btn btn-success"
+											<button type="submit" class="btn btn-success"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
-										<div id="comment-editor-button" style="margin-top: 10px;"
+										<!-- <div id="comment-editor-button" style="margin-top: 10px;"
 											height=80px;>
 											<input type="file" id="inputImage"
 												accept="image/gif,image/jpeg,image/png" value="사진 첨부 파일">
-											<!-- 사진 있을때 파일명 보여줌 -->
-											<%-- <%if(b.getReFname()!=null){ %>
-														<img src="<%=request.getContextPath() %>/images/file.png" width="25">
-														<sub><%=b.getReFname() %></sub>
-													<%} %> --%>
-										</div>
+										</div> -->
 									</form>
 								</div>
 								<h6 style="margin-top: 26px;">여행자 후기(후기 갯수)</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
-								<%-- <%if(!comments.isEmpty()){ %> --%>
+					<%-- 			 <%if(!comments.isEmpty()){ %>
 								<div class="container mt-3">
 									<table class="table">
 										<tbody>
-											<%-- <%for(BoardComment bc:comments){ %> --%>
-											<%-- <%if(bc.getLevel()==1) {%> --%>
+											 <%for(ProductsreviewDto pr:comments){ %> 
+											 <%if(pr.getCommentLevel()==1) {%>
 											<tr class="level1">
-												<td><sub class="comment-writer">회원명</sub> <sub
-													class="comment-date">등록일<br> 리뷰내용</td>
+												<td><sub class="comment-writer"></sub> <sub
+													class="comment-date"></sub><br></td>
 												<td>
 													<div style="display: flex">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
@@ -267,20 +265,20 @@
 													</div>
 												</td>
 											</tr>
-											<%-- 	<%}else{ %> --%>
+											 	<%}else{ %> 
 											<tr class="level2">
-												<td><sub class="comment-writer">회원명</sub> <sub
-													class="comment-date"></sub>등록일<br> 대댓글내용</td>
+												<td><sub class="comment-writer"><%=pr.getUserId() %></sub> <sub
+													class="comment-date"><%=pr.getCommentDate() %></sub><br> <%=pr.getCommentContent() %></td>
 												<td>
 											</tr>
-											<%-- 		<%} %> --%>
-											<%-- <%} %> --%>
-											<!-- }else{ %> -->
+											 		<%} %> 
+											 <%} %> 
+											 <% }else{ %> 
 											<tr>
 												<td width=1140px; height=100px; style="text-align: center;">작성된
 													여행 후기가 없습니다</td>
 											</tr>
-											<%-- <%} %> --%>
+											 <%} %>  --%>
 										</tbody>
 									</table>
 								</div>
@@ -297,17 +295,11 @@
 		</div>
 </section>
 
-<%-- <script>
-	$('#download-container').click(e=>{
+ <script>
+	<%-- $('#download-container').click(e=>{
 		location.assign("<%=request.getContextPath()%>/boardfiledownload.do?fname=<%=b.getReFname()%>");
-	})
+	}) --%>
 	
-	$(".comment-editor>form>textarea[name=content]").focus(e=>{
-		if(<%=loginMember==null%>){
-			alert("로그인 후 이용할 수 있는 서비스 입니다");
-			$("#userId").focus();
-		}
-	})
 	
 	$(".btn-reply").click(e=>{
 		const $tr=$("<tr>");
@@ -335,5 +327,5 @@
 			
 		
 	})
-</script> --%>
+</script> 
 <%@ include file="/views/common/footer.jsp"%>

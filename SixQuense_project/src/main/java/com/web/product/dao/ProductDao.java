@@ -73,7 +73,7 @@ public class ProductDao {
 		return discountProducts;
 	}
 
-	// 베스트 상품 조회해서 가져오는 메소드
+	// 베스트 상품(조회순) 조회해서 가져오는 메소드
 	public List<ProductDto> selectBestproductByCountry(Connection conn, int coodinateNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,10 +82,10 @@ public class ProductDao {
 			pstmt = conn.prepareStatement(sql.getProperty("selectBestproductAndImageByCoun"));
 			pstmt.setInt(1, coodinateNo);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				addProductAndImage(bestProducts, rs);
 			}
-				
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -94,17 +94,17 @@ public class ProductDao {
 		}
 		return bestProducts;
 	}
-	
-	//상품 번호별로 가져오는 메소드
+
+	// 상품 번호별로 가져오는 메소드
 	public ProductDto selectProductByNo(Connection conn, int productNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ProductDto> products = new ArrayList<ProductDto>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectProductByNo"));
+			pstmt = conn.prepareStatement(sql.getProperty("selectProductByNo"));
 			pstmt.setInt(1, productNo);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				addProductAndImage(products, rs);
 			}
 		} catch (SQLException e) {
@@ -115,54 +115,77 @@ public class ProductDao {
 		}
 		return products.get(0);
 	}
-	
-	//조회수 변경하는 메소드
+
+	// 조회수 변경하는 메소드
 	public int updateProductReadCount(Connection conn, int productNo) {
-		PreparedStatement pstmt=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("updateProductReadCount"));
+			pstmt = conn.prepareStatement(sql.getProperty("updateProductReadCount"));
 			pstmt.setInt(1, productNo);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
-	
-	//댓글 등록하는 메소드
-	/*
-	 * public int insertProductComment(Connection conn, ProductsreviewDto pr) {
-	 * PreparedStatement pstmt = null; int result = 0; try {
-	 * pstmt=conn.prepareStatement(sql.getProperty("insertProductComment"));
-	 * }catch(SQLException e) { e.printStackTrace(); }finally { close(pstmt); }
-	 * return result; }
-	 */
-	
-	//댓글 조회하는 메소드
+
+	// 댓글 인서트 메소드
+	public int insertProductComment(Connection conn, ProductsreviewDto pr) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("insertProductComment"));
+			pstmt.setString(1, pr.getUserId());
+			pstmt.setString(2, pr.getCommentContent());
+			pstmt.setString(3, pr.getCommentRef() == 0 ? null : String.valueOf(pr.getCommentRef()));
+			pstmt.setInt(4, pr.getCommentLevel());
+			pstmt.setInt(5, pr.getProductNo());
+			pstmt.setInt(6, pr.getMemberNo());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 댓글 조회하는 메소드
+
 	/*
 	 * public List<ProductsreviewDto> selectProductComment(Connection conn, int
-	 * productNo){ PreparedStatement pstmt = null; ResultSet rs= null;
-	 * List<ProductsreviewDto> comments = new ArrayList<>(); try {
-	 * pstmt=conn.prepareStatement(sql.getProperty("selectProductComment"));
-	 * pstmt.setInt(1,productNo); rs=pstmt.executeQuery(); while(rs.next()) {
-	 * comments.add(getProductComment(rs)); } }catch(SQLException e) {
-	 * e.printStackTrace(); }finally { close(rs); close(pstmt); } return comments;
+	 * productNo) { PreparedStatement pstmt = null; ResultSet rs = null;
+	 * List<ProductsreviewDto> comments = new ArrayList<>(); try { pstmt =
+	 * conn.prepareStatement(sql.getProperty("selectProductComment"));
+	 * pstmt.setInt(1, productNo); rs = pstmt.executeQuery(); while (rs.next()) {
+	 * comments.add(getReview(rs)); } } catch (SQLException e) {
+	 * e.printStackTrace(); } finally { close(rs); close(pstmt); } return comments;
+	 * 
+	 * }
 	 */
-	//}
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
+	// 댓글 숫자 카운트 메소드
+	public int selectProductCountByNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int commentCount = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectProductCountByno"));
+			pstmt.setInt(1, productNo);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				commentCount = rs.getInt("count");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return commentCount;
+	}
 
 	// 첨부파일이 있는 상품 조회 가능하게 하는 메소드
 	private void addProductAndImage(List<ProductDto> products, ResultSet rs) throws SQLException {
@@ -172,8 +195,12 @@ public class ProductDao {
 				try {
 					if (rs.getString("original_filename") != null) {
 						e.getAttachment().add(getImage(rs));
-					}if(rs.getString("course_no")!= null) {
+					}
+					if (rs.getInt("course_no") != 0) {
 						e.getCourse().add(getCourse(rs));
+					}
+					if (rs.getInt("product_review_no") != 0) {
+						e.getReview().add(getReview(rs));
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -184,13 +211,15 @@ public class ProductDao {
 			if (rs.getString("original_filename") != null) {
 				product.getAttachment().add(getImage(rs));
 				products.add(product);
-			}if(rs.getString("course_no") != null) {
+			}
+			if (rs.getInt("course_no") != 0) {
 				product.getCourse().add(getCourse(rs));
 				products.add(product);
 			}
-			
-				
-				
+			if (rs.getInt("product_review_no") != 0) {
+				product.getReview().add(getReview(rs));
+				products.add(product);
+			}
 		}
 	}
 
@@ -214,52 +243,38 @@ public class ProductDao {
 		}
 		return images;
 	}
-	
-	//빌더 조인 하는 것들도 적어서 수정 해야됨
+
+	// 빌더 조인 하는 것들도 적어서 수정 해야됨
 	public static ProductDto getProduct(ResultSet rs) throws SQLException {
-		return ProductDto.builder()
-				.ProductNo(rs.getInt("product_no"))
-				.ProductName(rs.getString("product_name"))
-				.ProductReadcount(rs.getInt("product_readcount"))
-				.ProductInsertdate(rs.getDate("product_insertdate"))
-				.MinCount(rs.getInt("min_count"))
-				.MaxCount(rs.getInt("max_count"))
-				.ProductPrice(rs.getInt("prodcut_price"))
-				.GuideNo(rs.getInt("guide_no"))
+		return ProductDto.builder().ProductNo(rs.getInt("product_no")).ProductName(rs.getString("product_name"))
+				.ProductReadcount(rs.getInt("product_readcount")).ProductInsertdate(rs.getDate("product_insertdate"))
+				.MinCount(rs.getInt("min_count")).MaxCount(rs.getInt("max_count"))
+				.ProductPrice(rs.getInt("prodcut_price")).GuideNo(rs.getInt("guide_no"))
 				.ProductDiscountRate(rs.getDouble("product_discount_rate"))
-				.ProductDetail(rs.getString("product_detail"))
-				.ProductDuration(rs.getInt("product_duration"))
-				.ProductDay(rs.getString("product_day").split(","))
-				.CoodinateNo(rs.getInt("coordinate_no"))
-				.EditorNote(rs.getString("editor_note"))
-				.attachment(new ArrayList<ProductattachmentDto>())			
-				.review(new ArrayList<ProductsreviewDto>()) 
-				.course(new ArrayList<ProductcourseDto>())
-				.build();
+				.ProductDetail(rs.getString("product_detail")).ProductDuration(rs.getInt("product_duration"))
+				.ProductDay(rs.getString("product_day").split(",")).CoodinateNo(rs.getInt("coordinate_no"))
+				.EditorNote(rs.getString("editor_note")).attachment(new ArrayList<ProductattachmentDto>())
+				.review(new ArrayList<ProductsreviewDto>()).course(new ArrayList<ProductcourseDto>()).build();
 	}
 
 	// 상품 첨부파일 구체화 하는 메소드
 	public static ProductattachmentDto getImage(ResultSet rs) throws SQLException {
 
-		return ProductattachmentDto.builder()
-				.OrginalFilename(rs.getString("original_filename"))
-				.RenameFilename(rs.getString("rename_filename"))
-				.ProductNo(rs.getInt("product_no"))
-				.build();
+		return ProductattachmentDto.builder().OrginalFilename(rs.getString("original_filename"))
+				.RenameFilename(rs.getString("rename_filename")).ProductNo(rs.getInt("product_no")).build();
 	}
-	
-	public static ProductcourseDto getCourse (ResultSet rs) throws SQLException {
-		return ProductcourseDto.builder()
-				.CourseNo(rs.getInt("course_int"))
-				.CourseName(rs.getString("course_name"))
-				.CourseDetail(rs.getString("course_detail"))
-				.ProductNo(rs.getInt("product_no"))
-				.build();
+
+	public static ProductcourseDto getCourse(ResultSet rs) throws SQLException {
+		return ProductcourseDto.builder().CourseNo(rs.getInt("course_int")).CourseName(rs.getString("course_name"))
+				.CourseDetail(rs.getString("course_detail")).ProductNo(rs.getInt("product_no")).build();
 	}
-	
-	/*
-	 * public static ProductsreviewDto getReview(ResultSet rs) throws SQLException {
-	 * return ProductsreviewDto.builder() . }
-	 */
+
+	public static ProductsreviewDto getReview(ResultSet rs) throws SQLException {
+		return ProductsreviewDto.builder().ProductNo(rs.getInt("product_no")).UserId(rs.getString("user_id"))
+				.CommentContent(rs.getString("comment_content")).CommentDate(rs.getDate("comment_date"))
+				.CommentRef(rs.getInt("comment_ref")).CommentLevel(rs.getInt("comment_level"))
+				.CommentNo(rs.getInt("product_review_no")).memberNo(rs.getInt("member_no")).build();
+
+	}
 
 }

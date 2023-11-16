@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.web.community.model.dto.CommunityDTO;
+import com.web.community.model.dto.TravelReviewAttachmentDTO;
 
 public class CommunityDAO {
 	private Properties sql=new Properties();
@@ -30,7 +31,7 @@ public class CommunityDAO {
 		ResultSet rs=null;
 		List<CommunityDTO> result=new ArrayList<>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty(""));
+			pstmt=conn.prepareStatement(sql.getProperty("selectAll"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getCommunityDTO(rs));
@@ -51,5 +52,13 @@ public class CommunityDAO {
 					.travelReviewReadCount(rs.getInt("TRAVEL_REVIEW_READCOUNT"))
 					.memberNo(rs.getInt("MEMBER_NO"))
 					.build();
+	}
+	
+	public TravelReviewAttachmentDTO getTravelReviewAttachmentDTO(ResultSet rs) throws SQLException{
+		return TravelReviewAttachmentDTO.builder()
+						.originalFilename(rs.getString("ORIGONAL_FILEANEM"))
+						.renameFilename(rs.getString("RENAME_FILENAME"))
+						.memberNo(rs.getInt("MEMBER_NO"))
+						.build();
 	}
 }

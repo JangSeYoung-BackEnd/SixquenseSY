@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.SYservice.BookingService;
 import com.web.product.dto.BookinginfoDto;
+import com.web.product.syservice.BookingService;
 
 /**
  * Servlet implementation class ProductPackageOrderEndServlet
@@ -27,6 +27,7 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
      */
     public ProductPackageOrderEndServlet() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -39,6 +40,6 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String imp=request.getParameter("imp_)
+		String imp=request.getParameter("imp_");
 	}
 }

@@ -171,10 +171,7 @@
 			<div class="loginbtn-container">
 				<div class="login-btn-wrap">
 					<button id="login-btn">로그인</button>
-					 <Error display={error ? 1 : 0}>
-          					*이메일 또는 비밀번호가 일치하지않습니다.
-          					
-        			</Error>
+					
 					<br>
 					<br>
 					<button class="btn">

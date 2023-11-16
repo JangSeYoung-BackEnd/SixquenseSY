@@ -170,8 +170,8 @@
 				<select id="gender" class="inputBox2" name="gender" id="gender" class="inputBoxinput" autocomplete="off">
 				<lable for="gender">성별</lable>
 					<option value="gender">성별</option>
-					<option value="man">남자</option>
-					<option value="woman">여자</option>
+					<option value="M">남자</option>
+					<option value="F">여자</option>
 				</select>
 			</div>
 			
@@ -186,7 +186,7 @@
 			
 			<div class="inputBox">
 				<input autocomplete="off" type="text" class="inputBoxinput"
-					id="phone" maxlength="13" /><label for="phone">전화번호</label>
+					id="phone" name="phone" maxlength="13" /><label for="phone">전화번호</label>
 			</div>
 			
 			
@@ -197,7 +197,7 @@
 				
 				 <div class="inputbox">
 					<select id="userdd" class="inputBox2" id="userdd" name="userMonth" class="inputBoxinput" autocomplete="off">
-						<option value="month">월</option>
+						<option value="month" disabled selected>월</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>

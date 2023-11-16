@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 @Builder
 public class CommunityDTO {
-	private int travelReviewNo;
+	private int travelReviewNo;	
+	private String travelReviewTitle;
 	private String travelReviewContent;
 	private Date travelReviewDate;
 	private int travelReviewReadCount;

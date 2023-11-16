@@ -107,8 +107,7 @@ public class AccompanyWH {
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next())result.add(getAccompanyComment(rs));
-			
-			
+			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -116,7 +115,6 @@ public class AccompanyWH {
 			close(pstmt);
 		}
 		return result;
-
 	}
 	
 	//댓글 빌더 
@@ -128,16 +126,49 @@ public class AccompanyWH {
 				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
 				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
 				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.MemberNo(rs.getInt("MEMBER_NO"))
+				.userId(rs.getString("USER_ID"))
 				.build();
 
+	}
+	public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt= conn.prepareStatement(sql.getProperty("insertAccompanyComment"));
+			pstmt.setInt(1,ac.getAccompanyComtLevel());
+			pstmt.setString(2,ac.getAccompanyComtContent());
+			pstmt.setString(3,ac.getAccompanyComtRef()==0?null:String.valueOf(ac.getAccompanyComtRef()));
+			pstmt.setInt(4,ac.getAccompanyNo());
+			pstmt.setString(5,ac.getUserId());
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 	
 	
 	//조회수 카운트 메소드 
 	public int updateAccompanyReadCount(Connection conn, int no) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("updateAccompanyReadCount"));
+			pstmt.setInt(1, no);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
 	}
+
+
 	
 }

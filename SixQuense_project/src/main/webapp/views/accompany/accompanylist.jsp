@@ -122,7 +122,7 @@
                     		for(AccompanyDTO a:accompanys){%>
 		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>');">
 		                            <div class="product__item">
-		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/img/accompany/traveldata.jpg" style="border-radius: 20%; ">
+		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
 		                                    <ul class="product__item__pic__hover">
 		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
 		                                    </ul>

@@ -42,6 +42,7 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
+			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -51,7 +52,7 @@ public class AccompanyDAOKH {
 		return result;
 	}
 	
-	public int insertAccompany(Connection conn, AccompanyDTO a, String nation) {
+	public int insertAccompany(Connection conn, AccompanyDTO a, String nation, String userId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
@@ -59,9 +60,11 @@ public class AccompanyDAOKH {
 			pstmt.setString(1, a.getAccompanyContent());
 			pstmt.setString(2, userId);
 			pstmt.setString(3, a.getOpenChattingLink());
-			pstmt.setString(4, nation);
-			pstmt.setString(5, a.getOriginalFilename());
-			pstmt.setString(6, a.getRenameFilename());
+			pstmt.setString(4, a.getAccompanyTitle());
+			pstmt.setString(5, nation);
+			pstmt.setString(6, a.getOriginalFilename());
+			pstmt.setString(7, a.getRenameFilename());
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

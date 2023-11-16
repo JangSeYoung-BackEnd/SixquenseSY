@@ -76,13 +76,13 @@ public class MemberDao {
 				.userNn(rs.getString("user_nn"))
 				.phone(rs.getString("phone"))
 				.userDd(rs.getDate("user_dd"))	
-				.enrollData(rs.getDate("user_data"))
+				.enrollData(rs.getDate("ENROLL_DATE"))
 				.userIntroduce(rs.getString("user_introduce"))
 				.travleType(rs.getString("travle_type"))
 				.gender(rs.getString("gender"))
 				.notificatIonset(rs.getString("notificationset"))
-				.originalFilename(rs.getString("original_filename"))
-				.renameFilename(rs.getString("rename_filename"))
+				.originalFilename(rs.getString("PROFILE_ORI_FILNAME"))
+				.renameFilename(rs.getString("PROFILE_RE_FILNAME"))
 				.build();
 	}
 

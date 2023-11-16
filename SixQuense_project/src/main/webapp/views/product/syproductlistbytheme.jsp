@@ -19,6 +19,7 @@
         .continent a.active {color: purple; font-weight: bold;}
         .continent a:hover {color: purple; font-weight:bold;}
     </style>
+  
 </head>
 <section class="body">
     <h4>대륙 카테고리</h4>
@@ -43,7 +44,7 @@
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">삿포르</a></li>
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오사카/교토</a></li>
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오키나와</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">후쿠오카</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=10">후쿠오카</a></li>
             </ul>
         </li>
         <li class="continent"><a href="#">[유럽]</a>
@@ -88,7 +89,7 @@
         });
     </script>
             </div>
-							    <div class="sidebar__item">
+					<div class="sidebar__item">
 							    <div class="latest-product__text">
 							        <h4>최근 상품들</h4>
 							        <div class="latest-product__slider owl-carousel">
@@ -162,7 +163,7 @@
                         </div>
                         
                         <div class="row">
-                            <div class="product__discount__slider owl-carousel">
+                            <div class="product__discount__slider owl-carousel owl-loaded owl-drag">
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">

@@ -1,4 +1,10 @@
+<%@page import="com.web.product.dto.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	ProductDto product = (ProductDto)request.getAttribute("product");
+
+%>
+<%@ page import="com.web.product.dto.ProductDto" %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
@@ -42,51 +48,49 @@
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="img/product/details/product-details-1.jpg" alt="">
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>" alt="">
 					</div>
-					<div class="product__details__pic__slider owl-carousel">
+					<%-- <div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
-							src="img/product/details/thumb-1.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
-							src="img/product/details/thumb-2.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-5.jpg"
-							src="img/product/details/thumb-3.jpg" alt=""> <img
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
-							src="img/product/details/thumb-4.jpg" alt="">
-					</div>
+							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
+					</div> --%>
 				</div>
 			</div>
 
 			<!-- 여기부터 -->
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__text">
-					<h3>패키지 이름</h3>
+					<h3><%=product.getProductName() %></h3>
 					<div class="product__details__rating">
 						<span>(리뷰 갯수 reviews)</span>
 					</div>
-					<div class="product__details__price">199,000원</div>
-					<p style="text-align: left">상품 소개글을 쓰겠습니다~~~ Mauris blandit
-						aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam
-						sit amet quam vehicula elementum sed sit amet dui. Sed porttitor
-						lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
-						sed sit amet dui. Proin eget tortor risus.</p>
-					<form action="<%=request.getContextPath()%>/product/makeorder.do">
+					<div class="product__details__price"><%=product.getProductPrice() %>원</div>
+					<p style="text-align: left"><%=product.getEditorNote() %></p>
+					<form action="<%=request.getContextPath()%>/product/makeorder.do" method="post">
+					<input type="hidden" name="productNo" value="<%= product.getProductNo() %>">
 					<div class="product__details__quantity">
 						<div class="date-container">
 							<input type="date" id="travel_date" name="travel_date"
 								onchange="checkDate()">
 						</div>
-						<div class="quantity">
-							<div class="pro-qty">
-								<input type="text" value="1">
-							</div>
-						</div>
+						<select class="form-select" aria-label="Default select example" name="selectOption">
+						  <option selected>Open this select menu</option>
+						  <option value="1">One</option>
+						  <option value="2">Two</option>
+						  <option value="3">Three</option>
+						</select>
 					</div>
 
 					<div class="button-container">
 						<input type="submit" class="primary-btn" onclick="" value="예약하기">
 						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
-							class="icon_heart_alt"></span> 위시리스트에 담기</a>
+							class="icon_heart_alt"></span> 위시리스트에 담기 </a>
 					</div>
 					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
@@ -133,11 +137,11 @@
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최소인원</b>
-							<span>최소인원적기</span></li>
+							<span><%=product.getMinCount() %></span></li>
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최대인원</b>
-							<span>최대인원적기</span></li>
+							<span><%=product.getMaxCount() %></span></li>
 					</ul>
 				</div>
 			</div>
@@ -157,30 +161,7 @@
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<h6>상품 정보</h6>
-								<p style="text-align: left">Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Pellentesque in ipsum id
-									orci porta dapibus. Proin eget tortor risus. Vivamus suscipit
-									tortor eget felis porttitor volutpat. Vestibulum ac diam sit
-									amet quam vehicula elementum sed sit amet dui. Donec rutrum
-									congue leo eget malesuada. Vivamus suscipit tortor eget felis
-									porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet
-									et, porttitor at sem. Praesent sapien massa, convallis a
-									pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet
-									quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum
-									primis in faucibus orci luctus et ultrices posuere cubilia
-									Curae; Donec velit neque, auctor sit amet aliquam vel,
-									ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-								<p style="text-align: left">Praesent sapien massa, convallis
-									a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit
-									amet, consectetur adipiscing elit. Mauris blandit aliquet elit,
-									eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna
-									dictum porta. Cras ultricies ligula sed magna dictum porta. Sed
-									porttitor lectus nibh. Mauris blandit aliquet elit, eget
-									tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Sed porttitor lectus nibh.
-									Vestibulum ac diam sit amet quam vehicula elementum sed sit
-									amet dui. Proin eget tortor risus.</p>
-							</div>
+								<p style="text-align: left"><%=product.getProductDetail() %></p>
 							<div class="product__details__tab__desc">
 								<h6>코스 소개</h6>
 								<p style="text-align: left">Vestibulum ac diam sit amet quam

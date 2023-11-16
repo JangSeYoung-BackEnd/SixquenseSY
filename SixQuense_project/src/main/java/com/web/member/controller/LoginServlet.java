@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub2
     }
 
 	/**
@@ -45,7 +45,9 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		//2. DB의 member테이블에 보낸 이메일와 패스워드 가 일치하는 회원을 가져온다. 
+
 		Member m=new MemberService().selectMemberByEmailAndPw(userId,userpw);
+		 System.out.println(m);
 		if(m!=null) {
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember",m);
@@ -58,7 +60,6 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		//3. 결과를 출력(응답페이지 선택하면 됩니다.)
-		
 		response.sendRedirect(request.getContextPath());
 	}
 

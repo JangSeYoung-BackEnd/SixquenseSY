@@ -73,8 +73,8 @@ public class MemberDao {
 				.userNo(rs.getInt("member_no"))
 				.userId(rs.getString("user_id"))
 				.userPw(rs.getString("user_pw"))
-				.userNn(rs.getString("user_nn"))
 				.phone(rs.getString("phone"))
+				.userName(rs.getString("KR_USER_NAME"))
 				.userDd(rs.getDate("user_dd"))	
 				.enrollData(rs.getDate("ENROLL_DATE"))
 				.userIntroduce(rs.getString("user_introduce"))
@@ -93,15 +93,15 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql.getProperty("lnsertMember"));
 			pstmt.setString(1, m.getUserId());
 			pstmt.setString(2, m.getUserPw());
-			pstmt.setString(3, m.getUserNn());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setDate(5, m.getUserDd());
-			pstmt.setString(6, m.getUserIntroduce());
-			pstmt.setString(7, m.getTravleType());
-			pstmt.setString(8, m.getGender());
-			pstmt.setString(9, m.getNotificatIonset());
-			pstmt.setString(10, m.getOriginalFilename());
-			pstmt.setString(11, m.getRenameFilename());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setDate(4,m.getUserDd());
+			pstmt.setString(5, m.getUserIntroduce());
+			pstmt.setString(6, m.getTravleType());
+			pstmt.setString(7, m.getGender());
+			pstmt.setString(8, m.getNotificatIonset());
+			pstmt.setString(9, m.getOriginalFilename());
+			pstmt.setString(10, m.getRenameFilename());
+			pstmt.setString(11, m.getUserName());
 			result=pstmt.executeUpdate();			
 		}catch(SQLException e) {
 			e.printStackTrace();

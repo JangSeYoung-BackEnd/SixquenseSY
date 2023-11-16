@@ -167,6 +167,23 @@ public class AccompanyWH {
 		
 	}
 
+	public int insertAccompanyOffer(Connection conn, String user, String value, String acompanyBNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertAccompanyOffer"));
+			pstmt.setString(1, value);
+			pstmt.setString(2, user);
+			pstmt.setString(3, acompanyBNo);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	public int updateAccompanyOffer(Connection conn, String user, String value) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -176,6 +193,7 @@ public class AccompanyWH {
 			pstmt.setString(1, value);
 			pstmt.setString(2, user);
 			result=pstmt.executeUpdate();
+			System.out.println(result +"이건 dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

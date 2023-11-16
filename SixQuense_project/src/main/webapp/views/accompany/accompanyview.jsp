@@ -14,7 +14,8 @@
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
-	System.out.print(acUserId);
+	int acompanyBNo= b.getAccompanyNo(); 
+	
 %>
 
 
@@ -188,13 +189,15 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div class="row" >
 							<div class="blog__sidebar__item">
 								<%if(loginMember!=null){ %>
-									<div class="col-sm-12">
-										<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+								<div class="col-sm-12">
+									<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
 								<%} %>
-									<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro;">
+								</div>
+								<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro;">
 									<div style="margin: 5px 0px 5px 0px;">
 										<h5>동행신청한 목록</h5>
 									</div>
+									<div>
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
 												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
@@ -202,14 +205,16 @@ table#tbl-comment tr.level2 sub.comment-date {
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
 											</div>
-										</a> <a href="#" class="blog__sidebar__recent__item">
+										</a> 
+										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
 												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
 											</div>
-										</a> <a href="#" class="blog__sidebar__recent__item">
+										</a> 
+										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
 												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
 											</div>
@@ -295,7 +300,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 
 	    <script>
@@ -369,11 +373,12 @@ table#tbl-comment tr.level2 sub.comment-date {
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
 		var User =  "<%= acUserId %>";
-		 
+		var boardNo = <%=acompanyBNo%>;
+		 console.log(User+boardNo+value)
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
-	            data: { value: value , acUser : User},
+	            data: { value: value , acUser : User ,boardNo :boardNo},
 	            success: function(response) {
 	                console.log('Ajax response:', response);
 	            },
@@ -387,6 +392,11 @@ table#tbl-comment tr.level2 sub.comment-date {
 	function confirmAccompany() {
 		var confirmed = confirm("동행을 신청하시겠습니까?");
 
+
+		        window.location.href = "https://www.naver.com";
+		    }
+		}
+		
 		if (confirmed) {
 			alert("동행이 신청되었습니다!");
 		} else {
@@ -450,6 +460,6 @@ table#tbl-comment tr.level2 sub.comment-date {
     });
 	</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
-
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+ -->
  <%@ include file="/views/common/footer.jsp"%>

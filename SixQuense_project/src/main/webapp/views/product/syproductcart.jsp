@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page import="com.web.product.dto.ProductDto" %>
+<%@ page import="com.web.member.dto.Member" %>
 <%@ include file="/views/common/header.jsp"%>
 
 <% 
 ProductDto product = (ProductDto)request.getAttribute("product");
-Member loginMember=(Member)session.getAttribute("loginMember");
-Member m=(Member)request.getAttribute("member");	
+/* Member loginMember = (Member)session.getAttribute("loginMember"); */
 %>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -199,7 +199,7 @@ Member m=(Member)request.getAttribute("member");
                     </div>
                     <label for="gender">성별:</label>
                     <select id="gender" name="gender" required>
-                      <option disabled selected>성별 선택</option>
+               			<option disabled selected>성별 선택</option>
                       <option value="male">M</option>
                       <option value="female">F</option>
                     </select>
@@ -255,7 +255,7 @@ Member m=(Member)request.getAttribute("member");
                     }
                 </style>
                 <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
-                    <h2>여행자 정보 입력</h2>
+                    <h2>대표 여행자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
                   
@@ -287,7 +287,7 @@ Member m=(Member)request.getAttribute("member");
                       <option value="female">F</option>
                     </select>
                     <input type="button" 
-            onclick="location.assign('<%=request.getContextPath() %>/user/userview.do?useremail=<%=loginMember.getUserId() %>')"
+            		<%-- onclick="location.assign('<%=request.getContextPath() %>/user/userview.do?useremail=<%=loginMember.getUserId() %>')" --%>
                    value="로그인 정보와 동일">
                   </form>
             </div>

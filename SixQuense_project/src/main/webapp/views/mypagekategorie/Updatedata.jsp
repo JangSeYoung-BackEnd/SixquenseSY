@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.web.member.dto.Member" %>
 <%
-Member m = (Member) request.getAttribute("member");
+Member m=(Member)request.getSession().getAttribute("loginMember");
 %>
  <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">

@@ -33,7 +33,7 @@ public class MypageUpdateServlet extends HttpServlet {
 		
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 		
-		int userId = Integer.parseInt(loginMember.getUserId());
+		int userId = loginMember.getUserNo();
 	    
 	    int result = new jhMemberService().selectMemberUpdate(userId);
 	    

@@ -17,7 +17,7 @@ public class jhMemberDao {
 	
 	{
 		String path=jhMemberDao.class
-					.getResource("/sql/member/member_sql.properties").getPath();
+					.getResource("/sql/mypage/mypage_sql.properties").getPath();
 		
 		try(FileReader fr=new FileReader(path);) {
 			sql.load(fr);
@@ -31,7 +31,7 @@ public class jhMemberDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("mypageupdate")); 
+			pstmt=conn.prepareStatement(sql.getProperty("selectmember")); 
 			pstmt.setInt(1, userId);
 			result=pstmt.executeUpdate();
 			

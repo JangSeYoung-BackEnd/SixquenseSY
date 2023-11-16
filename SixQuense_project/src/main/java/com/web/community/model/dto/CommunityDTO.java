@@ -1,6 +1,7 @@
 package com.web.community.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Builder;
@@ -15,5 +16,5 @@ public class CommunityDTO {
 	private Date travelReviewDate;
 	private int travelReviewReadCount;
 	private int memberNo;
-	private List<TravelReviewAttachmentDTO> travelReviewFile;
+	private List<TravelReviewAttachmentDTO> travelReviewFile=new ArrayList<>();
 }

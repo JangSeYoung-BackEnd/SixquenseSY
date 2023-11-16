@@ -30,7 +30,7 @@ public class CommunityDAO {
 		ResultSet rs=null;
 		List<CommunityDTO> result=new ArrayList<>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty(""));
+			pstmt=conn.prepareStatement(sql.getProperty("selectAll"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getCommunityDTO(rs));

@@ -59,8 +59,8 @@
                             <h4>커뮤니티 메뉴</h4>
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
                             <div style="margin: 10px 0px 10px 0px;">
-                                <div id="accompany" onclick="accompanyBtn();" style="width: 200px; font-weight: bold;">동행</div>
-                                <div id="cumunity" onclick="cumunityBtn();" style="width: 200px; font-weight: bold">여행리뷰</div>
+                                <div id="accompany" onclick="location.assign('<%=request.getContextPath() %>/accompany/accompanylist.do');" style="width: 200px; font-weight: bold; cursor:pointer;">동행</div>
+                                <div id="cumunity" onclick="location.assign('<%=request.getContextPath() %>/community/communitylist.do');" style="width: 200px; font-weight: bold; cursor:pointer;">여행리뷰</div>
                             </div>
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
                             <ul class="menu">
@@ -141,18 +141,6 @@
         </div>
     </section>
 	<script>
-	   function accompanyBtn(){
-	       if($("#accompany")){
-	           $("#accompany").addClass("communityBtn");
-	           $("#cumunity").removeClass("communityBtn");
-	       }
-	   }
-	   function cumunityBtn(){
-	       if($("#cumunity")){
-	           $("#cumunity").addClass("communityBtn");
-	           $("#accompany").removeClass("communityBtn");
-	       }
-	   }
 	</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

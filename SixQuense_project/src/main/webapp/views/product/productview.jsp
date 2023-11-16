@@ -81,7 +81,7 @@
 						<div class="date-container">
 							<input type="date" id="travel_date" name="travel_date"
 								onchange="checkDate()">
-						</div>
+						</div>`
 						<select class="form-select" aria-label="Default select example" name="selectOption">
 						  <option selected>Open this select menu</option>
 						  <option value="1">One</option>

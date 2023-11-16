@@ -52,7 +52,7 @@ public class MemberDao {
 		ResultSet rs=null;
 		Member m=null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("lnsertMember"));
+			pstmt=conn.prepareStatement(sql.getProperty("selectMemberByIdAndPw"));
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userpw);
 			rs=pstmt.executeQuery();

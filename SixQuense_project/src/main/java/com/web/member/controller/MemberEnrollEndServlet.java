@@ -48,7 +48,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		Member m=Member.builder()
 				.userId(userId)
 				.userPw(userPw)
-				.userNn(userNn)
+				.userName(userNn)
 				.phone(phone)
 				.userDd(userDd)
 				.gender(gender)

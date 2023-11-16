@@ -67,7 +67,7 @@ public class MemberDao {
 		}
 		return m;
 	}
-
+	
 	private Member getMember(ResultSet rs) throws SQLException{
 		return Member.builder()
 				.userNo(rs.getInt("member_no"))

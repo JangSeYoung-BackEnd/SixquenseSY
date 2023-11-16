@@ -1,11 +1,15 @@
 package com.web.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.web.member.dto.Member;
+import com.web.member.service.jhMemberService;
 
 /**
  * Servlet implementation class MypageUpdateServlet
@@ -26,6 +30,14 @@ public class MypageUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
+		
+		int userId = Integer.parseInt(loginMember.getUserId());
+	    
+	    int result = new jhMemberService().selectMemberUpdate(userId);
+	    
+	    request.setAttribute("result", result);
 		
 		request.getRequestDispatcher("/views/mypagekategorie/Updatedata.jsp").forward(request, response);
 	}

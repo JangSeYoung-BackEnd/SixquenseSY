@@ -15,9 +15,6 @@ import java.util.Properties;
 import com.web.common.JDBCTemplate;
 import com.web.member.dto.Member;
 public class MemberDao {
-<<<<<<< HEAD
-
-=======
 	private Properties sql=new Properties();
 	
 	{
@@ -29,7 +26,6 @@ public class MemberDao {
 		}
 		
 	}
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
 	public List<Member> selectMemberAll(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

@@ -62,9 +62,6 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp")
 			.forward(request,response);
 		}
-		
-		//3. 결과를 출력(응답페이지 선택하면 됩니다.)
-		response.sendRedirect(request.getContextPath());
 	}
 
 	private void forward(HttpServletRequest request, HttpServletResponse response) {

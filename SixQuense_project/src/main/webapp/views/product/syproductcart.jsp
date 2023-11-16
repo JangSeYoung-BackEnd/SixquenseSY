@@ -3,7 +3,11 @@
 <%@ page import="com.web.product.dto.ProductDto" %>
 <%@ include file="/views/common/header.jsp"%>
 
-<% ProductDto product = (ProductDto)request.getAttribute("product"); %>
+<% 
+ProductDto product = (ProductDto)request.getAttribute("product");
+Member loginMember=(Member)session.getAttribute("loginMember");
+Member m=(Member)request.getAttribute("member");	
+%>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
@@ -40,9 +44,10 @@
          function payment_kakaopay() {
              IMP.request_pay({
                  pg : 'kakaopay',
+                 pay_method : 'card',
                  merchant_uid: "IMP"+makeMerchantUid, 
                  name : $("div.shoping__cart__item>h3").text(),
-                 amount : Number($("td.shoping__cart__item__close").text()),
+                 amount : parseInt($("td.shoping__cart__item__close").text()),
                  buyer_email : 'sixquence',
                  buyer_name : '장세영',
                  buyer_tel : '010-1234-5678',
@@ -63,38 +68,18 @@
                  pay_method : "card", // 지불방법
                  merchant_uid: "1234567", // 주문번호가 들어가야함.
                  name : $("div.shoping__cart__item>h3").text(), // 결제창에 노출될 상품명
-                 amount: Number($("td.shoping__cart__item__close").text()), // 결제 금액
+                 amount: parseInt($("td.shoping__cart__item__close").text()), // 결제 금액
                  buyer_email : "mkty0328@gmail.com", // 주문자 email
                  buyer_name : "홍길동", // 주문자 이름
                  buyer_tel : "01064269887", // 주문자 전화번호
                  buyer_addr : "경기도 안양시 만안구", // 주문자 주소
                  buyer_postcode : "139-91", // 주문자 우편번호
-             }, function(rsp){ // callback함수
-                 if(rsp.success){
-                     $.ajax({
-                         url : "<%=request.getContextPath()%>/paydemo.do",
-                         type : "POST",
-                         dataType : "json",
-                         data : {
-                             imp_uid : rsp.imp_uid,
-                             merchant_uid : rsp.merchant_uid,
-                             paid_amount : rsp.paid_amount,
-                             apply_num : rsp.apply_num
-                         },
-                         success : function(data){
-                             Swal.fire({
-                                 title: "결제 완료",
-                                 text: "주문번호 : "+merchant_uid,
-                                 icon: "success"
-                             });
-                         }
-                     });
-                 }else{
-                     Swal.fire({
-                         title: "결제 실패",
-                         text: rsp.error_msg,
-                         icon: "error"
-                     });
+             }, function (rsp) { // callback
+                 if (rsp.success) {
+                     //주문정보 저장
+                     $("#orderInfo").submit();
+                 } else {
+                     console.log(rsp);
                  }
              });
          }
@@ -148,6 +133,7 @@
                 color: #ff0000;
               }
             </style>
+  
             <h3>예약하기</h3><br>
               <div class="row">
               <div class="col-lg-12">
@@ -166,18 +152,23 @@
                       <tr>
                         <td>
                           <div class="shoping__cart__item">
-                          <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-                            <h3>후쿠오카 패키지 제목</h3>
+                          <img src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>">
+                            <h3><%=product.getProductName() %></h3>
                           </div>
                         </td>
                         <td class="shoping__cart__price">
-                          100만원
+                          <%=product.getProductPrice() %>원
                         </td>
                         <td class="shoping__cart__total">
-                          수량
+                         <%= request.getAttribute("selectOption") %>
                         </td>
                         <td class="shoping__cart__item__close">
-                          500
+                          <% 
+						    int productPrice=product.getProductPrice();
+						    int selectOption=(int) request.getAttribute("selectOption");
+						    int totalPrice=productPrice * selectOption;
+						    out.print(totalPrice);
+						    %>원
                         </td>
                       </tr>
                     </tbody>
@@ -190,21 +181,12 @@
                 <div class="col-lg-12">  
                 </div>
                 <div class="form-containerbox">
-                <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
+                <form action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
                     <h2>예약자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text"id="name" name="name" required>
                   
-                    <div class="flex-containerbox">
-                      <div>
-                        <label for="englishFirstName">영문 이름:</label>
-                        <input type="text" id="englishFirstName" name="englishFirstName" required>
-                      </div>
-                      <div>
-                        <label for="englishLastName">영문 성:</label>
-                        <input type="text" id="englishLastName" name="englishLastName" required>
-                      </div>
-                    </div>
+                    
                      <div>
                         <label for="name">전화번호:</label>
                     <input type="text" id="name" name="name" required>
@@ -217,9 +199,9 @@
                     </div>
                     <label for="gender">성별:</label>
                     <select id="gender" name="gender" required>
-                      <option value="" disabled selected>성별 선택</option>
-                      <option value="male">남성</option>
-                      <option value="female">여성</option>
+                      <option disabled selected>성별 선택</option>
+                      <option value="male">M</option>
+                      <option value="female">F</option>
                     </select>
                     
                   </form>
@@ -272,7 +254,7 @@
                         justify-content: space-between;
                     }
                 </style>
-                <form action="product/bookinginfo.do" method="post">
+                <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
                     <h2>여행자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
                     <input type="text" id="name" name="name" required>
@@ -301,10 +283,12 @@
                     <label for="gender">성별:</label>
                     <select id="gender" name="gender" required>
                       <option value="" disabled selected>성별 선택</option>
-                      <option value="male">남성</option>
-                      <option value="female">여성</option>
+                      <option value="male">M</option>
+                      <option value="female">F</option>
                     </select>
-                    
+                    <input type="button" 
+            onclick="location.assign('<%=request.getContextPath() %>/user/userview.do?useremail=<%=loginMember.getUserId() %>')"
+                   value="로그인 정보와 동일">
                   </form>
             </div>
         </div>
@@ -323,7 +307,7 @@
           <h3>결제 정보</h3><hr>
         <div>
           <h5>주문 금액</h5>
-          <h4 style="background-color: #4caf50; padding: 5px; color: white;">총 결제 금액 1,179,000원</h4>
+          <h4 style="background-color: #4caf50; padding: 5px; color: white;">총 결제 금액<%=totalPrice %> 원</h4>
         </div>
 
     <h3>약관 안내</h3>
@@ -482,14 +466,18 @@
             </div>
         </div>
            <div style="display: flex; align-items: center; margin-bottom: 30px;">
-             <input type="radio" name="payment" value="card" style="width: 50px; margin-top: 10px; margin-left: 20px;">
-             <img src="<%=request.getContextPath()%>/img/SYPAY/cardpayment.png" style="width: 50px; height: 50px;">
-             <h5>카드결제</h5>
+	           <label style="display: flex; align-items: center;">
+	             <input type="radio" name="payment" value="card" style="width: 50px; margin-top: 10px; margin-left: 20px;">
+	             <img src="<%=request.getContextPath()%>/img/SYPAY/cardpayment.png" style="width: 50px; height: 50px;">
+	             <h5>카드결제</h5>
+             </label>
          </div>
          <div style="display: flex; align-items: center;">
-             <input type="radio" name="payment" value="kakaopay" style="width: 50px; margin-top: 10px; margin-left: 20px;">
-             <img src="<%=request.getContextPath()%>/img/SYPAY/payment_icon_yellow_small.png" style="width: 50px;">
-             <h5>카카오페이</h5>
+        	 <label style="display: flex; align-items: center;">
+	             <input type="radio" name="payment" value="kakaopay" style="width: 50px; margin-top: 10px; margin-left: 20px;">
+	             <img src="<%=request.getContextPath()%>/img/SYPAY/payment_icon_yellow_small.png" style="width: 50px;">
+	             <h5>카카오페이</h5>
+             </label>
          </div>
               <div>
                 <button id="paymentButton" onclick="paymentButton()" style="margin-top: 35px; margin-left: 250px; width: 100px;">결제하기</button>

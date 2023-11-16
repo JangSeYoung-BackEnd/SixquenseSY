@@ -13,6 +13,8 @@
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
+	String acUserId= loginMember.getUserId();
+	System.out.print(acUserId);
 %>
 
 
@@ -131,6 +133,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 	color: #ff9c8a;
 	font-size: 10px
 }
+
 </style>
 
 <script>
@@ -160,7 +163,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 	<section class="blog-details spad" style="padding-top:250px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-5 order-md-1 order-2">
+				<div class="col-lg-3 col-md-5 order-md-1 order-2" >
 					<div class="blog__sidebar" style="padding-top: 0px;">
 					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
@@ -220,19 +223,18 @@ table#tbl-comment tr.level2 sub.comment-date {
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-7 order-md-1 order-1">
-					<div>
-						<span style="font-size: larger; font-weight: bolder;"><%=b.getAccompanyTitle() %></span> <select name="accompany">
-					<%-- 	<%=b.getBoardTitle()%>  --%>
-					<!-- 분기 처리하기 만약에 ~  -->
-							<option value="모집중">모집중</option>
-							<option value="마감">마감</option>
+				<div class="col-lg-8 col-md-7 order-md-1 order-1" style="margin-bottom:0px; margin-bottom: 0px; margin-left: 30px;">
+					<div style="padding-top:10px;">
+						<span style="font-size: larger; font-weight: bolder;" ><%=b.getAccompanyTitle() %></span> 
+						<select id = "acSelect" onchange ="accompanySelect()">
+							<option value="모집중" value ="acRecruiting">모집중</option>
+							<option value="마감" value= "acClose">마감</option>
 						</select>
 					</div>
-					<div class="blog__details__text">
+					<div class="blog__details__text"  style="padding-top:20px;">
 						<div style="display:flex;">
 						<!-- 댓글처럼 따로 데이터를 불러서 사진 파일 들고오기  -->
-							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<img src="<%=request.getContextPath() %>/upload/accompany/<%=b.getRenameFilename() %>" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
 							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
 						</div>
 					</div>
@@ -244,9 +246,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div>조회수 <%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
-						<h3>comment</h3>
-						<br>
-						<br>
+						
 							<div class="comments" id="comments"> 
 							<%if(!comments.isEmpty()){ %>
 								<table id="tbl-comment">
@@ -288,7 +288,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:600px">
+							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:620px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
@@ -363,7 +363,26 @@ table#tbl-comment tr.level2 sub.comment-date {
 </body>
 
 <!-- javaScript 부분   -->
+	
 	<script>
+    function accompanySelect(){
+		var acSelect  = document.getElementById("acSelect");
+		var value = (acSelect.options[acSelect.selectedIndex].value);
+		var User =  "<%= acUserId %>";
+		 
+		   $.ajax({
+	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
+	            type: 'POST',
+	            data: { value: value , acUser : User},
+	            success: function(response) {
+	                console.log('Ajax response:', response);
+	            },
+	            error: function(error) {
+	                console.error('Ajax error:', error);
+	            }
+	        });
+	};
+
 	/* 동행 신청 */
 	function confirmAccompany() {
 		var confirmed = confirm("동행을 신청하시겠습니까?");
@@ -431,6 +450,6 @@ table#tbl-comment tr.level2 sub.comment-date {
     });
 	</script>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
- -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+
  <%@ include file="/views/common/footer.jsp"%>

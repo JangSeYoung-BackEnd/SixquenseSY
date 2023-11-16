@@ -107,7 +107,6 @@ public class AccompanyWH {
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next())result.add(getAccompanyComment(rs));
-			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -167,6 +166,23 @@ public class AccompanyWH {
 		}return result;
 		
 	}
+
+	public int updateAccompanyOffer(Connection conn, String user, String value) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateAccompanyOffer"));
+			pstmt.setString(1, value);
+			pstmt.setString(2, user);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 
 
 	

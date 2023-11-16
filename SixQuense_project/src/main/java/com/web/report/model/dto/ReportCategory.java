@@ -1,6 +1,6 @@
 package com.web.report.model.dto;
 
-public class Report_Category {
+public class ReportCategory {
 	private int reportCategoryNo;
 	private String reportCategory;
 	private String reportContent;

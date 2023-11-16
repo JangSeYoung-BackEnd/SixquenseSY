@@ -118,6 +118,19 @@ button:hover {
 #commentText{
 	width :640px
 }
+table#tbl-comment tr.level2 td:first-of-type {
+	padding-left: 100px;
+}
+
+table#tbl-comment tr.level2 sub.comment-writer {
+	color: #8e8eff;
+	font-size: 14px
+}
+
+table#tbl-comment tr.level2 sub.comment-date {
+	color: #ff9c8a;
+	font-size: 10px
+}
 </style>
 
 <script>
@@ -149,6 +162,7 @@ button:hover {
 			<div class="row">
 				<div class="col-lg-4 col-md-5 order-md-1 order-2">
 					<div class="blog__sidebar">
+					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
 							<div class="row">
 								<div class="blog__details__author__pic col-sm-4">
@@ -157,25 +171,29 @@ button:hover {
 								<div class="blog__details__author__text col-sm-6">
 									<div class="row">
 										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">
-										아이디값
+										<%=loginMember.getUserId() %>
 										<%-- <%=loginMember.getUserId %> --%>
 										</div>
 										<div class="item col-sm-4">
-											<img id="followButton" src="<%=request.getContextPath()%>/img/팔로우(빈거).png" alt="팔로우 버튼"
+											<img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
 												onclick="toggleImage()" width="30" height="30">
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						
+						<%} %>
 						<div class="blog__sidebar__item">
+						<%if(loginMember!=null){ %>
 							<form>
 								<button onclick="confirmAccompany()">동행신청하기</button>
 								<br>
 								<br>
 							</form>
-
+						<%} %>
 							<div class="blog__sidebar__recent">
+							<h5>동행신청한 목록</h5>
 								<a href="#" class="blog__sidebar__recent__item">
 									<div class="blog__sidebar__recent__item__pic">
 										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
@@ -236,7 +254,7 @@ button:hover {
 									if (ac.getAccompanyComtLevel() == 1) {
 								%>
 									<tr class="level1">
-										<td>
+										<td style="width:600px">
 											<sub class="comment-writer"><%=ac.getUserId() %></sub>
 											<sub class="comment-date"><%=ac.getAccompanyComtDate() %></sub>
 											<br>
@@ -270,7 +288,7 @@ button:hover {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요">
+							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요" style="width:600px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
@@ -279,13 +297,15 @@ button:hover {
 			</div>
 		</div>
 	</section>
+
 	    <script>
-<%-- 	    $(".comment-form>form>input[name=content]").focus(e=>{
+ 	    $(".comment-form>form>input[name=content]").focus(e=>{
 	    	if(<%=loginMember==null%>){
 	    		/* 로그인이 안됐을 때  */
 	    		alert("로그인 후 이용할 수 있는 서비스입니다.");
+	    		window.location.href = "/login.do";
 	        }
-	    }); --%>
+	    }); 
 	    $(".btn-reply").click(e=>{
 	    	/* alert("클릭"); */
 	    	/* $(e.target).parents("tr").after($("<tr>").append($("<td>테스트</td>"))) */
@@ -303,6 +323,7 @@ button:hover {
 	    })
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
+
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
@@ -337,6 +358,7 @@ button:hover {
 			</div>
 		</div>
 	</div>
+
 </body>
 
 <!-- javaScript 부분   -->
@@ -369,9 +391,9 @@ button:hover {
 		function toggleImage() {
 			var button = document.getElementById('followButton');
 			if (isFilled) {
-				button.src = "<%=request.getContextPath()%>/img/팔로우(빈거).png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
 			} else {
-				button.src = "<%=request.getContextPath()%>/img/팔로우.png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
 			}
 			isFilled = !isFilled; 
 		}

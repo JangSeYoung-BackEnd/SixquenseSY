@@ -147,8 +147,7 @@ public class AccompanyWH {
 		}finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 	

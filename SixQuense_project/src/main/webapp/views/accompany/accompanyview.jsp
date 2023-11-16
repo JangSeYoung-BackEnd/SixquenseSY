@@ -161,61 +161,61 @@ table#tbl-comment tr.level2 sub.comment-date {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-5 order-md-1 order-2">
-					<div class="blog__sidebar">
+					<div class="blog__sidebar" style="padding-top: 0px;">
 					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
-							<div class="row">
-								<div class="blog__details__author__pic col-sm-4">
-									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="">
+							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px">
+								<div class="blog__details__author__pic col-sm-2">
+									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
 								</div>
-								<div class="blog__details__author__text col-sm-6">
-									<div class="row">
-										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">
+								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
+									<div class="cols">
+										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
 										<%=loginMember.getUserId() %>
-										<%-- <%=loginMember.getUserId %> --%>
 										</div>
 										<div class="item col-sm-4">
 											<img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
-												onclick="toggleImage()" width="30" height="30">
+											onclick="toggleImage()" width="20" height="20">
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
 						<%} %>
-						<div class="blog__sidebar__item">
-						<%if(loginMember!=null){ %>
-							<form>
-								<button onclick="confirmAccompany()">동행신청하기</button>
-								<br>
-								<br>
-							</form>
-						<%} %>
-							<div class="blog__sidebar__recent">
-							<h5>동행신청한 목록</h5>
-								<a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
+						<div class="row" >
+							<div class="blog__sidebar__item">
+								<%if(loginMember!=null){ %>
+									<div class="col-sm-12">
+										<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+								<%} %>
+									<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro;">
+									<div style="margin: 5px 0px 5px 0px;">
+										<h5>동행신청한 목록</h5>
 									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
+										<a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a> <a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a> <a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a>
 									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -288,7 +288,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요" style="width:600px">
+							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:600px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
@@ -299,11 +299,10 @@ table#tbl-comment tr.level2 sub.comment-date {
 	</section>
 
 	    <script>
- 	    $(".comment-form>form>input[name=content]").focus(e=>{
+ 	    $("#btn-insert").click(e=>{
 	    	if(<%=loginMember==null%>){
 	    		/* 로그인이 안됐을 때  */
 	    		alert("로그인 후 이용할 수 있는 서비스입니다.");
-	    		window.location.href = "/login.do";
 	        }
 	    }); 
 	    $(".btn-reply").click(e=>{
@@ -340,25 +339,27 @@ table#tbl-comment tr.level2 sub.comment-date {
 	</div>
 	
 <!------------------------신고하기 Popup 부분 ------------------------>	
+
 	<div id="reportPopup" class="popup">
 		<div class="popup-content">
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
 			<div class="checkbox-group">
-				<label> <input type="checkbox" value="스팸"> 스팸 </label> 
-				<label> <input type="checkbox" value="욕설"> 욕설 </label> 
-				<label> <input type="checkbox" value="불쾌한 콘텐츠"> 불쾌한 콘텐츠 </label> 
-				<label> <input type="checkbox" value="text"> 기타
+				<label> <input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보 </label> 
+				<label> <input type="radio" value="abuse" name = "report"> 욕설 </label> 
+				<label> <input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테 </label> 
+				<label> 
+					<input type="radio" value="text" name = "report"> 기타
+					<textarea id="reportReason" name = "report"></textarea>
 				</label>
 			</div>
 			<div>
-				<textarea id="reportReason"></textarea>
-				<button onclick="submitReport()">제출</button>
+				
+				<button onclick="submitReport();">제출</button>
 			</div>
 		</div>
 	</div>
-
 </body>
 
 <!-- javaScript 부분   -->
@@ -373,7 +374,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 			alert("동행 신청이 취소되었습니다.");
 		}
 	}
-	
 	document.addEventListener('DOMContentLoaded', function() {
 		var openButton = document.getElementById('openProfilePopup');
 		var profilePopup = document.getElementById('profilePopup');
@@ -402,22 +402,35 @@ table#tbl-comment tr.level2 sub.comment-date {
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'block';
 		}
-
 		function closeReportPopup() {
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'none';
 		}
+	</script>
+	<script>
+	const radios = $("input[name=report]");
 
-		function submitReport() {
-			var reportReason = document.getElementById('reportReason').value;
-			// 여기에 신고 처리 로직 추가
-			alert('신고되었습니다.');
+    function submitReport() {
+        radios.click(e => {
+            const val = radios.filter(":checked").val();
 
-			// 신고 팝업 닫기
-		}
-		
+            if (val === "text") {
+                const textval = $("#reportReason").val();
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
+            } else {
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
+            }
+
+            alert('신고되었습니다.');
+        });
+    }
+
+    // Call the function when the document is ready
+    $(document).ready(function () {
+        submitReport();
+    });
 	</script>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>  -->
-
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+ -->
  <%@ include file="/views/common/footer.jsp"%>

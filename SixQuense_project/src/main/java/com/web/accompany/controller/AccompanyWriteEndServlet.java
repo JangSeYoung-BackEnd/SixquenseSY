@@ -39,7 +39,6 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 			throw new BadAccessException("잘못된 접근입니다. 관리자에게 문의하세요 :(");
 		}else {
 			String path=getServletContext().getRealPath("/upload/accompany/");
-			System.out.println(path);
 			int maxSize=1024*1024*100;
 			String encoding="utf-8";
 			DefaultFileRenamePolicy dfr=new DefaultFileRenamePolicy();
@@ -48,7 +47,6 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 			String content=mr.getParameter("accompany-content");
 			String openchattinglink=mr.getParameter("kakao-link");
 			String nation=mr.getParameter("nation");
-			System.out.println(nation);
 			String ori=mr.getFilesystemName("accompany-file");
 			String rename=mr.getFilesystemName("accompany-file");
 			String userId=request.getParameter("useId");

@@ -39,6 +39,6 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String imp=request.getParameter("imp_)
+		String imp=request.getParameter("imp_");
 	}
 }

@@ -60,13 +60,14 @@ public class ProductViewServlet extends HttpServlet {
 		}
 		
 		ProductDto product = new ProductService().selectProductByNo(productNo,readResult);
-		//List<ProductsreviewDto> comments = new ProductService().selectProductComment(productNo);
+		List<ProductsreviewDto> comments = new ProductService().selectProductComment(productNo);
 		int commentCount = new ProductService().selectProductCountByNo(productNo);
 		
 		request.setAttribute("product", product);
-		//request.setAttribute("comments", comments);
+		request.setAttribute("comments", comments);
 		request.setAttribute("commentCount", commentCount);
-		//System.out.println(comments);
+		System.out.println(comments);
+		System.out.println(product);
 		
 		
 		//상품 상 jsp로 이동

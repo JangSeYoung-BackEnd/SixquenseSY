@@ -5,12 +5,17 @@
 	ProductDto product = (ProductDto)request.getAttribute("product");
 	List<ProductsreviewDto> comments = (List<ProductsreviewDto>)request.getAttribute("comments");
 	int commentCount = (int)request.getAttribute("commentCount");
+	
+	List<ProductcourseDto> course = product.getCourse();
 
 %>
-<%@ page import="com.web.product.dto.ProductDto, com.web.product.dto.ProductsreviewDto,java.util.List" %>
+<%@ page import="com.web.product.dto.*, java.util.List" %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="<%=request.getContextPath() %>/js/jquery-ui.js"></script>
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -53,7 +58,7 @@
 						<img class="product__details__pic__item--large"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>" alt="">
 					</div>
-					<%-- <div class="product__details__pic__slider owl-carousel">
+					<%--  <div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
@@ -62,7 +67,7 @@
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
-					</div> --%>
+					</div>  --%>
 				</div>
 			</div>
 
@@ -79,9 +84,20 @@
 					<input type="hidden" name="productNo" value="<%= product.getProductNo() %>">
 					<div class="product__details__quantity">
 						<div class="date-container">
-							<input type="date" id="travel_date" name="travel_date"
-								onchange="checkDate()">
+							<input type="text" id="datepicker" name="travel_date"
+								onchange="validateDayOfWeek()">
 						</div>`
+						<script>
+						$(function() {
+							/* text -> 날짜로 변환 해주는 함수 */
+						    $( "#datepicker" ).datepicker({
+						    onSelect: function() { 
+					            var date = $.datepicker.formatDate("yy/mm/dd",$("#datepicker").datepicker("getDate")); 
+
+					        	}
+					   		});      
+						});
+						</script>
 						<select class="form-select" aria-label="Default select example" name="selectOption">
 						  <option selected>Open this select menu</option>
 						  <option value="1">One</option>
@@ -97,7 +113,7 @@
 					</div>
 					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
-					<script>
+					<!-- <script>
 						function checkDate() {
 							var dateInput = document
 									.getElementById("travel_date");
@@ -110,8 +126,8 @@
 							}
 
 						};
-					</script>
-
+					</script> -->
+				
 
 
 
@@ -124,13 +140,28 @@
 						<b style="color: darkgrey; font-size: 13px;"><span
 							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
 					</div>
-					<script>
+					<%-- <script>
 						function toggleHeartIcon(element) {
+							$.get("<%=request.getContextPath()%>/product/wishlist.do?userId="+<%=loginMember.getUserNo()%>
+									
+							
+							
+							
+							
+							
+							
+							)
+							
+							
+							
+							
 							// 버튼을 클릭할 때마다 'filled' 클래스를 추가 또는 제거
 							element.querySelector('.icon_heart_alt').classList
-									.toggle('filled');
+									.add('filled');
+							alert("해당 상품이 위시리스트에 담겼습니다");
+							
 						}
-					</script>
+					</script> --%>
 
 					<ul>
 						<li><img
@@ -165,31 +196,17 @@
 							<div class="product__details__tab__desc">
 								<h6>상품 정보</h6>
 								<p style="text-align: left"><%=product.getProductDetail() %></p>
+							</div>
 							<div class="product__details__tab__desc">
 								<h6>코스 소개</h6>
-								<p style="text-align: left">Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Pellentesque in ipsum id
-									orci porta dapibus. Proin eget tortor risus. Vivamus suscipit
-									tortor eget felis porttitor volutpat. Vestibulum ac diam sit
-									amet quam vehicula elementum sed sit amet dui. Donec rutrum
-									congue leo eget malesuada. Vivamus suscipit tortor eget felis
-									porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet
-									et, porttitor at sem. Praesent sapien massa, convallis a
-									pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet
-									quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum
-									primis in faucibus orci luctus et ultrices posuere cubilia
-									Curae; Donec velit neque, auctor sit amet aliquam vel,
-									ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-								<p style="text-align: left">Praesent sapien massa, convallis
-									a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit
-									amet, consectetur adipiscing elit. Mauris blandit aliquet elit,
-									eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna
-									dictum porta. Cras ultricies ligula sed magna dictum porta. Sed
-									porttitor lectus nibh. Mauris blandit aliquet elit, eget
-									tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Sed porttitor lectus nibh.
-									Vestibulum ac diam sit amet quam vehicula elementum sed sit
-									amet dui. Proin eget tortor risus.</p>
+								<%if(!course.isEmpty()){ %>
+								<div style="background-color: yellow;">
+								<%for(ProductcourseDto pc: course){%>
+								<p style="text-align: left"><span><%=pc.getCourseName() %></span><br>
+								<%=pc.getCourseDetail() %></p>
+								<%} %>
+								</div>
+								<%} %>
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -225,12 +242,12 @@
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
 								<h6>후기 작성</h6>
-								<div class="comment-editor">
+								 <div class="comment-editor">
 									<form action="<%=request.getContextPath() %>/product/insertComment.do" method="post">
 										<input type="hidden" name="productNo" value="<%=product.getProductNo() %>">
 										<input type="hidden" name="commentLevel" value="1"> 
-										<input type="hidden" name="userId" value="<%=loginMember.getUserId()%>"> 
-										<input type="hidden" name="member_no" value="<%=loginMember.getUserNo()%>"> 
+										<input type="hidden" name="userId" value="<%=loginMember!=null?loginMember.getUserId():"" %>"> 
+										<input type="hidden" name="member_no" value="<%=loginMember!=null?loginMember.getUserNo():"" %>"> 
 										<input type="hidden" name="CommentRef" value="0">										
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
@@ -238,24 +255,25 @@
 											<button type="submit" class="btn btn-success"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
-										<!-- <div id="comment-editor-button" style="margin-top: 10px;"
+										<!--  <div id="comment-editor-button" style="margin-top: 10px;"
 											height=80px;>
 											<input type="file" id="inputImage"
 												accept="image/gif,image/jpeg,image/png" value="사진 첨부 파일">
-										</div> -->
+										</div>  -->
 									</form>
 								</div>
-								
-								<h6 style="margin-top: 26px;">여행자 후기(후기 갯수)</h6>
+								<h6 style="margin-top: 26px;">여행자 후기(<%=commentCount %>)</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
-								<div class="container mt-3">
+ 								<div class="container mt-3">
+ 								<%if(!comments.isEmpty()){ %>
 									<table class="table">
 										<tbody>
 											 <%for(ProductsreviewDto pr:comments){ %> 
 											 <%if(pr.getCommentLevel()==1) {%>
 											<tr class="level1">
-												<td><sub class="comment-writer"></sub> <sub
-													class="comment-date"></sub><br></td>
+												<td><sub class="comment-writer"><%=pr.getUserId() %></sub> <sub
+													class="comment-date"><%=pr.getCommentDate()%></sub><br>
+													<%=pr.getCommentContent() %></td>
 												<td>
 													<div style="display: flex">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
@@ -265,21 +283,26 @@
 													</div>
 												</td>
 											</tr>
-											 	<%}else{ %> 
+											 	 <%}else{ %> 
 											<tr class="level2">
 												<td><sub class="comment-writer"><%=pr.getUserId() %></sub> <sub
-													class="comment-date"><%=pr.getCommentDate() %></sub><br> <%=pr.getCommentContent() %></td>
+													class="comment-date"><%=pr.getCommentDate() %></sub><br> 
+													<%=pr.getCommentContent() %></td>
 												<td>
 											</tr>
-											 		<%} %> 
 											 <%} %> 
-											<tr>
-												<td width=1140px; height=100px; style="text-align: center;">작성된
-													여행 후기가 없습니다</td>
-											</tr>
-										</tbody>
+										<%} %> 
 									</table>
-								</div>
+									<%} else{%> 
+									<table>
+										<tr>
+											<td width=1140px; height=100px; style="text-align: center;">작성된
+													여행 후기가 없습니다</td>
+										</tr> 
+									</table>
+									<%} %>
+										</tbody>
+								</div> 
 								<br>
 							</div>
 						</div>

@@ -31,7 +31,7 @@ public class ProductService {
 	// 나라별 할인상품 리스트 가져오기
 	public List<ProductDto> selectDicountproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();
-		List<ProductDto> discountProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+		List<ProductDto> discountProducts = dao.selectDicountproductByCountry(conn, coordinateNo);
 
 //		discountProducts.forEach(e -> {
 //			List<ProductattachmentDto> images = dao.selectImages(conn, e.getProductNo());
@@ -45,7 +45,7 @@ public class ProductService {
 
 	public List<ProductDto> selectBestproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();
-		List<ProductDto> bestProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+		List<ProductDto> bestProducts = dao.selectBestproductByCountry(conn, coordinateNo);
 
 		/*
 		 * bestProducts.forEach(e -> { List<ProductattachmentDto> images =
@@ -87,13 +87,13 @@ public class ProductService {
 
 	// 댓글 조회하는 메소드
 
-	/*
-	 * public List<ProductsreviewDto> selectProductComment(int productNo) {
-	 * Connection conn = getConnection(); List<ProductsreviewDto> comments =
-	 * dao.selectProductComment(conn, productNo); close(conn); return comments;
-	 * 
-	 * }
-	 */
+	public List<ProductsreviewDto> selectProductComment(int productNo) {
+		Connection conn = getConnection();
+		List<ProductsreviewDto> comments = dao.selectProductComment(conn, productNo);
+		close(conn);
+		return comments;
+
+	}
 
 	// 댓글 카운트 하는 메소드
 	public int selectProductCountByNo(int productNo) {

@@ -274,15 +274,25 @@ public class ProductDao {
 	}
 
 	public static ProductcourseDto getCourse(ResultSet rs) throws SQLException {
-		return ProductcourseDto.builder().CourseNo(rs.getInt("course_int")).CourseName(rs.getString("course_name"))
-				.CourseDetail(rs.getString("course_detail")).ProductNo(rs.getInt("product_no")).build();
+		return ProductcourseDto.builder().
+				CourseNo(rs.getInt("course_no"))
+				.CourseName(rs.getString("course_name"))
+				.CourseDetail(rs.getString("course_detail"))
+				.ProductNo(rs.getInt("product_no"))
+				.build();
 	}
 
 	public static ProductsreviewDto getReview(ResultSet rs) throws SQLException {
-		return ProductsreviewDto.builder().ProductNo(rs.getInt("product_no")).UserId(rs.getString("user_id"))
-				.CommentContent(rs.getString("comment_content")).CommentDate(rs.getDate("comment_date"))
-				.CommentRef(rs.getInt("comment_ref")).CommentLevel(rs.getInt("comment_level"))
-				.CommentNo(rs.getInt("products_review_no")).memberNo(rs.getInt("member_no")).build();
+		return ProductsreviewDto.builder()
+				.ProductNo(rs.getInt("product_no"))
+				.UserId(rs.getString("QCSJ_C000000001700000"))
+				.CommentContent(rs.getString("comment_content"))
+				.CommentDate(rs.getDate("comment_date"))
+				.CommentRef(rs.getInt("comment_ref"))
+				.CommentLevel(rs.getInt("comment_level"))
+				.CommentNo(rs.getInt("products_review_no"))
+				.memberNo(rs.getInt("member_no"))
+				.build();
 
 	}
 

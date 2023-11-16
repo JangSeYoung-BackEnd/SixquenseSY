@@ -42,6 +42,9 @@ public class ProductListServlet extends HttpServlet {
 		request.setAttribute("recentProducts", recentProducts);
 		request.setAttribute("bestProducts", bestProducts);
 		request.setAttribute("dicountProducts", dicountProducts);
+		System.out.println(recentProducts);
+		System.out.println(bestProducts);
+		System.out.println(dicountProducts);
 		
 	
 		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);

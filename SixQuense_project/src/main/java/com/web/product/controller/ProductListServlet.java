@@ -1,11 +1,16 @@
 package com.web.product.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.web.product.dto.ProductDto;
+import com.web.product.model.service.ProductService;
 
 /**
  * Servlet implementation class ProductListServlet
@@ -26,8 +31,21 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
+		
+		//List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
+		
+		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
+		
+		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
+		
+		request.setAttribute("recentProducts", recentProducts);
+		//request.setAttribute("bestProducts", bestProducts);
+		request.setAttribute("dicountProducts", dicountProducts);
+		
+	
+		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
 	}
 
 	/**

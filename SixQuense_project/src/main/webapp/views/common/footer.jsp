@@ -17,13 +17,6 @@
                             "광고 매체 문의 5678@1234.com"
                             <br>
                             <br>
-                            " 자사는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다."
-                            <br>
-                            " 영업보증보험: 1.5억원 / 기획여행보증: 2억원"
-                            <br>
-                            " sixquense은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품·거래정보 및 거래에 대하여 책임을 지지않습니다."
-                            <br>
-                            " 부득이한 사정에 의해 확정된 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다. "
                         </p>
                     </div>
                 </div>
@@ -36,6 +29,7 @@
         <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
                 <button onclick="#문의 페이지" style="background: none; border: none;">
                     <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
+                    <p>문의사항</p>
                 </button>
             </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
@@ -43,9 +37,9 @@
             <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px" style="margin-right: 12px">
         </a>
         </div>
+       </div> 
     </footer>
     <!-- 푸터 -->
-    
     <!-- Js Plugins -->
     <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -55,7 +49,6 @@
     <script src="<%=request.getContextPath()%>/js/mixitup.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/main.js"></script>
-
 </body>
 
 </html>

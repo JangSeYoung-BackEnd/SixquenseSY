@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	List<ProductDto> recentProducts = (List<ProductDto>)request.getAttribute("recentProducts");
+	ProductDto rp = recentProducts.get(0);
+	
+	List<ProductDto> dicountProducts = (List<ProductDto>)request.getAttribute("dicountProducts");
+	ProductDto dp = dicountProducts.get(0);
+	
+	
+%>
+<%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
@@ -8,9 +18,7 @@
 	font-size: 14px; ! important;
 	margin: 20px 0px; ! important;
 	padding: 10px 16px; ! important;
-	width: 1106px;
-	!
-	important;
+	width: 1106px; !important;
 }
 
 p {
@@ -64,10 +72,10 @@ p {
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="#">패키지/투어 이름1</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do>">패키지/투어 이름1</a>
 								</h5>
 								<p>패키지 내용1</p>
-								<a href="#" class="blog__btn"> 199,000원 <span
+								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 199,000원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
@@ -83,19 +91,19 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="latest">
 							<div class="blog__item__pic">
-								<img src="img/blog/blog-2.jpg" alt="">
+								<img src="<%=request.getContextPath() %>/img/product/<%=rp.getAttachment().get(0).getOrginalFilename() %>" alt="고양이">
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="#">패키지/투어 이름2</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=rp.getProductNo()%>"><%=rp.getProductName() %></a>
 								</h5>
-								<p>패키지 내용2</p>
-								<a href="#" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
+								<p><%=rp.getProductDetail() %></p>
+								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=rp.getProductNo()%>" class="blog__btn"> <%=rp.getProductPrice() %>원 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p>추천 이유2</p>
+										<p><%=rp.getEditorNote() %></p>
 									</div>
 								</div>
 							</div>
@@ -104,19 +112,19 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="special">
 							<div class="blog__item__pic">
-								<img src="img/blog/blog-2.jpg" alt="">
+								<img src="<%=request.getContextPath() %>/img/product/<%=dp.getAttachment().get(0).getOrginalFilename() %>" alt="">
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="#">패키지/투어 이름3</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=dp.getProductNo()%>"><%=dp.getProductName() %></a>
 								</h5>
-								<p>패키지 내용3</p>
-								<a href="#" class="blog__btn"> 가격 <span class="arrow_right"></span></a>
+								<p><%=dp.getProductDetail() %></p>
+								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=dp.getProductNo()%>" class="blog__btn"> <%=dp.getProductPrice() %>원 <span class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p>추천 이유3</p>
+										<p><%=dp.getEditorNote() %></p>
 									</div>
 								</div>
 							</div>

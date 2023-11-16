@@ -12,4 +12,5 @@ public class BookinginfoDto {
 	private Date BookingBrith;
 	private String BookingGender;
 	private String BookingPhone;
+	private int OrderNo;
 }

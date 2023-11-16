@@ -36,8 +36,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//화면에서 전달한 데이터 받아오기
 		String userId=request.getParameter("userId");
-		String userPw=request.getParameter("userPw");
-		String userNn=request.getParameter("userNn");
+		String userPw=request.getParameter("userpw");
+		String userNn=request.getParameter("usernn");
 		String phone=request.getParameter("phone");
 		
 		Date userDd = Date.valueOf(LocalDate.of(Integer.parseInt(request.getParameter("userYear")),
@@ -68,7 +68,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher("/viesw/common/msg.jsp")
+		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request, response);
 	}
 

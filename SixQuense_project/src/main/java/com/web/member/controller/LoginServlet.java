@@ -35,15 +35,19 @@ public class LoginServlet extends HttpServlet {
 		//1. 클라이언트가 보낸 아이디와 패스워드를 받아온다
 		String userId=request.getParameter("userId");
 		String userpw=request.getParameter("userpw");
-		//Member m=new MemberService().selectMemberByEmailAndPw(userId, userpw);
+		
+		
 		String saveId=request.getParameter("saveId");
 		if(saveId!=null) {
 			Cookie c=new Cookie("saveId", userId);
 			c.setMaxAge(60*60*24);
 			response.addCookie(c);
+		}else {
+			Cookie c=new Cookie("saveId","userId");
+			c.setMaxAge(0);
+			response.addCookie(c);
+		
 		}
-		
-		
 		//2. DB의 member테이블에 보낸 이메일와 패스워드 가 일치하는 회원을 가져온다. 
 
 		Member m=new MemberService().selectMemberByEmailAndPw(userId,userpw);

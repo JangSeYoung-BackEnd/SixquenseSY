@@ -96,13 +96,13 @@ public class MemberDao {
 			pstmt.setString(3, m.getUserNn());
 			pstmt.setString(4, m.getPhone());
 			pstmt.setDate(5, m.getUserDd());
-			pstmt.setDate(6, m.getEnrollData());
-			pstmt.setString(7, m.getUserIntroduce());
-			pstmt.setString(8, m.getTravleType());
-			pstmt.setString(9, m.getGender());
-			pstmt.setString(10, m.getNotificatIonset());
-			pstmt.setString(11, m.getOriginalFilename());
-			pstmt.setString(12, m.getRenameFilename());
+			pstmt.setString(6, m.getUserIntroduce());
+			pstmt.setString(7, m.getTravleType());
+			pstmt.setString(8, m.getGender());
+			pstmt.setString(9, m.getNotificatIonset());
+			pstmt.setString(10, m.getOriginalFilename());
+			pstmt.setString(11, m.getRenameFilename());
+			result=pstmt.executeUpdate();			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

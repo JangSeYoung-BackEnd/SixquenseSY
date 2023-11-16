@@ -15,7 +15,21 @@ import java.util.Properties;
 import com.web.common.JDBCTemplate;
 import com.web.member.dto.Member;
 public class MemberDao {
+<<<<<<< HEAD
 
+=======
+	private Properties sql=new Properties();
+	
+	{
+		String path=MemberDao.class.getResource("/sql/member/member_sql.properties").getPath();
+		try(FileReader fr=new FileReader(path)) {
+			sql.load(fr);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+>>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
 	public List<Member> selectMemberAll(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -36,15 +50,14 @@ public class MemberDao {
 		}return result;
 	}
 
-	public Member selectMemberByEmailAndPw(Connection conn, String useremail, String userpw) {
+	public Member selectMemberByEmailAndPw(Connection conn, String userId, String userpw) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Member m=null;
-		String sql="SELECT * FROM MEMBER WHERE USER_ID = ? AND USER_PW = ?";
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, useremail);
+			pstmt=conn.prepareStatement(sql.getProperty("lnsertMember"));
+			pstmt.setString(1, userId);
 			pstmt.setString(2, userpw);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -65,6 +78,7 @@ public class MemberDao {
 				.userId(rs.getString("user_id"))
 				.userPw(rs.getString("user_pw"))
 				.userNn(rs.getString("user_nn"))
+				.phone(rs.getString("phone"))
 				.userDd(rs.getDate("user_dd"))	
 				.enrollData(rs.getDate("ENROLL_DATE"))
 				.userIntroduce(rs.getString("user_introduce"))
@@ -74,6 +88,31 @@ public class MemberDao {
 				.originalFilename(rs.getString("PROFILE_ORI_FILNAME"))
 				.renameFilename(rs.getString("PROFILE_RE_FILNAME"))
 				.build();
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("lnsertMember"));
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPw());
+			pstmt.setString(3, m.getUserNn());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setDate(5, m.getUserDd());
+			pstmt.setDate(6, m.getEnrollData());
+			pstmt.setString(7, m.getUserIntroduce());
+			pstmt.setString(8, m.getTravleType());
+			pstmt.setString(9, m.getGender());
+			pstmt.setString(10, m.getNotificatIonset());
+			pstmt.setString(11, m.getOriginalFilename());
+			pstmt.setString(12, m.getRenameFilename());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	

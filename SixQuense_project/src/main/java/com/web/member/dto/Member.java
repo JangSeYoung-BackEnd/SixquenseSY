@@ -1,8 +1,7 @@
 package com.web.member.dto;
 
 import java.sql.Date;
-
-import com.web.product.dto.ProductorderinfoDto;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +23,5 @@ public class Member {
 	private String notificatIonset;
 	private String originalFilename; 
 	private String renameFilename;
-	private ProductorderinfoDto orderInfo;
 	
 }

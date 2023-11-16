@@ -1,8 +1,9 @@
 package com.web.product.model.service;
 
 import static com.web.common.JDBCTemplate.close;
+import static com.web.common.JDBCTemplate.commit;
 import static com.web.common.JDBCTemplate.getConnection;
-import static com.web.common.JDBCTemplate.*;
+import static com.web.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import com.web.product.dao.ProductDao;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductsreviewDto;
+import com.web.product.dto.ProductwishilistDto;
 
 public class ProductService {
 
@@ -102,6 +104,18 @@ public class ProductService {
 		close(conn);
 		return commentCount;
 
+	}
+	
+	//위시리스트 인서트 하는 메소드
+	public int insertwishlist(ProductwishilistDto wishlist) {
+		Connection conn = getConnection();
+		int result = dao.insertwishlist(conn, wishlist);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
 	}
 
 	// 상품 등록

@@ -108,7 +108,7 @@
 
 					<div class="button-container">
 						<input type="submit" class="primary-btn" onclick="" value="예약하기">
-						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
+						<a href="" class="heart-icon" onclick="toggleHeartIcon(this)"><span
 							class="icon_heart_alt"></span> 위시리스트에 담기 </a>
 					</div>
 					</form>
@@ -140,28 +140,45 @@
 						<b style="color: darkgrey; font-size: 13px;"><span
 							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
 					</div>
-					<%-- <script>
-						function toggleHeartIcon(element) {
-							$.get("<%=request.getContextPath()%>/product/wishlist.do?userId="+<%=loginMember.getUserNo()%>
-									
+					 <script>
+					 function toggleHeartIcon(element) {
+							$.ajax({
+								type: 'post',
+								url: '<%=request.getContextPath()%>/product/wishlist.do',
+								data: {memberNo : m<%=loginMember.getUserNo()%>, productNo : <%=product.getProductNo()%>}
+								success:data=> {
+									console.log('Added to wishlist successfully');
+					                // 토글 기능을 구현하여 아이콘을 변경
+					                $(element).find('.icon_heart_alt').classList.add('filled');
+									alert("해당 상품이 위시리스트에 담겼습니다");
+								},
+								error: data=>{
+									console.error('Error adding to wishlist');
+								}
+							})
+							
+						};
+							
+							
+						$(".icon_heart_alt").click(e=>{
+							if(<%=loginMember==null%>){
+								alert("로그인 후 이용할 수 있는 서비스 입니다");
+							}
+						})	
 							
 							
 							
 							
 							
-							
-							)
 							
 							
 							
 							
 							// 버튼을 클릭할 때마다 'filled' 클래스를 추가 또는 제거
-							element.querySelector('.icon_heart_alt').classList
-									.add('filled');
-							alert("해당 상품이 위시리스트에 담겼습니다");
+							/*  */
 							
-						}
-					</script> --%>
+						
+					</script> 
 
 					<ul>
 						<li><img
@@ -200,12 +217,12 @@
 							<div class="product__details__tab__desc">
 								<h6>코스 소개</h6>
 								<%if(!course.isEmpty()){ %>
-								<div style="background-color: yellow;">
-								<%for(ProductcourseDto pc: course){%>
-								<p style="text-align: left"><span><%=pc.getCourseName() %></span><br>
-								<%=pc.getCourseDetail() %></p>
-								<%} %>
-								</div>
+									<div style="background-color: yellow;">
+										<%for(ProductcourseDto pc: course){%>
+											<p style="text-align: left"><span><%=pc.getCourseName() %></span><br>
+											<%=pc.getCourseDetail() %></p>
+										<%} %>
+									</div>
 								<%} %>
 							</div>
 						</div>
@@ -241,12 +258,13 @@
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
+								 <%-- <%if (loginMember!=null&&(loginMember.getUserId().equals("admin")||product.getOrderinfo().contains(loginMember.getUserNo()))){ %>  --%>
 								<h6>후기 작성</h6>
 								 <div class="comment-editor">
 									<form action="<%=request.getContextPath() %>/product/insertComment.do" method="post">
 										<input type="hidden" name="productNo" value="<%=product.getProductNo() %>">
 										<input type="hidden" name="commentLevel" value="1"> 
-										<input type="hidden" name="userId" value="<%=loginMember!=null?loginMember.getUserId():"" %>"> 
+										<input type="hidden" name="userId" value="<%=loginMember!=null?loginMember.getUserNo():"" %>>"> 
 										<input type="hidden" name="member_no" value="<%=loginMember!=null?loginMember.getUserNo():"" %>"> 
 										<input type="hidden" name="CommentRef" value="0">										
 										<div id="comment-editor-container" style="display: flex;">
@@ -262,6 +280,7 @@
 										</div>  -->
 									</form>
 								</div>
+								<%-- <%} %> --%>
 								<h6 style="margin-top: 26px;">여행자 후기(<%=commentCount %>)</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
  								<div class="container mt-3">

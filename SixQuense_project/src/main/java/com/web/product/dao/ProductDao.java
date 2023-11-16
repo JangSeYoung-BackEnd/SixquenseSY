@@ -1,7 +1,5 @@
 package com.web.product.dao;
 
-import static com.web.common.JDBCTemplate.close;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,9 +14,9 @@ import java.util.Properties;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductattachmentDto;
 import com.web.product.dto.ProductcourseDto;
-import com.web.product.dto.ProductdateDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
+import static com.web.common.JDBCTemplate.*;
 
 public class ProductDao {
 	private Properties sql = new Properties();
@@ -194,6 +192,23 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return commentCount;
+	}
+	
+	//위시리스트 인서트 하는 메소드
+	public int insertwishlist(Connection conn, ProductwishilistDto wishlist) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			try {
+				pstmt = conn.prepareStatement(sql.getProperty("insertwishlist"));
+				pstmt.setInt(1, wishlist.getMemberNo());
+				pstmt.setInt(2, wishlist.getProductNo());	
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
 	}
 
 	// 첨부파일이 있는 상품 조회 가능하게 하는 메소드

@@ -1,4 +1,4 @@
-package com.web.product.sydao;
+package com.web.product.SYdao;
 
 public class ProductSyDao {
 

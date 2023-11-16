@@ -18,7 +18,7 @@ public class BookinginfoDao {
 	private Properties sql = new Properties();
 
     {
-        String path = BookinginfoDao.class.getResource("/sql/product/product_sql").getPath();
+        String path = BookinginfoDao.class.getResource("/sql/SYproduct/product_sql").getPath();
         try(FileReader fr = new FileReader(path)) {
             sql.load(fr);
         } catch(IOException e) {

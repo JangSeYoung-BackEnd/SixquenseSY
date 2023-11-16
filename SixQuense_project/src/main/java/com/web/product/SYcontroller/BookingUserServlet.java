@@ -1,10 +1,6 @@
 package com.web.product.SYcontroller;
 
-
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.dto.BookinginfoDto;
-import com.web.product.syservice.BookingService;
+import com.web.member.dto.Member;
+import com.web.product.syservice.BookingUserService;
 
 /**
- * Servlet implementation class ProductPackageOrderEndServlet
+ * Servlet implementation class BookingUserServlet
  */
-@WebServlet("/productpackage/orderend.do")
-public class ProductPackageOrderEndServlet extends HttpServlet {
+@WebServlet("/user/userview.do")
+public class BookingUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductPackageOrderEndServlet() {
+    public BookingUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,11 +30,22 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId=request.getParameter("userId");
+		Member m=new BookingUserService().selectMemberById(userId);
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/views/product/syproductcart.jsp")
+		.forward(request, response);
+	
+		System.out.println(m);
 	}
+	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String imp=request.getParameter("imp_)
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }

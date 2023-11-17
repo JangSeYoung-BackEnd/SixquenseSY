@@ -43,7 +43,7 @@ public class AccompanyServiceWH {
 			return list;
 		}
 
-
+		//댓글 삽입하는 메소드 
 		public int insertAccompanyComment(AccompanyComment ac) {
 			Connection conn = getConnection();
 			int result = dao.insertAccompanyComment(conn,ac);
@@ -53,11 +53,21 @@ public class AccompanyServiceWH {
 			return result;
 		}
 
-
+		//동행글에서 모집여부를 업데이트하는 메소드 
 		public int updateAccompanyOffer(int acompanyBNo, String value) {
 			Connection conn=getConnection();
 			int result=dao.updateAccompanyOffer(conn,acompanyBNo,value);
 			//System.out.println(value);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		//동행글에서 동행 신청하기 눌렀을 때 신청하는 메소드 
+		public int insertAccompanyOffer(int userNo, int acompanyBNo) {
+			Connection conn=getConnection();
+			int result=dao.insertAccompanyOffer(conn,userNo,acompanyBNo);
 			if(result>0) commit(conn);
 			else rollback(conn);
 			close(conn);

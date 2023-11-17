@@ -16,6 +16,8 @@
 	String acUserId= loginMember.getUserId();
 	int acompanyBNo= b.getAccompanyNo(); 
 	
+	
+	
 %>
 
 
@@ -232,8 +234,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 						
 						<%
 						if(loginMember.getUserNo()== b.getMemberNo()){
-							
-							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
+							if(b.getAccompanyStatus().equals("acClose")) {%>
 							<select id = "acSelect" onchange ="accompanySelect();">
 								<option name="acSelect" value ="acRecruiting">모집중</option>
 								<option name="acSelect" value= "acClose" selected>마감</option>
@@ -438,7 +439,6 @@ table#tbl-comment tr.level2 sub.comment-date {
     
     //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
-    	console.log(115111);
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
 		<%-- var User =  "<%= acUserId %>"; --%>
@@ -447,36 +447,32 @@ table#tbl-comment tr.level2 sub.comment-date {
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
-	            data: { value: value,boardNo :boardNo},
-	            success: function(response) {
-	                console.log('Ajax response:', response);
-	            },
-	            error: function(error) {
-	                console.error('Ajax error:', error);
-	            }
+	            data: { value: value,boardNo :boardNo}
 	        });
 	};
 	
 	//동행신청하기 누르기 
 	function confirmAccompany(){
 		var confirmed=confirm("동행을 신청하시겠습니까?");
-		var User =  "<%= acUserId %>";
+		var userNo =  <%= loginMember.getUserNo() %>;
 		var boardNo = <%=acompanyBNo%>;
-		
 		if(confirmed){
 				alert("동행이 신청되었습니다!");
-				window.open("<%=b.getOpenChattingLink()%>", "_blank");
+				
 				 $.ajax({
 			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
 			            type: 'POST',
-			            data: { value: value , acUser : User ,boardNo :boardNo},
+			            data: { userNo : userNo ,boardNo :boardNo},
 			            success: function(response) {
 			                console.log('Ajax response:', response);
+			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
 			            },
 			            error: function(error) {
 			                console.error('Ajax error:', error);
 			            }
 			        });
+				 /* window.open("https://open.kakao.com/o/su9dmOSf", "_blank"); */
+
 			}else{
 				alert("동행 신청이 취소되었습니다.");
 			}

@@ -1,6 +1,7 @@
 package com.web.accompany.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Builder;
@@ -21,5 +22,6 @@ public class AccompanyDTO {
 	private String originalFilename; //첨부 파일불러오기
 	private String renameFilename; //첨부 파일불러오기
 	private String accompanyStatus;
+	private List <AccompanyOffer> AcOffer = new ArrayList();
 }
 

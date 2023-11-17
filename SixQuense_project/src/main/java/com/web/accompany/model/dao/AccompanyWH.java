@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.web.accompany.model.dto.AccompanyAttachment;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
 
@@ -44,7 +45,9 @@ public class AccompanyWH {
 					.coordinate(getCoordinate(rs))		
 					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
 					.renameFilename(rs.getString("RENAME_FILENAME"))
-					.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
+					.accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
+					.openChattingLink(rs.getString("OPENCHATTING_LINK"))
+					.AcOffer(new ArrayList<>())
 					.build();
 	}
 	
@@ -87,6 +90,10 @@ public class AccompanyWH {
 				.userId(rs.getString("USER_ID"))
 				.build();
 
+	}
+	private void boardAddAcoffer (List<AccompanyOffer> AcOffer, ResultSet rs)throws SQLException {
+		
+		
 	}
 	
 	
@@ -170,23 +177,23 @@ public class AccompanyWH {
 		
 	}
 
-	public int insertAccompanyOffer(Connection conn, String user, String value, String acompanyBNo) {
+	public int insertAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		
+		//System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertAccompanyOffer"));
-			pstmt.setString(1, value);
-			pstmt.setString(2, user);
-			pstmt.setString(3, acompanyBNo);
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, userNo);
 			result=pstmt.executeUpdate();
-			
+		//System.out.println(result +"dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
 	}
+	
 	public int updateAccompanyOffer(Connection conn, int acompanyBNo, String value) {
 		PreparedStatement pstmt=null;
 		int result=0;

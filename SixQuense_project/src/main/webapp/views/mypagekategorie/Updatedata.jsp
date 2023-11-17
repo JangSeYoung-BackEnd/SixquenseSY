@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.web.member.dto.Member" %>
 <%
-Member m=(Member)request.getSession().getAttribute("loginMember");
+ Member loginMember = (Member)session.getAttribute("loginMember");
 %>
+
  <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
@@ -53,7 +54,7 @@ Member m=(Member)request.getSession().getAttribute("loginMember");
                             </div>
                             <div class="checkout__input">
                                 <p>전화번호</p>
-                                <input type="text" placeholder="010-1234-5678" value="<%=m.getPhone()%>">
+                                <input type="text" placeholder="010-1234-5678" value="<%=loginMember.getPhone()%>">
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
@@ -66,9 +67,9 @@ Member m=(Member)request.getSession().getAttribute("loginMember");
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div>
-                            	<input type="button" value="정보수정"/>
-                            </div>
+                            <form action="<%=request.getContextPath()%>/update.do" method="post">
+							    <button id="updateBtn2">개인정보 수정</button>
+							</form>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
@@ -105,8 +106,21 @@ Member m=(Member)request.getSession().getAttribute("loginMember");
                 	</form>
                 	</div>
             	</div>
-        	</div>
 </section>
+<script>
+$("#updateBtn2").click(function () {
+    $.ajax({
+        url: "<%=request.getContextPath()%>/update.do",
+        method: "POST",
+        data: {
+            userNo: <%=loginMember.getUserNo()%>,
+            name: $("#nameInput").val(), 
+            phone: $("#phoneInput").val()
+           
+        }
+    });
+});
+</script>
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({

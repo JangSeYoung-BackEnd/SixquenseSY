@@ -25,6 +25,28 @@ public class jhMemberDao {
 			e.printStackTrace();
 		}
 	}
+	public int updateMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("mypageupdate")); 
+			pstmt.setString(1, m.getUserPw());
+			pstmt.setString(2, m.getUserName());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setDate(4, m.getUserDd());
+			pstmt.setString(5, m.getUserIntroduce());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getNotificatIonset());
+			pstmt.setString(8, m.getOriginalFilename());
+			pstmt.setString(9, m.getRenameFilename());
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	public int selectMemberUpdate(Connection conn, int userId) {
@@ -42,6 +64,4 @@ public class jhMemberDao {
 		}return result;
 	}
 
-
-	
-}
+	}

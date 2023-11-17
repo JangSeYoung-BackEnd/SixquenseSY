@@ -1,21 +1,23 @@
 <%@page import="com.web.product.dto.ProductsreviewDto"%>
 <%@page import="com.web.product.dto.ProductDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
-	ProductDto product = (ProductDto)request.getAttribute("product");
-	List<ProductsreviewDto> comments = (List<ProductsreviewDto>)request.getAttribute("comments");
-	int commentCount = (int)request.getAttribute("commentCount");
-	
-	List<ProductcourseDto> course = product.getCourse();
+ProductDto product = (ProductDto) request.getAttribute("product");
+List<ProductsreviewDto> comments = (List<ProductsreviewDto>) request.getAttribute("comments");
+int commentCount = (int) request.getAttribute("commentCount");
 
+List<ProductcourseDto> course = product.getCourse();
 %>
-<%@ page import="com.web.product.dto.*, java.util.List" %>
+<%@ page import="com.web.product.dto.*, java.util.List"%>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="<%=request.getContextPath() %>/js/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/jquery-ui.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -56,7 +58,8 @@
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>" alt="">
+							src="<%=request.getContextPath()%>/img/product/<%=product.getAttachment().get(0).getOrginalFilename()%>"
+							alt="">
 					</div>
 					<%--  <div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -74,20 +77,24 @@
 			<!-- 여기부터 -->
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__text">
-					<h3><%=product.getProductName() %></h3>
+					<h3><%=product.getProductName()%></h3>
 					<div class="product__details__rating">
-						<span><%=commentCount %> reviews</span>
+						<span><%=commentCount%> reviews</span>
 					</div>
-					<div class="product__details__price"><%=product.getProductPrice() %>원</div>
-					<p style="text-align: left"><%=product.getEditorNote() %></p>
-					<form action="<%=request.getContextPath()%>/product/makeorder.do" method="post">
-					<input type="hidden" name="productNo" value="<%= product.getProductNo() %>">
-					<div class="product__details__quantity">
-						<div class="date-container">
-							<input type="text" id="datepicker" name="travel_date"
-								onchange="validateDayOfWeek()">
-						</div>`
-						<script>
+					<div class="product__details__price"><%=product.getProductPrice()%>원
+					</div>
+					<p style="text-align: left"><%=product.getEditorNote()%></p>
+					<form action="<%=request.getContextPath()%>/product/makeorder.do"
+						method="post">
+						<input type="hidden" name="productNo"
+							value="<%=product.getProductNo()%>">
+						<div class="product__details__quantity">
+							<div class="date-container">
+								<input type="text" id="datepicker" name="travel_date"
+									onchange="validateDayOfWeek()">
+							</div>
+							`
+							<script>
 						$(function() {
 							/* text -> 날짜로 변환 해주는 함수 */
 						    $( "#datepicker" ).datepicker({
@@ -98,19 +105,20 @@
 					   		});      
 						});
 						</script>
-						<select class="form-select" aria-label="Default select example" name="selectOption">
-						  <option selected>Open this select menu</option>
-						  <option value="1">One</option>
-						  <option value="2">Two</option>
-						  <option value="3">Three</option>
-						</select>
-					</div>
+							<select class="form-select" aria-label="Default select example"
+								name="selectOption">
+								<option selected vaule="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
 
-					<div class="button-container">
-						<input type="submit" class="primary-btn" onclick="" value="예약하기">
-						<a href="" class="heart-icon" onclick="toggleHeartIcon(this)"><span
-							class="icon_heart_alt"></span> 위시리스트에 담기 </a>
-					</div>
+						<div class="button-container">
+							<input type="submit" class="primary-btn" onclick="" value="예약하기">
+							<a href="" class="heart-icon" onclick="toggleHeartIcon(this)"><span
+								class="icon_heart_alt"></span> 위시리스트에 담기 </a>
+						</div>
 					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
 					<!-- <script>
@@ -127,7 +135,7 @@
 
 						};
 					</script> -->
-				
+
 
 
 
@@ -140,31 +148,37 @@
 						<b style="color: darkgrey; font-size: 13px;"><span
 							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
 					</div>
-					 <script>
-					 function toggleHeartIcon(element) {
-							$.ajax({
-								type: 'post',
-								url: '<%=request.getContextPath()%>/product/wishlist.do',
-								data: {memberNo : m<%=loginMember.getUserNo()%>, productNo : <%=product.getProductNo()%>}
-								success:data=> {
-									console.log('Added to wishlist successfully');
-					                // 토글 기능을 구현하여 아이콘을 변경
-					                $(element).find('.icon_heart_alt').classList.add('filled');
-									alert("해당 상품이 위시리스트에 담겼습니다");
-								},
-								error: data=>{
-									console.error('Error adding to wishlist');
+					<script>
+					 $(".heart-icon").click(e=>{
+							if(<%=loginMember == null%>){
+								alert("로그인 후 이용할 수 있는 서비스 입니다");
+								
+							}else{
+								$.ajax({
+									type: 'post',
+									url: '<%=request.getContextPath()%>/product/wishlist.do',
+									data: {memberNo : <%=loginMember.getUserNo()%>, productNo : <%=product.getProductNo()%>}
+									success:data=> {
+										console.log('Added to wishlist successfully');
+						                // 토글 기능을 구현하여 아이콘을 변경
+						                $(element).find('.icon_heart_alt').classList.add('filled');
+										alert("해당 상품이 위시리스트에 담겼습니다");
+									},
+									error: data=>{
+										console.error('Error adding to wishlist');
+									}
+								})	
 								}
-							})
+							
+						})	
+						
+					 /* function toggleHeartIcon(element) {
+					
 							
 						};
+							 */
 							
-							
-						$(".icon_heart_alt").click(e=>{
-							if(<%=loginMember==null%>){
-								alert("로그인 후 이용할 수 있는 서비스 입니다");
-							}
-						})	
+						
 							
 							
 							
@@ -178,7 +192,7 @@
 							/*  */
 							
 						
-					</script> 
+					</script>
 
 					<ul>
 						<li><img
@@ -188,11 +202,11 @@
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최소인원</b>
-							<span><%=product.getMinCount() %></span></li>
+							<span><%=product.getMinCount()%></span></li>
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최대인원</b>
-							<span><%=product.getMaxCount() %></span></li>
+							<span><%=product.getMaxCount()%></span></li>
 					</ul>
 				</div>
 			</div>
@@ -205,25 +219,34 @@
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#tabs-2" role="tab" aria-selected="false">이용 안내</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(<%=commentCount %>)</span></a>
-						</li>
+							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(<%=commentCount%>)
+							</span></a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<h6>상품 정보</h6>
-								<p style="text-align: left"><%=product.getProductDetail() %></p>
+								<p style="text-align: left"><%=product.getProductDetail()%></p>
 							</div>
 							<div class="product__details__tab__desc">
 								<h6>코스 소개</h6>
-								<%if(!course.isEmpty()){ %>
-									<div style="background-color: yellow;">
-										<%for(ProductcourseDto pc: course){%>
-											<p style="text-align: left"><span><%=pc.getCourseName() %></span><br>
-											<%=pc.getCourseDetail() %></p>
-										<%} %>
-									</div>
-								<%} %>
+								<%
+								if (!course.isEmpty()) {
+								%>
+								<div style="background-color: yellow;">
+									<%
+									for (ProductcourseDto pc : course) {
+									%>
+									<p style="text-align: left">
+										<span><%=pc.getCourseName()%></span><br>
+										<%=pc.getCourseDetail()%></p>
+									<%
+									}
+									%>
+								</div>
+								<%
+								}
+								%>
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -253,23 +276,29 @@
 										onclick="showRefundPolicy()"> 환불 규정 상세 보기 (클릭)</a>
 								</p>
 							</div>
-				
+
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
-								 <%-- <%if (loginMember!=null&&(loginMember.getUserId().equals("admin")||product.getOrderinfo().contains(loginMember.getUserNo()))){ %>  --%>
+								<%-- <%if (loginMember!=null&&(loginMember.getUserId().equals("admin")||product.getOrderinfo().contains(loginMember.getUserNo()))){ %>  --%>
 								<h6>후기 작성</h6>
-								 <div class="comment-editor">
-									<form action="<%=request.getContextPath() %>/product/insertComment.do" method="post">
-										<input type="hidden" name="productNo" value="<%=product.getProductNo() %>">
-										<input type="hidden" name="commentLevel" value="1"> 
-										<input type="hidden" name="userId" value="<%=loginMember!=null?loginMember.getUserNo():"" %>>"> 
-										<input type="hidden" name="member_no" value="<%=loginMember!=null?loginMember.getUserNo():"" %>"> 
-										<input type="hidden" name="CommentRef" value="0">										
+								<div class="comment-editor">
+									<form
+										action="<%=request.getContextPath()%>/product/insertComment.do"
+										method="post">
+										<input type="hidden" name="productNo"
+											value="<%=product.getProductNo()%>"> <input
+											type="hidden" name="commentLevel" value="1"> <input
+											type="hidden" name="userId"
+											value="<%=loginMember != null ? loginMember.getUserNo() : ""%>>">
+										<input type="hidden" name="member_no"
+											value="<%=loginMember != null ? loginMember.getUserNo() : ""%>">
+										<input type="hidden" name="CommentRef" value="0">
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
-												id="floatingTextarea2" name="content" style="height: 100px; resize: none"></textarea>
+												id="floatingTextarea2" name="content"
+												style="height: 100px; resize: none"></textarea>
 											<button type="submit" class="btn btn-success"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
@@ -281,18 +310,26 @@
 									</form>
 								</div>
 								<%-- <%} %> --%>
-								<h6 style="margin-top: 26px;">여행자 후기(<%=commentCount %>)</h6>
+								<h6 style="margin-top: 26px;">
+									여행자 후기(<%=commentCount%>)
+								</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
- 								<div class="container mt-3">
- 								<%if(!comments.isEmpty()){ %>
+								<div class="container mt-3">
+									<%
+									if (!comments.isEmpty()) {
+									%>
 									<table class="table">
 										<tbody>
-											 <%for(ProductsreviewDto pr:comments){ %> 
-											 <%if(pr.getCommentLevel()==1) {%>
+											<%
+											for (ProductsreviewDto pr : comments) {
+											%>
+											<%
+											if (pr.getCommentLevel() == 1) {
+											%>
 											<tr class="level1">
-												<td><sub class="comment-writer"><%=pr.getUserId() %></sub> <sub
-													class="comment-date"><%=pr.getCommentDate()%></sub><br>
-													<%=pr.getCommentContent() %></td>
+												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
+													<%=pr.getCommentContent()%></td>
 												<td>
 													<div style="display: flex">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
@@ -302,26 +339,37 @@
 													</div>
 												</td>
 											</tr>
-											 	 <%}else{ %> 
+											<%
+											} else {
+											%>
 											<tr class="level2">
-												<td><sub class="comment-writer"><%=pr.getUserId() %></sub> <sub
-													class="comment-date"><%=pr.getCommentDate() %></sub><br> 
-													<%=pr.getCommentContent() %></td>
+												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
+													<%=pr.getCommentContent()%></td>
 												<td>
 											</tr>
-											 <%} %> 
-										<%} %> 
+											<%
+											}
+											%>
+											<%
+											}
+											%>
+										
 									</table>
-									<%} else{%> 
+									<%
+									} else {
+									%>
 									<table>
 										<tr>
 											<td width=1140px; height=100px; style="text-align: center;">작성된
-													여행 후기가 없습니다</td>
-										</tr> 
+												여행 후기가 없습니다</td>
+										</tr>
 									</table>
-									<%} %>
-										</tbody>
-								</div> 
+									<%
+									}
+									%>
+									</tbody>
+								</div>
 								<br>
 							</div>
 						</div>
@@ -335,7 +383,7 @@
 		</div>
 </section>
 
- <script>
+<script>
 	<%-- $('#download-container').click(e=>{
 		location.assign("<%=request.getContextPath()%>/boardfiledownload.do?fname=<%=b.getReFname()%>");
 	}) --%>
@@ -367,5 +415,5 @@
 			
 		
 	})
-</script> 
+</script>
 <%@ include file="/views/common/footer.jsp"%>

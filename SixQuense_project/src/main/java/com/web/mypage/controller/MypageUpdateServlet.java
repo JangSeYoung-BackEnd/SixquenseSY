@@ -31,13 +31,13 @@ public class MypageUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
+		Member m=(Member)request.getSession().getAttribute("loginMember");
 		
-		int userId = Integer.parseInt(loginMember.getUserId());
+		int userId = m.getUserNo();
 	    
 	    int result = new jhMemberService().selectMemberUpdate(userId);
 	    
-	    request.setAttribute("result", result);
+	    request.setAttribute("loginMember", m);
 		
 		request.getRequestDispatcher("/views/mypagekategorie/Updatedata.jsp").forward(request, response);
 	}
@@ -46,8 +46,8 @@ public class MypageUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
+		  
 	}
 
 }

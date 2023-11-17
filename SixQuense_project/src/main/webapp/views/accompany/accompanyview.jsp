@@ -9,12 +9,14 @@
 
 
 <%
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");                                                  
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
 	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
 	
 %>
 
@@ -159,6 +161,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 </script> 
 
 
+
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
@@ -170,8 +173,8 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div class="col-lg-12 blog__details__author">
 							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px">
 								<div class="blog__details__author__pic col-sm-2">
-									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
-								</div>
+<%-- 									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
+ --%>								</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
 									<div class="cols">
 										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
@@ -200,7 +203,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 									<div>
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -208,7 +210,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 										</a> 
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -216,7 +217,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 										</a> 
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -231,10 +231,21 @@ table#tbl-comment tr.level2 sub.comment-date {
 				<div class="col-lg-8 col-md-7 order-md-1 order-1" style="margin-bottom:0px; margin-bottom: 0px; margin-left: 30px;">
 					<div style="padding-top:10px;">
 						<span style="font-size: larger; font-weight: bolder;" ><%=b.getAccompanyTitle() %></span> 
-						<select id = "acSelect" onchange ="accompanySelect()">
-							<option value="모집중" value ="acRecruiting">모집중</option>
-							<option value="마감" value= "acClose">마감</option>
-						</select>
+						
+						<%
+						if(loginMember.getUserNo()== b.getMemberNo()){
+							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting">모집중</option>
+								<option name="acSelect" value= "acClose" selected>마감</option>
+							</select>
+								<%}else{ %>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting" selected>모집중</option>
+								<option name="acSelect" value= "acClose" >마감</option>
+							</select>
+						<%}
+					}%>
 					</div>
 					<div class="blog__details__text"  style="padding-top:20px;">
 						<div style="display:flex;">
@@ -367,14 +378,86 @@ table#tbl-comment tr.level2 sub.comment-date {
 </body>
 
 <!-- javaScript 부분   -->
+<script>
+	function confirmAccompany(){
+	var confirmed=confirm("동행을 신청하시겠습니까?");
+
+
+	        window.location.href = "https://www.naver.com";
+	    }
+	}
 	
+	if(confirmed){
+		alert("동행이 신청되었습니다!");
+	}else{
+		alert("동행 신청이 취소되었습니다.");
+	}
+}
+</script>
 	<script>
+	
+	/* 동행 신청 */
+	
+	document.addEventListener('DOMContentLoaded', function(){
+		var openButton = document.getElementById('openProfilePopup');
+		var profilePopup = document.getElementById('profilePopup');
+		var closeButton = document.getElementById('closeProfilePopup');
+
+		openButton.addEventListener('click', function(){
+			profilePopup.style.display = 'block';
+		});
+		closeButton.addEventListener('click', function(){
+			profilePopup.style.display = 'none';
+		});
+	});
+		
+		var isFilled = false;
+		function toggleImage(){
+			var button = document.getElementById('followButton');
+			if (isFilled) {
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
+			} else {
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
+			}
+			isFilled = !isFilled; 
+		}
+/* 신고하기  부분  */
+		function openReportPopup(){
+			var reportPopup = document.getElementById('reportPopup');
+			reportPopup.style.display = 'block';
+		}
+		function closeReportPopup(){
+			var reportPopup = document.getElementById('reportPopup');
+			reportPopup.style.display = 'none';
+		}
+	</script>
+	<script>
+	const radios = $("input[name=report]");
+
+    function submitReport(){
+        radios.click(e => {
+            const val = radios.filter(":checked").val();
+            if (val === "text") {
+                const textval = $("#reportReason").val();
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
+            } else {
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
+            }
+            alert('신고되었습니다.');
+        });
+    }
+
+    $(document).ready(function (){
+        submitReport();
+    });
+    
     function accompanySelect(){
+    	console.log(115111);
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
 		var User =  "<%= acUserId %>";
 		var boardNo = <%=acompanyBNo%>;
-		 console.log(User+boardNo+value)
+		 //console.log(User+boardNo+value)
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
@@ -387,77 +470,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 	            }
 	        });
 	};
-
-	/* 동행 신청 */
-	function confirmAccompany() {
-		var confirmed = confirm("동행을 신청하시겠습니까?");
-
-
-		        window.location.href = "https://www.naver.com";
-		    }
-		}
-		
-		if (confirmed) {
-			alert("동행이 신청되었습니다!");
-		} else {
-			alert("동행 신청이 취소되었습니다.");
-		}
-	}
-	document.addEventListener('DOMContentLoaded', function() {
-		var openButton = document.getElementById('openProfilePopup');
-		var profilePopup = document.getElementById('profilePopup');
-		var closeButton = document.getElementById('closeProfilePopup');
-
-		openButton.addEventListener('click', function() {
-			profilePopup.style.display = 'block';
-		});
-		closeButton.addEventListener('click', function() {
-			profilePopup.style.display = 'none';
-		});
-	});
-		
-		var isFilled = false;
-		function toggleImage() {
-			var button = document.getElementById('followButton');
-			if (isFilled) {
-				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
-			} else {
-				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
-			}
-			isFilled = !isFilled; 
-		}
-/* 신고하기  부분  */
-		function openReportPopup() {
-			var reportPopup = document.getElementById('reportPopup');
-			reportPopup.style.display = 'block';
-		}
-		function closeReportPopup() {
-			var reportPopup = document.getElementById('reportPopup');
-			reportPopup.style.display = 'none';
-		}
-	</script>
-	<script>
-	const radios = $("input[name=report]");
-
-    function submitReport() {
-        radios.click(e => {
-            const val = radios.filter(":checked").val();
-
-            if (val === "text") {
-                const textval = $("#reportReason").val();
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
-            } else {
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
-            }
-
-            alert('신고되었습니다.');
-        });
-    }
-
-    // Call the function when the document is ready
-    $(document).ready(function () {
-        submitReport();
-    });
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

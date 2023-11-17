@@ -106,11 +106,17 @@
     </section>
 	<script>
 	$(document).ready(function(){
-	    $(".menu>ul").click(function(){
-	        // 클릭된 요소의 텍스트 값을 가져옴
-	        const countryText = $(this).text();
-	        // 가져온 텍스트를 콘솔에 출력
-	        console.log(countryText);
+	    $(".menu li").click(function(){
+	        const temp = $(this).text();
+	        console.log(temp);
+	        $.ajax({
+	        	type:"post",
+	        	url:"<%=request.getContextPath()%>/accompany/accompanycoordinate.do",
+	        	date:{coordinate:temp},
+	        	success:function(){
+	        		console.log("되니");
+	        	}
+	        });
 	    });
 	});
 	</script>

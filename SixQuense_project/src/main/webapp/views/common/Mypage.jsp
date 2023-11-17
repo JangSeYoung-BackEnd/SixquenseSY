@@ -75,7 +75,6 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button>수정</button>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">

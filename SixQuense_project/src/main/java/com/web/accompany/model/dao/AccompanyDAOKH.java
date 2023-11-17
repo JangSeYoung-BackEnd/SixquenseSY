@@ -104,6 +104,7 @@ public class AccompanyDAOKH {
 					.coordinate(getCoodinate(rs))
 					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
 					.renameFilename(rs.getString("RENAME_FILENAME"))
+					.accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
 					.build();
 	}
 	public Coordinate getCoodinate(ResultSet rs) throws SQLException{

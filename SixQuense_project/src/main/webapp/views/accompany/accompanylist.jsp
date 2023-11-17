@@ -60,10 +60,11 @@
                             <div style="padding:10px 0px 10px 0px; font-weight:bold;">대륙별 게시글 보기</div>
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
                             <ul class="menu">
-                                <li><a href="#">동남아·대만</a></li>
-                                <li><a href="#">일본</a></li>
-                                <li><a href="#">유럽</a></li>
-                                <li><a href="#">미주·캐나다</a></li>
+                            	<li><a>전체보기</a></li>
+                                <li><a>동남아·대만</a></li>
+                                <li><a>일본</a></li>
+                                <li><a>유럽</a></li>
+                                <li><a>미주·캐나다</a></li>
                             </ul>
                         </div>
                     </div>
@@ -90,6 +91,7 @@
 		                                    </ul>
 		                                </div>
 		                                <div class="product__item__text">
+		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("asClose")?"모집마감":"모집중"%>]</a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
 		                                </div>
@@ -103,6 +105,14 @@
         </div>
     </section>
 	<script>
+	$(document).ready(function(){
+	    $(".menu>ul").click(function(){
+	        // 클릭된 요소의 텍스트 값을 가져옴
+	        const countryText = $(this).text();
+	        // 가져온 텍스트를 콘솔에 출력
+	        console.log(countryText);
+	    });
+	});
 	</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

@@ -44,6 +44,7 @@ public class AccompanyWH {
 					.coordinate(getCoordinate(rs))		
 					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
 					.renameFilename(rs.getString("RENAME_FILENAME"))
+					.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
 					.build();
 	}
 	
@@ -72,6 +73,20 @@ public class AccompanyWH {
 				.continentNo(rs.getInt("CONTINENT_NO"))
 				.continentName(rs.getString("CONTINENT_NAME"))
 				.build();
+	}
+	
+	//댓글 빌더 
+	private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
+		return AccompanyComment.builder()
+				.accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
+				.accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
+				.accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
+				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
+				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
+				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
+				.userId(rs.getString("USER_ID"))
+				.build();
+
 	}
 	
 	
@@ -116,19 +131,7 @@ public class AccompanyWH {
 		return result;
 	}
 	
-	//댓글 빌더 
-	private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
-		return AccompanyComment.builder()
-				.accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
-				.accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
-				.accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
-				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
-				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
-				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.userId(rs.getString("USER_ID"))
-				.build();
 
-	}
 	public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
 		PreparedStatement pstmt = null;
 		int result = 0;

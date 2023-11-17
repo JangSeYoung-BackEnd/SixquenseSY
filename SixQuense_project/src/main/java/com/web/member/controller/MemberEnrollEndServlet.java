@@ -2,8 +2,6 @@ package com.web.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -18,7 +16,7 @@ import com.web.member.service.MemberService;
 /**
  * Servlet implementation class MemberEnrollEndServlet
  */
-@WebServlet("/member/login.do")
+@WebServlet(name="enrollMemberEnd",urlPatterns="/member/enrollMemberEnd.do")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +35,18 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		//화면에서 전달한 데이터 받아오기
 		String userId=request.getParameter("userId");
 		String userPw=request.getParameter("userpw");
-		String userNn=request.getParameter("usernn");
+		String userName=request.getParameter("username");
 		String phone=request.getParameter("phone");
 		
 		Date userDd = Date.valueOf(LocalDate.of(Integer.parseInt(request.getParameter("userYear")),
 				Integer.parseInt(request.getParameter("userMonth")), Integer.parseInt(request.getParameter("userDd"))));
 
 		String gender=request.getParameter("gender");
+		String userIntroduce=request.getParameter("userIntroduce");
+		String travleType=request.getParameter("travleType");
+		String notificatIonset=request.getParameter("notificatIonset");
+		String originalFilename=request.getParameter("originalFilename");
+		String renameFilename=request.getParameter("renameFilename");
 		
 		Member m=Member.builder()
 				.userId(userId)
@@ -52,6 +55,12 @@ public class MemberEnrollEndServlet extends HttpServlet {
 				.phone(phone)
 				.userDd(userDd)
 				.gender(gender)
+				.userIntroduce(userIntroduce)
+				.travleType(travleType)
+				.notificatIonset(notificatIonset)
+				.originalFilename(originalFilename)
+				.renameFilename(renameFilename)
+				.userName(userName)
 				.build();
 		//DB에 저장하기
 		int result=new MemberService().insertMember(m);

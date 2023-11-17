@@ -6,22 +6,13 @@
 
 <style>
 .outBox {
+	width: 368px;
+	height: 416px;
 	margin: 50px auto;
 	padding: 20px;
 	max-width: 720px;
 	border: 1px solid #999;
 	border-radius: 6px;
-}
-
-
-.outBox .inputBoxinput[type="text"],.outBox .inputBoxinput[type="password"] {
-	padding: 0 10px;
-	width: 100%;
-	height: 50px;
-	font-size: 14px;
-	box-sizing: border-box;
-	border: 1px solid #999;
-	outline: none;
 }
 
 .outBox .inputBox label {
@@ -38,14 +29,16 @@
 	pointer-events: none;
 }
 
-.outBox .inputBox input[type="text"]:focus, .outBox.existence .inputBox input[type="text"],
-.outBox .inputBox input[type="password"]:focus, .outBox.existence .inputBox input[type="password"]
+.outBox .inputBox input[type="text"]:focus, .inputBox input.existence,
+.outBox .inputBox input[type="password"]:focus, .inputBox input[type="password"]
 	{
 	border: 2px solid blue;
 }
 
-.outBox .inputBox input[type="text"]:focus+label, .outBox.existence .inputBox label,.outBox .inputBox input[type="password"]:focus+label
-	{
+.outBox .inputBox input[type="text"]:focus+label, 
+	.inputBox>input.existence+label,
+	.outBox .inputBox input[type="password"]:focus+label
+{
 	color: blue;
 	transform: scale(.85) translate(-10px, -48px);
 }
@@ -55,7 +48,7 @@
 	height: 50px;
 }
 
-.outBox .inputBox input[type="text"] {
+.outBox .inputBox input[type="text"],.outBox .inputBox input[type="password"] {
 	padding: 0 10px;
 	width: 100%;
 	height: 50px;
@@ -79,12 +72,12 @@
 	pointer-events: none;
 }
 
-.outBox .inputBox input[type="text"]:focus, .outBox.existence .inputBox input[type="text"]
+.outBox .inputBox input[type="text"]:focus,.inputBox input[type="text"]
 	{
 	border: 2px solid blue;
 }
 
-.outBox .inputBox input[type="text"]:focus+label, .outBox.existence .inputBox label
+.outBox .inputBox input[type="text"]:focus+label,.inputBox label
 	{
 	color: blue;
 	transform: scale(.85) translate(-10px, -48px);
@@ -96,7 +89,7 @@
 	margin-top: 200px;
 }
 .outBox{
-		margin-top:5px !important;
+		margin-top:100px !important;
 }
 .sh{
 	margin-top: 3%;
@@ -131,18 +124,58 @@
       }
 .footer-info{
 		display: flex;
+		
 }
-.btn{
-	display: flex;
-	background-color:transparent;
-    width: 300px;
-    padding: 50px 0px;
-    border: 1px solid #212121;
-    margin: 0px 16px;
-    text-align: center;
-    border-radius: 30px;
+/* 회원가입 드롭다운 할꼬얌*/
+.dropbtn {
+  background-color: transparent;
+  color: blue;
+  padding: 7px;
+  font-size: 15px;
+  border: none;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: transparent;}
+
+.llog{
+	display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:wrap;
+    width:100%;
+    justify-content:space-around;
+}
+.login-btn{
+	`	  background: blue;
+		  color: white;
+		  padding: 7px;
+		  font-size: 15px;
+		  border: none;
+}
 </style>
 </head>
  <body>
@@ -150,48 +183,59 @@
 	<form action="<%=request.getContextPath()%>/login.do">
 		<div class="outBox">
 			<div class="logo">
-				<a href="http://192.168.1.11:5500/main.html" target="_blank" >
+				<a href="http://192.168.1.11:5500/main.html" target="_blank" style="display: flex; justify-content: center;">
 					<img src="<%=request.getContextPath()%>/img/logo/ttlogo.png" width="250" height="100"
-					class="image">
+					class="image" style="display: flex; justify-content: center;">
 				</a>
 			</div>
-			<h1 class="o08pQe" data-ally-title-poece id="headingText" >
-				<span >로그인</span>
+			<h1 class="o08pQe" data-ally-title-poece id="headingText" style="display: flex; justify-content: center;">
+				<span style="font-size: 20px;">로그인</span>
 			</h1>
-			<div class="inputBox">
+			<div class="inputBox" style="margin-bottom: 20px;">
 				<input autocomplete="off" id="userId" name="userId" type="text">
 				<label for="userId">이메일</label>
 			</div>
-
-			<div class="inputBox">
-				<input autocapitalize="off" id="userpw" class="inputBoxinput"
+			
+			<div class="inputBox" style="margin-bottom: 10px;">
+				<input autocapitalize="off" id="userpw"
 					name="userpw" type="password"> <label for="userpw">비밀번호</label>
 			</div>
-			<div class="footer-info">아이디 찾기 | 비밀번호 찾기</div>
+			<div class="find">이메일을 잊으셨나요?
 			<div class="loginbtn-container">
-				<div class="login-btn-wrap">
-					<button id="login-btn">로그인</button>
-					
-					<br>
-					<br>
-					<button class="btn">
-						<a href="<%=request.getContextPath() %>/member/joinServlet.do">회원가입</a>
-						
-					</button>
+			<div class="hr-sect">계정 만들기 || 간편로그인</div>
+			
+			<div class="llog">
+				<div class="login-btn">
+					<button id="login-btn" >다음</button>
 				</div>
+			<div class="dropdown">
+			  <button class="dropbtn">계정 만들기</button>
+			  	<div class="dropdown-content">
+			   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
+			    	<a href="#">google</a>
+			   	    <a href="#">kakao</a> 
+			  </div>
+				</div>
+			</div>
 				
 
-				<!-- 카카오,네이버 로고 이미지 들어 갈곳 -->
-				<div class="hr-sect">간편 로그인</div>
-					<a class="easy"> <img
-						src="<%=request.getContextPath() %>/img/logo/카카오로고.png" width="50"
-						height="50"> <img
-						src="<%=request.getContextPath() %>/img/logo/네이버로고.png" width="50"
-						height="50">
-					</a>
-				</div>
+				
 		</div>
 	</form>
 </div>
+	<script>
+        var loginBox = document.querySelector('.outBox');
+        var loginInputBox = document.querySelectorAll('.inputBox input');
+        loginInputBox.forEach(e=>{
+                e.addEventListener('keyup', function(){
+                if(!e.value == ''){
+                    e.classList.add('existence');   
+                }else{
+                    e.classList.remove('existence');   
+                }
+            });
+        });
+       
+ 	</script>
 </body>
 </html>

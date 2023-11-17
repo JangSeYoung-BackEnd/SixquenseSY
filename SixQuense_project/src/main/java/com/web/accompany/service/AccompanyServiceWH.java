@@ -54,11 +54,10 @@ public class AccompanyServiceWH {
 		}
 
 
-		public int updateAccompanyOffer(String user, String value) {
+		public int updateAccompanyOffer(int acompanyBNo, String value) {
 			Connection conn=getConnection();
-			int result=dao.updateAccompanyOffer(conn,user,value);
-			System.out.println(user);
-			System.out.println(value);
+			int result=dao.updateAccompanyOffer(conn,acompanyBNo,value);
+			//System.out.println(value);
 			if(result>0) commit(conn);
 			else rollback(conn);
 			close(conn);

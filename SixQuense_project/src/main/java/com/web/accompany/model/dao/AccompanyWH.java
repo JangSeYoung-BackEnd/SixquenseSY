@@ -187,16 +187,16 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
-	public int updateAccompanyOffer(Connection conn, String user, String value) {
+	public int updateAccompanyOffer(Connection conn, int acompanyBNo, String value) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("updateAccompanyOffer"));
 			pstmt.setString(1, value);
-			pstmt.setString(2, user);
+			pstmt.setInt(2, acompanyBNo);
 			result=pstmt.executeUpdate();
-			System.out.println(result +"이건 dao");
+			//System.out.println(result +"이건 dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

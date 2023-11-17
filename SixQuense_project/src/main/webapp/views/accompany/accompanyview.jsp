@@ -16,8 +16,6 @@
 	String acUserId= loginMember.getUserId();
 	int acompanyBNo= b.getAccompanyNo(); 
 	
-	
-	
 %>
 
 
@@ -234,6 +232,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 						
 						<%
 						if(loginMember.getUserNo()== b.getMemberNo()){
+							
 							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
 							<select id = "acSelect" onchange ="accompanySelect();">
 								<option name="acSelect" value ="acRecruiting">모집중</option>
@@ -378,22 +377,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 </body>
 
 <!-- javaScript 부분   -->
-<script>
-	function confirmAccompany(){
-	var confirmed=confirm("동행을 신청하시겠습니까?");
 
-
-	        window.location.href = "https://www.naver.com";
-	    }
-	}
-	
-	if(confirmed){
-		alert("동행이 신청되었습니다!");
-	}else{
-		alert("동행 신청이 취소되었습니다.");
-	}
-}
-</script>
 	<script>
 	
 	/* 동행 신청 */
@@ -451,17 +435,19 @@ table#tbl-comment tr.level2 sub.comment-date {
         submitReport();
     });
     
+    
+    //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
     	console.log(115111);
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
-		var User =  "<%= acUserId %>";
+		<%-- var User =  "<%= acUserId %>"; --%>
 		var boardNo = <%=acompanyBNo%>;
 		 //console.log(User+boardNo+value)
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
-	            data: { value: value , acUser : User ,boardNo :boardNo},
+	            data: { value: value,boardNo :boardNo},
 	            success: function(response) {
 	                console.log('Ajax response:', response);
 	            },
@@ -470,6 +456,32 @@ table#tbl-comment tr.level2 sub.comment-date {
 	            }
 	        });
 	};
+	
+	//동행신청하기 누르기 
+	function confirmAccompany(){
+		var confirmed=confirm("동행을 신청하시겠습니까?");
+		var User =  "<%= acUserId %>";
+		var boardNo = <%=acompanyBNo%>;
+		
+		if(confirmed){
+				alert("동행이 신청되었습니다!");
+				window.open("<%=b.getOpenChattingLink()%>", "_blank");
+				 $.ajax({
+			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
+			            type: 'POST',
+			            data: { value: value , acUser : User ,boardNo :boardNo},
+			            success: function(response) {
+			                console.log('Ajax response:', response);
+			            },
+			            error: function(error) {
+			                console.error('Ajax error:', error);
+			            }
+			        });
+			}else{
+				alert("동행 신청이 취소되었습니다.");
+			}
+
+		 }
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			c.setMaxAge(60*60*24);
 			response.addCookie(c);
 		}else {
-			Cookie c=new Cookie("saveId","userId");
+			Cookie c=new Cookie("saveId",userId);
 			c.setMaxAge(0);
 			response.addCookie(c);
 		

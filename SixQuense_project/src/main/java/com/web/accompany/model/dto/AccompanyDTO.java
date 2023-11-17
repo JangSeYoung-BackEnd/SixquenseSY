@@ -20,5 +20,6 @@ public class AccompanyDTO {
 	private String openChattingLink;
 	private String originalFilename; //첨부 파일불러오기
 	private String renameFilename; //첨부 파일불러오기
+	private String accompanyStatus;
 }
 

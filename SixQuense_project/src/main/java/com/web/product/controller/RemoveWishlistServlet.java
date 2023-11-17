@@ -1,7 +1,6 @@
 package com.web.product.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.web.product.dto.ProductwishilistDto;
 import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class WishListServlet
+ * Servlet implementation class RemoveWishlistServlet
  */
-@WebServlet("/product/makewishlist.do")
-public class WishListServlet extends HttpServlet {
+@WebServlet("/product/removewishlist.do")
+public class RemoveWishlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WishListServlet() {
+    public RemoveWishlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,9 +38,8 @@ public class WishListServlet extends HttpServlet {
 				.ProductNo(productNo)
 				.build();
 		
-	int result = new ProductService().insertwishlist(wishlist);
-	System.out.println(result);
-		
+		int result = new ProductService().removewishlist(wishlist);
+		System.out.println(result);
 	}
 
 	/**

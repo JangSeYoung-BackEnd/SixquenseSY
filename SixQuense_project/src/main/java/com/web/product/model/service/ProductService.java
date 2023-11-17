@@ -117,6 +117,27 @@ public class ProductService {
 		close(conn);
 		return result;
 	}
+	
+	//위시리스트 삭제하는 메소드
+	public int removewishlist(ProductwishilistDto wishlist) {
+		Connection conn = getConnection();
+		int result = dao.removewishlist(conn, wishlist);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	//위시리스트 카운트 하는 메소드
+	public int selectWishlistCountByNo(int productNo) {
+		Connection conn = getConnection();
+		int commentCount = dao.selectWishlistCountByNo(conn, productNo);
+		close(conn);
+		return commentCount;
+
+	}
 
 	// 상품 등록
 	// public int insertProduct(Product p) {

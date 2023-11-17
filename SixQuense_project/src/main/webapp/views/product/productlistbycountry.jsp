@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
+<%@ include file="/views/common/header.jsp"%>
 <%
 	List<ProductDto> recentProducts = (List<ProductDto>)request.getAttribute("recentProducts");
 	ProductDto rp = recentProducts.get(0);
@@ -9,11 +11,7 @@
 	
 	List<ProductDto> bestProducts = (List<ProductDto>)request.getAttribute("bestProducts");
 	ProductDto bp = dicountProducts.get(0);
-	
-	
 %>
-<%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
-<%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <style>
@@ -77,7 +75,7 @@ p {
 								<h5>
 									<a href="<%=request.getContextPath()%>/product/productview.do>"><%=bp.getProductName() %>
 								</h5>
-								<p>패키지 내용1</p>
+								<p><%=bp.getProductDetail() %></p>
 								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=bp.getProductNo()%>" class="blog__btn"> <%=bp.getProductPrice() %>원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">

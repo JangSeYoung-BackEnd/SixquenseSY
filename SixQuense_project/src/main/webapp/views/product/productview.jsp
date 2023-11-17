@@ -2,15 +2,16 @@
 <%@page import="com.web.product.dto.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.*, java.util.List"%>
+<%@ include file="/views/common/header.jsp"%>
 <%
 ProductDto product = (ProductDto) request.getAttribute("product");
 List<ProductsreviewDto> comments = (List<ProductsreviewDto>) request.getAttribute("comments");
 int commentCount = (int) request.getAttribute("commentCount");
+int wishlistCount = (int) request.getAttribute("wishlistCount");
 
 List<ProductcourseDto> course = product.getCourse();
 %>
-<%@ page import="com.web.product.dto.*, java.util.List"%>
-<%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <link rel="stylesheet"
@@ -115,9 +116,11 @@ List<ProductcourseDto> course = product.getCourse();
 						</div>
 
 						<div class="button-container">
-							<input type="submit" class="primary-btn" onclick="" value="예약하기">
-							<a href="" class="heart-icon" onclick="toggleHeartIcon(this)"><span
-								class="icon_heart_alt"></span> 위시리스트에 담기 </a>
+						 	<input type="submit" class="primary-btn" onclick="" value="예약하기">
+							
+	                    	<%-- <a href="javascript:toggleHeartIcon(this)" class="heart-icon">
+	                        <span class="icon_heart_alt <%=(Boolean)request.getAttribute("wishResult")?"filled":"" %>"></span>위시리스트에 담기</a> --%>
+				
 						</div>
 					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
@@ -146,52 +149,61 @@ List<ProductcourseDto> course = product.getCourse();
 
 					<div style="width: 290px; height: 51px; text-align: center;">
 						<b style="color: darkgrey; font-size: 13px;"><span
-							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
+							style="color: red"><%=wishlistCount%>명</span>이 이 상품을 위시리스트에
+							담았습니다</b>
 					</div>
 					<script>
-					 $(".heart-icon").click(e=>{
-							if(<%=loginMember == null%>){
-								alert("로그인 후 이용할 수 있는 서비스 입니다");
-								
-							}else{
-								$.ajax({
-									type: 'post',
-									url: '<%=request.getContextPath()%>/product/wishlist.do',
-									data: {memberNo : <%=loginMember.getUserNo()%>, productNo : <%=product.getProductNo()%>}
-									success:data=> {
-										console.log('Added to wishlist successfully');
-						                // 토글 기능을 구현하여 아이콘을 변경
-						                $(element).find('.icon_heart_alt').classList.add('filled');
-										alert("해당 상품이 위시리스트에 담겼습니다");
-									},
-									error: data=>{
-										console.error('Error adding to wishlist');
-									}
-								})	
-								}
-							
-						})	
-						
-					 /* function toggleHeartIcon(element) {
 					
-							
-						};
-							 */
-							
+													
 						
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							// 버튼을 클릭할 때마다 'filled' 클래스를 추가 또는 제거
-							/*  */
-							
-						
+				     
+					 function toggleHeartIcon(e){
+						  // Get the product and member information
+				            var memberNo = <%=loginMember != null ? loginMember.getUserNo() : 0%>;
+				            var productNo = <%=product.getProductNo()%>;
+				            console.log('<%=loginMember%>');
+						 if (<%=loginMember == null%>) {
+					            alert("로그인 후 이용할 수 있는 서비스입니다");
+						 } else {
+							 if($("a.heart-icon").find('.icon_heart_alt').hasClass('filled')){
+									 $.ajax({
+							            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
+							            	type:"get",
+							                data: {memberNo: memberNo, productNo: productNo},
+							                success: function (data) {
+							                    console.log(data);
+							                    
+							                    // Toggle the heart icon by adding the 'filled' class
+							                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
+							                    
+							                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
+							                },
+							                error: function (data) {
+							                    console.error('Error adding to wishlist');
+							                }
+									 })
+					            }else{
+					            	// Make an AJAX request to add the product to the wishlist
+						            $.ajax({
+						            	url: "<%=request.getContextPath()%>/product/makewishlist.do",
+						            	type:"get",
+						                data: {memberNo: memberNo, productNo: productNo},
+						                success: function (data) {
+						                    console.log(data);
+						                    
+						                    // Toggle the heart icon by adding the 'filled' class
+						                    $("a.heart-icon").find('.icon_heart_alt').addClass('filled');
+						                    
+						                    alert("해당 상품이 위시리스트에 담겼습니다");
+						                },
+						                error: function (data) {
+						                    console.error('Error adding to wishlist');
+					            }
+					        })
+					    }
+					}
+								}
+								
 					</script>
 
 					<ul>
@@ -281,7 +293,10 @@ List<ProductcourseDto> course = product.getCourse();
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
-								<%-- <%if (loginMember!=null&&(loginMember.getUserId().equals("admin")||product.getOrderinfo().contains(loginMember.getUserNo()))){ %>  --%>
+								<%
+								if (loginMember != null
+										&& (loginMember.getUserId().equals("admin") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
+								%>
 								<h6>후기 작성</h6>
 								<div class="comment-editor">
 									<form
@@ -291,9 +306,9 @@ List<ProductcourseDto> course = product.getCourse();
 											value="<%=product.getProductNo()%>"> <input
 											type="hidden" name="commentLevel" value="1"> <input
 											type="hidden" name="userId"
-											value="<%=loginMember != null ? loginMember.getUserNo() : ""%>>">
+											value="<%=loginMember != null ? loginMember.getUserId() : ""%>">
 										<input type="hidden" name="member_no"
-											value="<%=loginMember != null ? loginMember.getUserNo() : ""%>">
+											value="<%=loginMember != null ? loginMember.getUserNo() : 0%>">
 										<input type="hidden" name="CommentRef" value="0">
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
@@ -309,7 +324,9 @@ List<ProductcourseDto> course = product.getCourse();
 										</div>  -->
 									</form>
 								</div>
-								<%-- <%} %> --%>
+								<%
+								}
+								%>
 								<h6 style="margin-top: 26px;">
 									여행자 후기(<%=commentCount%>)
 								</h6>

@@ -100,6 +100,7 @@ public class ProductDao {
 		List<ProductDto> products = new ArrayList<ProductDto>();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectProductByNo"));
+			//System.out.println(sql.getProperty("selectProductByNo"));
 			pstmt.setInt(1, productNo);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -210,8 +211,46 @@ public class ProductDao {
 			}
 			return result;
 	}
+	
+	//위시리스트 삭제하는 메소드
+	public int removewishlist(Connection conn, ProductwishilistDto wishlist) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("removewishlist"));
+			pstmt.setInt(1, wishlist.getMemberNo());
+			pstmt.setInt(2, wishlist.getProductNo());	
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//위시리스트 카운트 하는 메소드
+	
+	public int selectWishlistCountByNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int commentCount = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectWishlistCountByNo"));
+			pstmt.setInt(1, productNo);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				commentCount = rs.getInt("count");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return commentCount;
+	}
 
-	// 첨부파일이 있는 상품 조회 가능하게 하는 메소드
+	// list 있는 상품 조회 가능하게 하는 메소드
 	private void addProductAndImage(List<ProductDto> products, ResultSet rs) throws SQLException {
 		int pk = rs.getInt("product_no");
 		if (products.stream().anyMatch(e -> pk == e.getProductNo())) {
@@ -300,7 +339,7 @@ public class ProductDao {
 	public static ProductsreviewDto getReview(ResultSet rs) throws SQLException {
 		return ProductsreviewDto.builder()
 				.ProductNo(rs.getInt("product_no"))
-				.UserId(rs.getString("QCSJ_C000000001700000"))
+				.UserId(rs.getString("user_id_re"))
 				.CommentContent(rs.getString("comment_content"))
 				.CommentDate(rs.getDate("comment_date"))
 				.CommentRef(rs.getInt("comment_ref"))

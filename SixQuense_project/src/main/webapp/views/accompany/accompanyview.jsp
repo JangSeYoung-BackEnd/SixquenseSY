@@ -161,6 +161,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 </script> 
 
 
+
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
@@ -172,8 +173,8 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div class="col-lg-12 blog__details__author">
 							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px">
 								<div class="blog__details__author__pic col-sm-2">
-									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
-								</div>
+<%-- 									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
+ --%>								</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
 									<div class="cols">
 										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
@@ -377,39 +378,41 @@ table#tbl-comment tr.level2 sub.comment-date {
 </body>
 
 <!-- javaScript 부분   -->
-	
-	<script>
-
-	/* 동행 신청 */
-	function confirmAccompany() {
-		var confirmed = confirm("동행을 신청하시겠습니까?");
+<script>
+	function confirmAccompany(){
+	var confirmed=confirm("동행을 신청하시겠습니까?");
 
 
-		        window.location.href = "https://www.naver.com";
-		    }
-		}
-		
-		if (confirmed) {
-			alert("동행이 신청되었습니다!");
-		} else {
-			alert("동행 신청이 취소되었습니다.");
-		}
+	        window.location.href = "https://www.naver.com";
+	    }
 	}
-	document.addEventListener('DOMContentLoaded', function() {
+	
+	if(confirmed){
+		alert("동행이 신청되었습니다!");
+	}else{
+		alert("동행 신청이 취소되었습니다.");
+	}
+}
+</script>
+	<script>
+	
+	/* 동행 신청 */
+	
+	document.addEventListener('DOMContentLoaded', function(){
 		var openButton = document.getElementById('openProfilePopup');
 		var profilePopup = document.getElementById('profilePopup');
 		var closeButton = document.getElementById('closeProfilePopup');
 
-		openButton.addEventListener('click', function() {
+		openButton.addEventListener('click', function(){
 			profilePopup.style.display = 'block';
 		});
-		closeButton.addEventListener('click', function() {
+		closeButton.addEventListener('click', function(){
 			profilePopup.style.display = 'none';
 		});
 	});
 		
 		var isFilled = false;
-		function toggleImage() {
+		function toggleImage(){
 			var button = document.getElementById('followButton');
 			if (isFilled) {
 				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
@@ -419,11 +422,11 @@ table#tbl-comment tr.level2 sub.comment-date {
 			isFilled = !isFilled; 
 		}
 /* 신고하기  부분  */
-		function openReportPopup() {
+		function openReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'block';
 		}
-		function closeReportPopup() {
+		function closeReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'none';
 		}
@@ -431,23 +434,20 @@ table#tbl-comment tr.level2 sub.comment-date {
 	<script>
 	const radios = $("input[name=report]");
 
-    function submitReport() {
+    function submitReport(){
         radios.click(e => {
             const val = radios.filter(":checked").val();
-
             if (val === "text") {
                 const textval = $("#reportReason").val();
                 location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
             } else {
                 location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
             }
-
             alert('신고되었습니다.');
         });
     }
 
-    // Call the function when the document is ready
-    $(document).ready(function () {
+    $(document).ready(function (){
         submitReport();
     });
     
@@ -457,8 +457,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 		var value = (acSelect.options[acSelect.selectedIndex].value);
 		var User =  "<%= acUserId %>";
 		var boardNo = <%=acompanyBNo%>;
-		 console.log(User+boardNo+value)
-		 
+		 //console.log(User+boardNo+value)
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',

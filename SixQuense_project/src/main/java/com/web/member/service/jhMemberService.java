@@ -19,5 +19,7 @@ public class jhMemberService {
         close(conn);
         return result;
     }
+    
 }
+
 

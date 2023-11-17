@@ -34,4 +34,16 @@ public class AccompanyServiceKH {
 			return result;
 			
 		}
+		
+		public List<AccompanyDTO> selectAccompanyByPopularity(){
+			Connection conn=getConnection();
+			List<AccompanyDTO> a=dao.selectAccompanyByPopularity(conn);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
 }

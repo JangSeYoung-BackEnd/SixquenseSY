@@ -29,14 +29,14 @@
         <div class="inquirybtn" style="position: fixed; bottom: 70px; right: 20px; border: 0;">
         	<a href= "<%=request.getContextPath()%>/views/common/inquiry.jsp">
                 <button onclick="#문의 페이지" style="background: none; border: none;">
-                    <img src="<%=request.getContextPath()%>/img/icon/문의2.png" width="50px" style="background: transparent;">
-                    <p>문의사항</p>
+                    <img src="<%=request.getContextPath()%>/img/mainicon/문의사항(사이드).png" width="50px" style="background: transparent;">
+                    <p style="margin-bottom:0px">문의사항</p>
                 </button>
                 </a>
             </div>
         <div style="position: fixed; bottom: 15px; right: 20px;">
         <a href="#" id="topbtn">
-            <img src="<%=request.getContextPath()%>/img/icon/화살표.png" width="30px" style="margin-right: 12px">
+            <img src="<%=request.getContextPath()%>/img/mainicon/상단화살표.png" width="30px" style="margin-right: 12px; margin-bottom:15px">
         </a>
         </div>
     </footer>

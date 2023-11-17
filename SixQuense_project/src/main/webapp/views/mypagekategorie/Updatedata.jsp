@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
- <section class="checkout spad">
+	pageEncoding="UTF-8"%>
+<%@ page import="com.web.member.dto.Member" %>
+<%
+ Member loginMember = (Member)session.getAttribute("loginMember");
+%>
+
+ <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
+                <img src="<%=request.getContextPath() %>/img/icon/수정.png" style="
                             width: 165px;
                             padding-left: 0px;
                             margin-left: 294px;
@@ -11,7 +16,7 @@
                             <p style="width: 750px;"> 홍 길 동</p>
                 <form action="#">
                     <div class="row">
-                        <div class="col-lg-8 col-md-6">
+                        <div class="col-lg-8 col-md-6" method="post">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
@@ -22,7 +27,7 @@
                                 <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>성별</p>
-                                    <input type="text" value="남" >
+                                    <input type="text" >
                                 </div>
                             </div>
                             </div>
@@ -32,11 +37,11 @@
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호</p>
-                                <input type="text" placeholder="">
+                                <input type="text" >
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
-                                <input type="text" placeholder="" >
+                                <input type="text"  >
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
@@ -45,15 +50,15 @@
                             </div>
                             <div class="checkout__input">
                                 <p>가입날짜</p>
-                                <input type="text" placeholder="2023/11/11" >
+                                <input type="text" placeholder="2023/11/11">
                             </div>
                             <div class="checkout__input">
                                 <p>전화번호</p>
-                                <input type="text" placeholder="010-1234-5678" >
+                                <input type="text" placeholder="010-1234-5678" value="<%=loginMember.getPhone()%>">
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;">
+                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;" >
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
@@ -62,6 +67,9 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                            <form action="<%=request.getContextPath()%>/update.do" method="post">
+							    <button id="updateBtn2">개인정보 수정</button>
+							</form>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
@@ -73,7 +81,7 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
@@ -98,8 +106,21 @@
                 	</form>
                 	</div>
             	</div>
-        	</div>
 </section>
+<script>
+$("#updateBtn2").click(function () {
+    $.ajax({
+        url: "<%=request.getContextPath()%>/update.do",
+        method: "POST",
+        data: {
+            userNo: <%=loginMember.getUserNo()%>,
+            name: $("#nameInput").val(), 
+            phone: $("#phoneInput").val()
+           
+        }
+    });
+});
+</script>
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({

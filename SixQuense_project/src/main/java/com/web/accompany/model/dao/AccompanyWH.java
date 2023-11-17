@@ -44,6 +44,7 @@ public class AccompanyWH {
 					.coordinate(getCoordinate(rs))		
 					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
 					.renameFilename(rs.getString("RENAME_FILENAME"))
+					.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
 					.build();
 	}
 	
@@ -72,6 +73,20 @@ public class AccompanyWH {
 				.continentNo(rs.getInt("CONTINENT_NO"))
 				.continentName(rs.getString("CONTINENT_NAME"))
 				.build();
+	}
+	
+	//댓글 빌더 
+	private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
+		return AccompanyComment.builder()
+				.accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
+				.accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
+				.accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
+				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
+				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
+				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
+				.userId(rs.getString("USER_ID"))
+				.build();
+
 	}
 	
 	
@@ -107,7 +122,6 @@ public class AccompanyWH {
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			while(rs.next())result.add(getAccompanyComment(rs));
-			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -117,19 +131,7 @@ public class AccompanyWH {
 		return result;
 	}
 	
-	//댓글 빌더 
-	private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
-		return AccompanyComment.builder()
-				.accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
-				.accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
-				.accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
-				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
-				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
-				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.userId(rs.getString("USER_ID"))
-				.build();
 
-	}
 	public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -147,8 +149,7 @@ public class AccompanyWH {
 		}finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 	
@@ -168,6 +169,41 @@ public class AccompanyWH {
 		}return result;
 		
 	}
+
+	public int insertAccompanyOffer(Connection conn, String user, String value, String acompanyBNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertAccompanyOffer"));
+			pstmt.setString(1, value);
+			pstmt.setString(2, user);
+			pstmt.setString(3, acompanyBNo);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int updateAccompanyOffer(Connection conn, String user, String value) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateAccompanyOffer"));
+			pstmt.setString(1, value);
+			pstmt.setString(2, user);
+			result=pstmt.executeUpdate();
+			System.out.println(result +"이건 dao");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 
 
 	

@@ -65,7 +65,7 @@ public class AccompanyViewServlet extends HttpServlet {
 		
 		AccompanyDTO a = new AccompanyServiceWH().selectBoardByNo(no,readResult);
 		List <AccompanyComment> comments = new AccompanyServiceWH().selectAccompanyComment(no);
-		System.out.println(comments+"111111111111");
+		System.out.println(a);
 		request.setAttribute("board", a);
 		request.setAttribute("comments", comments);
 		request.getRequestDispatcher("/views/accompany/accompanyview.jsp").forward(request, response);

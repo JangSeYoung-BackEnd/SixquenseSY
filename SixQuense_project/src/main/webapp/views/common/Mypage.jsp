@@ -56,10 +56,6 @@
                                 <input type="text" value="**********" readonly>
                             </div>
                             <div class="checkout__input">
-                                <p>비밀번호 확인</p>
-                                <input type="text" value="" readonly>
-                            </div>
-                            <div class="checkout__input">
                                 <p>생년월일</p>
                                 <input type="text" placeholder="1569" class="checkout__input__add" readonly>
                                 <input type="text" placeholder="12월/31일" readonly>
@@ -90,7 +86,7 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자 아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
+                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">

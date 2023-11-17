@@ -9,10 +9,15 @@
 
 
 <%
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");                                                  
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
+	String acUserId= loginMember.getUserId();
+	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
+	
 %>
 
 
@@ -118,6 +123,20 @@ button:hover {
 #commentText{
 	width :640px
 }
+table#tbl-comment tr.level2 td:first-of-type {
+	padding-left: 100px;
+}
+
+table#tbl-comment tr.level2 sub.comment-writer {
+	color: #8e8eff;
+	font-size: 14px
+}
+
+table#tbl-comment tr.level2 sub.comment-date {
+	color: #ff9c8a;
+	font-size: 10px
+}
+
 </style>
 
 <script>
@@ -142,79 +161,96 @@ button:hover {
 </script> 
 
 
+
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-5 order-md-1 order-2">
-					<div class="blog__sidebar">
+				<div class="col-lg-3 col-md-5 order-md-1 order-2" >
+					<div class="blog__sidebar" style="padding-top: 0px;">
+					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
-							<div class="row">
-								<div class="blog__details__author__pic col-sm-4">
-									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="">
-								</div>
-								<div class="blog__details__author__text col-sm-6">
-									<div class="row">
-										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">
-										아이디값
-										<%-- <%=loginMember.getUserId %> --%>
+							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px">
+								<div class="blog__details__author__pic col-sm-2">
+<%-- 									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
+ --%>								</div>
+								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
+									<div class="cols">
+										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
+										<%=loginMember.getUserId() %>
 										</div>
 										<div class="item col-sm-4">
-											<img id="followButton" src="<%=request.getContextPath()%>/img/팔로우(빈거).png" alt="팔로우 버튼"
-												onclick="toggleImage()" width="30" height="30">
+											<img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
+											onclick="toggleImage()" width="20" height="20">
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="blog__sidebar__item">
-							<form>
-								<button onclick="confirmAccompany()">동행신청하기</button>
-								<br>
-								<br>
-							</form>
-
-							<div class="blog__sidebar__recent">
-								<a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
+						<%} %>
+						<div class="row" >
+							<div class="blog__sidebar__item">
+								<%if(loginMember!=null){ %>
+								<div class="col-sm-12">
+									<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+								<%} %>
+								</div>
+								<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro;">
+									<div style="margin: 5px 0px 5px 0px;">
+										<h5>동행신청한 목록</h5>
 									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
+									<div>
+										<a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a> 
+										<a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a> 
+										<a href="#" class="blog__sidebar__recent__item">
+											<div class="blog__sidebar__recent__item__pic">
+											</div>
+											<div class="blog__sidebar__recent__item__text">
+												<h6>아이디</h6>
+											</div>
+										</a>
 									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-7 order-md-1 order-1">
-					<div>
-						<span style="font-size: larger; font-weight: bolder;"><%=b.getAccompanyTitle() %></span> <select name="accompany">
-					<%-- 	<%=b.getBoardTitle()%>  --%>
-					<!-- 분기 처리하기 만약에 ~  -->
-							<option value="모집중">모집중</option>
-							<option value="마감">마감</option>
-						</select>
+				<div class="col-lg-8 col-md-7 order-md-1 order-1" style="margin-bottom:0px; margin-bottom: 0px; margin-left: 30px;">
+					<div style="padding-top:10px;">
+						<span style="font-size: larger; font-weight: bolder;" ><%=b.getAccompanyTitle() %></span> 
+						
+						<%
+						if(loginMember.getUserNo()== b.getMemberNo()){
+							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting">모집중</option>
+								<option name="acSelect" value= "acClose" selected>마감</option>
+							</select>
+								<%}else{ %>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting" selected>모집중</option>
+								<option name="acSelect" value= "acClose" >마감</option>
+							</select>
+						<%}
+					}%>
 					</div>
-					<div class="blog__details__text">
+					<div class="blog__details__text"  style="padding-top:20px;">
 						<div style="display:flex;">
 						<!-- 댓글처럼 따로 데이터를 불러서 사진 파일 들고오기  -->
-							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<img src="<%=request.getContextPath() %>/upload/accompany/<%=b.getRenameFilename() %>" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
 							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
 						</div>
 					</div>
@@ -226,9 +262,7 @@ button:hover {
 						<div>조회수 <%=b.getAccompanyReadCount()%></div>
 					</div>
 					<div class="comment-section">
-						<h3>comment</h3>
-						<br>
-						<br>
+						
 							<div class="comments" id="comments"> 
 							<%if(!comments.isEmpty()){ %>
 								<table id="tbl-comment">
@@ -236,7 +270,7 @@ button:hover {
 									if (ac.getAccompanyComtLevel() == 1) {
 								%>
 									<tr class="level1">
-										<td>
+										<td style="width:600px">
 											<sub class="comment-writer"><%=ac.getUserId() %></sub>
 											<sub class="comment-date"><%=ac.getAccompanyComtDate() %></sub>
 											<br>
@@ -270,22 +304,22 @@ button:hover {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요">
+							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:620px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
+
 	    <script>
-<%-- 	    $(".comment-form>form>input[name=content]").focus(e=>{
+ 	    $("#btn-insert").click(e=>{
 	    	if(<%=loginMember==null%>){
 	    		/* 로그인이 안됐을 때  */
 	    		alert("로그인 후 이용할 수 있는 서비스입니다.");
 	        }
-	    }); --%>
+	    }); 
 	    $(".btn-reply").click(e=>{
 	    	/* alert("클릭"); */
 	    	/* $(e.target).parents("tr").after($("<tr>").append($("<td>테스트</td>"))) */
@@ -303,6 +337,7 @@ button:hover {
 	    })
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
+
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
@@ -319,83 +354,124 @@ button:hover {
 	</div>
 	
 <!------------------------신고하기 Popup 부분 ------------------------>	
+
 	<div id="reportPopup" class="popup">
 		<div class="popup-content">
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
 			<div class="checkbox-group">
-				<label> <input type="checkbox" value="스팸"> 스팸 </label> 
-				<label> <input type="checkbox" value="욕설"> 욕설 </label> 
-				<label> <input type="checkbox" value="불쾌한 콘텐츠"> 불쾌한 콘텐츠 </label> 
-				<label> <input type="checkbox" value="text"> 기타
+				<label> <input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보 </label> 
+				<label> <input type="radio" value="abuse" name = "report"> 욕설 </label> 
+				<label> <input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테 </label> 
+				<label> 
+					<input type="radio" value="text" name = "report"> 기타
+					<textarea id="reportReason" name = "report"></textarea>
 				</label>
 			</div>
 			<div>
-				<textarea id="reportReason"></textarea>
-				<button onclick="submitReport()">제출</button>
+				
+				<button onclick="submitReport();">제출</button>
 			</div>
 		</div>
 	</div>
 </body>
 
 <!-- javaScript 부분   -->
-	<script>
-	/* 동행 신청 */
-	function confirmAccompany() {
-		var confirmed = confirm("동행을 신청하시겠습니까?");
+<script>
+	function confirmAccompany(){
+	var confirmed=confirm("동행을 신청하시겠습니까?");
 
-		if (confirmed) {
-			alert("동행이 신청되었습니다!");
-		} else {
-			alert("동행 신청이 취소되었습니다.");
-		}
+
+	        window.location.href = "https://www.naver.com";
+	    }
 	}
 	
-	document.addEventListener('DOMContentLoaded', function() {
+	if(confirmed){
+		alert("동행이 신청되었습니다!");
+	}else{
+		alert("동행 신청이 취소되었습니다.");
+	}
+}
+</script>
+	<script>
+	
+	/* 동행 신청 */
+	
+	document.addEventListener('DOMContentLoaded', function(){
 		var openButton = document.getElementById('openProfilePopup');
 		var profilePopup = document.getElementById('profilePopup');
 		var closeButton = document.getElementById('closeProfilePopup');
 
-		openButton.addEventListener('click', function() {
+		openButton.addEventListener('click', function(){
 			profilePopup.style.display = 'block';
 		});
-		closeButton.addEventListener('click', function() {
+		closeButton.addEventListener('click', function(){
 			profilePopup.style.display = 'none';
 		});
 	});
 		
 		var isFilled = false;
-		function toggleImage() {
+		function toggleImage(){
 			var button = document.getElementById('followButton');
 			if (isFilled) {
-				button.src = "<%=request.getContextPath()%>/img/팔로우(빈거).png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
 			} else {
-				button.src = "<%=request.getContextPath()%>/img/팔로우.png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
 			}
 			isFilled = !isFilled; 
 		}
 /* 신고하기  부분  */
-		function openReportPopup() {
+		function openReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'block';
 		}
-
-		function closeReportPopup() {
+		function closeReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'none';
 		}
+	</script>
+	<script>
+	const radios = $("input[name=report]");
 
-		function submitReport() {
-			var reportReason = document.getElementById('reportReason').value;
-			// 여기에 신고 처리 로직 추가
-			alert('신고되었습니다.');
+    function submitReport(){
+        radios.click(e => {
+            const val = radios.filter(":checked").val();
+            if (val === "text") {
+                const textval = $("#reportReason").val();
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
+            } else {
+                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
+            }
+            alert('신고되었습니다.');
+        });
+    }
 
-			// 신고 팝업 닫기
-		}
-		
+    $(document).ready(function (){
+        submitReport();
+    });
+    
+    function accompanySelect(){
+    	console.log(115111);
+		var acSelect  = document.getElementById("acSelect");
+		var value = (acSelect.options[acSelect.selectedIndex].value);
+		var User =  "<%= acUserId %>";
+		var boardNo = <%=acompanyBNo%>;
+		 //console.log(User+boardNo+value)
+		   $.ajax({
+	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
+	            type: 'POST',
+	            data: { value: value , acUser : User ,boardNo :boardNo},
+	            success: function(response) {
+	                console.log('Ajax response:', response);
+	            },
+	            error: function(error) {
+	                console.error('Ajax error:', error);
+	            }
+	        });
+	};
 	</script>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>  -->
-
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+ -->
  <%@ include file="/views/common/footer.jsp"%>

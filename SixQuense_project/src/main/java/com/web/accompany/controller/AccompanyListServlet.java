@@ -32,7 +32,6 @@ public class AccompanyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
-		System.out.println(accompanys);
 		request.setAttribute("accompanys", accompanys);
 		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);
 	}

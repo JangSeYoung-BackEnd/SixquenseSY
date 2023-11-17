@@ -50,6 +50,13 @@ public class AccompanyWH {
 					.AcOffer(new ArrayList<>())
 					.build();
 	}
+	private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
+		return AccompanyOffer.builder()
+				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
+				.memberNo(rs.getInt("MEMBER_NO"))
+				.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
+				.build();
+	}
 	
 	private List<AccompanyAttachment> getAttachment(ResultSet rs) throws SQLException {
 	    return Collections.singletonList(
@@ -91,10 +98,7 @@ public class AccompanyWH {
 				.build();
 
 	}
-	private void boardAddAcoffer (List<AccompanyOffer> AcOffer, ResultSet rs)throws SQLException {
-		
-		
-	}
+	
 	
 	
 	//게시물 번호를 받아서 게시물을 가져오는 메소드 
@@ -209,6 +213,32 @@ public class AccompanyWH {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+
+	public List<AccompanyOffer> selectselectOffer(Connection conn, int no) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<AccompanyOffer> result = new ArrayList<>();
+		System.out.println();
+		try {
+			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
+			pstm.setInt(1, no);
+			rs=pstm.executeQuery();
+			System.out.println("여기는 dao의 rs"+rs.next());
+			while(rs.next()) {
+				result.add(getAccompanyOffer(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		System.out.println("여기는 dao의 result"+result);
+		return result;
+		
+		
+		
 	}
 	
 

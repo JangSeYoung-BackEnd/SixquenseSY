@@ -15,6 +15,7 @@
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
 	int acompanyBNo= b.getAccompanyNo(); 
+	System.out.println(b.getAcOffer()+"offer값");
 	
 	
 	

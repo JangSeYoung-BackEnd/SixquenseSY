@@ -8,6 +8,7 @@ import java.util.List;
 import com.web.accompany.model.dao.AccompanyWH;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.AccompanyOffer;
 
 
 public class AccompanyServiceWH {
@@ -19,15 +20,20 @@ public class AccompanyServiceWH {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
 			
+			//offerstatus불러올려면 list로 가져온다.
+			List<AccompanyOffer> offers=dao.selectselectOffer(conn,no);
+			accompanyView.setAcOffer(offers);
+			System.out.println(offers);
 			//만약에 게시글이 null이 아니면 조회수 올리기 
 			if(accompanyView!=null&&!readResult) {
 				int result=dao.updateAccompanyReadCount(conn, no);
-				
 				if(result>0) {
 					commit(conn);
 					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount()+1);
 				}
-				else rollback(conn);
+				else {
+					rollback(conn);
+				}
 			}
 			close(conn);
 			return accompanyView;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <div class="container">
@@ -37,41 +38,40 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" value="홍길동" readonly >
+                                        <input type="text" value="<%=loginMember.getUserName()%>" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>성별</p>
-                                    <input type="text" value="남" readonly >
+                                    <input type="text" value="<%=loginMember.getGender()%>" readonly>
                                 </div>
                             </div>
                             </div>
-                            <div class="checkout__input">
-                                <p>닉네임</p>
-                                <input type="text" value="길동길동" readonly    >
-                            </div>
                              <div class="checkout__input">
                                 <p>비밀번호</p>
-                                <input type="text" value="**********" readonly>
+                                <input type="text" value="<%=loginMember.getUserPw()%>"readonly>
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
-                                <input type="text" placeholder="1569" class="checkout__input__add" readonly>
-                                <input type="text" placeholder="12월/31일" readonly>
+                                <input type="text" value="<%=loginMember.getUserDd()%>"readonly>
                             </div>
                             <div class="checkout__input">
                                 <p>가입날짜</p>
-                                <input type="text" value="2023/11/11" readonly>
+                                <input type="text" value="<%=loginMember.getEnrollData()%>"readonly>
+                            </div>
+                            <div class="checkout__input">
+                                <p>전화번호</p>
+                                <input type="text" value="<%=loginMember.getPhone()%>"readonly>
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none;"></textarea>
+                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none; value="<%=loginMember.getUserIntroduce()%>"readonly></textarea>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" checked>
+                                    <input type="checkbox" id="acc" checked value="<%=loginMember.getNotificatIonset()%>"readonly>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -116,7 +116,7 @@
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/update.do",
+			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);

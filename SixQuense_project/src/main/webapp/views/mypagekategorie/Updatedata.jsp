@@ -21,23 +21,19 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" placeholder="홍길동" >
+                                        <input type="text" value="<%=loginMember.getUserName()%>" id="name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>성별</p>
-                                    <input type="text" >
+                                    <input type="text" value="<%=loginMember.getGender()%>" id="gender">
                                 </div>
                             </div>
                             </div>
                             <div class="checkout__input">
-                                <p>닉네임</p>
-                                <input type="text" placeholder="길동길동"   >
-                            </div>
-                            <div class="checkout__input">
                                 <p>비밀번호</p>
-                                <input type="text" >
+                                <input type="text" value="<%=loginMember.getUserPw()%>" id="pw">
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
@@ -45,30 +41,29 @@
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
-                                <input type="text" placeholder="1569" class="checkout__input__add" >
-                                <input type="text" placeholder="12월/31일" >
+                                <input type="text"  value="<%=loginMember.getUserDd()%>">
                             </div>
                             <div class="checkout__input">
                                 <p>가입날짜</p>
-                                <input type="text" placeholder="2023/11/11">
+                                <input type="text" value="<%=loginMember.getEnrollData()%>">
                             </div>
                             <div class="checkout__input">
                                 <p>전화번호</p>
-                                <input type="text" placeholder="010-1234-5678" value="<%=loginMember.getPhone()%>">
+                                <input type="text" value="<%=loginMember.getPhone()%>">
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;" >
+                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;" value="<%=loginMember.getUserIntroduce()%>">
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc">
+                                    <input type="checkbox" id="acc" value="<%=loginMember.getNotificatIonset()%>">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <form action="<%=request.getContextPath()%>/update.do" method="post">
-							    <button id="updateBtn2">개인정보 수정</button>
+                            <form>
+							    <input type="button" id="infoupdateBtn" value="정보수정" />
 							</form>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
@@ -108,23 +103,31 @@
             	</div>
 </section>
 <script>
-$("#updateBtn2").click(function () {
-    $.ajax({
-        url: "<%=request.getContextPath()%>/update.do",
-        method: "POST",
-        data: {
-            userNo: <%=loginMember.getUserNo()%>,
-            name: $("#nameInput").val(), 
-            phone: $("#phoneInput").val()
-           
-        }
+    $("#infoupdateBtn").click(e => {	    
+        $.ajax({
+            url: "<%=request.getContextPath()%>/update.do?userNo=<%=loginMember.getUserNo()%>",
+            type: "post",
+            data: {
+            	pw: $('#pw').val(),
+            	name: $('#name').val()
+            	},
+            success: function(data, status, xhr) {
+            	if (data != null) {
+                    alert("성공!");
+                } else {
+                    alert("실패!");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("에러:", error);
+            }
+        });
     });
-});
 </script>
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/update.do",
+			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);

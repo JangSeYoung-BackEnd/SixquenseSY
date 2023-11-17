@@ -9,12 +9,14 @@
 
 
 <%
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");                                                  
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
 	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
 	
 %>
 
@@ -200,7 +202,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 									<div>
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -208,7 +209,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 										</a> 
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -216,7 +216,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 										</a> 
 										<a href="#" class="blog__sidebar__recent__item">
 											<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
 											</div>
 											<div class="blog__sidebar__recent__item__text">
 												<h6>아이디</h6>
@@ -231,10 +230,21 @@ table#tbl-comment tr.level2 sub.comment-date {
 				<div class="col-lg-8 col-md-7 order-md-1 order-1" style="margin-bottom:0px; margin-bottom: 0px; margin-left: 30px;">
 					<div style="padding-top:10px;">
 						<span style="font-size: larger; font-weight: bolder;" ><%=b.getAccompanyTitle() %></span> 
-						<select id = "acSelect" onchange ="accompanySelect()">
-							<option value="모집중" value ="acRecruiting">모집중</option>
-							<option value="마감" value= "acClose">마감</option>
-						</select>
+						
+						<%
+						if(loginMember.getUserNo()== b.getMemberNo()){
+							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting">모집중</option>
+								<option name="acSelect" value= "acClose" selected>마감</option>
+							</select>
+								<%}else{ %>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting" selected>모집중</option>
+								<option name="acSelect" value= "acClose" >마감</option>
+							</select>
+						<%}
+					}%>
 					</div>
 					<div class="blog__details__text"  style="padding-top:20px;">
 						<div style="display:flex;">
@@ -369,24 +379,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 <!-- javaScript 부분   -->
 	
 	<script>
-    function accompanySelect(){
-		var acSelect  = document.getElementById("acSelect");
-		var value = (acSelect.options[acSelect.selectedIndex].value);
-		var User =  "<%= acUserId %>";
-		var boardNo = <%=acompanyBNo%>;
-		 console.log(User+boardNo+value)
-		   $.ajax({
-	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
-	            type: 'POST',
-	            data: { value: value , acUser : User ,boardNo :boardNo},
-	            success: function(response) {
-	                console.log('Ajax response:', response);
-	            },
-	            error: function(error) {
-	                console.error('Ajax error:', error);
-	            }
-	        });
-	};
 
 	/* 동행 신청 */
 	function confirmAccompany() {
@@ -458,6 +450,27 @@ table#tbl-comment tr.level2 sub.comment-date {
     $(document).ready(function () {
         submitReport();
     });
+    
+    function accompanySelect(){
+    	console.log(115111);
+		var acSelect  = document.getElementById("acSelect");
+		var value = (acSelect.options[acSelect.selectedIndex].value);
+		var User =  "<%= acUserId %>";
+		var boardNo = <%=acompanyBNo%>;
+		 console.log(User+boardNo+value)
+		 
+		   $.ajax({
+	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
+	            type: 'POST',
+	            data: { value: value , acUser : User ,boardNo :boardNo},
+	            success: function(response) {
+	                console.log('Ajax response:', response);
+	            },
+	            error: function(error) {
+	                console.error('Ajax error:', error);
+	            }
+	        });
+	};
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

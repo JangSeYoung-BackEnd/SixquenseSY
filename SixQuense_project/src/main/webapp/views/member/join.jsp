@@ -81,8 +81,10 @@
 	border: 2px solid blue;
 }
 
-.outBox .inputBox input[type="text"]:focus+label, .outBox.existence .inputBox label
-	{
+.outBox .inputBox input[type="text"]:focus+label, 
+	.inputBox>input.existence+label,
+	.outBox .inputBox input[type="password"]:focus+label
+{
 	color: blue;
 	transform: scale(.85) translate(-10px, -48px);
 }
@@ -146,10 +148,10 @@
 </style>
 <div class="sh">
 <body>
-	<form action="<%=request.getContextPath()%>/member/login.do" method="post" onsubmit="">
+	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="">
 		<div class="outBox">
 			<div class="inputBox">
-				<input autocomplete="off" id="userId" name="userId" type="text" class="inputBoxinput">
+				<input autocomplete="off" id="userId" name="userId" type="text" class="inputBoxinput" onsubmit="return fn_membervalidate();">
 				<label for="userId">이메일</label>
 			</div>
 
@@ -160,7 +162,7 @@
 			
 			
 			<div class="inputBox">
-				<input autocapitalize="off" id="userpw2" class="inputBoxinput"
+				<input autocapitalize="off" id="userpw2" class="inputBoxinput" name="userpw2"
 					 type="password"> <label for="userpw2">비밀번호 확인</label>
 			</div>
 			
@@ -178,9 +180,9 @@
 			
 			
 			<div class="inputBox">
-				<input autocomplete="off" id="usernn" class="inputBoxinput"
-					name="usernn" type="text">
-				<label for="usernn">닉네임 </label>
+				<input autocomplete="off" id="userName" class="inputBoxinput"
+					name="userName" type="text">
+				<label for="userName">이름 </label>
 			</div>
 			
 			
@@ -225,6 +227,32 @@
 		
 	</form>
 	<script>
+		const fn_membervalidate=()=>{
+			 const userId=$("userId").val().trim();
+			 if(userId.ienght<8){
+				 alert("죄송합니다 8자 이상의 사용자 이름에는 최소 하나의 알파벳 문자(a-z)가 있어야 합니다.")
+			 	 return false;
+			 }
+			 const reg='^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$';
+			 const password=$("#password"){
+				 alert("비밀번호는 영문자, 특수기호,숫자를 반드시 포함해야합니다.");
+				 $("#userpw").val("");
+				 $("#userpw2").val("");
+				 $("#userpw").focus();
+				 return false;
+			 }
+		}
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	<script>
+		// 아이디 비밀번호 OutBox 입력값 입히면 안내려가고 올라가는 JS
         var loginBox = document.querySelector('.outBox');
         var loginInputBox = document.querySelectorAll('.inputBox input');
         loginInputBox.forEach(e=>{
@@ -236,10 +264,17 @@
                 }
             });
         });
-       
- 	</script>
+  	</script>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	<script>
- 	function phone(str){
+ 		// 폰 번호 ***-****-**** 자동으로 나오게 하는 JS
+ 		function phone(str){
         str = str.replace(/[^0-9]/g, '');
         var tmp = '';
         if( str.length < 4){
@@ -267,10 +302,10 @@
         return str;
     }
 
-var cellPhone = document.getElementById('cellPhone');
+var cellPhone = document.getElementById('phone');
 cellPhone.onkeyup = function(event){
     event = event || window.event;
     var _val = this.value.trim();
-    this.value = autoHypenPhone(_val) ;
+    this.value = phone(_val) ;
 }
  	</script>

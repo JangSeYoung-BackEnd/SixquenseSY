@@ -72,6 +72,27 @@ public class AccompanyDAOKH {
 		return result;
 	}
 	
+	public List<AccompanyDTO> selectAccompanyByCoordinate(Connection conn, String coordinate){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyByCoordinate"));
+			pstmt.setString(1, coordinate);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+			System.out.println(result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int insertAccompany(Connection conn, AccompanyDTO a, String nation, String userId) {
 		PreparedStatement pstmt=null;
 		int result=0;

@@ -1,28 +1,26 @@
 package com.web.product.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductwishilistDto;
 import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class RemoveWishlistServlet
  */
-@WebServlet("/product/productlist.do")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/removewishlist.do")
+public class RemoveWishlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public RemoveWishlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +29,17 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); //post방식 인코딩 필요
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		
-		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
+		ProductwishilistDto wishlist = ProductwishilistDto.builder()
+				.MemberNo(memberNo)
+				.ProductNo(productNo)
+				.build();
 		
-		List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
-		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
-		
-		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
-		
-		request.setAttribute("recentProducts", recentProducts);
-		request.setAttribute("bestProducts", bestProducts);
-		request.setAttribute("dicountProducts", dicountProducts);
-		System.out.println(recentProducts);
-		System.out.println(bestProducts);
-		System.out.println(dicountProducts);
-		
-	
-		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
+		int result = new ProductService().removewishlist(wishlist);
+		System.out.println(result);
 	}
 
 	/**

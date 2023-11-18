@@ -46,7 +46,7 @@ public class BookingUserDao {
 		return Member.builder()
 				.userNo(rs.getInt("member_no"))
 				.userId(rs.getString("user_id"))
-				.userNn(rs.getString("user_nn"))
+				.userName(rs.getString("kr_user_name"))
 				.userDd(rs.getDate("user_dd"))	
 				.gender(rs.getString("gender"))
 				.build();

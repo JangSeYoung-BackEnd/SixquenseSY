@@ -80,8 +80,8 @@
                         <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanylist.do')" class="recent-btn">최신순</button>
                         <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanypopularity.do')" class="popularity-btn">인기순</button>
                     </div>
-                    <div class="row">
-                    	<% if(!accompanys.isEmpty()){ 
+                    <div class="row" id="accompanylist">
+                    	<% if(!accompanys.isEmpty()){
                     		for(AccompanyDTO a:accompanys){%>
 		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>');">
 		                            <div class="product__item">
@@ -112,9 +112,26 @@
 	        $.ajax({
 	        	type:"post",
 	        	url:"<%=request.getContextPath()%>/accompany/accompanycoordinate.do",
-	        	date:{coordinate:temp},
-	        	success:function(){
-	        		console.log("되니");
+	        	data:{"coordinate":temp},
+	        	success:data=>{
+	        		console.log(data);
+	        		data.forEach(e=>{
+	        			htmltext +="<div class='col-lg-4 col-md-6 col-sm-6' onclick=\"location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=" + e['memberNo'] + "');\">" +
+				        	        "<div class='product__item'>" +
+				        	        "<div class='product__item__pic set-bg' data-setbg='<%=request.getContextPath()%>/upload/accompany/" + e['renameFilename'] + "' style='border-radius: 20%;'>" +
+				        	        "<ul class='product__item__pic__hover'>" +
+				        	        "<li><a href='#'><i class='fa fa-heart'></i></a></li>" +
+				        	        "</ul>" +
+				        	        "</div>" +
+				        	        "<div class='product__item__text'>" +
+				        	        "<a style='display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;'>" + (e['accompanyStatus'] == 'acClose' ? '모집마감' : '모집중') + "</a>" +
+				        	        "<a style='display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;'>" + e['accompanyTitle'] + "</a>" +
+				        	        "<a style='display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;'>" + e['accompanyContent'] + "</a>" +
+				        	        "</div>" +
+				        	        "</div>" +
+				        	        "</div>";
+	        		});
+	        		$("#accompanylist").html(htmltext);
 	        	}
 	        });
 	    });

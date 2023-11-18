@@ -42,7 +42,6 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -62,7 +61,6 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -83,7 +81,6 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

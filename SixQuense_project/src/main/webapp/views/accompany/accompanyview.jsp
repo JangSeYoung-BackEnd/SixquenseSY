@@ -1,3 +1,4 @@
+<%@page import="com.web.accompany.model.dto.AccompanyOffer"%>
 <%@page import="com.web.accompany.model.dto.AccompanyComment"%>
 <%@page import="java.util.List"%>
 <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
@@ -9,20 +10,42 @@
 
 
 <%
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");                                                  
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");		
+	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer"); 
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
-	int acompanyBNo= b.getAccompanyNo(); 
-	
-	
+	int acompanyBNo= b.getAccompanyNo(); 	
 	
 %>
 
 
 
 <style>
+    .blog__sidebar__recent {
+        border: solid gainsboro;
+    }
+
+    .blog__sidebar__recent > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog__sidebar__recent__item {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .blog__sidebar__recent__item__pic img {
+        height: 60px;
+        width: 60px;
+        margin-top: 10px;
+    }
+
+    .blog__sidebar__recent__item__text {
+        margin-left: 10px;
+    }
 div#googleMap img{
 	border-radius:0;
 }
@@ -171,18 +194,20 @@ table#tbl-comment tr.level2 sub.comment-date {
 					<div class="blog__sidebar" style="padding-top: 0px;">
 					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
-							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px">
+							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px; height: 80px;" >
 								<div class="blog__details__author__pic col-sm-2">
-<%-- 									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">
- --%>								</div>
+								<img src="<%=request.getContextPath() %>/img/profile/<%=b.getRenameProfilename() %>" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+								
+<%-- <img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">--%>							</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
 									<div class="cols">
 										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
-										<%=loginMember.getUserId() %>
+										<%= b.getUserId()%>
 										</div>
 										<div class="item col-sm-4">
-											<img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
-											onclick="toggleImage()" width="20" height="20">
+											
+											<%-- <img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
+											onclick="toggleImage()" width="20" height="20"> --%>
 										</div>
 									</div>
 								</div>
@@ -191,37 +216,44 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<%} %>
 						<div class="row" >
 							<div class="blog__sidebar__item">
-								<%if(loginMember!=null){ %>
-								<div class="col-sm-12">
-									<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
-								<%} %>
+								<%if(loginMember!=null){ 
+									/* 로그인을 하고 로그인멤버가 글쓴이가 아니면 ~ 버튼 생성  */
+									if(loginMember.getUserNo()!= b.getMemberNo()){
+										if(b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() &&
+										b.getAcOffer().get(0).getAccompanyOfferStatus().equals("대기중")) {%>
+										<!--  -->
+											<div class="col-sm-12">
+											<button onclick="" style="margin:10px 0 10px 0; width: 290px;">신청했습니다</button>				
+										<%}else{ %>
+											<div class="col-sm-12">
+											<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+										<%}
+									}else{%>
+										<div class="col-sm-12">
+										<button style="margin:10px 0 10px 0; width: 290px;"> <a href="<%=request.getContextPath() %>/mywrite.do">나의 글 확인하기</a></button>
+									<%}
+								}%>
 								</div>
-								<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro;">
+								<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro; margin-left: 15px; width: 289.8px;">
 									<div style="margin: 5px 0px 5px 0px;">
-										<h5>동행신청한 목록</h5>
+										<%if (offer.isEmpty()){ %>
+											<h5>신청자가 없습니다.</h5>
+										<%}else{ %>
+											<h5>동행신청한 목록</h5>
+										<%} %>
 									</div>
 									<div>
-										<a href="#" class="blog__sidebar__recent__item">
-											<div class="blog__sidebar__recent__item__pic">
+									<%for(int i =0; i < offer.size();i++){ %>
+											<div>
+												<div class="blog__sidebar__recent__item__pic">
+												<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+												</div>
+												<div class="blog__sidebar__recent__item__text">
+													<h6><%=offer.get(i).getUserId() %></h6>
+												</div>
 											</div>
-											<div class="blog__sidebar__recent__item__text">
-												<h6>아이디</h6>
-											</div>
-										</a> 
-										<a href="#" class="blog__sidebar__recent__item">
-											<div class="blog__sidebar__recent__item__pic">
-											</div>
-											<div class="blog__sidebar__recent__item__text">
-												<h6>아이디</h6>
-											</div>
-										</a> 
-										<a href="#" class="blog__sidebar__recent__item">
-											<div class="blog__sidebar__recent__item__pic">
-											</div>
-											<div class="blog__sidebar__recent__item__text">
-												<h6>아이디</h6>
-											</div>
-										</a>
+										<%} %>
+
 									</div>
 								</div>
 							</div>
@@ -234,7 +266,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 						
 						<%
 						if(loginMember.getUserNo()== b.getMemberNo()){
-							if(b.getAccompanyOfferStatus().equals("acClose")) {%>
+							if(b.getAccompanyStatus().equals("acClose")) {%>
 							<select id = "acSelect" onchange ="accompanySelect();">
 								<option name="acSelect" value ="acRecruiting">모집중</option>
 								<option name="acSelect" value= "acClose" selected>마감</option>
@@ -378,22 +410,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 </body>
 
 <!-- javaScript 부분   -->
-<script>
-	function confirmAccompany(){
-	var confirmed=confirm("동행을 신청하시겠습니까?");
 
-
-	        window.location.href = "https://www.naver.com";
-	    }
-	}
-	
-	if(confirmed){
-		alert("동행이 신청되었습니다!");
-	}else{
-		alert("동행 신청이 취소되었습니다.");
-	}
-}
-</script>
 	<script>
 	
 	/* 동행 신청 */
@@ -451,25 +468,48 @@ table#tbl-comment tr.level2 sub.comment-date {
         submitReport();
     });
     
+    
+    //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
-    	console.log(115111);
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
-		var User =  "<%= acUserId %>";
+		<%-- var User =  "<%= acUserId %>"; --%>
 		var boardNo = <%=acompanyBNo%>;
 		 //console.log(User+boardNo+value)
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
-	            data: { value: value , acUser : User ,boardNo :boardNo},
-	            success: function(response) {
-	                console.log('Ajax response:', response);
-	            },
-	            error: function(error) {
-	                console.error('Ajax error:', error);
-	            }
+	            data: { value: value,boardNo :boardNo}
 	        });
 	};
+	
+	//동행신청하기 누르기 
+	function confirmAccompany(){
+		var confirmed=confirm("동행을 신청하시겠습니까?");
+		var userNo =  <%= loginMember.getUserNo() %>;
+		var boardNo = <%=acompanyBNo%>;
+		if(confirmed){
+				alert("동행이 신청되었습니다!");
+				
+				 $.ajax({
+			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
+			            type: 'POST',
+			            data: { userNo : userNo ,boardNo :boardNo},
+			            success: function(response) {
+			                console.log('Ajax response:', response);
+			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
+			            },
+			            error: function(error) {
+			                console.error('Ajax error:', error);
+			            }
+			        });
+				 /* window.open("https://open.kakao.com/o/su9dmOSf", "_blank"); */
+
+			}else{
+				alert("동행 신청이 취소되었습니다.");
+			}
+
+		 }
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

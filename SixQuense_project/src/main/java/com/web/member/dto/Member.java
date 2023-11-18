@@ -23,5 +23,6 @@ public class Member {
 	private String notificatIonset;
 	private String originalFilename; 
 	private String renameFilename;
+		
 	
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.dao.ProductDao;
+import com.web.member.dto.Member;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.model.service.ProductService;
@@ -60,10 +60,23 @@ public class ProductViewServlet extends HttpServlet {
 		}
 		
 		ProductDto product = new ProductService().selectProductByNo(productNo,readResult);
-		//List<ProductsreviewDto> comments = new ProductService().selectProductComment(productNo);
-		
+		List<ProductsreviewDto> comments = new ProductService().selectProductComment(productNo);
+		int commentCount = new ProductService().selectProductCountByNo(productNo);
+		int wishlistCount = new ProductService().selectWishlistCountByNo(productNo);
+		/*
+		 * Member loginMember=(Member)request.getSession().getAttribute("loginMember");
+		 * boolean wishresult=false; if(loginMember!=null) {
+		 * wishresult=product.getWishlist().stream().anyMatch(e->e.getMemberNo()==
+		 * loginMember.getUserNo()); }
+		 */
 		request.setAttribute("product", product);
-		//request.setAttribute("comments", comments);
+		request.setAttribute("comments", comments);
+		request.setAttribute("commentCount", commentCount);
+		request.setAttribute("wishlistCount", wishlistCount);
+		//request.setAttribute("wishResult", wishresult);
+		System.out.println(comments);
+		System.out.println(product);
+		
 		
 		//상품 상 jsp로 이동
 		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);

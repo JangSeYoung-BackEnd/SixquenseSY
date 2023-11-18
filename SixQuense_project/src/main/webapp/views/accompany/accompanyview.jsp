@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.web.accompany.model.dto.AccompanyOffer"%>
 <%@page import="com.web.accompany.model.dto.AccompanyComment"%>
 <%@page import="java.util.List"%>
@@ -10,19 +11,30 @@
 
 
 <%
+	
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");		
 	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer"); 
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
-	int acompanyBNo= b.getAccompanyNo(); 	
+	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
 	
 %>
 
 
 
 <style>
+.accept-button,
+    .decline-button {
+        margin-left: 10px;
+        cursor: pointer;
+        padding: 5px 10px; /* Adjust padding to change button size */
+        font-size: 14px; /* Adjust font size */
+        /* Add additional styling as needed */
+    }
     .blog__sidebar__recent {
         border: solid gainsboro;
     }
@@ -196,7 +208,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div class="col-lg-12 blog__details__author">
 							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px; height: 80px;" >
 								<div class="blog__details__author__pic col-sm-2">
-								<img src="<%=request.getContextPath() %>/img/profile/<%=b.getRenameProfilename() %>" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+								<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
 								
 <%-- <img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">--%>							</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
@@ -243,18 +255,28 @@ table#tbl-comment tr.level2 sub.comment-date {
 										<%} %>
 									</div>
 									<div>
-									<%for(int i =0; i < offer.size();i++){ %>
-											<div>
-												<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+									<% int a= 0;
+									for( int i =1; i < offer.size();i++){ %>
+											<div style ="display: flex;">
+												<div >
+													<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px; margin-botton : 10px;">
 												</div>
-												<div class="blog__sidebar__recent__item__text">
-													<h6><%=offer.get(i).getUserId() %></h6>
+												<div >
+													<div style ="margin: 5px; margin-bottom: 0px; margin-left: 10px; ">
+														<h4 style ="margin-bottom: 0px"> <%=offer.get(i).getUserId() %></h4>
+														
+													</div>
+													<%if(loginMember.getUserNo() == b.getMemberNo()){ %>
+													<div style="margin-bottom: 5px; margin-left: 20px; ">
+														<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+														<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+													</div>
+													
+													<%} %>
 												</div>
 											</div>
-										<%} %>
-
-									</div>
+										<%} %>									
+										</div>
 								</div>
 							</div>
 						</div>
@@ -510,6 +532,54 @@ table#tbl-comment tr.level2 sub.comment-date {
 			}
 
 		 }
+	/* function acceptOffer(e){ */
+		function acceptOffer(button) {
+			var boardNo = <%=acompanyBNo%>;
+			var memberNo = $(button).data("member-no");
+		    //console.log("MemberNo: " + memberNo);
+			//console.log(e.target);
+			/* console.log( ("button[class=accept-button]").val($(e.target).val()));
+			console.log($(event.target).val); */
+			/* offer.get((event.target).val).getMemberNo() */
+			/* var $clickedButton = $(this);
+		    var index = $("button.accept-button").index($clickedButton);
+		    console.log("Clicked button text: " + $clickedButton.text());
+		    console.log("Index of clicked button: " + index); */
+		   
+			var confirmed=confirm("동행 신청을 수락하시겠습니까?");
+			if(confirmed){
+				alert("동행이 수락되었습니다");
+				$.ajax({
+					url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
+		            type: 'POST',
+		            data: {boardNo :boardNo,memberNo :memberNo},
+					
+				});
+				
+				
+			}else{
+				alert("동행 신청이 취소되었습니다.");
+			}
+		}
+		
+	
+	function declineOffer(button){
+		var boardNo = <%=acompanyBNo%>;
+		var memberNo = $(button).data("member-no");
+		
+		var confirmed=confirm("동행 신청을 거절하시겠습니까?");
+		if(confirmed){
+			alert("거절되었습니다.");
+			$.ajax({
+				url: "<%=request.getContextPath() %>/accompay/Acommpanydecline.do", 
+	            type: 'POST',
+	            data: { boardNo :boardNo,memberNo :memberNo},
+				
+			});
+		}else{
+			alert("취소되었습니다.");
+		}
+	}
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

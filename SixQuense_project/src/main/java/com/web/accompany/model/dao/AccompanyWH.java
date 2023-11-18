@@ -300,10 +300,38 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
-
-
-
-	
+	public int updateAcceptOffer(Connection conn, int acompanyBNo, int memberNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		//System.out.println(acompanyBNo+" " +memberNo);
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateAcceptOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int updateDeclineOffer(Connection conn, int acompanyBNo, int memberNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		//System.out.println(acompanyBNo+" " +memberNo);
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateDeclineOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+			System.out.println(result+"거절결과");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}	
 
 
 	

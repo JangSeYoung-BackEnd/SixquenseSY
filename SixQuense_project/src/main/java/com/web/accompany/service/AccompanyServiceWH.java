@@ -89,6 +89,26 @@ public class AccompanyServiceWH {
 		}
 
 
+		public int updateAcceptOffer(int acompanyBNo, int memberNo) {
+			Connection conn=getConnection();
+			int result=dao.updateAcceptOffer(conn,acompanyBNo,memberNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+
+		public int updateDeclineOffer(int acompanyBNo, int memberNo) {
+			Connection conn=getConnection();
+			int result=dao.updateDeclineOffer(conn,acompanyBNo,memberNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+
 		
 		
 }

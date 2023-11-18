@@ -25,11 +25,9 @@
 	
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png" style="
-                            width: 165px;
-                            padding-left: 0px;
-                            margin-left: 294px;
-                            margin-bottom: 25px;">
+                <img src="<%=request.getContextPath() %>/upload/mypage/<%=loginMember.getProfileImage()%>"
+     				style="width: 165px; padding-left: 0px; margin-left: 294px; margin-bottom: 25px;">
+
                             <p style="width: 750px;"> 홍 길 동</p>
                 <form action="#">
                     <div class="row">
@@ -66,12 +64,12 @@
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none; value="<%=loginMember.getUserIntroduce()%>"readonly></textarea>
+                                <textarea style="width: 100%; height: 150px; padding-bottom: 100px; resize:none; value="<%=loginMember.getUserIntroduce()%>"disabled></textarea>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" checked value="<%=loginMember.getNotificatIonset()%>"readonly>
+                                    <input type="checkbox" id="acc" checked readonly value="<%=loginMember.getNotificatIonset()%>"readonly>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -90,7 +88,7 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회&취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회,취소</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
                                             <button id="wishBtn">위시리스트</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">

@@ -76,8 +76,9 @@
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
                         <form action="#">
-                            <input type="text" placeholder="어디로 떠나실건가요?">
+                            <input type="search" id="search" list="data" placeholder="어디로 떠나실 건가요?">
                             <button type="submit" class="site-btn">SEARCH</button>
+							<datalist id="data"></datalist>
                         </form>
                     </div>
                     <%if(loginMember==null) {%>

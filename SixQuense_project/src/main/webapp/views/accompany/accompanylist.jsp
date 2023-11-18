@@ -91,7 +91,7 @@
 		                                    </ul>
 		                                </div>
 		                                <div class="product__item__text">
-		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("asClose")?"모집마감":"모집중"%>]</a>
+		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
 		                                </div>

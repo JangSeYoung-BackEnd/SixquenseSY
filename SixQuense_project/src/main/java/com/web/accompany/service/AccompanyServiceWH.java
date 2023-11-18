@@ -21,9 +21,9 @@ public class AccompanyServiceWH {
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
 			
 			//offerstatus불러올려면 list로 가져온다.
-			List<AccompanyOffer> offers=dao.selectselectOffer(conn,no);
-			accompanyView.setAcOffer(offers);
-			System.out.println(offers);
+//			List<AccompanyOffer> offers=dao.selectselectOffer(conn,no);
+//			accompanyView.setAcOffer(offers);
+			//System.out.println(offers);
 			//만약에 게시글이 null이 아니면 조회수 올리기 
 			if(accompanyView!=null&&!readResult) {
 				int result=dao.updateAccompanyReadCount(conn, no);
@@ -47,6 +47,14 @@ public class AccompanyServiceWH {
 			close(conn);
 			//System.out.println(list+"dao");
 			return list;
+		}
+		
+		//글번호에 해당하는 offerStatus를 가져옴 
+		public List<AccompanyOffer> selectOfferByNo(int no) {
+			Connection conn= getConnection();
+			List <AccompanyOffer> offer = dao.selectOfferByNo(conn,no);
+			close(conn);
+			return offer;
 		}
 
 		//댓글 삽입하는 메소드 
@@ -79,5 +87,8 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+
+
+		
 		
 }

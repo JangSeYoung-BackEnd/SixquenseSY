@@ -16,6 +16,7 @@ public class AccompanyDTO {
 	private int accompanyCount;
 	private Date accompanyDate;
 	private int memberNo;
+	private String userId ; //user 아이디 가져오기 
 	private int accompanyReadCount;
 	private Coordinate coordinate;//좌표 번호 
 	private String openChattingLink;
@@ -23,5 +24,7 @@ public class AccompanyDTO {
 	private String renameFilename; //첨부 파일불러오기
 	private String accompanyStatus;
 	private List <AccompanyOffer> AcOffer = new ArrayList();
+	private String renameProfilename;
+	
 }
 

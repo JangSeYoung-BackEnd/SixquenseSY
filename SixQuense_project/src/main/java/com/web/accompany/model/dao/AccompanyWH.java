@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 import com.web.accompany.model.dto.AccompanyAttachment;
@@ -48,9 +49,20 @@ public class AccompanyWH {
 					.accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
 					.openChattingLink(rs.getString("OPENCHATTING_LINK"))
 					.AcOffer(new ArrayList<>())
+					.userId(rs.getString("USER_ID"))
+					.renameProfilename(rs.getString("PROFILE_RE_FILNAME"))
 					.build();
 	}
 	private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
+		return AccompanyOffer.builder()
+				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
+				.memberNo(rs.getInt("MEMBER_NO"))
+				.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
+				.offerRename(rs.getString("PROFILE_RE_FILNAME"))
+				.userId(rs.getString("USER_ID"))
+				.build();
+	}
+	private AccompanyOffer getOffer (ResultSet rs) throws SQLException{
 		return AccompanyOffer.builder()
 				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
 				.memberNo(rs.getInt("MEMBER_NO"))
@@ -105,24 +117,76 @@ public class AccompanyWH {
 	public AccompanyDTO selectAccompanyByNo(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		AccompanyDTO a=  null;
+		List<AccompanyDTO> board = new ArrayList<AccompanyDTO>();
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyByNo"));
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) a =getAccompanyDTO(rs);
-						
+			 while (rs.next()) {
+				//a = getAccompanyDTO(rs);
+				addselectOffer(board,rs);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		return a;
+		//System.out.println(board.get(0));
+		return board.get(0);
 		
 	}
-
+//	public List<AccompanyOffer> selectselectOffer(Connection conn, int no) {
+//		PreparedStatement pstm = null;
+//		ResultSet rs = null;
+//		List<AccompanyOffer> result = new ArrayList<>();
+//		System.out.println();
+//		try {
+//			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
+//			pstm.setInt(1, no);
+//			rs=pstm.executeQuery();
+//			System.out.println("여기는 dao의 rs"+rs.next());
+//			while(rs.next()) {
+//				result.add(getAccompanyOffer(rs));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstm);
+//		}
+//		System.out.println("여기는 dao의 result"+result);
+//		return result;
+//		
+//		
+//		
+//	}
+	
+	private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
+		  int pk = rs.getInt("ACCOMPANY_NO");
+	      if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {
+	    	  board.stream().filter(e -> Objects.equals(e.getAccompanyNo(), pk)).forEach(e -> {
+	            try {
+	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+	                  e.getAcOffer().add(getAccompanyOffer(rs));
+	               }
+	               
+	            } catch (SQLException e1) {
+	               e1.printStackTrace();
+	            }
+	         });
+	      } else {
+	    	  AccompanyDTO boards = getAccompanyDTO(rs);
+	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+	        	 boards.getAcOffer().add(getAccompanyOffer(rs));
+	        	 board.add(boards);
+	         }
+	         
+	      }
+	}
+	
+	
 	//댓글 가져오는 메소드 
 	public List<AccompanyComment> selectAccompanyComment(Connection conn, int no) {
 		PreparedStatement pstmt= null;
@@ -140,6 +204,28 @@ public class AccompanyWH {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public List<AccompanyOffer> selectOfferByNo(Connection conn, int no) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<AccompanyOffer> result = new ArrayList<>();
+		//System.out.println(no +"dao 번호1!!!!!!!!!!!!");
+		try {
+			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
+			pstm.setInt(1, no);
+			rs=pstm.executeQuery();
+			while(rs.next())result.add(getAccompanyOffer(rs));
+			//System.out.println(rs.next() +"rs.next() 번호1!!!!!!!!!!!!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		System.out.println(result);
+		return result;
+		
 	}
 	
 
@@ -215,31 +301,8 @@ public class AccompanyWH {
 		}return result;
 	}
 
-	public List<AccompanyOffer> selectselectOffer(Connection conn, int no) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<AccompanyOffer> result = new ArrayList<>();
-		System.out.println();
-		try {
-			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
-			pstm.setInt(1, no);
-			rs=pstm.executeQuery();
-			System.out.println("여기는 dao의 rs"+rs.next());
-			while(rs.next()) {
-				result.add(getAccompanyOffer(rs));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstm);
-		}
-		System.out.println("여기는 dao의 result"+result);
-		return result;
-		
-		
-		
-	}
+
+
 	
 
 

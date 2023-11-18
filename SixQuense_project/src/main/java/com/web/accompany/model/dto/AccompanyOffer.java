@@ -9,4 +9,6 @@ public class AccompanyOffer {
 	private int accompanyNo;
 	private int memberNo;
 	private String accompanyOfferStatus;
+	private String offerRename;
+	private String userId ;
 }

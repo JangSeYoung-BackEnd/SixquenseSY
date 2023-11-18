@@ -1,27 +1,26 @@
-package com.web.accompany.controller;
+package com.web.product.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.accompany.service.AccompanyServiceWH;
+import com.web.product.dto.ProductwishilistDto;
+import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class AccompanyResultAjax
+ * Servlet implementation class RemoveWishlistServlet
  */
-@WebServlet("/accompany/AccompanyResultAjax.do")
-public class AccompanyResultAjax extends HttpServlet {
+@WebServlet("/product/removewishlist.do")
+public class RemoveWishlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyResultAjax() {
+    public RemoveWishlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +29,17 @@ public class AccompanyResultAjax extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String value = request.getParameter("value");
-//		String user =request.getParameter("acUser");
-		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
-//		PrintWriter out=response.getWriter();
-//		out.print(value);
-//		out.print(user);
-//		System.out.println(value+"servlet");
-//		System.out.println(user+"servlet");
-//		System.out.println(acompanyBNo+"servlet");
-		int result = new AccompanyServiceWH().updateAccompanyOffer(acompanyBNo,value);
-//		System.out.println(result);
-		//request.setAttribute("result", result);
+		request.setCharacterEncoding("utf-8"); //post방식 인코딩 필요
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		
+		ProductwishilistDto wishlist = ProductwishilistDto.builder()
+				.MemberNo(memberNo)
+				.ProductNo(productNo)
+				.build();
+		
+		int result = new ProductService().removewishlist(wishlist);
+		System.out.println(result);
 	}
 
 	/**

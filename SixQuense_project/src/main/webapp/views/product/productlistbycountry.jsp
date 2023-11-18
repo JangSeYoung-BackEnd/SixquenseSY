@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
+<%@ include file="/views/common/header.jsp"%>
 <%
 	List<ProductDto> recentProducts = (List<ProductDto>)request.getAttribute("recentProducts");
 	ProductDto rp = recentProducts.get(0);
@@ -7,10 +9,9 @@
 	List<ProductDto> dicountProducts = (List<ProductDto>)request.getAttribute("dicountProducts");
 	ProductDto dp = dicountProducts.get(0);
 	
-	
+	List<ProductDto> bestProducts = (List<ProductDto>)request.getAttribute("bestProducts");
+	ProductDto bp = dicountProducts.get(0);
 %>
-<%@ page import="com.web.product.dto.ProductDto, java.util.List" %>
-<%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <style>
@@ -56,7 +57,7 @@ p {
 						<div class="blog__sidebar__item">
 							<h4>어떤 여행을 찾고 있나요</h4>
 							<div class="blog__sidebar__item__tags">
-								<a href="#" class="tag" onclick="scrollToSection('best')">BEST</a> 
+								<a href="#" class="tag" onclick="scrollToSection('best')">조회순</a> 
 								<a href="#" class="tag" onclick="scrollToSection('latest')">최신순</a> 
 								<a href="#" class="tag" onclick="scrollToSection('special')">특가</a>
 							</div>
@@ -68,20 +69,20 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
-								<img src="img/blog/blog-2.jpg" alt="">
+								<img src="<%=request.getContextPath() %>/img/product/<%=bp.getAttachment().get(0).getOrginalFilename() %>" alt="">
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productview.do>">패키지/투어 이름1</a>
+									<a href="<%=request.getContextPath()%>/product/productview.do>"><%=bp.getProductName() %>
 								</h5>
-								<p>패키지 내용1</p>
-								<a href="<%=request.getContextPath()%>/product/productview.do" class="blog__btn"> 199,000원 <span
+								<p><%=bp.getProductDetail() %></p>
+								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=bp.getProductNo()%>" class="blog__btn"> <%=bp.getProductPrice() %>원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p>추천 이유1</p>
+										<p><%=bp.getEditorNote() %></p>
 									</div>
 								</div>
 							</div>

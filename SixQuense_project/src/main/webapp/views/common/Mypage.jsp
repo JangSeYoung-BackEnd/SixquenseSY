@@ -25,10 +25,8 @@
 	
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/upload/mypage/<%=loginMember.getProfileImage()%>"
+                <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png"
      				style="width: 165px; padding-left: 0px; margin-left: 294px; margin-bottom: 25px;">
-
-                            <p style="width: 750px;"> 홍 길 동</p>
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -113,75 +111,111 @@
 </section>
 <script>
 	$("#updateBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true); 
 		$.ajax({
 			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+				complete: function () {
+	                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+	            }
 			});
 		});		
 		
 	</script>
 <script>
 	$("#wishBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/Wish.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+			complete: function () {
+                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+            }
 			});
 		});		
 		
 	</script>
 	<script>
 	$("#checkcancelBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ProductList.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+			complete: function () {
+                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+            }
 		});
 	});		
 	</script>
    <script>
 	$("#wenttripBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/Wenttrip.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+			complete: function () {
+                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+            }
 		});
 	});		
 	</script>
 	 <script>
 	$("#mywirteBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/mywrite.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+			complete: function () {
+                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+            }
 		});
 	});		
 	</script>
 	<script>
 	$("#questionBtn").click(e=>{
+		e.preventDefault();
+        var $button = $(this);
+        $button.prop("disabled", true);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/question.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
 					$("#htmlcontainer").html(data);
-				}
+				},
+			complete: function () {
+                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+            }
 		});
 	});		
 	</script>

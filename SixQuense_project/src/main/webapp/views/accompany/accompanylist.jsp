@@ -83,7 +83,7 @@
                     <div class="row" id="accompanylist">
                     	<% if(!accompanys.isEmpty()){
                     		for(AccompanyDTO a:accompanys){%>
-		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>');">
+		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>,userNo=<%=loginMember.getUserNo()%>');">
 		                            <div class="product__item">
 		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
 		                                    <ul class="product__item__pic__hover">

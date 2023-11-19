@@ -298,8 +298,8 @@ a {
 													</tr>
 													<tr>
 														<td class="content-block">
-															<h2>예약 접수</h2> <br> <strong>예약을 확인하기까지 조금만
-																기다려주세요!<br> 영업일 기준 24시간 이내로 확정 여부를 알려드려요
+															<h2>결제완료</h2> <br> <strong>여행 :
+																<br> 결제번호 :
 														</strong>
 														</td>
 													</tr>
@@ -330,8 +330,6 @@ a {
 									<tr>
 										<td class="content-block">
 											<button type="button" class="btn btn-light">홈으로 가기</button>
-											<button type="button" class="btn btn-success">예약 상세
-												가기</button>
 										</td>
 									</tr>
 								</tbody>

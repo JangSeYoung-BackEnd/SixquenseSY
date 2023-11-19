@@ -35,8 +35,7 @@ public class BookinginfoDao {
             pstmt.setDate(2, new java.sql.Date(b.getBookingBrith().getTime()));
             pstmt.setString(3, b.getBookingGender());
             pstmt.setString(4, b.getBookingPhone());
-            pstmt.setInt(5, memberNo); // 외래키
-            pstmt.setInt(6, orderNo); // 외래키
+            pstmt.setInt(5, orderNo); // 외래키
             result = pstmt.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
@@ -52,6 +51,7 @@ public class BookinginfoDao {
                 .BookingBrith(rs.getDate("BOOKING_BIRTH"))
                 .BookingGender(rs.getString("BOOKING_GENDER"))
                 .BookingPhone(rs.getString("BOOKING_PHONE"))
+                .OrderNo(rs.getInt("ORDER_NO")) //주문번호
                 .build();
     }
 }

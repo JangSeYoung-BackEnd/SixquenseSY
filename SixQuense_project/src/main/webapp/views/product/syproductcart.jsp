@@ -51,11 +51,6 @@ ProductDto product = (ProductDto)request.getAttribute("product");
                  merchant_uid: "IMP"+makeMerchantUid, 
                  name : $("div.shoping__cart__item>h3").text(),
                  amount : parseInt($("td.shoping__cart__item__close").text()),
-                 buyer_email : 'sixquence',
-                 buyer_name : '',
-                 buyer_tel : '010-1234-5678',
-                 buyer_addr : '',
-                 buyer_postcode : '123-456'
              }, function (rsp) { // callback
                  if (rsp.success) {
                 	 $("#orderInfo div.nice-select").removeClass("disabled");
@@ -86,25 +81,32 @@ ProductDto product = (ProductDto)request.getAttribute("product");
          function payment_card() {
              IMP.request_pay({
                  pg : "kcp.AO09C", // 결제사명.PG상점아이디
-                 pay_method : "card", // 지불방법
-                 merchant_uid: "1234567", // 주문번호가 들어가야함.
-                 name : $("div.shoping__cart__item>h3").text(), // 결제창에 노출될 상품명
-                 amount: parseInt($("td.shoping__cart__item__close").text()), // 결제 금액
-                 buyer_email : "mkty0328@gmail.com", // 주문자 email
-                 buyer_name : "홍길동", // 주문자 이름
-                 buyer_tel : "01064269887", // 주문자 전화번호
-                 buyer_addr : "경기도 안양시 만안구", // 주문자 주소
-                 buyer_postcode : "139-91", // 주문자 우편번호
+                 pay_method : 'card',
+                 merchant_uid: "IMP"+makeMerchantUid, 
+                 name : $("div.shoping__cart__item>h3").text(),
+                 amount : parseInt($("td.shoping__cart__item__close").text()),
              }, function (rsp) { // callback
                  if (rsp.success) {
-                	 
-                	 $("#orderInfo>select").removeAttr("disabled");
+                	 $("#orderInfo div.nice-select").removeClass("disabled");
+                     
+                     //주문번호 merchant_uid : rsp.merchant_uid, //주문번호
+                     //결제번호  imp_uid : rsp.imp_uid, //결제 고유번호
+                     //결제상태 status * string
+                      $("#orderInfo>select").removeAttr("disabled");
                      //주문정보 저장
-                      $("#paid_at").val(rsp.paid_at); // 결제승인시각
-				      $("#merchant_uid").val(rsp.merchant_uid); // 주문번호
+                     const paidTime=new Date(rsp.paid_at*1000)
+                      $("#paid_at").val(paidTime.getFullYear()+"-"
+                    		  +(paidTime.getMonth()+1)+"-"
+                    		  +paidTime.getDate()+"T"
+                    		  +paidTime.getHours()+":"
+                    		  +paidTime.getMinutes()+":"
+                    		  +paidTime.getSeconds()); // 결제승인시각
+				     
+                      
+                      $("#merchant_uid").val(rsp.merchant_uid); // 주문번호
 				      $("#imp_uid").val(rsp.imp_uid); // 결제 고유번호
 				      $("#status").val(rsp.status); // 결제상태
-                     //$("#orderInfo").submit();
+                      $("#orderInfo").submit(); 
                  } else {
                 	 alert("주문이 취소됐습니다.");
                  }
@@ -495,7 +497,7 @@ function inputs() {
         </div>
        
         <div class="infocheck" style="border: 2px solid grey";>
-              "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"<input type="checkbox" id="infocheckbox">
+              "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"<input type="checkbox" id="infocheckbox" onclick="checkConsent()"/>
         </div>
 
         <div>
@@ -607,21 +609,31 @@ function inputs() {
   </style>
 
  <script>
-    function checkConsent() {
-        let personalinfo = document.getElementById("personalInfoConsent").checked;
-        let infoprovide = document.getElementById("infoProvidingConsent").checked;
-        let identifiinfo = document.getElementById("identificationConsent").checked;
-        let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
+ function checkConsent() {
+	    let personalinfo = document.getElementById("personalInfoConsent").checked;
+	    let infoprovide = document.getElementById("infoProvidingConsent").checked;
+	    let identifiinfo = document.getElementById("identificationConsent").checked;
+	    let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
 
-        var infocheckbox = document.getElementById("infocheckbox");
-        if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
-            infocheckbox.checked = true;
-            infocheckbox.disabled = false;
-        } else {
-            infocheckbox.checked = false;
-            infocheckbox.disabled = true;
-        }
-    }
+	    let infocheckbox = document.getElementById("infocheckbox");
+
+	   
+	    if (infocheckbox.checked) {
+	        document.getElementById("personalInfoConsent").checked = true;
+	        document.getElementById("infoProvidingConsent").checked = true;
+	        document.getElementById("identificationConsent").checked = true;
+	        document.getElementById("identificationTransferConsent").checked = true;
+	    }
+	    
+	    
+	    if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
+	        infocheckbox.checked = true;
+	        infocheckbox.disabled = false;
+	    } else {
+	        infocheckbox.checked = false;
+	        infocheckbox.disabled = false;
+	    }
+	}
 
     function showModal() {
         var modal = document.getElementById("termsModal");
@@ -669,9 +681,6 @@ function inputs() {
     }
 
     window.onload = function() {
-        var infocheckbox = document.getElementById("infocheckbox");
-        infocheckbox.disabled = true;
-
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() {
             var modal = document.getElementById("termsModal");

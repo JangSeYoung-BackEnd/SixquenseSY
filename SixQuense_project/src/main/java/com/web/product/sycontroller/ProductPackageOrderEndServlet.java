@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,7 +74,7 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	    Timestamp orderdate2=Timestamp.valueOf(ltorderDate2);
 	    String totalPrice=request.getParameter("totalPrice"); //결제된 총금액
 	    String status=request.getParameter("status"); //결제상태
-	    if(status != null){
+	    if(status!=null){
 	        switch (status){
 	            case "paid":
 	                status = "결제완료";
@@ -117,12 +119,14 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
         ProductPackageOrderEndService service = new ProductPackageOrderEndService();
         boolean result=service.insertOrder(b, p, paymentDto, userNo, orderNo);
 
-        // 결과 반환
-        if (result) {
-            response.getWriter().println("결제성공");
-        } else {
-            response.getWriter().println("결제실패");
-        }
-		
-	}
+        //데이터를 List에 추가
+        List<Object> dataList = new ArrayList<>();
+        dataList.add(p);
+        dataList.add(b);
+        dataList.add(paymentDto);
+
+        request.setAttribute("dataList", dataList);
+        
+        request.getRequestDispatcher("/views/product/paymentsuccess.jsp").forward(request, response);
+  	}
 }

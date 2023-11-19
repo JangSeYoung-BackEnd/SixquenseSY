@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.web.product.dto.ProductorderinfoDto" %>
+<%@ page import="com.web.product.dto.BookinginfoDto" %>
+<%@ page import="com.web.product.dto.ProductpaymentDto" %>	
 <%@ include file="/views/common/header.jsp"%>
+<%
+List<Object> dataList = (List<Object>) request.getAttribute("dataList");
+ProductorderinfoDto p = (ProductorderinfoDto) dataList.get(0);
+BookinginfoDto b = (BookinginfoDto) dataList.get(1);
+ProductpaymentDto paymentDto = (ProductpaymentDto) dataList.get(2);
+%>
 <style>
 * {
 	margin: 0;
@@ -313,11 +323,11 @@ a {
 																			<tbody>
 																				<tr>
 																					<td>주문 금액</td>
-																					<td class="alignright">199,000원</td>
+																					<td class="alignright"><%= paymentDto.getTotalAmount() %>원</td>
 																				</tr>
 																				<tr>
 																					<td class="totalamount">총 결제 금액</td>
-																					<td class="alignright totalamount">199,000원</td>
+																					<td class="alignright totalamount"><%= paymentDto.getTotalAmount() %>원</td>
 																				</tr>
 																			</tbody>
 																		</table>

@@ -1,11 +1,9 @@
 package com.web.member.dto;
 
 import java.sql.Date;
-import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
-
 
 @Data
 @Builder
@@ -22,7 +20,5 @@ public class Member {
 	private String gender;
 	private String notificatIonset;
 	private String originalFilename; 
-	private String renameFilename;
-		
 	
 }

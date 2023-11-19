@@ -51,6 +51,7 @@ public class AccompanyWH {
 					.AcOffer(new ArrayList<>())
 					.userId(rs.getString("USER_ID"))
 					.renameProfilename(rs.getString("PROFILE_RE_FILNAME"))
+					.userIntroduce(rs.getString("USER_INTRODUCE"))
 					.build();
 	}
 	private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
@@ -284,6 +285,26 @@ public class AccompanyWH {
 		}return result;
 	}
 	
+	
+	public int deleteAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		//System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteAccompanyOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, userNo);
+			result=pstmt.executeUpdate();
+			System.out.println(result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}	
+	
+	
+	
 	public int updateAccompanyOffer(Connection conn, int acompanyBNo, String value) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -331,8 +352,6 @@ public class AccompanyWH {
 		}finally {
 			close(pstmt);
 		}return result;
-	}	
-
-
+	}
 	
 }

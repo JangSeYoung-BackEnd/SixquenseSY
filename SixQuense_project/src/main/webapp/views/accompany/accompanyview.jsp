@@ -210,7 +210,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 								<div class="blog__details__author__pic col-sm-2">
 								<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
 								
-<%-- <img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">--%>							</div>
+								</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
 									<div class="cols">
 										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
@@ -233,9 +233,9 @@ table#tbl-comment tr.level2 sub.comment-date {
 									if(loginMember.getUserNo()!= b.getMemberNo()){
 										if(b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() &&
 										b.getAcOffer().get(0).getAccompanyOfferStatus().equals("대기중")) {%>
-										<!--  -->
+										<!-- 이거 고쳐야함  -->
 											<div class="col-sm-12">
-											<button onclick="" style="margin:10px 0 10px 0; width: 290px;">신청했습니다</button>				
+											<button onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청 취소하기</button>				
 										<%}else{ %>
 											<div class="col-sm-12">
 											<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
@@ -266,13 +266,27 @@ table#tbl-comment tr.level2 sub.comment-date {
 														<h4 style ="margin-bottom: 0px"> <%=offer.get(i).getUserId() %></h4>
 														
 													</div>
-													<%if(loginMember.getUserNo() == b.getMemberNo()){ %>
-													<div style="margin-bottom: 5px; margin-left: 20px; ">
-														<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
-														<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
-													</div>
-													
-													<%} %>
+													<%if(loginMember.getUserNo() == b.getMemberNo()){ 
+														/* offer status가 대기중이라면 ? */
+														 if(offer.get(i).getAccompanyOfferStatus().equals("대기중")){%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+														<%}else if(offer.get(i).getAccompanyOfferStatus().equals("decline")){
+															/* offer status가 decline이라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<span>거절중</span>
+															</div>
+														<%}else{
+															/* offer status가 accept 수락한 상태라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<span>수락중</span>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+													<%}
+													} %>
 												</div>
 											</div>
 										<%} %>									
@@ -358,7 +372,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:620px">
+							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요" style="width:620px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
@@ -395,14 +409,24 @@ table#tbl-comment tr.level2 sub.comment-date {
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
-			<h2>프로필 정보</h2>
-			<div id="profileInfo">
-				<!-- 프로필 정보를 추가하세요 -->
-				<p>아이디 넣는 곳 John Doe</p>
-				<p>여기는 소개글 적는 곳</p>
-				<button id="reportButton" onclick="openReportPopup()">신고하기</button>
-				<button id="blockButton">차단하기</button>
-				<button id="followButton">팔로우하기</button>
+			<div>
+				<div> 
+					<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="프로필 사진"  style="display:flex; height: 150px; width: 150px; margin: auto;">
+				</div>
+					<div>
+						<div>
+							<h2><%=b.getUserId() %></h2>
+						</div>
+						<div id="profileInfo">
+						<!-- 프로필 정보를 추가하세요 -->
+							<p><%=b.getUserIntroduce() %></p>
+						</div>
+					</div>
+					<div style=" margin-left : 150px">
+						<button id="reportButton" onclick="openReportPopup()">신고하기</button>
+						<button id="blockButton">차단하기</button>
+						<button id="followButton">팔로우하기</button>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -495,9 +519,8 @@ table#tbl-comment tr.level2 sub.comment-date {
     function accompanySelect(){
 		var acSelect  = document.getElementById("acSelect");
 		var value = (acSelect.options[acSelect.selectedIndex].value);
-		<%-- var User =  "<%= acUserId %>"; --%>
 		var boardNo = <%=acompanyBNo%>;
-		 //console.log(User+boardNo+value)
+		
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
@@ -508,78 +531,113 @@ table#tbl-comment tr.level2 sub.comment-date {
 	//동행신청하기 누르기 
 	function confirmAccompany(){
 		var confirmed=confirm("동행을 신청하시겠습니까?");
-		var userNo =  <%= loginMember.getUserNo() %>;
-		var boardNo = <%=acompanyBNo%>;
+		var userNo=<%=loginMember.getUserNo() %>;
+		var boardNo=<%=acompanyBNo%>;
 		if(confirmed){
 				alert("동행이 신청되었습니다!");
-				
 				 $.ajax({
 			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
 			            type: 'POST',
 			            data: { userNo : userNo ,boardNo :boardNo},
 			            success: function(response) {
-			                console.log('Ajax response:', response);
 			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
 			            },
 			            error: function(error) {
-			                console.error('Ajax error:', error);
+			            	alert("동행 신청 중 오류가 발생했습니다.");
 			            }
 			        });
-				 /* window.open("https://open.kakao.com/o/su9dmOSf", "_blank"); */
-
 			}else{
 				alert("동행 신청이 취소되었습니다.");
 			}
-
 		 }
-	/* function acceptOffer(e){ */
-		function acceptOffer(button) {
-			var boardNo = <%=acompanyBNo%>;
-			var memberNo = $(button).data("member-no");
-		    //console.log("MemberNo: " + memberNo);
-			//console.log(e.target);
-			/* console.log( ("button[class=accept-button]").val($(e.target).val()));
-			console.log($(event.target).val); */
-			/* offer.get((event.target).val).getMemberNo() */
-			/* var $clickedButton = $(this);
-		    var index = $("button.accept-button").index($clickedButton);
-		    console.log("Clicked button text: " + $clickedButton.text());
-		    console.log("Index of clicked button: " + index); */
-		   
-			var confirmed=confirm("동행 신청을 수락하시겠습니까?");
-			if(confirmed){
-				alert("동행이 수락되었습니다");
-				$.ajax({
-					url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
-		            type: 'POST',
-		            data: {boardNo :boardNo,memberNo :memberNo},
-					
-				});
-				
-				
-			}else{
-				alert("동행 신청이 취소되었습니다.");
-			}
+	
+	/* 동행 신청하기누르고 다시 거절을 눌렀을 때  */
+	function deleteAccompany(){
+		var confirmed=confirm("동행 신청을 거절하시겠습니까?");
+		var userNo=<%= loginMember.getUserNo() %>;
+		var boardNo=<%=acompanyBNo%>;
+		f(confirmed){
+			alert("동행이 거절되었습니다!");
+			 $.ajax({
+		            url:"<%=request.getContextPath() %>/accompay/deleteAccompany.do", 
+		            type:'POST',
+		            data:{ userNo : userNo ,boardNo :boardNo},
+		            success: function(response) {
+		                console.log("신청버튼 만들기")
+		            },
+		            error: function(error) {
+		            	alert("동행 거절 중 오류가 발생했습니다.");
+		            }
+		        });
+		}else{
+			alert("동행 신청 거절이 취되었습니다.");
 		}
+
+	}
+	
+	/* 동행신청 수락버튼 누르기  */
+	function acceptOffer(button) {
+    var boardNo = <%=acompanyBNo%>;
+    var memberNo = $(button).data("member-no");
+
+    var confirmed = confirm("동행 신청을 수락하시겠습니까?");
+    
+    if (confirmed) {
+        alert("동행이 수락되었습니다");
+
+        // Replace the button with the loading message
+        
+
+        $.ajax({
+            url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
+            type: 'POST',
+            data: {boardNo: boardNo, memberNo: memberNo},
+            success: function(response) {
+            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+                        "<span>수락중</span>" +
+                        "<button class='decline-button' data-member-no='" + memberNo + "' onclick='declineOffer(this)'>거절</button>" +
+                     "</div>");
+            },
+            error: function() {
+                alert("동행 신청 수락 중 오류가 발생했습니다.");
+                // Restore the button if the AJAX request fails
+                loadingMessage.replaceWith(button);
+            }
+        });
+    } else {
+        alert("동행 신청이 취소되었습니다.");
+    }
+}
 		
 	
-	function declineOffer(button){
-		var boardNo = <%=acompanyBNo%>;
-		var memberNo = $(button).data("member-no");
-		
-		var confirmed=confirm("동행 신청을 거절하시겠습니까?");
-		if(confirmed){
-			alert("거절되었습니다.");
-			$.ajax({
-				url: "<%=request.getContextPath() %>/accompay/Acommpanydecline.do", 
+	function declineOffer(button) {
+	    var boardNo = <%=acompanyBNo%>;
+	    var memberNo = $(button).data("member-no");
+	    var confirmed = confirm("동행 신청을 거절하시겠습니까?");
+	    
+	    if (confirmed) {
+	        alert("동행 신청이 거절되었습니다.");       
+
+	        $.ajax({
+	            url: "<%=request.getContextPath() %>/accompay/Acommpanydecline.do", 
 	            type: 'POST',
-	            data: { boardNo :boardNo,memberNo :memberNo},
-				
-			});
-		}else{
-			alert("취소되었습니다.");
-		}
+	            data: {boardNo: boardNo, memberNo: memberNo},
+	            success: function(response) {
+	            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+	                                 "<button class='accept-button' data-member-no='" + memberNo + "' onclick='acceptOffer(this)'>수락</button>" +
+	                                 "<span>거절중</span>" +
+	                              "</div>");
+	     
+	            }, 
+	            error: function() {
+	                alert("동행 신청 거절 중 오류가 발생했습니다.");
+	            }
+	        });
+	    } else {
+	        alert("동행 신청 거절이 취소되었습니다.");
+	    }
 	}
+
 	</script>
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 

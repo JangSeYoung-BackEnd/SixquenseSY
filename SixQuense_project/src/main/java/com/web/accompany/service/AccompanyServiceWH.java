@@ -87,6 +87,15 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+		//동행신청후 거절눌렀을 때 거절되는 메소드
+		public int deleteAccompanyOffer(int userNo, int acompanyBNo) {
+			Connection conn=getConnection();
+			int result=dao.deleteAccompanyOffer(conn,userNo,acompanyBNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
 
 
 		public int updateAcceptOffer(int acompanyBNo, int memberNo) {
@@ -107,6 +116,9 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+
+
+		
 
 
 		

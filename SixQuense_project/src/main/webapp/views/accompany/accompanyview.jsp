@@ -528,7 +528,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 	        });
 	};
 	
-	//동행신청하기 누르기 
+	//회원이 동행신청하기 누르기 
 	function confirmAccompany(){
 		var confirmed=confirm("동행을 신청하시겠습니까?");
 		var userNo=<%=loginMember.getUserNo() %>;
@@ -551,7 +551,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 			}
 		 }
 	
-	/* 동행 신청하기누르고 다시 거절을 눌렀을 때  */
+	/* 회원이 동행 신청하기누르고 다시 거절을 눌렀을 때  */
 	function deleteAccompany(){
 		var confirmed=confirm("동행 신청을 거절하시겠습니까?");
 		var userNo=<%= loginMember.getUserNo() %>;
@@ -609,7 +609,7 @@ table#tbl-comment tr.level2 sub.comment-date {
     }
 }
 		
-	
+	//글쓴이가 동행신청 목록에 
 	function declineOffer(button) {
 	    var boardNo = <%=acompanyBNo%>;
 	    var memberNo = $(button).data("member-no");

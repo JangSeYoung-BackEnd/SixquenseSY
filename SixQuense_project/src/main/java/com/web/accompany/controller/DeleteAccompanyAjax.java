@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.web.accompany.service.AccompanyServiceWH;
+import com.web.member.dto.MemberToAcompanyWH;
 
 /**
  * Servlet implementation class DeleteAccompanyAjax
@@ -31,7 +32,9 @@ public class DeleteAccompanyAjax extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int userNo =Integer.parseInt(request.getParameter("userNo"));
 		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
-		int result = new AccompanyServiceWH().deleteAccompanyOffer(userNo,acompanyBNo);
+		
+		new AccompanyServiceWH().deleteAccompanyOffer(userNo,acompanyBNo);
+		
 		}
 
 	/**

@@ -20,6 +20,7 @@ import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
+import com.web.member.dto.MemberToAcompanyWH;
 
 
 
@@ -137,33 +138,65 @@ public class AccompanyWH {
 		//System.out.println(board.get(0));
 		return board.get(0);
 		
+	} 
+	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, no);
+			rs=pstmt.executeQuery();
+			
+			 while (rs.next()) {
+				//a = getAccompanyDTO(rs);
+				addMemberOffer(member,rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		//System.out.println(board.get(0));
+		return member.get(0);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
-//	public List<AccompanyOffer> selectselectOffer(Connection conn, int no) {
-//		PreparedStatement pstm = null;
-//		ResultSet rs = null;
-//		List<AccompanyOffer> result = new ArrayList<>();
-//		System.out.println();
-//		try {
-//			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
-//			pstm.setInt(1, no);
-//			rs=pstm.executeQuery();
-//			System.out.println("여기는 dao의 rs"+rs.next());
-//			while(rs.next()) {
-//				result.add(getAccompanyOffer(rs));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstm);
-//		}
-//		System.out.println("여기는 dao의 result"+result);
-//		return result;
-//		
-//		
-//		
-//	}
 	
+
+	
+	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
+		int pk = rs.getInt("ACCOMPANY_NO");
+		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
+			member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
+	            try {
+	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+	                  e.getAcOffer().add(getAccompanyOffer(rs));
+	               }
+	               
+	            } catch (SQLException e1) {
+	               e1.printStackTrace();
+	            }
+	         });
+	      } else {
+	    	  AccompanyDTO members = getAccompanyDTO(rs);
+	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+	        	 members.getAcOffer().add(getAccompanyOffer(rs));
+	        	 member.add(members);
+	         }
+	         
+	      }
+		
+	}
 	private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
 		  int pk = rs.getInt("ACCOMPANY_NO");
 	      if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {
@@ -353,5 +386,6 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
+	
 	
 }

@@ -9,6 +9,7 @@ import com.web.accompany.model.dao.AccompanyWH;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.AccompanyOffer;
+import com.web.member.dto.MemberToAcompanyWH;
 
 
 public class AccompanyServiceWH {
@@ -37,6 +38,13 @@ public class AccompanyServiceWH {
 			}
 			close(conn);
 			return accompanyView;
+		}
+		
+		public MemberToAcompanyWH selectMemberToAcompany(int userNo, int no) {
+			Connection conn = getConnection();
+			MemberToAcompanyWH member  = dao.selectMemberToAcompany(conn,userNo,no);
+			close(conn);
+			return member;
 		}
 		
 		
@@ -90,7 +98,7 @@ public class AccompanyServiceWH {
 		//동행신청후 거절눌렀을 때 거절되는 메소드
 		public int deleteAccompanyOffer(int userNo, int acompanyBNo) {
 			Connection conn=getConnection();
-			int result=dao.deleteAccompanyOffer(conn,userNo,acompanyBNo);
+			int result=dao.insertAccompanyOffer(conn,userNo,acompanyBNo);
 			if(result>0) commit(conn);
 			else rollback(conn);
 			close(conn);
@@ -116,6 +124,9 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+
+
+		
 
 
 		

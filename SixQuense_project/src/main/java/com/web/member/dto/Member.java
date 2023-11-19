@@ -20,5 +20,7 @@ public class Member {
 	private String gender;
 	private String notificatIonset;
 	private String originalFilename; 
+	private String renameFilename;
+
 	
 }

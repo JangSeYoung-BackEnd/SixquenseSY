@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.service.AccompanyServiceWH;
 
 /**
@@ -51,8 +52,6 @@ public class AccompanyViewServlet extends HttpServlet {
 				break;
 			}
 		}
-		
-		
 		//한번 글을 클릭했으면 쿠키기간동안은 조회수가 증가되지 않게 한다. 
 		if(!readResult) {
 			Cookie cookie = new Cookie("readBoard", readBoard+"|"+no+"|");
@@ -62,11 +61,16 @@ public class AccompanyViewServlet extends HttpServlet {
 		
 		
 		
-		
+		//System.out.println("이건 서브릿의 no" + no);
 		AccompanyDTO a = new AccompanyServiceWH().selectBoardByNo(no,readResult);
+		List <AccompanyOffer> offer = new AccompanyServiceWH().selectOfferByNo(no);
 		List <AccompanyComment> comments = new AccompanyServiceWH().selectAccompanyComment(no);
-		System.out.println(a);
+		
+		//System.out.println(a);
 		request.setAttribute("board", a);
+		//System.out.println(a);
+		
+		request.setAttribute("offer", offer);
 		request.setAttribute("comments", comments);
 		request.getRequestDispatcher("/views/accompany/accompanyview.jsp").forward(request, response);
 

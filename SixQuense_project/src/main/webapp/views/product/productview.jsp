@@ -1,13 +1,24 @@
+<%@page import="com.web.product.dto.ProductsreviewDto"%>
 <%@page import="com.web.product.dto.ProductDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	ProductDto product = (ProductDto)request.getAttribute("product");
-
-%>
-<%@ page import="com.web.product.dto.ProductDto" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.*, java.util.List"%>
 <%@ include file="/views/common/header.jsp"%>
+<%
+ProductDto product = (ProductDto) request.getAttribute("product");
+List<ProductsreviewDto> comments = (List<ProductsreviewDto>) request.getAttribute("comments");
+int commentCount = (int) request.getAttribute("commentCount");
+int wishlistCount = (int) request.getAttribute("wishlistCount");
+
+List<ProductcourseDto> course = product.getCourse();
+%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/jquery-ui.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -48,9 +59,10 @@
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>" alt="">
+							src="<%=request.getContextPath()%>/img/product/<%=product.getAttachment().get(0).getOrginalFilename()%>"
+							alt="">
 					</div>
-					<%-- <div class="product__details__pic__slider owl-carousel">
+					<%--  <div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
@@ -59,42 +71,60 @@
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
-					</div> --%>
+					</div>  --%>
 				</div>
 			</div>
 
 			<!-- 여기부터 -->
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__text">
-					<h3><%=product.getProductName() %></h3>
+					<h3><%=product.getProductName()%></h3>
 					<div class="product__details__rating">
-						<span>(리뷰 갯수 reviews)</span>
+						<span><%=commentCount%> reviews</span>
 					</div>
-					<div class="product__details__price"><%=product.getProductPrice() %>원</div>
-					<p style="text-align: left"><%=product.getEditorNote() %></p>
-					<form action="<%=request.getContextPath()%>/product/makeorder.do" method="post">
-					<input type="hidden" name="productNo" value="<%= product.getProductNo() %>">
-					<div class="product__details__quantity">
-						<div class="date-container">
-							<input type="date" id="travel_date" name="travel_date"
-								onchange="checkDate()">
-						</div>`
-						<select class="form-select" aria-label="Default select example" name="selectOption">
-						  <option selected>Open this select menu</option>
-						  <option value="1">One</option>
-						  <option value="2">Two</option>
-						  <option value="3">Three</option>
-						</select>
+					<div class="product__details__price"><%=product.getProductPrice()%>원
 					</div>
+					<p style="text-align: left"><%=product.getEditorNote()%></p>
+					<form action="<%=request.getContextPath()%>/product/makeorder.do"
+						method="post">
+						<input type="hidden" name="productNo"
+							value="<%=product.getProductNo()%>">
+						<div class="product__details__quantity">
+							<div class="date-container">
+								<input type="text" id="datepicker" name="travel_date"
+									onchange="validateDayOfWeek()">
+							</div>
+							`
+							<script>
+						$(function() {
+							/* text -> 날짜로 변환 해주는 함수 */
+						    $( "#datepicker" ).datepicker({
+						    onSelect: function() { 
+					            var date = $.datepicker.formatDate("yy/mm/dd",$("#datepicker").datepicker("getDate")); 
 
-					<div class="button-container">
-						<input type="submit" class="primary-btn" onclick="" value="예약하기">
-						<a href="#" class="heart-icon" onclick="toggleHeartIcon(this)"><span
-							class="icon_heart_alt"></span> 위시리스트에 담기 </a>
-					</div>
+					        	}
+					   		});      
+						});
+						</script>
+							<select class="form-select" aria-label="Default select example"
+								name="selectOption">
+								<option selected vaule="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+
+						<div class="button-container">
+						 	<input type="submit" class="primary-btn" onclick="" value="예약하기">
+							
+	                    	<%-- <a href="javascript:toggleHeartIcon(this)" class="heart-icon">
+	                        <span class="icon_heart_alt <%=(Boolean)request.getAttribute("wishResult")?"filled":"" %>"></span>위시리스트에 담기</a> --%>
+				
+						</div>
 					</form>
 					<!-- 데이트 넣어야만 예약버튼 되도록 -->
-					<script>
+					<!-- <script>
 						function checkDate() {
 							var dateInput = document
 									.getElementById("travel_date");
@@ -107,7 +137,7 @@
 							}
 
 						};
-					</script>
+					</script> -->
 
 
 
@@ -119,14 +149,61 @@
 
 					<div style="width: 290px; height: 51px; text-align: center;">
 						<b style="color: darkgrey; font-size: 13px;"><span
-							style="color: red">몇명</span>이 이 상품을 위시리스트에 담았습니다</b>
+							style="color: red"><%=wishlistCount%>명</span>이 이 상품을 위시리스트에
+							담았습니다</b>
 					</div>
 					<script>
-						function toggleHeartIcon(element) {
-							// 버튼을 클릭할 때마다 'filled' 클래스를 추가 또는 제거
-							element.querySelector('.icon_heart_alt').classList
-									.toggle('filled');
-						}
+					
+													
+						
+				     
+					 function toggleHeartIcon(e){
+						  // Get the product and member information
+				            var memberNo = <%=loginMember != null ? loginMember.getUserNo() : 0%>;
+				            var productNo = <%=product.getProductNo()%>;
+				            console.log('<%=loginMember%>');
+						 if (<%=loginMember == null%>) {
+					            alert("로그인 후 이용할 수 있는 서비스입니다");
+						 } else {
+							 if($("a.heart-icon").find('.icon_heart_alt').hasClass('filled')){
+									 $.ajax({
+							            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
+							            	type:"get",
+							                data: {memberNo: memberNo, productNo: productNo},
+							                success: function (data) {
+							                    console.log(data);
+							                    
+							                    // Toggle the heart icon by adding the 'filled' class
+							                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
+							                    
+							                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
+							                },
+							                error: function (data) {
+							                    console.error('Error adding to wishlist');
+							                }
+									 })
+					            }else{
+					            	// Make an AJAX request to add the product to the wishlist
+						            $.ajax({
+						            	url: "<%=request.getContextPath()%>/product/makewishlist.do",
+						            	type:"get",
+						                data: {memberNo: memberNo, productNo: productNo},
+						                success: function (data) {
+						                    console.log(data);
+						                    
+						                    // Toggle the heart icon by adding the 'filled' class
+						                    $("a.heart-icon").find('.icon_heart_alt').addClass('filled');
+						                    
+						                    alert("해당 상품이 위시리스트에 담겼습니다");
+						                },
+						                error: function (data) {
+						                    console.error('Error adding to wishlist');
+					            }
+					        })
+					    }
+					}
+								}
+								
 					</script>
 
 					<ul>
@@ -137,11 +214,11 @@
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최소인원</b>
-							<span><%=product.getMinCount() %></span></li>
+							<span><%=product.getMinCount()%></span></li>
 						<li><img
 							src="<%=request.getContextPath()%>/img/checkicon2.png"
 							width="20px" height="20px" style="margin-right: 10px"> <b>최대인원</b>
-							<span><%=product.getMaxCount() %></span></li>
+							<span><%=product.getMaxCount()%></span></li>
 					</ul>
 				</div>
 			</div>
@@ -154,39 +231,34 @@
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#tabs-2" role="tab" aria-selected="false">이용 안내</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(후기갯수)</span></a>
-						</li>
+							href="#tabs-3" role="tab" aria-selected="false">후기 <span>(<%=commentCount%>)
+							</span></a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<h6>상품 정보</h6>
-								<p style="text-align: left"><%=product.getProductDetail() %></p>
+								<p style="text-align: left"><%=product.getProductDetail()%></p>
+							</div>
 							<div class="product__details__tab__desc">
 								<h6>코스 소개</h6>
-								<p style="text-align: left">Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Pellentesque in ipsum id
-									orci porta dapibus. Proin eget tortor risus. Vivamus suscipit
-									tortor eget felis porttitor volutpat. Vestibulum ac diam sit
-									amet quam vehicula elementum sed sit amet dui. Donec rutrum
-									congue leo eget malesuada. Vivamus suscipit tortor eget felis
-									porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet
-									et, porttitor at sem. Praesent sapien massa, convallis a
-									pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet
-									quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum
-									primis in faucibus orci luctus et ultrices posuere cubilia
-									Curae; Donec velit neque, auctor sit amet aliquam vel,
-									ullamcorper sit amet ligula. Proin eget tortor risus.</p>
-								<p style="text-align: left">Praesent sapien massa, convallis
-									a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit
-									amet, consectetur adipiscing elit. Mauris blandit aliquet elit,
-									eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna
-									dictum porta. Cras ultricies ligula sed magna dictum porta. Sed
-									porttitor lectus nibh. Mauris blandit aliquet elit, eget
-									tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-									vehicula elementum sed sit amet dui. Sed porttitor lectus nibh.
-									Vestibulum ac diam sit amet quam vehicula elementum sed sit
-									amet dui. Proin eget tortor risus.</p>
+								<%
+								if (!course.isEmpty()) {
+								%>
+								<div style="background-color: yellow;">
+									<%
+									for (ProductcourseDto pc : course) {
+									%>
+									<p style="text-align: left">
+										<span><%=pc.getCourseName()%></span><br>
+										<%=pc.getCourseDetail()%></p>
+									<%
+									}
+									%>
+								</div>
+								<%
+								}
+								%>
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -216,48 +288,65 @@
 										onclick="showRefundPolicy()"> 환불 규정 상세 보기 (클릭)</a>
 								</p>
 							</div>
-				
+
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
+								<%
+								if (loginMember != null
+										&& (loginMember.getUserId().equals("admin") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
+								%>
 								<h6>후기 작성</h6>
 								<div class="comment-editor">
-									<form action="" method="post">
-										<input type="hidden" name="boardRef" value="">
-										<!-- 서블릿이 필요한 정보 hidden으로 보내주기 -->
-										<input type="hidden" name="level" value="1"> <input
-											type="hidden" name="writer" value=""> <input
-											type="hidden" name="boardCommentRef" value="0">
+									<form
+										action="<%=request.getContextPath()%>/product/insertComment.do"
+										method="post">
+										<input type="hidden" name="productNo"
+											value="<%=product.getProductNo()%>"> <input
+											type="hidden" name="commentLevel" value="1"> <input
+											type="hidden" name="userId"
+											value="<%=loginMember != null ? loginMember.getUserId() : ""%>">
+										<input type="hidden" name="member_no"
+											value="<%=loginMember != null ? loginMember.getUserNo() : 0%>">
+										<input type="hidden" name="CommentRef" value="0">
 										<div id="comment-editor-container" style="display: flex;">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
-												id="floatingTextarea2" style="height: 100px; resize: none"></textarea>
-											<button type="button" class="btn btn-success"
+												id="floatingTextarea2" name="content"
+												style="height: 100px; resize: none"></textarea>
+											<button type="submit" class="btn btn-success"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
-										<div id="comment-editor-button" style="margin-top: 10px;"
+										<!--  <div id="comment-editor-button" style="margin-top: 10px;"
 											height=80px;>
 											<input type="file" id="inputImage"
 												accept="image/gif,image/jpeg,image/png" value="사진 첨부 파일">
-											<!-- 사진 있을때 파일명 보여줌 -->
-											<%-- <%if(b.getReFname()!=null){ %>
-														<img src="<%=request.getContextPath() %>/images/file.png" width="25">
-														<sub><%=b.getReFname() %></sub>
-													<%} %> --%>
-										</div>
+										</div>  -->
 									</form>
 								</div>
-								<h6 style="margin-top: 26px;">여행자 후기(후기 갯수)</h6>
+								<%
+								}
+								%>
+								<h6 style="margin-top: 26px;">
+									여행자 후기(<%=commentCount%>)
+								</h6>
 								<!-- 리뷰 리스트 보여줄 리스트 : 로그인 없이 볼 수 있도록 -->
-								<%-- <%if(!comments.isEmpty()){ %> --%>
 								<div class="container mt-3">
+									<%
+									if (!comments.isEmpty()) {
+									%>
 									<table class="table">
 										<tbody>
-											<%-- <%for(BoardComment bc:comments){ %> --%>
-											<%-- <%if(bc.getLevel()==1) {%> --%>
+											<%
+											for (ProductsreviewDto pr : comments) {
+											%>
+											<%
+											if (pr.getCommentLevel() == 1) {
+											%>
 											<tr class="level1">
-												<td><sub class="comment-writer">회원명</sub> <sub
-													class="comment-date">등록일<br> 리뷰내용</td>
+												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
+													<%=pr.getCommentContent()%></td>
 												<td>
 													<div style="display: flex">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
@@ -267,22 +356,36 @@
 													</div>
 												</td>
 											</tr>
-											<%-- 	<%}else{ %> --%>
+											<%
+											} else {
+											%>
 											<tr class="level2">
-												<td><sub class="comment-writer">회원명</sub> <sub
-													class="comment-date"></sub>등록일<br> 대댓글내용</td>
+												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
+													<%=pr.getCommentContent()%></td>
 												<td>
 											</tr>
-											<%-- 		<%} %> --%>
-											<%-- <%} %> --%>
-											<!-- }else{ %> -->
-											<tr>
-												<td width=1140px; height=100px; style="text-align: center;">작성된
-													여행 후기가 없습니다</td>
-											</tr>
-											<%-- <%} %> --%>
-										</tbody>
+											<%
+											}
+											%>
+											<%
+											}
+											%>
+										
 									</table>
+									<%
+									} else {
+									%>
+									<table>
+										<tr>
+											<td width=1140px; height=100px; style="text-align: center;">작성된
+												여행 후기가 없습니다</td>
+										</tr>
+									</table>
+									<%
+									}
+									%>
+									</tbody>
 								</div>
 								<br>
 							</div>
@@ -297,17 +400,11 @@
 		</div>
 </section>
 
-<%-- <script>
-	$('#download-container').click(e=>{
+<script>
+	<%-- $('#download-container').click(e=>{
 		location.assign("<%=request.getContextPath()%>/boardfiledownload.do?fname=<%=b.getReFname()%>");
-	})
+	}) --%>
 	
-	$(".comment-editor>form>textarea[name=content]").focus(e=>{
-		if(<%=loginMember==null%>){
-			alert("로그인 후 이용할 수 있는 서비스 입니다");
-			$("#userId").focus();
-		}
-	})
 	
 	$(".btn-reply").click(e=>{
 		const $tr=$("<tr>");
@@ -335,5 +432,5 @@
 			
 		
 	})
-</script> --%>
+</script>
 <%@ include file="/views/common/footer.jsp"%>

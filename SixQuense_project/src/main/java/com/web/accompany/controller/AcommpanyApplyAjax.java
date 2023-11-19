@@ -1,8 +1,6 @@
 package com.web.accompany.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.web.accompany.service.AccompanyServiceWH;
 
 /**
- * Servlet implementation class AccompanyResultAjax
+ * Servlet implementation class AcommpanyApply
  */
-@WebServlet("/accompany/AccompanyResultAjax.do")
-public class AccompanyResultAjax extends HttpServlet {
+@WebServlet("/accompay/AcommpanyApply.do")
+public class AcommpanyApplyAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyResultAjax() {
+    public AcommpanyApplyAjax() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +29,12 @@ public class AccompanyResultAjax extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String value = request.getParameter("value");
-//		String user =request.getParameter("acUser");
+		int userNo =Integer.parseInt(request.getParameter("userNo"));
 		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
-//		PrintWriter out=response.getWriter();
-//		out.print(value);
-//		out.print(user);
-//		System.out.println(value+"servlet");
-//		System.out.println(user+"servlet");
-//		System.out.println(acompanyBNo+"servlet");
-		int result = new AccompanyServiceWH().updateAccompanyOffer(acompanyBNo,value);
-//		System.out.println(result);
-		//request.setAttribute("result", result);
-		
+//		System.out.println(userNo +"회원 번호 값이 잘 들어왓는지 서블렛에서 확인 ");
+//		System.out.println(acompanyBNo +"값이 잘 들어왓는지 서블렛에서 확인 ");
+		int result = new AccompanyServiceWH().insertAccompanyOffer(userNo,acompanyBNo);
+//		System.out.println(result +"서블렛에서 확인 ");
 	}
 
 	/**

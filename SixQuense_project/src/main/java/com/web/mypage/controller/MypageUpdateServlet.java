@@ -16,7 +16,7 @@ import com.web.member.service.jhMemberService;
 /**
  * Servlet implementation class MypageUpdateServlet
  */
-@WebServlet("/update.do")
+@WebServlet(urlPatterns="/update.do",name="memberupdateinfor")
 public class MypageUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,14 +25,14 @@ public class MypageUpdateServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Member loginMember = (Member) session.getAttribute("loginMember");
         if (loginMember != null) {
-            // 여기서 loginMember 정보를 업데이트합니다.
         	loginMember.setUserPw(request.getParameter("pw"));
         	loginMember.setUserName(request.getParameter("name"));
-        	loginMember.setPhone(request.getParameter("phone"));	
-        	loginMember.setUserIntroduce(request.getParameter("userIntroduce"));
+        	loginMember.setPhone(request.getParameter("phone"));
+        	loginMember.setUserDd(Date.valueOf(request.getParameter("Dd")));
+        	loginMember.setUserIntroduce(request.getParameter("intro"));
         	loginMember.setGender(request.getParameter("gender"));
-        	loginMember.setNotificatIonset(request.getParameter("notificationSet"));
-            // 나머지 필드에 대해서도 유사한 방식으로 업데이트
+        	loginMember.setNotificatIonset(request.getParameter("acc"));
+            
 
             int result = new jhMemberService().mypageupdate(loginMember);
             String userpw=loginMember.getUserPw();
@@ -42,12 +42,12 @@ public class MypageUpdateServlet extends HttpServlet {
                 request.getRequestDispatcher("/views/mypagekategorie/Updatedata.jsp").forward(request, response);
             } else {
                 // 업데이트 실패 처리
-                response.sendRedirect(request.getContextPath() + "/views/common/error.jsp");
+                response.sendRedirect(request.getContextPath() + "/views/common/failMessage.jsp");
             }
         } else {
             // 로그인 멤버가 null일 경우 예외 처리 또는 로그 메시지 추가
             System.out.println("loginMember is null");
-            // 예외 처리 또는 다른 작업 수행
+          
         }
     }
     

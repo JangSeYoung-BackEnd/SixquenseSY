@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.web.member.dto.Member;
+import com.web.product.dto.ProductwishilistDto;
 
 public class jhMemberDao {
 
@@ -69,5 +70,22 @@ public class jhMemberDao {
 	        close(pstmt);
 	    }
 	    return result;
+	}
+	public int selectWishListByNo(Connection conn, ProductwishilistDto wish ) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectWishListByNo")); 
+			pstmt.setInt(1, wish.getProductWishlistNo());
+			pstmt.setInt(2, wish.getMemberNo());
+			pstmt.setInt(3, wish.getProductNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 }

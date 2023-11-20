@@ -31,12 +31,12 @@
                             </div>
                             </div>
                             <div class="checkout__input">
-                                <p>비밀번호</p>
-                                <input type="text" value="<%=m.getUserPw()%>" id="pw">
+                                <p>새 비밀번호</p>
+                                <input type="text"  id="pw">
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
-                                <input type="text"  >
+                                <input type="text" id="confirmPassword">
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
@@ -57,7 +57,7 @@
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" value="<%=m.getNotificatIonset()%>">
+                                    <input type="checkbox" id="acc" value="<%=m.getNotificatIonset()%>" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -79,13 +79,9 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회,취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="wishBtn">위시리스트</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">
-                                            <button id="alarmBtn">알림</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/다녀온 여행.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="wenttripBtn">다녀온 여행</button></a></li>
+                                            <button id="wishBtn">위시리스트</button></a></li>                                           
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
                                             <button id="mywirteBtn">나의 글</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
@@ -102,32 +98,40 @@
             	</div>
 </section>
 <script>
-    $("#infoupdateBtn").click(e => {	    
-        $.ajax({
-            url: "<%=request.getContextPath()%>/update.do?userNo=<%=m.getUserNo()%>",
-            type: "post",
-            data: {
-            	name: $('#name').val(),
-            	pw: $('#pw').val(),
-            	gender: $('#gender').val(),
-            	Dd: $('#Dd').val(),
-            	enroll: $('#enroll').val(),
-            	phone: $('#phone').val(),
-            	intro: $('#intro').val(),
-            	acc: $('#acc').val()
-            	},
-            success: function(data, status, xhr) {
-            	if (data != null) {
-                    alert("성공!");
-                } else {
-                    alert("실패!");
+    $("#infoupdateBtn").click(e => {	  
+        var newPassword = $('#pw').val();
+        var confirmPassword = $('#confirmPassword').val();
+        
+        if (newPassword === confirmPassword) {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/update.do?userNo=<%=m.getUserNo()%>",
+                type: "post",
+                data: {
+                    name: $('#name').val(),
+                    pw: newPassword, // 여기에서 새 비밀번호 사용
+                    gender: $('#gender').val(),
+                    Dd: $('#Dd').val(),
+                    enroll: $('#enroll').val(),
+                    phone: $('#phone').val(),
+                    intro: $('#intro').val(),
+                    acc: $('#acc').val()
+                },
+                success: function(data, status, xhr) {
+                    if (data != null) {
+                        alert("비밀번호가 일치하며 정보가 성공적으로 업데이트되었습니다!");
+                    } else {
+                        alert("정보 업데이트에 실패했습니다!");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("에러:", error);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("에러:", error);
-            }
-        });
+            });
+        } else {
+            alert("입력한 비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+        }
     });
+</script>
 </script>
 <script>
 	$("#updateBtn").click(e=>{
@@ -159,18 +163,6 @@
 	$("#checkcancelBtn").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ProductList.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				}
-		});
-	});		
-	</script>
-   <script>
-	$("#wenttripBtn").click(e=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wenttrip.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);

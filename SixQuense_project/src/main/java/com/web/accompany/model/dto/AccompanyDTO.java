@@ -27,5 +27,6 @@ public class AccompanyDTO {
 	private String renameProfilename;
 	private String userIntroduce;
 	
+	
 }
 

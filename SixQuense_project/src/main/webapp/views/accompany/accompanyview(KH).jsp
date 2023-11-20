@@ -1,4 +1,3 @@
-<%@page import="com.web.member.dto.MemberToAcompanyWH"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.web.accompany.model.dto.AccompanyOffer"%>
 <%@page import="com.web.accompany.model.dto.AccompanyComment"%>
@@ -13,8 +12,7 @@
 
 <%
 	
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
-	MemberToAcompanyWH member =(MemberToAcompanyWH)request.getAttribute("member");	
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");		
 	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer"); 
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
@@ -247,15 +245,14 @@ div.subcategory>button{
 								<%if(loginMember!=null){ 
 									/* 로그인을 하고 로그인멤버가 글쓴이가 아니면 ~ 버튼 생성  */
 									if(loginMember.getUserNo()!= b.getMemberNo()){
-										if(/* b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() && */
-										member != null && member.getAcOffer().equals("대기중")) {%>
+										if(b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() &&
+										b.getAcOffer().get(0).getAccompanyOfferStatus().equals("대기중")) {%>
+										<!-- 이거 고쳐야함  -->
 											<div class="col-sm-12">
-											<button id="cancelButton"  onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청 취소하기</button>				
-											<button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px; display:none">동행신청하기</button>
+											<button onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청 취소하기</button>				
 										<%}else{ %>
 											<div class="col-sm-12">
-											<button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
-											<button id="cancelButton"  onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; display:none">동행신청 취소하기</button>
+											<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
 										<%}
 									}else{%>
 										<div class="col-sm-12">
@@ -307,7 +304,7 @@ div.subcategory>button{
 												</div>
 											</div>
 										<%} %>									
-									</div>
+										</div>
 								</div>
 							</div>
 						</div>
@@ -371,8 +368,7 @@ div.subcategory>button{
 										</td>
 										<td>
 											<button class="btn-reply" value="<%=ac.getAccompanyComtNo()%>">답글</button>
-											<button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>">삭제</button>
-
+											<button class="btn-delete">삭제</button>
 										</td>
 									</tr>
 									<%}else{ %>
@@ -384,7 +380,6 @@ div.subcategory>button{
 											<%=ac.getAccompanyComtContent() %>
 										</td>
 										<td>
-										<button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>">삭제</button>
 										</td>
 									</tr>
 									<%} 
@@ -395,8 +390,6 @@ div.subcategory>button{
 						
 						<div class="comment-editor">
 						<form action = "<%=request.getContextPath() %>/accompany/insertaccompanycomment.do" method="post">
-						
-							<input type="hidden" name="userNo" value="<%=loginMember.getUserNo()%>">
 							<input type="hidden" name="accompanyNo" value="<%=b.getAccompanyNo()%>">
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
@@ -504,7 +497,16 @@ div.subcategory>button{
 		});
 	});
 		
-
+		var isFilled = false;
+		function toggleImage(){
+			var button = document.getElementById('followButton');
+			if (isFilled) {
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
+			} else {
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
+			}
+			isFilled = !isFilled; 
+		}
 /* 신고하기  부분  */
 		function openReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
@@ -514,27 +516,9 @@ div.subcategory>button{
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'none';
 		}
-		
-
 	</script>
 	<script>
-<<<<<<< HEAD
 	<%-- const radios = $("input[name=report]");
-=======
-	/* 댓글 삭제부분 여기에 하기 */
-	
-	 function deleteComment(commentNo) {
-       
-        var confirmDelete = confirm("정말로 삭제하시겠습니까?");
-        if (!confirmDelete) {
-            return;
-        }
-        window.location.href = "<%=request.getContextPath()%>/accompany/deletecomment.do?commentNo=" + commentNo + "&userNo=<%=loginMember.getUserNo()%>";
-    }
-	
-	
-	const radios = $("input[name=report]");
->>>>>>> branch 'dev' of https://github.com/ImmortalDeveloper/Sixquense.git
 
     function submitReport(){
         radios.click(e => {
@@ -574,10 +558,6 @@ div.subcategory>button{
 			            data: { userNo : userNo ,boardNo :boardNo},
 			            success: function(response) {
 			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
-			                $('#confirmButton').hide();
-			                $('#cancelButton').show();
-			               /*  $('#confirmButton').hide();
-			                $('#cancelButton').css("display"," "); */
 			            },
 			            error: function(error) {
 			            	alert("동행 신청 중 오류가 발생했습니다.");
@@ -600,11 +580,7 @@ div.subcategory>button{
 		            type:'POST',
 		            data:{ userNo : userNo ,boardNo :boardNo},
 		            success: function(response) {
-		            	 $('#cancelButton').hide();
-		                 $('#confirmButton').show();
-		            	/* $('#cancelButton').hide();
-		                $('#confirmButton').css("display"," "); */
-		                
+		                console.log("신청버튼 만들기")
 		            },
 		            error: function(error) {
 		            	alert("동행 거절 중 오류가 발생했습니다.");
@@ -672,6 +648,7 @@ div.subcategory>button{
 	        alert("동행 신청 거절이 취소되었습니다.");
 	    }
 	}
+
 	</script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
  -->

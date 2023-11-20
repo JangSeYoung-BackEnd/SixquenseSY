@@ -11,7 +11,9 @@ import lombok.Data;
 @Builder
 public class MemberToAcompanyWH {
 	private int userNo;
-	private List <AccompanyDTO> accompany = new ArrayList<AccompanyDTO>();
-	private List <AccompanyOffer> AcOffer = new ArrayList(); 
+	private int accompany;
+	private String AcOffer;
+//	private List <AccompanyDTO> accompany = new ArrayList<AccompanyDTO>();
+//	private List <AccompanyOffer> AcOffer = new ArrayList(); 
 	
 }

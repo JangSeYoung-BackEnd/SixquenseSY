@@ -52,10 +52,38 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 
 	    // 주문정보
 	    String productStack=request.getParameter("productStack"); //인원수
-	    String orderDateStr=request.getParameter("paidat"); //주문일자
-	    DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:m:s");
-	    LocalDateTime ltorderDate=LocalDateTime.parse(orderDateStr,dtf);
-	    Timestamp orderdate=Timestamp.valueOf(ltorderDate); 
+		/*
+		 * String orderDateStr=request.getParameter("paidat"); //주문일자 DateTimeFormatter
+		 * dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"); LocalDateTime
+		 * ltorderDate=LocalDateTime.parse(orderDateStr,dtf); Timestamp
+		 * orderdate=Timestamp.valueOf(ltorderDate);
+		 */
+	    String orderDateStr = request.getParameter("paidat"); //주문일자
+
+	 // 날짜와 시간 분리
+	 String[] dateTimeParts = orderDateStr.split("T");
+	 String datePart = dateTimeParts[0];
+	 String timePart = dateTimeParts[1];
+
+	 // 시간 부분을 ":"로 분리
+	 String[] timeParts = timePart.split(":");
+
+	 // 시간, 분, 초가 한 자리일 경우 두 자리로 변환
+	 for (int i = 0; i < timeParts.length; i++) {
+	     if (timeParts[i].length() == 1) {
+	         timeParts[i] = "0" + timeParts[i];
+	     }
+	 }
+
+	 // 변환된 시간 부분으로 다시 시간 문자열 생성
+	 String newTimePart = String.join(":", timeParts);
+
+	 // 새로운 날짜 및 시간 문자열 생성
+	 String newOrderDateStr = datePart + "T" + newTimePart;
+
+	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	 LocalDateTime ltorderDate = LocalDateTime.parse(newOrderDateStr, dtf);
+	 Timestamp orderdate1 = Timestamp.valueOf(ltorderDate);
 	    String userNoStr=request.getParameter("userNo"); //회원번호
 	    int userNo=Integer.parseInt(userNoStr);
 	    String productNo=request.getParameter("productNo"); //상품번호
@@ -68,10 +96,40 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	    
 	    //결제 정보
 	    String impuid=request.getParameter("impuid"); //결제번호
-	    String orderDateStr2=request.getParameter("paidat");
-	    DateTimeFormatter dtf2=DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:m:s");
-	    LocalDateTime ltorderDate2=LocalDateTime.parse(orderDateStr2,dtf2);
-	    Timestamp orderdate2=Timestamp.valueOf(ltorderDate2);
+		/*
+		 * String orderDateStr2=request.getParameter("paidat"); DateTimeFormatter
+		 * dtf2=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"); LocalDateTime
+		 * ltorderDate2=LocalDateTime.parse(orderDateStr2,dtf2); Timestamp
+		 * orderdate2=Timestamp.valueOf(ltorderDate2);
+		 */
+	    //주문일자
+	    String orderDateStr1 = request.getParameter("paidat");
+
+		 // 날짜와 시간 분리
+		 String[] dateTimeParts1 = orderDateStr1.split("T");
+		 String datePart1 = dateTimeParts1[0];
+		 String timePart1 = dateTimeParts1[1];
+
+		 // 시간 부분을 ":"로 분리
+		 String[] timeParts1 = timePart1.split(":");
+	
+		 // 시간, 분, 초가 한 자리일 경우 두 자리로 변환
+		 for (int i = 0; i < timeParts1.length; i++) {
+		     if (timeParts1[i].length() == 1) {
+		         timeParts1[i] = "0" + timeParts1[i];
+		     }
+		 }
+	
+		 // 변환된 시간 부분으로 다시 시간 문자열 생성
+		 String newTimePart1 = String.join(":", timeParts1);
+	
+		 // 새로운 날짜 및 시간 문자열 생성
+		 String newOrderDateStr1 = datePart1 + "T" + newTimePart1;
+	
+		 DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		 LocalDateTime ltorderDate1 = LocalDateTime.parse(newOrderDateStr1, dtf1);
+		 Timestamp orderdate2 = Timestamp.valueOf(ltorderDate1);
+		 
 	    String totalPrice=request.getParameter("totalPrice"); //결제된 총금액
 	    String status=request.getParameter("status"); //결제상태
 	    if(status!=null){
@@ -94,7 +152,7 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	    ProductorderinfoDto p = ProductorderinfoDto.builder()
 	            .OrderNo(orderNo) 
 	            .OrderCount(Integer.parseInt(productStack))
-	            .OrderDate(new java.sql.Date(orderdate.getTime()))
+	            .OrderDate(new java.sql.Date(orderdate1.getTime()))
 	            .MemberNO(userNo)
 	            .ProductNo(Integer.parseInt(productNo))
 	            .build();

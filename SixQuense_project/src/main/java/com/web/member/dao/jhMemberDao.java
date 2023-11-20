@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -25,7 +26,7 @@ public class jhMemberDao {
 			e.printStackTrace();
 		}
 	}
-	public int updateMember(Connection conn, Member m) {
+	public int mypageupdate(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
@@ -36,32 +37,37 @@ public class jhMemberDao {
 			pstmt.setDate(4, m.getUserDd());
 			pstmt.setString(5, m.getUserIntroduce());
 			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getNotificatIonset());
-			pstmt.setString(8, m.getOriginalFilename());
-			pstmt.setString(9, m.getRenameFilename());
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	
-	
-	public int selectMemberUpdate(Connection conn, int userId) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectmember")); 
-			pstmt.setInt(1, userId);
-			result=pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
+			pstmt.setString(7, m.getNotificatIonset());	
+			pstmt.setInt(8, m.getUserNo());			
 
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
+	
+	public int selectMemberByNo(Connection conn, int userNo) {
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int result = 0;
+	    try {
+	        pstmt = conn.prepareStatement(sql.getProperty("selectMemberByNo"));
+	        pstmt.setInt(1, userNo);
+	        rs = pstmt.executeQuery();
+
+	        // ResultSet에서 결과가 있는지 확인
+	        if (rs.next()) {
+	            result = 1; // 결과가 있다면 1로 설정
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return result;
+	}
+}

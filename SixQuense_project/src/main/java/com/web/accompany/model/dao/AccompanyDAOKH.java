@@ -35,14 +35,15 @@ public class AccompanyDAOKH {
 	public List<AccompanyDTO> selectBoardAll(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+//		String sqlTemp="WHERE CONTINENT_NAME LIKE '%"+coordinate+"%' \\";
 		List<AccompanyDTO> result=new ArrayList<>();
 		try {
 			pstmt=conn.prepareCall(sql.getProperty("selectAll"));
+//			pstmt.setString(1, coordinate!=null||coordinate.equals("전체보기")?"":sqlTemp);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -62,7 +63,6 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -83,7 +83,6 @@ public class AccompanyDAOKH {
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

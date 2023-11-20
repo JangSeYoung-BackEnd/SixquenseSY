@@ -31,6 +31,10 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String coordinate=request.getParameter("coordinate");
+		if(coordinate==null) {
+			
+		}
 		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
 		request.setAttribute("accompanys", accompanys);
 		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);

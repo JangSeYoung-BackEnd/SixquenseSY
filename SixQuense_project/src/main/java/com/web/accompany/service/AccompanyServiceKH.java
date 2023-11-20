@@ -58,4 +58,16 @@ public class AccompanyServiceKH {
 			close(conn);
 			return	a;
 		}
+		
+		public List<AccompanyDTO> selectAccompanyByCoordinatePopularity(String coordinate){
+			Connection conn=getConnection();
+			List<AccompanyDTO> a=dao.selectAccompanyByCoordinatePopularity(conn, coordinate);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
 }

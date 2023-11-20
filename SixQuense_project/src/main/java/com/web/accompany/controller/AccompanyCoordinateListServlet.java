@@ -16,14 +16,14 @@ import com.web.accompany.service.AccompanyServiceKH;
 /**
  * Servlet implementation class AccompanyCoordinateServlet
  */
-@WebServlet("/accompany/accompanycoordinate.do")
-public class AccompanyCoordinateAjaxServlet extends HttpServlet {
+@WebServlet("/accompany/accompanycoordinatelist.do")
+public class AccompanyCoordinateListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyCoordinateAjaxServlet() {
+    public AccompanyCoordinateListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +33,10 @@ public class AccompanyCoordinateAjaxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String coordinate=request.getParameter("coordinate");
-		System.out.println(coordinate);
 		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyByCoordinate(coordinate);
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(accompanys,response.getWriter());
+		request.setAttribute("accompanys", accompanys);
+		request.setAttribute("coordinate", coordinate);
+		request.getRequestDispatcher("/views/accompany/accompanycoordinatelist.jsp").forward(request, response);
 		
 	}
 

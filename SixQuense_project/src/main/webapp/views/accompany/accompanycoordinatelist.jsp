@@ -4,6 +4,7 @@
 <%@ page import="java.util.List, com.web.accompany.model.dto.AccompanyDTO" %>
 <%
 	List<AccompanyDTO> accompanys=(List<AccompanyDTO>)request.getAttribute("accompanys");
+	
 %>
 <style>
     .menu {
@@ -77,8 +78,8 @@
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
                         </div>
                         <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
-                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanylist.do')" class="recent-btn">최신순</button>
-                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanypopularity.do')" class="popularity-btn">인기순</button>
+                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanycoordinatelist.do?coordinate=<%=request.getAttribute("coordinate")%>');" class="recent-btn">최신순</button>
+                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanycoordinatepopularity.do?coordinate=<%=request.getAttribute("coordinate")%>');" class="popularity-btn">인기순</button>
                     </div>
                     <div class="row">
                     	<% if(!accompanys.isEmpty()){

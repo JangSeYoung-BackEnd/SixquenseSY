@@ -35,6 +35,7 @@ public class InsertAccompanyCommentServlet extends HttpServlet {
 	int level = Integer.parseInt(request.getParameter("level"));
 	String writer= request.getParameter("writer");
 	String content =request.getParameter("content");
+	//System.out.println(content +"내용 servlet ");
 	int accompanyCommentRef = Integer.parseInt(request.getParameter("accompanyCommentRef"));
 	//System.out.println(boardNo+level+writer+content+accompanyCommentRef);
 	

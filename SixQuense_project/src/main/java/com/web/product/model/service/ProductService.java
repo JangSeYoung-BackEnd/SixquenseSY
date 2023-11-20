@@ -9,14 +9,25 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.web.product.dao.ProductDao;
+import com.web.product.dto.ProductCoordinateDto;
 import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductcourseDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 
 public class ProductService {
 
 	private ProductDao dao = new ProductDao();
-
+	//나라별 전체 상품 조회
+	public List<ProductDto> selectproductAllByCountry(int coordinateNo) {
+		Connection conn = getConnection();
+		List<ProductDto> allProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+		close(conn);
+		return allProducts;
+	}
+	
+	
+	
 	// 나라별 최신상품 리스트 가져오기
 	public List<ProductDto> selectRecentproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();
@@ -130,6 +141,15 @@ public class ProductService {
 		return result;
 	}
 	
+	//위시리스트 조회하는 메소드
+	public List<ProductwishilistDto> selectwishlistByNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductwishilistDto> wishlists = dao.selectwishlistByNo(conn, productNo);
+		close(conn);
+		return wishlists;
+
+	}
+	
 	//위시리스트 카운트 하는 메소드
 	public int selectWishlistCountByNo(int productNo) {
 		Connection conn = getConnection();
@@ -137,6 +157,22 @@ public class ProductService {
 		close(conn);
 		return commentCount;
 
+	}
+	
+	//상품 코스 조회하는 메소드
+	public List<ProductcourseDto> selectCourseByNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductcourseDto> course = dao.selectCourseByNo(conn, productNo);
+		close(conn);
+		return course;
+	}
+	
+	//나라 조회하는 메소드
+	public ProductCoordinateDto selectCoordinateByNo(int coordinateNo) {
+		Connection conn = getConnection();
+		ProductCoordinateDto coordinate = dao.selectCoordinateByNo(conn, coordinateNo);
+		close(conn);
+		return coordinate;
 	}
 
 	// 상품 등록
@@ -148,10 +184,6 @@ public class ProductService {
 
 	// 상품 삭제
 
-	// 리뷰 코멘트 등록
-	// public int insertProductComment(ProductComment pc) {
-
-	// }
 
 	// 리뷰 코멘트 수정
 

@@ -1,3 +1,5 @@
+<%@page import="java.io.PrintWriter"%>
+<%@page import="com.web.accompany.model.dto.AccompanyOffer"%>
 <%@page import="com.web.accompany.model.dto.AccompanyComment"%>
 <%@page import="java.util.List"%>
 <%@page import="com.web.accompany.model.dto.AccompanyDTO"%>
@@ -9,15 +11,50 @@
 
 
 <%
-	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");
+	
+	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");		
+	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer"); 
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
+	String acUserId= loginMember.getUserId();
+	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
+	
 %>
-
-
-
 <style>
+.accept-button,
+    .decline-button {
+        margin-left: 10px;
+        cursor: pointer;
+        padding: 5px 10px; /* Adjust padding to change button size */
+        font-size: 14px; /* Adjust font size */
+        /* Add additional styling as needed */
+    }
+    .blog__sidebar__recent {
+        border: solid gainsboro;
+    }
+
+    .blog__sidebar__recent > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog__sidebar__recent__item {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .blog__sidebar__recent__item__pic img {
+        height: 60px;
+        width: 60px;
+        margin-top: 10px;
+    }
+
+    .blog__sidebar__recent__item__text {
+        margin-left: 10px;
+    }
 div#googleMap img{
 	border-radius:0;
 }
@@ -118,6 +155,37 @@ button:hover {
 #commentText{
 	width :640px
 }
+table#tbl-comment tr.level2 td:first-of-type {
+	padding-left: 100px;
+}
+
+table#tbl-comment tr.level2 sub.comment-writer {
+	color: #8e8eff;
+	font-size: 14px
+}
+
+table#tbl-comment tr.level2 sub.comment-date {
+	color: #ff9c8a;
+	font-size: 10px
+}
+div.subcategory{
+	border:1px solid #6c757d61;
+	border-radius: 10px;
+	margin-bottom:5px;
+	width:400px;
+	overflow:hidden;
+	
+}
+div.subcategory>div{
+	margin: 0px 5px 0px 5px;
+}
+div.subcategory>button{
+	margin: 2px 5px 0px 5px;
+	height:20px;
+	width:40px;
+	font-size:10px;
+}
+
 </style>
 
 <script>
@@ -142,93 +210,149 @@ button:hover {
 </script> 
 
 
+
 <body>
 	<!-- Blog Details Section Begin -->
 	<section class="blog-details spad" style="padding-top:250px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-5 order-md-1 order-2">
-					<div class="blog__sidebar">
+				<div class="col-lg-3 col-md-5 order-md-1 order-2" >
+					<div class="blog__sidebar" style="padding-top: 0px;">
+					<%if(loginMember!=null){ %>
 						<div class="col-lg-12 blog__details__author">
-							<div class="row">
-								<div class="blog__details__author__pic col-sm-4">
-									<img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="">
+							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px; height: 80px;" >
+								<div class="blog__details__author__pic col-sm-2">
+								<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+								
 								</div>
-								<div class="blog__details__author__text col-sm-6">
-									<div class="row">
-										<div class="gotoprofile,item col-sm-5" id="openProfilePopup">
-										아이디값
-										<%-- <%=loginMember.getUserId %> --%>
+								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
+									<div class="cols">
+										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
+										<%= b.getUserId()%>
 										</div>
 										<div class="item col-sm-4">
-											<img id="followButton" src="<%=request.getContextPath()%>/img/팔로우(빈거).png" alt="팔로우 버튼"
-												onclick="toggleImage()" width="30" height="30">
+											
+											<%-- <img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
+											onclick="toggleImage()" width="20" height="20"> --%>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="blog__sidebar__item">
-							<form>
-								<button onclick="confirmAccompany()">동행신청하기</button>
-								<br>
-								<br>
-							</form>
-
-							<div class="blog__sidebar__recent">
-								<a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-1.jpg" alt="">
+						<%} %>
+						<div class="row" >
+							<div class="blog__sidebar__item">
+								<%if(loginMember!=null){ 
+									/* 로그인을 하고 로그인멤버가 글쓴이가 아니면 ~ 버튼 생성  */
+									if(loginMember.getUserNo()!= b.getMemberNo()){
+										if(b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() &&
+										b.getAcOffer().get(0).getAccompanyOfferStatus().equals("대기중")) {%>
+										<!-- 이거 고쳐야함  -->
+											<div class="col-sm-12">
+											<button onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청 취소하기</button>				
+										<%}else{ %>
+											<div class="col-sm-12">
+											<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+										<%}
+									}else{%>
+										<div class="col-sm-12">
+										<button style="margin:10px 0 10px 0; width: 290px;"> <a href="<%=request.getContextPath() %>/mywrite.do">나의 글 확인하기</a></button>
+									<%}
+								}%>
+								</div>
+								<div class="blog__sidebar__recent col-sm-12" style="border:solid gainsboro; margin-left: 15px; width: 289.8px;">
+									<div style="margin: 5px 0px 5px 0px;">
+										<%if (offer.isEmpty()){ %>
+											<h5>신청자가 없습니다.</h5>
+										<%}else{ %>
+											<h5>동행신청한 목록</h5>
+										<%} %>
 									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-2.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a> <a href="#" class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="<%=request.getContextPath()%>img/blog/sidebar/sr-3.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>아이디</h6>
-									</div>
-								</a>
+									<div>
+									<% int a= 0;
+									for( int i =1; i < offer.size();i++){ %>
+											<div style ="display: flex;">
+												<div >
+													<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px; margin-botton : 10px;">
+												</div>
+												<div >
+													<div style ="margin: 5px; margin-bottom: 0px; margin-left: 10px; ">
+														<h4 style ="margin-bottom: 0px"> <%=offer.get(i).getUserId() %></h4>
+														
+													</div>
+													<%if(loginMember.getUserNo() == b.getMemberNo()){ 
+														/* offer status가 대기중이라면 ? */
+														 if(offer.get(i).getAccompanyOfferStatus().equals("대기중")){%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+														<%}else if(offer.get(i).getAccompanyOfferStatus().equals("decline")){
+															/* offer status가 decline이라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<span>거절중</span>
+															</div>
+														<%}else{
+															/* offer status가 accept 수락한 상태라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<span>수락중</span>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+													<%}
+													} %>
+												</div>
+											</div>
+										<%} %>									
+										</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-7 order-md-1 order-1">
-					<div>
-						<span style="font-size: larger; font-weight: bolder;"><%=b.getAccompanyTitle() %></span> <select name="accompany">
-					<%-- 	<%=b.getBoardTitle()%>  --%>
-					<!-- 분기 처리하기 만약에 ~  -->
-							<option value="모집중">모집중</option>
-							<option value="마감">마감</option>
-						</select>
+				<div class="col-lg-8 col-md-7 order-md-1 order-1" style="margin-bottom:0px; margin-bottom: 0px; margin-left: 30px;">
+					<div style="padding-top:10px;">
+						<span style="font-size: larger; font-weight: bolder;" ><%=b.getAccompanyTitle() %></span> 
+						
+						<%
+						if(loginMember.getUserNo()== b.getMemberNo()){
+							if(b.getAccompanyStatus().equals("acClose")) {%>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting">모집중</option>
+								<option name="acSelect" value= "acClose" selected>마감</option>
+							</select>
+								<%}else{ %>
+							<select id = "acSelect" onchange ="accompanySelect();">
+								<option name="acSelect" value ="acRecruiting" selected>모집중</option>
+								<option name="acSelect" value= "acClose" >마감</option>
+							</select>
+						<%}
+					}%>
 					</div>
-					<div class="blog__details__text">
+					<div class="blog__details__text"  style="padding-top:20px;">
 						<div style="display:flex;">
 						<!-- 댓글처럼 따로 데이터를 불러서 사진 파일 들고오기  -->
-							<img src="<%=request.getContextPath() %>/img/america/호주.png" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
+							<img src="<%=request.getContextPath() %>/upload/accompany/<%=b.getRenameFilename() %>" alt="여행사진"  style="width:450px; height: 250px; border-radius:0%;">
 							<div id="googleMap" style=" width: 250px; height: 250px;  border-radius:0% ;" > 지도 자리</div>
 						</div>
 					</div>
 					<div>
 						<p><%=b.getAccompanyContent() %></p>
 					</div>
-					<div style="display: flex;">
+					<div class="subcategory" style="display: flex;">
 						<div><%=b.getAccompanyDate()%></div>
 						<div>조회수 <%=b.getAccompanyReadCount()%></div>
+						<%if(loginMember.getUserNo()==b.getMemberNo()){%>
+							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
+							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="delete">삭제</button>
+						<%}else{ %>
+							<button onclick="modifyaccompany();" role="modify" value="modify" style="display:none;">수정</button>
+							<button onclick="deleteaccompany();" role="delete" value="delete" style="display:none;">삭제</button>
+						<%} %>
 					</div>
+						
 					<div class="comment-section">
-						<h3>comment</h3>
-						<br>
-						<br>
+						
 							<div class="comments" id="comments"> 
 							<%if(!comments.isEmpty()){ %>
 								<table id="tbl-comment">
@@ -236,7 +360,7 @@ button:hover {
 									if (ac.getAccompanyComtLevel() == 1) {
 								%>
 									<tr class="level1">
-										<td>
+										<td style="width:600px">
 											<sub class="comment-writer"><%=ac.getUserId() %></sub>
 											<sub class="comment-date"><%=ac.getAccompanyComtDate() %></sub>
 											<br>
@@ -270,22 +394,22 @@ button:hover {
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요">
+							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요" style="width:620px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
+
 	    <script>
-<%-- 	    $(".comment-form>form>input[name=content]").focus(e=>{
+ 	    $("#btn-insert").click(e=>{
 	    	if(<%=loginMember==null%>){
 	    		/* 로그인이 안됐을 때  */
 	    		alert("로그인 후 이용할 수 있는 서비스입니다.");
 	        }
-	    }); --%>
+	    }); 
 	    $(".btn-reply").click(e=>{
 	    	/* alert("클릭"); */
 	    	/* $(e.target).parents("tr").after($("<tr>").append($("<td>테스트</td>"))) */
@@ -300,102 +424,232 @@ button:hover {
 			$td.append($form);
 			$tr.append($td);
 			$(e.target).parents("tr").after($tr);
-	    })
+	    });
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
+
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
-			<h2>프로필 정보</h2>
-			<div id="profileInfo">
-				<!-- 프로필 정보를 추가하세요 -->
-				<p>아이디 넣는 곳 John Doe</p>
-				<p>여기는 소개글 적는 곳</p>
-				<button id="reportButton" onclick="openReportPopup()">신고하기</button>
-				<button id="blockButton">차단하기</button>
-				<button id="followButton">팔로우하기</button>
+			<div>
+				<div> 
+					<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="프로필 사진"  style="display:flex; height: 150px; width: 150px; margin: auto;">
+				</div>
+					<div>
+						<div>
+							<h2><%=b.getUserId() %></h2>
+						</div>
+						<div id="profileInfo">
+						<!-- 프로필 정보를 추가하세요 -->
+							<p><%=b.getUserIntroduce()%></p>
+						</div>
+					</div>
+					<div style=" margin-left : 150px">
+						<button id="reportButton" onclick="openReportPopup()">신고하기</button>
+						<button id="blockButton">차단하기</button>
+						<button id="followButton">팔로우하기</button>
+					</div>
 			</div>
 		</div>
 	</div>
 	
 <!------------------------신고하기 Popup 부분 ------------------------>	
+
 	<div id="reportPopup" class="popup">
 		<div class="popup-content">
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
-			<div class="checkbox-group">
-				<label> <input type="checkbox" value="스팸"> 스팸 </label> 
-				<label> <input type="checkbox" value="욕설"> 욕설 </label> 
-				<label> <input type="checkbox" value="불쾌한 콘텐츠"> 불쾌한 콘텐츠 </label> 
-				<label> <input type="checkbox" value="text"> 기타
-				</label>
-			</div>
-			<div>
-				<textarea id="reportReason"></textarea>
-				<button onclick="submitReport()">제출</button>
-			</div>
+			<form action="<%=request.getContextPath()%>/report/report.do" method="post">
+				<div class="checkbox-group">
+					<label> <input type="radio" value="illegal_advertising" name="report"> 무단광고/홍보 </label> 
+					<label> <input type="radio" value="abuse" name="report"> 욕설 </label> 
+					<label> <input type="radio" value="offensive_language" name="report"> 불쾌한 언어사용 및 컨테 </label> 
+					<label> 
+						<input type="radio" value="text" name="report"> 기타
+						<textarea id="reportReason" name="textContent"></textarea>
+					</label>
+				</div>
+				<div>
+					<input type="submit" value="제출">
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
 
 <!-- javaScript 부분   -->
-	<script>
-	/* 동행 신청 */
-	function confirmAccompany() {
-		var confirmed = confirm("동행을 신청하시겠습니까?");
 
-		if (confirmed) {
-			alert("동행이 신청되었습니다!");
-		} else {
-			alert("동행 신청이 취소되었습니다.");
-		}
-	}
+	<script>
 	
-	document.addEventListener('DOMContentLoaded', function() {
+	/* 동행 신청 */
+	
+	document.addEventListener('DOMContentLoaded', function(){
 		var openButton = document.getElementById('openProfilePopup');
 		var profilePopup = document.getElementById('profilePopup');
 		var closeButton = document.getElementById('closeProfilePopup');
 
-		openButton.addEventListener('click', function() {
+		openButton.addEventListener('click', function(){
 			profilePopup.style.display = 'block';
 		});
-		closeButton.addEventListener('click', function() {
+		closeButton.addEventListener('click', function(){
 			profilePopup.style.display = 'none';
 		});
 	});
 		
 		var isFilled = false;
-		function toggleImage() {
+		function toggleImage(){
 			var button = document.getElementById('followButton');
 			if (isFilled) {
-				button.src = "<%=request.getContextPath()%>/img/팔로우(빈거).png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png";
 			} else {
-				button.src = "<%=request.getContextPath()%>/img/팔로우.png";
+				button.src = "<%=request.getContextPath()%>/img/accompany/팔로우.png";
 			}
 			isFilled = !isFilled; 
 		}
 /* 신고하기  부분  */
-		function openReportPopup() {
+		function openReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'block';
 		}
-
-		function closeReportPopup() {
+		function closeReportPopup(){
 			var reportPopup = document.getElementById('reportPopup');
 			reportPopup.style.display = 'none';
 		}
-
-		function submitReport() {
-			var reportReason = document.getElementById('reportReason').value;
-			// 여기에 신고 처리 로직 추가
-			alert('신고되었습니다.');
-
-			// 신고 팝업 닫기
-		}
-		
 	</script>
+	<script>
+	<%-- const radios = $("input[name=report]");
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>  -->
+    function submitReport(){
+        radios.click(e => {
+            const val = radios.filter(":checked").val();
+            if (val === "text") {
+                const textval = $("#reportReason").val();
+                location.replace("<%=request.getContextPath()%>/report/report.do?report="+val+"&text=" + textval);
+            } else {
+                location.replace("<%=request.getContextPath()%>/report/report.do?report=" + val);
+            }
+        });
+		alert('신고되었습니다.');
+    } --%>
+    //동행 모집중인지 여부 확인하는 ajax 
+    function accompanySelect(){
+    	const acSelect  = document.getElementById("acSelect");
+		const value = (acSelect.options[acSelect.selectedIndex].value);
+		const boardNo = <%=acompanyBNo%>;
+		
+		   $.ajax({
+	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
+	            type: 'POST',
+	            data: { value: value,boardNo :boardNo}
+	        });
+	};
+	
+	//회원이 동행신청하기 누르기 
+	function confirmAccompany(){
+		const confirmed=confirm("동행을 신청하시겠습니까?");
+		const userNo=<%=loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
+		if(confirmed){
+				alert("동행이 신청되었습니다!");
+				 $.ajax({
+			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
+			            type: 'POST',
+			            data: { userNo : userNo ,boardNo :boardNo},
+			            success: function(response) {
+			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
+			            },
+			            error: function(error) {
+			            	alert("동행 신청 중 오류가 발생했습니다.");
+			            }
+			        });
+			}else{
+				alert("동행 신청이 취소되었습니다.");
+			}
+		 }
+	
+	/* 회원이 동행 신청하기누르고 다시 거절을 눌렀을 때  */
+	function deleteAccompany(){
+		const confirmed=confirm("동행 신청을 거절하시겠습니까?");
+		const userNo=<%= loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
+		if(confirmed){
+			alert("동행이 거절되었습니다!");
+			 $.ajax({
+		            url:"<%=request.getContextPath() %>/accompay/deleteAccompany.do", 
+		            type:'POST',
+		            data:{ userNo : userNo ,boardNo :boardNo},
+		            success: function(response) {
+		                console.log("신청버튼 만들기")
+		            },
+		            error: function(error) {
+		            	alert("동행 거절 중 오류가 발생했습니다.");
+		            }
+		        });
+		}else{
+			alert("동행 신청 거절이 취되었습니다.");
+		}
 
+	}
+	
+	/* 동행신청 수락버튼 누르기  */
+	function acceptOffer(button) {
+    const boardNo = <%=acompanyBNo%>;
+    const memberNo = $(button).data("member-no");
+
+    const confirmed = confirm("동행 신청을 수락하시겠습니까?");
+    
+    if (confirmed) {
+        alert("동행이 수락되었습니다");
+        $.ajax({
+            url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
+            type: 'POST',
+            data: {boardNo: boardNo, memberNo: memberNo},
+            success: function(response) {
+            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+                        "<span>수락중</span>" +
+                        "<button class='decline-button' data-member-no='" + memberNo + "' onclick='declineOffer(this)'>거절</button>" +
+                     "</div>");
+            },
+            error: function() {
+                alert("동행 신청 수락 중 오류가 발생했습니다.");
+            }
+        });
+    } else {
+        alert("동행 신청이 취소되었습니다.");
+    }
+}
+		
+	//글쓴이가 동행신청 목록에 
+	function declineOffer(button) {
+		const boardNo = <%=acompanyBNo%>;
+		const memberNo = $(button).data("member-no");
+		const confirmed = confirm("동행 신청을 거절하시겠습니까?");
+	    
+	    if (confirmed) {
+	        alert("동행 신청이 거절되었습니다.");       
+
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/accompay/Acommpanydecline.do", 
+	            type: 'POST',
+	            data: {boardNo: boardNo, memberNo: memberNo},
+	            success: function(response) {
+	            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+	                                 "<button class='accept-button' data-member-no='" + memberNo + "' onclick='acceptOffer(this)'>수락</button>" +
+	                                 "<span>거절중</span>" +
+	                              "</div>");
+	     
+	            }, 
+	            error: function() {
+	                alert("동행 신청 거절 중 오류가 발생했습니다.");
+	            }
+	        });
+	    } else {
+	        alert("동행 신청 거절이 취소되었습니다.");
+	    }
+	}
+
+	</script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+ -->
  <%@ include file="/views/common/footer.jsp"%>

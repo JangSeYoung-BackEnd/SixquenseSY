@@ -1,6 +1,6 @@
 package com.web.accompany.model.dao;
 
-import static com.web.common.JDBCTemplate.*;
+import static com.web.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,12 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
-
-import oracle.jdbc.proxy.annotation.Pre;
 
 
 
@@ -35,14 +32,15 @@ public class AccompanyDAOKH {
 	public List<AccompanyDTO> selectBoardAll(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+//		String sqlTemp="WHERE CONTINENT_NAME LIKE '%"+coordinate+"%' \\";
 		List<AccompanyDTO> result=new ArrayList<>();
 		try {
 			pstmt=conn.prepareCall(sql.getProperty("selectAll"));
+//			pstmt.setString(1, coordinate!=null||coordinate.equals("전체보기")?"":sqlTemp);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getAccompanyDTO(rs));
 			}
-			System.out.println(result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -50,6 +48,106 @@ public class AccompanyDAOKH {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public List<AccompanyDTO> selectAccompanyByPopularity(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyByPopularity"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<AccompanyDTO> selectAccompanyByCoordinate(Connection conn, String coordinate){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyByCoordinate"));
+			pstmt.setString(1, coordinate);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<AccompanyDTO> selectAccompanyByCoordinatePopularity(Connection conn, String coordinate){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyByCoordinatePopularity"));
+			pstmt.setString(1, coordinate);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<AccompanyDTO> ModifyAccompany(Connection conn, int memberNo, int accompanyNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("modifyAccompany"));
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, accompanyNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int ModifyAccompanyUpdate(Connection conn, AccompanyDTO a, String nation, int memberNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("ModifyAccompanyUpdate"));
+			pstmt.setString(1, a.getAccompanyContent());
+			pstmt.setString(2, a.getOpenChattingLink());
+			pstmt.setString(3, a.getAccompanyTitle());
+			pstmt.setString(4, nation);
+			pstmt.setString(5, a.getOriginalFilename());
+			pstmt.setString(6, a.getRenameFilename());
+			pstmt.setInt(7, memberNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}return result;
 	}
 	
 	public int insertAccompany(Connection conn, AccompanyDTO a, String nation, String userId) {
@@ -72,6 +170,8 @@ public class AccompanyDAOKH {
 		}return result;
 	}
 	
+	
+	
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
 		return AccompanyDTO.builder()
 					.accompanyNo(rs.getInt("ACCOMPANY_NO"))
@@ -84,6 +184,7 @@ public class AccompanyDAOKH {
 					.coordinate(getCoodinate(rs))
 					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
 					.renameFilename(rs.getString("RENAME_FILENAME"))
+					.accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
 					.build();
 	}
 	public Coordinate getCoodinate(ResultSet rs) throws SQLException{

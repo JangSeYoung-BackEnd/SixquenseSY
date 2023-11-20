@@ -4,7 +4,6 @@
 <%
 
 	Member loginMember=(Member)session.getAttribute("loginMember");
-	System.out.println(loginMember);
 	Cookie[] cookies=request.getCookies();
 	String saveId=null;
 	if(cookies!=null){
@@ -77,8 +76,9 @@
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
                         <form action="#">
-                            <input type="text" placeholder="어디로 떠나실건가요?">
+                            <input type="search" id="search" list="data" placeholder="어디로 떠나실 건가요?">
                             <button type="submit" class="site-btn">SEARCH</button>
+							<datalist id="data"></datalist>
                         </form>
                     </div>
                     <%if(loginMember==null) {%>
@@ -109,16 +109,12 @@
             </div>
                  <nav class="header__menu" style="text-align: center; display: contents;">
                     <ul>
-                        <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/icon/홈.png" width="25px"> 홈</a></li>
-                        <li><a href= "<%=request.getContextPath() %>/product/productmain.do"><img src="<%=request.getContextPath() %>/img/icon/여행상품.png" width="25px;"> 상품</a>
+                        <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/mainicon/홈1.png" width="25px"> 홈</a></li>
+                        <li><a href= "<%=request.getContextPath() %>/product/productmain.do"><img src="<%=request.getContextPath() %>/img/mainicon/상품.png" width="25px;"> 상품</a>
                         </li>
-                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/icon/커뮤니티.png" width="25px;"> 커뮤니티</a>
-                        	<ul class="header__menu__dropdown">
-                                <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do">동행</a></li>
-                                <li><a href= "<%=request.getContextPath() %>/community/communitylist.do">여행리뷰</a></li>
-                            </ul>
+                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="25px;"> 동행</a>
                         </li>
-                        <li><a href= "<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/img/icon/헤더문의.png" width="25px;"> 문의사항</a></li>
+                        <li><a href= "<%=request.getContextPath()%>/views/common/inquiry.jsp"><img src="<%=request.getContextPath() %>/img/mainicon/문의사항.png" width="25px;"> 문의사항</a></li>
                     </ul>
                 </nav>
         </div>

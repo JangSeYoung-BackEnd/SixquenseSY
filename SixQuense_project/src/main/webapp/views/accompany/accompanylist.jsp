@@ -1,3 +1,4 @@
+<%@page import="com.web.product.dto.ProductCoordinateDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
@@ -56,54 +57,15 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>커뮤니티 메뉴</h4>
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
-                            <div style="margin: 10px 0px 10px 0px;">
-                                <div id="accompany" onclick="location.assign('<%=request.getContextPath() %>/accompany/accompanylist.do');" style="width: 200px; font-weight: bold; cursor:pointer;">동행</div>
-                                <div id="cumunity" onclick="location.assign('<%=request.getContextPath() %>/community/communitylist.do');" style="width: 200px; font-weight: bold; cursor:pointer;">여행리뷰</div>
-                            </div>
+                            <div style="padding:10px 0px 10px 0px; font-weight:bold;">대륙별 게시글 보기</div>
                             <div style="border: 2px solid #7fad39; width: 200px;"></div>
                             <ul class="menu">
-                                <li><a href="#">동남아·대만</a>
-                                    <ul class="submenu">
-                                        <li><a href="#">방콕·파타야</a></li>
-                                        <li><a href="#">호치민·나트랑·달랏</a></li>
-                                        <li><a href="#">푸켓</a></li>
-                                        <li><a href="#">코타카나발루</a></li>
-                                        <li><a href="#">대만</a></li>
-                                        <li><a href="#">보홀</a></li>
-                                        <li><a href="#">싱가포르</a></li>
-                                        <li><a href="#">세부·클락</a></li>
-                                        <li><a href="#">보라카이</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">일본</a>
-                                    <ul class="submenu">
-                                        <li><a href="#">후쿠오카</a></li>
-                                        <li><a href="#">오사카·교토</a></li>
-                                        <li><a href="#">도쿄</a></li>
-                                        <li><a href="#">샷포로</a></li>
-                                        <li><a href="#">오키나와</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">유럽</a>
-                                    <ul class="submenu">
-                                        <li><a href="#">영국</a></li>
-                                        <li><a href="#">프랑스</a></li>
-                                        <li><a href="#">이탈리아</a></li>
-                                        <li><a href="#">스위스</a></li>
-                                        <li><a href="#">스페인·포르투칼</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">미주·캐나다</a>
-                                    <ul class="submenu">
-                                        <li><a href="#">미서부</a></li>
-                                        <li><a href="#">미동부</a></li>
-                                        <li><a href="#">하와이</a></li>
-                                        <li><a href="#">캐나다</a></li>
-                                        <li><a href="#">호주</a></li>
-                                    </ul>
-                                </li>
+                            	<li><a>전체보기</a></li>
+                                <li><a>동남아·대만</a></li>
+                                <li><a>일본</a></li>
+                                <li><a>유럽</a></li>
+                                <li><a>미주·캐나다</a></li>
                             </ul>
                         </div>
                     </div>
@@ -111,16 +73,18 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>동행</h2>
+                        <img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="50px" height="50px" style="margin:0px 0px 10px 0px">
+                            <span style="font-size:25px; font-weight:bold">동행 게시글</span>
+                            <div style="border: 2px solid #7fad39; width: 200px;"></div>
                         </div>
                         <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
-                        <button onclick="" class="recent-btn">최신순</button>
-                        <button onclick="" class="popularity-btn">인기순</button>
+                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanylist.do')" class="recent-btn">최신순</button>
+                        <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanypopularity.do')" class="popularity-btn">인기순</button>
                     </div>
                     <div class="row">
-                    	<% if(!accompanys.isEmpty()){ 
+                    	<% if(!accompanys.isEmpty()){
                     		for(AccompanyDTO a:accompanys){%>
-		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>');">
+		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>&userNo=<%=loginMember.getUserNo()%>');">
 		                            <div class="product__item">
 		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
 		                                    <ul class="product__item__pic__hover">
@@ -128,6 +92,7 @@
 		                                    </ul>
 		                                </div>
 		                                <div class="product__item__text">
+		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
 		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
 		                                </div>
@@ -141,6 +106,17 @@
         </div>
     </section>
 	<script>
+	$(document).ready(function(){
+	    $(".menu li").click(function(){
+	        const temp = $(this).text();
+	        console.log(temp);
+	        if(temp!="전체보기"){
+	        	location.assign("<%=request.getContextPath()%>/accompany/accompanycoordinatelist.do?coordinate="+temp);
+	        }else{
+	        	location.assign("<%=request.getContextPath()%>/accompany/accompanylist.do")
+	        }
+        });
+    });
 	</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

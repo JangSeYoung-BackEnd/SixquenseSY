@@ -1,4 +1,4 @@
-package com.web.product.SYcontroller;
+package com.web.product.sycontroller;
 
 
 import java.io.IOException;
@@ -11,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.web.product.syservice.BookingService;
+import com.web.product.dto.BookinginfoDto;
 
 import com.web.product.dto.BookinginfoDto;
 import com.web.product.syservice.BookingService;
@@ -27,6 +30,7 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
      */
     public ProductPackageOrderEndServlet() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -39,30 +43,6 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String bookingName=request.getParameter("bookingName");
-		String bookingBirth=request.getParameter("bookingBirth");
-		String bookingGender=request.getParameter("bookingGender");
-		String bookingPhone=request.getParameter("bookingPhone");
-		
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		int orderNo=Integer.parseInt(request.getParameter("orderNo"));
-	
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date birth = null;
-        try {
-            birth = sdf.parse(bookingBirth);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        BookinginfoDto b = BookinginfoDto.builder()
-                .BookingName(bookingName)
-                .BookingBrith(birth)
-                .BookingGender(bookingGender)
-                .BookingPhone(bookingPhone)
-                .build();
-            
-            int result = new BookingService().insertBookingInfo(b, memberNo, orderNo);
+		String imp=request.getParameter("imp_");
 	}
 }

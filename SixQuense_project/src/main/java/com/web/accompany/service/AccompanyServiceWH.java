@@ -40,12 +40,12 @@ public class AccompanyServiceWH {
 			return accompanyView;
 		}
 		
-		public MemberToAcompanyWH selectMemberToAcompany(int userNo, int no) {
-			Connection conn = getConnection();
-			MemberToAcompanyWH member  = dao.selectMemberToAcompany(conn,userNo,no);
-			close(conn);
-			return member;
-		}
+//		public MemberToAcompanyWH selectMemberToAcompany(int userNo, int no) {
+//			Connection conn = getConnection();
+//			MemberToAcompanyWH member  = dao.selectMemberToAcompany(conn,userNo,no);
+//			close(conn);
+//			return member;
+//		}
 		
 		
 		//글번호로 관련된 댓글을 가져오는 메소드 

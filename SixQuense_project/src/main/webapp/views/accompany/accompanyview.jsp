@@ -270,7 +270,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 														/* offer status가 대기중이라면 ? */
 														 if(offer.get(i).getAccompanyOfferStatus().equals("대기중")){%>
 															<div style="margin-bottom: 5px; margin-left: 20px; ">
-																<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<button class="accept-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
 																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
 															</div>
 														<%}else if(offer.get(i).getAccompanyOfferStatus().equals("decline")){
@@ -517,9 +517,9 @@ table#tbl-comment tr.level2 sub.comment-date {
     
     //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
-		var acSelect  = document.getElementById("acSelect");
-		var value = (acSelect.options[acSelect.selectedIndex].value);
-		var boardNo = <%=acompanyBNo%>;
+    	const acSelect  = document.getElementById("acSelect");
+		const value = (acSelect.options[acSelect.selectedIndex].value);
+		const boardNo = <%=acompanyBNo%>;
 		
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
@@ -530,9 +530,9 @@ table#tbl-comment tr.level2 sub.comment-date {
 	
 	//회원이 동행신청하기 누르기 
 	function confirmAccompany(){
-		var confirmed=confirm("동행을 신청하시겠습니까?");
-		var userNo=<%=loginMember.getUserNo() %>;
-		var boardNo=<%=acompanyBNo%>;
+		const confirmed=confirm("동행을 신청하시겠습니까?");
+		const userNo=<%=loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
 		if(confirmed){
 				alert("동행이 신청되었습니다!");
 				 $.ajax({
@@ -553,10 +553,10 @@ table#tbl-comment tr.level2 sub.comment-date {
 	
 	/* 회원이 동행 신청하기누르고 다시 거절을 눌렀을 때  */
 	function deleteAccompany(){
-		var confirmed=confirm("동행 신청을 거절하시겠습니까?");
-		var userNo=<%= loginMember.getUserNo() %>;
-		var boardNo=<%=acompanyBNo%>;
-		f(confirmed){
+		const confirmed=confirm("동행 신청을 거절하시겠습니까?");
+		const userNo=<%= loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
+		if(confirmed){
 			alert("동행이 거절되었습니다!");
 			 $.ajax({
 		            url:"<%=request.getContextPath() %>/accompay/deleteAccompany.do", 
@@ -577,17 +577,13 @@ table#tbl-comment tr.level2 sub.comment-date {
 	
 	/* 동행신청 수락버튼 누르기  */
 	function acceptOffer(button) {
-    var boardNo = <%=acompanyBNo%>;
-    var memberNo = $(button).data("member-no");
+    const boardNo = <%=acompanyBNo%>;
+    const memberNo = $(button).data("member-no");
 
-    var confirmed = confirm("동행 신청을 수락하시겠습니까?");
+    const confirmed = confirm("동행 신청을 수락하시겠습니까?");
     
     if (confirmed) {
         alert("동행이 수락되었습니다");
-
-        // Replace the button with the loading message
-        
-
         $.ajax({
             url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
             type: 'POST',
@@ -600,8 +596,6 @@ table#tbl-comment tr.level2 sub.comment-date {
             },
             error: function() {
                 alert("동행 신청 수락 중 오류가 발생했습니다.");
-                // Restore the button if the AJAX request fails
-                loadingMessage.replaceWith(button);
             }
         });
     } else {
@@ -611,9 +605,9 @@ table#tbl-comment tr.level2 sub.comment-date {
 		
 	//글쓴이가 동행신청 목록에 
 	function declineOffer(button) {
-	    var boardNo = <%=acompanyBNo%>;
-	    var memberNo = $(button).data("member-no");
-	    var confirmed = confirm("동행 신청을 거절하시겠습니까?");
+		const boardNo = <%=acompanyBNo%>;
+		const memberNo = $(button).data("member-no");
+		const confirmed = confirm("동행 신청을 거절하시겠습니까?");
 	    
 	    if (confirmed) {
 	        alert("동행 신청이 거절되었습니다.");       
@@ -639,7 +633,6 @@ table#tbl-comment tr.level2 sub.comment-date {
 	}
 
 	</script>
-
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
  -->
  <%@ include file="/views/common/footer.jsp"%>

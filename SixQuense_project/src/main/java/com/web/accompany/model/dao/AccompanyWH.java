@@ -139,64 +139,56 @@ public class AccompanyWH {
 		return board.get(0);
 		
 	} 
-	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
-		try {
-			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
-			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, no);
-			rs=pstmt.executeQuery();
+//	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
+//		try {
+//			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
+//			pstmt.setInt(1, userNo);
+//			pstmt.setInt(2, no);
+//			rs=pstmt.executeQuery();
+//			
+//			 while (rs.next()) {
+//				a = getAccompanyDTO(rs);
+//				//addMemberOffer(member,rs);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		//System.out.println(board.get(0));
+//		return member.get(0);
 			
-			 while (rs.next()) {
-				//a = getAccompanyDTO(rs);
-				addMemberOffer(member,rs);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		//System.out.println(board.get(0));
-		return member.get(0);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+//	}
 	
 
 	
-	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
-		int pk = rs.getInt("ACCOMPANY_NO");
-		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
-			member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
-	            try {
-	               if (rs.getInt("ACCOMPANY_NO") != 0) {
-	                  e.getAcOffer().add(getAccompanyOffer(rs));
-	               }
-	               
-	            } catch (SQLException e1) {
-	               e1.printStackTrace();
-	            }
-	         });
-	      } else {
-	    	  AccompanyDTO members = getAccompanyDTO(rs);
-	         if( rs.getInt("ACCOMPANY_NO") != 0) {
-	        	 members.getAcOffer().add(getAccompanyOffer(rs));
-	        	 member.add(members);
-	         }
-	         
-	      }
-		
-	}
+//	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
+//		int pk = rs.getInt("ACCOMPANY_NO");
+//		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
+//			member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
+//	            try {
+//	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+//	                  e.getAcOffer().add(getAccompanyOffer(rs));
+//	               }
+//	               
+//	            } catch (SQLException e1) {
+//	               e1.printStackTrace();
+//	            }
+//	         });
+//	      } else {
+//	    	  AccompanyDTO members = getAccompanyDTO(rs);
+//	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+//	        	 members.getAcOffer().add(getAccompanyOffer(rs));
+//	        	 member.add(members);
+//	         }
+//	         
+//	      }
+//		
+//	}
 	private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
 		  int pk = rs.getInt("ACCOMPANY_NO");
 	      if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {

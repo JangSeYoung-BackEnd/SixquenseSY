@@ -2,18 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.web.member.dto.Member" %>
 <%
- Member loginMember = (Member)session.getAttribute("loginMember");
+ Member m = (Member)session.getAttribute("loginMember");
 %>
 
  <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/수정.png" style="
-                            width: 165px;
-                            padding-left: 0px;
-                            margin-left: 294px;
-                            margin-bottom: 25px;">
+                <div>
+			    <label for="upFile">
+			        	<img src="<%=request.getContextPath() %>/img/icon/수정.png" style="
+			            width: 165px;
+			            padding-left: 0px;
+			            margin-left: 294px;
+			            margin-bottom: 25px; cursor: pointer;">
+			    </label>
+			    		<input type="file" id="upFile" multiple style="display: none;">
+				</div>
                             <p style="width: 750px;"> 홍 길 동</p>
+            	
+                            <button id="btnupload">수정</button>
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6" method="post">
@@ -21,54 +28,49 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" placeholder="홍길동" >
+                                        <input type="text" value="<%=m.getUserName()%>" id="name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>성별</p>
-                                    <input type="text" >
+                                    <input type="text" value="<%=m.getGender()%>" id="gender">
                                 </div>
                             </div>
                             </div>
                             <div class="checkout__input">
-                                <p>닉네임</p>
-                                <input type="text" placeholder="길동길동"   >
-                            </div>
-                            <div class="checkout__input">
                                 <p>비밀번호</p>
-                                <input type="text" >
+                                <input type="text" value="<%=m.getUserPw()%>" id="pw">
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
-                                <input type="text"  >
+                                <input type="text" id="confirmPw">
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
-                                <input type="text" placeholder="1569" class="checkout__input__add" >
-                                <input type="text" placeholder="12월/31일" >
+                                <input type="text"  value="<%=m.getUserDd()%>" id="Dd">
                             </div>
                             <div class="checkout__input">
                                 <p>가입날짜</p>
-                                <input type="text" placeholder="2023/11/11">
+                                <input type="text" value="<%=m.getEnrollData()%>" id="enroll">
                             </div>
                             <div class="checkout__input">
                                 <p>전화번호</p>
-                                <input type="text" placeholder="010-1234-5678" value="<%=loginMember.getPhone()%>">
+                                <input type="text" value="<%=m.getPhone()%>" id="phone">
                             </div>
                             <div class="checkout__input">
                                 <p>자기소개</p>
-                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;" >
+                                <input type="text" style="width: 100%; height: 150px; padding-bottom: 100px;" value="<%=m.getUserIntroduce()%>" id="intro">
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc">
+                                    <input type="checkbox" id="acc" value="<%=m.getNotificatIonset()%>">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <form action="<%=request.getContextPath()%>/update.do" method="post">
-							    <button id="updateBtn2">개인정보 수정</button>
+                            <form>
+							    <input type="button" id="infoupdateBtn" value="정보수정" />
 							</form>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
@@ -85,7 +87,7 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회&취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회,취소</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
                                             <button id="wishBtn">위시리스트</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">
@@ -108,23 +110,78 @@
             	</div>
 </section>
 <script>
-$("#updateBtn2").click(function () {
+    $(document).ready(function () {
+        // 파일 업로드 버튼 클릭 시 이벤트 처리
+        $("#btnupload").click(function (e) {
+            // js FormData 클래스를 제공함
+            const form = new FormData();
+            // FormData 클래스에 append(key, value)로 전송할 데이터를 저장
+            const fileInput = $("#upFile");
+            $.each(fileInput[0].files, function (i, file) {
+                form.append("upfile" + i, file);
+            });
+            $.ajax({
+                url: "<%=request.getContextPath()%>/uploadfro.do",
+                data: form,
+                type: "post",
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    alert("업로드 성공!!");
+                },
+                error: function (r, e) {
+                    alert("업로드 실패 ㅠㅠ");
+                },
+                complete: function () {
+                    fileInput.val('');
+                }
+            });
+        });
+    });
+</script>
+<script>
+$("#infoupdateBtn").click(e => {
+    var newPassword = $('#pw').val();
+    var confirmPassword = $('#confirmPw').val();
+
+    // 새로운 비밀번호와 확인 비밀번호가 다르면 알림 후 함수 종료
+    if (newPassword !== confirmPassword) {
+        alert("비밀번호가 다릅니다.");
+        return;
+    }
+
+
+    // 이하 코드는 비밀번호가 일치할 때만 실행
     $.ajax({
-        url: "<%=request.getContextPath()%>/update.do",
-        method: "POST",
+        url: "<%=request.getContextPath()%>/update.do?userNo=<%=m.getUserNo()%>",
+        type: "post",
         data: {
-            userNo: <%=loginMember.getUserNo()%>,
-            name: $("#nameInput").val(), 
-            phone: $("#phoneInput").val()
-           
+            name: $('#name').val(),
+            pw: newPassword,
+            gender: $('#gender').val(),
+            Dd: $('#Dd').val(),
+            enroll: $('#enroll').val(),
+            phone: $('#phone').val(),
+            intro: $('#intro').val(),
+            acc: $('#acc').val()
+        },
+        success: function(data, status, xhr) {
+            if (data != null) {
+
+                alert("정보가 수정되었습니다!");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("에러:", error);
         }
     });
 });
+
 </script>
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/update.do",
+			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
@@ -183,7 +240,7 @@ $("#updateBtn2").click(function () {
 		});
 	});		
 	</script>
-	<script>
+<script>
 	$("#questionBtn").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/question.do",

@@ -1,4 +1,4 @@
-package com.web.accompany.controller;
+package com.web.product.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.accompany.service.AccompanyServiceKH;
+import com.web.product.dto.ProductCoordinateDto;
+import com.web.product.dto.ProductDto;
+import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class AccompanySelectAllServlet
+ * Servlet implementation class ProductListLatestServlet
  */
-@WebServlet("/accompany/accompanylist.do")
-public class AccompanyListServlet extends HttpServlet {
+@WebServlet("/product/productlistlatest.do")
+public class ProductListLatestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyListServlet() {
+    public ProductListLatestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +32,18 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String coordinate=request.getParameter("coordinate");
-		if(coordinate==null) {
-			
-		}
-		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
-		request.setAttribute("accompanys", accompanys);
-		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);
+		  int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
+		  
+		  List<ProductDto> products = new ProductService().selectRecentproductByCountry(coordinateNo);
+		  ProductCoordinateDto coordinate = new ProductService().selectCoordinateByNo(coordinateNo);
+		  
+		  request.setAttribute("products", products);
+		  request.setAttribute("coordinateNo", coordinateNo);
+		  request.setAttribute("coordinate", coordinate);
+		 System.out.println(products);
+		 
+		  request.getRequestDispatcher("/views/product/productlistbycountry.jsp").
+		  forward(request, response);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 <%@page import="com.web.product.dto.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.web.product.dto.*, java.util.List"%>
+<%@ page import="com.web.product.dto.*, java.util.List, java.util.Arrays"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
 ProductDto product = (ProductDto) request.getAttribute("product");
@@ -10,15 +10,14 @@ List<ProductsreviewDto> comments = (List<ProductsreviewDto>) request.getAttribut
 int commentCount = (int) request.getAttribute("commentCount");
 int wishlistCount = (int) request.getAttribute("wishlistCount");
 
-List<ProductcourseDto> course = product.getCourse();
+List<ProductcourseDto> course = (List<ProductcourseDto>)request.getAttribute("course");
+
 %>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/jquery-ui.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -49,6 +48,92 @@ List<ProductcourseDto> course = product.getCourse();
 	padding: 10px 16px;
 	!
 	important;
+	
+table {
+	width: 580px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	clear: both;
+}
+
+table.container mt-3 tr td {
+	border-bottom: 1px solid;
+	border-top: 1px solid;
+	padding: 5px;
+	text-align: left;
+	line-height: 120%;
+}
+
+table.container mt-3 tr td:first-of-type {
+	padding: 5px 5px 5px 50px;
+}
+
+table.container mt-3 tr td:last-of-type {
+	text-align: right;
+	width: 100px;
+}
+
+table.container mt-3 button.btn-reply {
+	display: none;
+}
+
+table.container mt-3 button.btn-delete {
+	display: none;
+}
+
+table.container mt-3 tr:hover {
+	background: lightgray;
+}
+
+table.container mt-3 tr:hover button.btn-reply {
+	display: inline;
+}
+
+table.container mt-3 tr:hover button.btn-delete {
+	display: inline;
+}
+
+table.container mt-3 tr.level2 {
+	color: gray;
+	font-size: 14px;
+}
+
+table.container mt-3 sub.comment-writer {
+	color: navy;
+	font-size: 14px
+}
+
+table.container mt-3 sub.comment-date {
+	color: tomato;
+	font-size: 10px
+}
+
+table.container mt-3 tr.level2 td:first-of-type {
+	padding-left: 100px;
+}
+
+table.container mt-3 tr.level2 sub.comment-writer {
+	color: #8e8eff;
+	font-size: 14px
+}
+
+table.container mt-3 tr.level2 sub.comment-date {
+	color: #ff9c8a;
+	font-size: 10px
+}
+/*답글관련*/
+table.container mt-3 textarea {
+	margin: 4px 0 0 0; !important;
+}
+
+table.container mt-3 button.btn-insert2 {
+	width: 60px; !important;
+	height: 23px; !important;
+	color: white; !important;
+	background: #3300ff; !important;
+	position: relative; !important;
+	top: -5px; !important;
+	left: 10px;	!important;
 }
 </style>
 <!-- Product Details Section Begin -->
@@ -86,58 +171,99 @@ List<ProductcourseDto> course = product.getCourse();
 					</div>
 					<p style="text-align: left"><%=product.getEditorNote()%></p>
 					<form action="<%=request.getContextPath()%>/product/makeorder.do"
-						method="post">
+						method="post" onsubmit="return checkDate()">
 						<input type="hidden" name="productNo"
 							value="<%=product.getProductNo()%>">
 						<div class="product__details__quantity">
 							<div class="date-container">
-								<input type="text" id="datepicker" name="travel_date"
-									onchange="validateDayOfWeek()">
+								<input type="text" id="datepicker" name="travel_date">
 							</div>
-							`
+							<!-- 달력 구현 -->
 							<script>
+							$(document).ready(function(){               
+							    $.datepicker.setDefaults({
+							    closeText: "닫기",
+							    currentText: "오늘",
+							    prevText: '이전 달',
+							    nextText: '다음 달',
+							    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+							    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+							    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+							    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+							    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+							    weekHeader: "주",
+							    yearSuffix: '년'
+							    });    
+							 });
+
 						$(function() {
+							var desiredDaysOfWeek = [
+					            <% String[] productDays = product.getProductDay();
+					               for (int i = 0; i < productDays.length; i++) {
+					                   if (i > 0) {
+					                       out.print(", ");
+					                   }
+					                   out.print("'" + productDays[i] + "'");
+					               }
+					            %>
+					        ];
+							
 							/* text -> 날짜로 변환 해주는 함수 */
 						    $( "#datepicker" ).datepicker({
-						    onSelect: function() { 
-					            var date = $.datepicker.formatDate("yy/mm/dd",$("#datepicker").datepicker("getDate")); 
-
-					        	}
-					   		});      
+						    	minDate: 0,
+								maxDate: "+3M",
+								onSelect: function(dateText, inst) {
+									var date = $.datepicker.formatDate("yy/mm/dd", $("#datepicker").datepicker("getDate"));
+								},
+								beforeShowDay: function(date) {
+									// 현재 날짜의 요일 확인
+									var dayOfWeek = date.toLocaleDateString("ko-KR", { weekday: "short" });
+									console.log(dayOfWeek);
+									
+									// 특정 요일인지 확인하여 선택 가능 여부 반환
+									return [desiredDaysOfWeek.includes(dayOfWeek)];     
+								}
+							});
 						});
 						</script>
 							<select class="form-select" aria-label="Default select example"
-								name="selectOption">
+								name="selectOption" id="selectOption">
 								<option selected vaule="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
+								 <% for (int i = 2; i <= product.getMaxCount(); i++) { %>
+							        <option value="<%= i %>"><%= i %></option>
+							    <% } %>
 							</select>
 						</div>
+						
 
 						<div class="button-container">
-						 	<input type="submit" class="primary-btn" onclick="" value="예약하기">
+						 	<input type="submit" class="primary-btn" value="예약하기">
 							
-	                    	<%-- <a href="javascript:toggleHeartIcon(this)" class="heart-icon">
-	                        <span class="icon_heart_alt <%=(Boolean)request.getAttribute("wishResult")?"filled":"" %>"></span>위시리스트에 담기</a> --%>
+	                    	 <a href="javascript:toggleHeartIcon(this)" class="heart-icon">
+	                        <span class="icon_heart_alt <%=(boolean)request.getAttribute("wishResult")?"filled":"" %>"></span>위시리스트에 담기</a>
 				
 						</div>
 					</form>
-					<!-- 데이트 넣어야만 예약버튼 되도록 -->
-					<!-- <script>
+					<!-- 로그인 & 데이트 넣어야만 예약버튼 되도록 -->
+					 <script>
 						function checkDate() {
-							var dateInput = document
-									.getElementById("travel_date");
+							var datepickerValue = document.getElementById("datepicker").value;
 							var reserveLink = document
 									.querySelector(".primary-btn");
-							if (!dateInput.checked){
-								 reserveLink.removeAttribute("href");
-								reserveLink.style.backgroundColor = 'grey';
-								reserveLink.style.cursor = 'none';
-							}
-
-						};
-					</script> -->
+							 if (<%=loginMember == null%>) {
+ 								alert("로그인 후 이용할 수 있는 서비스입니다"); 
+ 					            location.assign('<%=request.getContextPath()%>/loginpage.do');  	
+ 					           	return false;
+						  } else {
+							  if (!datepickerValue){
+								  alert("날짜와 인원수를 입력해주세요"); 
+								  return false;
+								}else{
+									return true;
+								}
+							} 
+						}; 					
+					</script> 
 
 
 
@@ -161,27 +287,28 @@ List<ProductcourseDto> course = product.getCourse();
 						  // Get the product and member information
 				            var memberNo = <%=loginMember != null ? loginMember.getUserNo() : 0%>;
 				            var productNo = <%=product.getProductNo()%>;
+				            
 				            console.log('<%=loginMember%>');
 						 if (<%=loginMember == null%>) {
 					            alert("로그인 후 이용할 수 있는 서비스입니다");
 						 } else {
-							 if($("a.heart-icon").find('.icon_heart_alt').hasClass('filled')){
-									 $.ajax({
-							            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
-							            	type:"get",
-							                data: {memberNo: memberNo, productNo: productNo},
-							                success: function (data) {
-							                    console.log(data);
-							                    
-							                    // Toggle the heart icon by adding the 'filled' class
-							                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
-							                    
-							                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
-							                },
-							                error: function (data) {
-							                    console.error('Error adding to wishlist');
-							                }
-									 })
+							 if(<%=(boolean)request.getAttribute("wishResult")%>){
+					        $.ajax({
+					            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
+					            	type:"get",
+					                data: {memberNo: memberNo, productNo: productNo},
+					                success: function (data) {
+					                    console.log(data);
+					                    
+					                    // Toggle the heart icon by adding the 'filled' class
+					                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
+					                    
+					                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
+					                },
+					                error: function (data) {
+					                    console.error('Error adding to wishlist');
+					                }
+							 })
 					            }else{
 					            	// Make an AJAX request to add the product to the wishlist
 						            $.ajax({
@@ -200,6 +327,7 @@ List<ProductcourseDto> course = product.getCourse();
 						                    console.error('Error adding to wishlist');
 					            }
 					        })
+					         
 					    }
 					}
 								}
@@ -244,19 +372,15 @@ List<ProductcourseDto> course = product.getCourse();
 								<h6>코스 소개</h6>
 								<%
 								if (!course.isEmpty()) {
-								%>
-								<div style="background-color: yellow;">
-									<%
 									for (ProductcourseDto pc : course) {
 									%>
+								<div style="background-color: yellow;">
 									<p style="text-align: left">
 										<span><%=pc.getCourseName()%></span><br>
 										<%=pc.getCourseDetail()%></p>
-									<%
-									}
-									%>
 								</div>
 								<%
+									}
 								}
 								%>
 							</div>
@@ -293,28 +417,28 @@ List<ProductcourseDto> course = product.getCourse();
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
-								<%
-								if (loginMember != null
-										&& (loginMember.getUserId().equals("admin") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
-								%>
+								<% 
+								if (loginMember != null && product.getOrderinfo()!=null
+										&& (loginMember.getUserId().equals("six@six.com") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
+								 %>
 								<h6>후기 작성</h6>
-								<div class="comment-editor">
-									<form
-										action="<%=request.getContextPath()%>/product/insertComment.do"
+								<!--  -->
+									<div class="comment-editor">
+									<form action="<%=request.getContextPath()%>/product/insertComment.do"
 										method="post">
 										<input type="hidden" name="productNo"
-											value="<%=product.getProductNo()%>"> <input
-											type="hidden" name="commentLevel" value="1"> <input
-											type="hidden" name="userId"
+											value="<%=product.getProductNo()%>"> 
+											<input type="hidden" name="commentLevel" value="1"> 
+											<input type="hidden" name="userId"
 											value="<%=loginMember != null ? loginMember.getUserId() : ""%>">
 										<input type="hidden" name="member_no"
 											value="<%=loginMember != null ? loginMember.getUserNo() : 0%>">
 										<input type="hidden" name="CommentRef" value="0">
-										<div id="comment-editor-container" style="display: flex;">
+										<div id="comment-editor-container" style="display: flex">
 											<textarea class="form-control" placeholder="리뷰를 등록해주세요"
 												id="floatingTextarea2" name="content"
 												style="height: 100px; resize: none"></textarea>
-											<button type="submit" class="btn btn-success"
+											<button type="submit" class="btn btn-success" id="btn-insert"
 												style="margin-left: 10px; text-size: 5px">등록</button>
 										</div>
 										<!--  <div id="comment-editor-button" style="margin-top: 10px;"
@@ -338,6 +462,7 @@ List<ProductcourseDto> course = product.getCourse();
 									<table class="table">
 										<tbody>
 											<%
+											if(comments!=null){
 											for (ProductsreviewDto pr : comments) {
 											%>
 											<%
@@ -351,8 +476,18 @@ List<ProductcourseDto> course = product.getCourse();
 													<div style="display: flex">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
 														<!-- 이벤트 함수 실행할때 코멘트 번호 id,value로 가져오기 -->
-														<button class="btn-reply" value="">답글</button>
-														<button class="btn-delete">삭제</button>
+													 	<%
+															if (loginMember != null
+																	&& loginMember.getUserId().equals("six@six.com")) {%>
+														<button class="btn-reply" value="<%=pr.getCommentNo()%>">답글</button>
+														<%}%>
+														 <%for(ProductsreviewDto cm : comments){%>
+															 <%if (loginMember != null && cm.getMemberNo()==loginMember.getUserNo()){ %>
+															    <button class="btn-delete">삭제</button>
+															<%
+															 break;
+															}%>
+														<%}%>
 													</div>
 												</td>
 											</tr>
@@ -370,8 +505,8 @@ List<ProductcourseDto> course = product.getCourse();
 											%>
 											<%
 											}
-											%>
-										
+										}
+										%>
 									</table>
 									<%
 									} else {
@@ -392,7 +527,7 @@ List<ProductcourseDto> course = product.getCourse();
 						</div>
 					</div>
 					<div class="button-container">
-						<button type="button" class="btn btn-secondary btn-lg btn-block">다른
+						<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="location.replace('<%=request.getContextPath() %>/product/productmain.do')">다른
 							지역 둘러보기</button>
 					</div>
 				</div>
@@ -411,10 +546,10 @@ List<ProductcourseDto> course = product.getCourse();
 		const $td=$("<td>").attr("colspan","2");
 		const $form=$(".comment-editor>form").clone();
 		/* find함수 자손들 중에서 속성 찾을 수 있다 -> 속성에 있는 값 바꾸고 속성 지워주고 속성 추가해주고 다 가능*/
-		$form.find("input[name=level]").val("2");
+		$form.find("input[name=commentLevel]").val("2");
 		$form.find("textarea").attr("rows","1");
 		$form.find("button").removeAttr("id").addClass("btn-insert2");
-		$form.find("input[name=boardCommentRef]").val($(e.target).val());
+		$form.find("input[name=CommentRef]").val($(e.target).val());
 		$td.append($form);
 		$tr.append($td);
 		

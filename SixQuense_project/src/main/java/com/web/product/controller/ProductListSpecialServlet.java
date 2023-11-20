@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.web.product.dto.ProductCoordinateDto;
 import com.web.product.dto.ProductDto;
 import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class ProductListSpecialServlet
  */
-@WebServlet("/product/productlist.do")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/productlistspecial.do")
+public class ProductListSpecialServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ProductListSpecialServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,11 +32,9 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
-		
-		//List<ProductDto> allProducts = new ProductService().selectproductAllByCountry(coordinateNo);
-		List<ProductDto> products = new ProductService().selectBestproductByCountry(coordinateNo);
+
+		List<ProductDto> products = new ProductService().selectDicountproductByCountry(coordinateNo);
 		ProductCoordinateDto coordinate = new ProductService().selectCoordinateByNo(coordinateNo);
 		
 		
@@ -49,18 +46,15 @@ public class ProductListServlet extends HttpServlet {
 		 * gson.toJson(recentProducts,response.getWriter());
 		 * gson.toJson(dicountProducts,response.getWriter());
 		 */
-		System.out.println(coordinateNo);
-		  //request.setAttribute("allProducts", allProducts);
+		
+
 		  request.setAttribute("products", products);
 		  request.setAttribute("coordinateNo", coordinateNo);
 		  request.setAttribute("coordinate", coordinate);
 		  System.out.println(products);
-		  
 		 
 		  request.getRequestDispatcher("/views/product/productlistbycountry.jsp").
 		  forward(request, response);
-		  
-		 
 	}
 
 	/**

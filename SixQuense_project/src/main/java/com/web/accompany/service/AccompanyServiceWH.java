@@ -8,6 +8,7 @@ import java.util.List;
 import com.web.accompany.model.dao.AccompanyWH;
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.AccompanyOffer;
 
 
 public class AccompanyServiceWH {
@@ -19,15 +20,20 @@ public class AccompanyServiceWH {
 			Connection conn = getConnection();
 			AccompanyDTO accompanyView  = dao.selectAccompanyByNo(conn,no);
 			
+			//offerstatus불러올려면 list로 가져온다.
+//			List<AccompanyOffer> offers=dao.selectselectOffer(conn,no);
+//			accompanyView.setAcOffer(offers);
+			//System.out.println(offers);
 			//만약에 게시글이 null이 아니면 조회수 올리기 
 			if(accompanyView!=null&&!readResult) {
 				int result=dao.updateAccompanyReadCount(conn, no);
-				
 				if(result>0) {
 					commit(conn);
 					accompanyView.setAccompanyReadCount(accompanyView.getAccompanyReadCount()+1);
 				}
-				else rollback(conn);
+				else {
+					rollback(conn);
+				}
 			}
 			close(conn);
 			return accompanyView;
@@ -42,8 +48,16 @@ public class AccompanyServiceWH {
 			//System.out.println(list+"dao");
 			return list;
 		}
+		
+		//글번호에 해당하는 offerStatus를 가져옴 
+		public List<AccompanyOffer> selectOfferByNo(int no) {
+			Connection conn= getConnection();
+			List <AccompanyOffer> offer = dao.selectOfferByNo(conn,no);
+			close(conn);
+			return offer;
+		}
 
-
+		//댓글 삽입하는 메소드 
 		public int insertAccompanyComment(AccompanyComment ac) {
 			Connection conn = getConnection();
 			int result = dao.insertAccompanyComment(conn,ac);
@@ -51,6 +65,30 @@ public class AccompanyServiceWH {
 			else rollback(conn);
 			close(conn);
 			return result;
-
 		}
+
+		//동행글에서 모집여부를 업데이트하는 메소드 
+		public int updateAccompanyOffer(int acompanyBNo, String value) {
+			Connection conn=getConnection();
+			int result=dao.updateAccompanyOffer(conn,acompanyBNo,value);
+			//System.out.println(value);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		//동행글에서 동행 신청하기 눌렀을 때 신청하는 메소드 
+		public int insertAccompanyOffer(int userNo, int acompanyBNo) {
+			Connection conn=getConnection();
+			int result=dao.insertAccompanyOffer(conn,userNo,acompanyBNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+
+		
+		
 }

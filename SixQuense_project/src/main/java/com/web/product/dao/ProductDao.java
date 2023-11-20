@@ -137,8 +137,6 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(products.get(0));
-		System.out.println("sjdi?"+products.get(0).getCourse().get(2));
 		return products.get(0);
 		
 	}
@@ -467,8 +465,8 @@ public class ProductDao {
 	}
 
 	public static ProductwishilistDto getWishlist(ResultSet rs) throws SQLException {
-		return ProductwishilistDto.builder().MemberNo(rs.getInt("member_no")).ProductNo(rs.getInt("product_no"))
-				.ProductWishlistNo(rs.getInt("product_wishlist_no")).build();
+		return ProductwishilistDto.builder().MemberNo(rs.getInt("MEMBER_NO")).ProductNo(rs.getInt("PRODUCT_NO"))
+				.ProductWishlistNo(rs.getInt("PRODUCT_WISHLIST_NO")).build();
 
 	}
 

@@ -184,10 +184,6 @@ public class ProductService {
 
 	// 상품 삭제
 
-	// 리뷰 코멘트 등록
-	// public int insertProductComment(ProductComment pc) {
-
-	// }
 
 	// 리뷰 코멘트 수정
 

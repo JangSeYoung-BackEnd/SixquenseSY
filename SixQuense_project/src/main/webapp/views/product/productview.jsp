@@ -417,10 +417,10 @@ table.container mt-3 button.btn-insert2 {
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
-								<%
-								if (loginMember != null 
+								<% 
+								if (loginMember != null && product.getOrderinfo()!=null
 										&& (loginMember.getUserId().equals("six@six.com") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
-								%>
+								 %>
 								<h6>후기 작성</h6>
 								<!--  -->
 									<div class="comment-editor">
@@ -462,6 +462,7 @@ table.container mt-3 button.btn-insert2 {
 									<table class="table">
 										<tbody>
 											<%
+											if(comments!=null){
 											for (ProductsreviewDto pr : comments) {
 											%>
 											<%
@@ -504,7 +505,8 @@ table.container mt-3 button.btn-insert2 {
 											%>
 											<%
 											}
-											%>
+										}
+										%>
 									</table>
 									<%
 									} else {

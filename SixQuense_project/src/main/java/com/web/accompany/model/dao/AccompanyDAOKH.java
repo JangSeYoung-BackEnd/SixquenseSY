@@ -170,7 +170,40 @@ public class AccompanyDAOKH {
 		}return result;
 	}
 	
-	
+	public int DeleteAccompany(Connection conn, int AccompanyNo, int memberNo) {
+		PreparedStatement pstmt1=null;
+		PreparedStatement pstmt2=null;
+		PreparedStatement pstmt3=null;
+		PreparedStatement pstmt4=null;
+		int result1=0;
+		int result2=0;
+		int result3=0;
+		int result4=0;
+		int resultTotal=0;
+		try {
+			pstmt1=conn.prepareStatement(sql.getProperty("DeleteAccompany1"));
+			pstmt1.setInt(1, AccompanyNo);
+			result1=pstmt1.executeUpdate();
+			pstmt2=conn.prepareStatement(sql.getProperty("DeleteAccompany2"));
+			pstmt2.setInt(1, AccompanyNo);
+			result2=pstmt2.executeUpdate();
+			pstmt3=conn.prepareStatement(sql.getProperty("DeleteAccompany3"));
+			pstmt3.setInt(1, AccompanyNo);
+			result3=pstmt3.executeUpdate();
+			pstmt4=conn.prepareStatement(sql.getProperty("DeleteAccompany4"));
+			pstmt4.setInt(1, AccompanyNo);
+			result4=pstmt4.executeUpdate();
+			resultTotal=result1+result2+result3+result4;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt4);
+			close(pstmt3);
+			close(pstmt2);
+			close(pstmt1);
+		}
+		return resultTotal;
+	}
 	
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
 		return AccompanyDTO.builder()

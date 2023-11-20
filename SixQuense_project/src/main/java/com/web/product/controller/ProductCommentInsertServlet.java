@@ -37,6 +37,7 @@ public class ProductCommentInsertServlet extends HttpServlet {
 		String content=request.getParameter("content");
 		int CommentRef=Integer.parseInt(request.getParameter("CommentRef"));
 		System.out.println(CommentRef);
+
 		
 		ProductsreviewDto pr = ProductsreviewDto.builder()
 		  .ProductNo(productNo)

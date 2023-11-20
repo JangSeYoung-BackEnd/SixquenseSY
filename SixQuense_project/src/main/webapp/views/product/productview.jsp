@@ -472,12 +472,12 @@ td.level2td {
 											if (pr.getCommentLevel() == 1) {
 											%>
 											<tr class="level1">
-												<td>
+												<td width="490px">
 												<sub class="comment-writer"><%=pr.getUserId()%></sub>
 													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
 													<%=pr.getCommentContent()%></td>
 												<td>
-													<div style="display: flex">
+													<div style="display: flex" style="width: 174px;">
 														<!-- 클래스 명에 이벤트 걸면 다수에 걸 수 있다 (자바스크립트), onlclick시 함수 사용-->
 														<!-- 이벤트 함수 실행할때 코멘트 번호 id,value로 가져오기 -->
 													 	<%
@@ -486,8 +486,8 @@ td.level2td {
 														<button class="btn-reply" value="<%=pr.getCommentNo()%>">답글</button>
 														<%}%>
 														 <%for(ProductsreviewDto cm : comments){%>
-															 <%if (loginMember != null && (loginMember.getUserId().equals("admin") || cm.getMemberNo()==loginMember.getUserNo())){ %>
-															   <button class="btn-delete" onclick="deleteComment(event,<%=cm.getCommentNo() %>)">삭제</button>
+															 <%if (loginMember != null && (loginMember.getUserId().equals("123@123") || cm.getMemberNo()==loginMember.getUserNo())){ %>
+															   <button class="btn-delete" onclick="fn_removecomment(<%=cm.getCommentNo()%>,<%=product.getProductNo()%>)">삭제</button>
 															<%
 															 break;
 															}%>
@@ -499,10 +499,20 @@ td.level2td {
 											} else {
 											%>
 											<tr class="level2">
-												<td class="level2td" style=""><sub class="comment-writer"><%=pr.getUserId()%></sub>
+												<td class="level2td" style="padding-left:40px" width="800px"><sub class="comment-writer"><%=pr.getUserId()%></sub>
 													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
 													<%=pr.getCommentContent()%></td>
 												<td>
+													<div style="display: flex">
+														 <%for(ProductsreviewDto cm : comments){%>
+															 <%if (loginMember != null && (loginMember.getUserId().equals("123@123"))){ %>
+															   <button class="btn-delete" onclick="fn_removecomment(<%=cm.getCommentNo()%>,<%=product.getProductNo()%>);">삭제</button>
+															<%
+															 break;
+															}%>
+														<%}%>
+													</div>
+												</td>
 											</tr>
 											<%
 											}
@@ -541,11 +551,15 @@ td.level2td {
 
 
 <script>
-function deleteComment(e,commentNo) {
+	const fn_removecomment=(commentNo, productNo)=>{
+		location.assign('<%=request.getContextPath()%>/product/removecomment.do?commentNo='+ commentNo + '&productNo=' + productNo);
+	};
+	
+<%-- function deleteComment(e,commentNo) {
 	const productNo = <%=product.getProductNo()%>;
 	  const currentCount = <%=commentCount%>;
       const updatedCount = currentCount - 1;
-      <%-- <%=commentCount%> = updatedCount; --%>
+      <%=commentCount%> = updatedCount;
 
     $.ajax({
         type: "post",
@@ -570,7 +584,7 @@ function deleteComment(e,commentNo) {
             console.error('코멘트 삭제에 실패');
         }
     });
-};
+}; --%>
 
 	function toggleHeartIcon(e){
 		  // Get the product and member information

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.web.product.dto.ProductreviewattachmentDto;
+import com.web.product.dto.ProductsreviewDto;
 import com.web.product.model.service.ProductService;
 
 /**
@@ -34,8 +36,10 @@ public class ProductCommentRemoveServlet extends HttpServlet {
 		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 		System.out.println("받아온 코멘트 넘버"+commentNo);
 		
+		
 		int result=new ProductService().removeProductComment(commentNo);
-		System.out.println("댓글 삭제 결과"+result);
+		//System.out.println("댓글 삭제 결과"+result);
+		
 		
 		response.sendRedirect(request.getContextPath()+"/product/productview.do?productNo="+productNo);
 	}

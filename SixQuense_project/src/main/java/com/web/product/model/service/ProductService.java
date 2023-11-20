@@ -13,6 +13,7 @@ import com.web.product.dto.ProductCoordinateDto;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductcourseDto;
 import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 
@@ -107,6 +108,14 @@ public class ProductService {
 		close(conn);
 		return comments;
 
+	}
+	
+	//댓글 번호로 댓글 조회하는 메소드
+	public ProductsreviewDto selectCommentByCoNo(int commentNo) {
+		Connection conn = getConnection();
+		ProductsreviewDto comment = dao.selectCommentByCoNo(conn, commentNo);
+		close(conn);
+		return comment;
 	}
 	
 	//댓글 삭제하는 메소드

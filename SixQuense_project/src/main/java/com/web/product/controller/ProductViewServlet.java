@@ -14,6 +14,7 @@ import com.web.member.dto.Member;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductcourseDto;
 import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 import com.web.product.model.service.ProductService;

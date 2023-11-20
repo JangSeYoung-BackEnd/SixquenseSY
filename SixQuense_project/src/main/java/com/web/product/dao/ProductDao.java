@@ -18,6 +18,7 @@ import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductattachmentDto;
 import com.web.product.dto.ProductcourseDto;
 import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 
@@ -200,6 +201,27 @@ public class ProductDao {
 		}
 		return comments;
 
+	}
+	
+	//댓글 번호호 댓글 조회하는 메소드
+	public ProductsreviewDto selectCommentByCoNo(Connection conn, int commentNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductsreviewDto comment = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectCommentByCoNo"));
+			pstmt.setInt(1, commentNo);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				comment = getReview(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return comment;
 	}
 	
 	//댓글 삭제 메소드

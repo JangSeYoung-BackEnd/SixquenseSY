@@ -6,11 +6,13 @@
 <%@ include file="/views/common/header.jsp"%>
 <%
 ProductDto product = (ProductDto) request.getAttribute("product");
+
 List<ProductsreviewDto> comments = (List<ProductsreviewDto>) request.getAttribute("comments");
+List<ProductcourseDto> course = (List<ProductcourseDto>)request.getAttribute("course");
+List<ProductorderinfoDto> orderInfo = (List<ProductorderinfoDto>)request.getAttribute("orderInfo");
+
 int commentCount = (int) request.getAttribute("commentCount");
 int wishlistCount = (int) request.getAttribute("wishlistCount");
-
-List<ProductcourseDto> course = (List<ProductcourseDto>)request.getAttribute("course");
 
 %>
 <link rel="stylesheet"
@@ -126,15 +128,10 @@ table.container mt-3 textarea {
 	margin: 4px 0 0 0; !important;
 }
 
-table.container mt-3 button.btn-insert2 {
-	width: 60px; !important;
-	height: 23px; !important;
-	color: white; !important;
-	background: #3300ff; !important;
-	position: relative; !important;
-	top: -5px; !important;
-	left: 10px;	!important;
+td.level2td {
+	margin-left: 20px; !inportant
 }
+
 </style>
 <!-- Product Details Section Begin -->
 <section class="product-details spad" style="padding-top: 250px";>
@@ -147,7 +144,7 @@ table.container mt-3 button.btn-insert2 {
 							src="<%=request.getContextPath()%>/img/product/<%=product.getAttachment().get(0).getOrginalFilename()%>"
 							alt="">
 					</div>
-					<%--  <div class="product__details__pic__slider owl-carousel">
+					  <%-- <div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
@@ -156,7 +153,7 @@ table.container mt-3 button.btn-insert2 {
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
-					</div>  --%>
+					</div>   --%>
 				</div>
 			</div>
 
@@ -176,7 +173,7 @@ table.container mt-3 button.btn-insert2 {
 							value="<%=product.getProductNo()%>">
 						<div class="product__details__quantity">
 							<div class="date-container">
-								<input type="text" id="datepicker" name="travel_date">
+								<input type="text" id="datepicker" name="travel_date" placeholder="일자를 선택하세요">
 							</div>
 							<!-- 달력 구현 -->
 							<script>
@@ -227,7 +224,7 @@ table.container mt-3 button.btn-insert2 {
 						});
 						</script>
 							<select class="form-select" aria-label="Default select example"
-								name="selectOption" id="selectOption">
+								name="selectOption" id="selectOption" style="padding-right:65px; padding-left:65px">
 								<option selected vaule="1">1</option>
 								 <% for (int i = 2; i <= product.getMaxCount(); i++) { %>
 							        <option value="<%= i %>"><%= i %></option>
@@ -280,6 +277,9 @@ table.container mt-3 button.btn-insert2 {
 					</div>
 					<script>
 					
+					
+					
+					
 													
 						
 				     
@@ -330,7 +330,7 @@ table.container mt-3 button.btn-insert2 {
 					         
 					    }
 					}
-								}
+								};
 								
 					</script>
 
@@ -374,9 +374,12 @@ table.container mt-3 button.btn-insert2 {
 								if (!course.isEmpty()) {
 									for (ProductcourseDto pc : course) {
 									%>
-								<div style="background-color: yellow;">
-									<p style="text-align: left">
-										<span><%=pc.getCourseName()%></span><br>
+								<div style="background-color: #f8f9fa; width: 800px;">
+								<div style="display:flex">
+								<img class="offer-course__introduce__map" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiM0OTUwNTYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwIDE4Yy00LTQuNDA5LTYtNy43MjYtNi05Ljk1M0M0IDQuNzA3IDYuNjg2IDIgMTAgMnM2IDIuNzA3IDYgNi4wNDdjMCAyLjIyNy0yIDUuNTQ0LTYgOS45NTN6bTAtNy43NWEyLjI1IDIuMjUgMCAxIDAgMC00LjUgMi4yNSAyLjI1IDAgMCAwIDAgNC41eiIvPgo8L3N2Zz4K" alt="map-icon">
+									<b><%=pc.getCourseName()%></b>
+								</div>
+									<br> <p style="text-align: left">
 										<%=pc.getCourseDetail()%></p>
 								</div>
 								<%
@@ -418,8 +421,8 @@ table.container mt-3 button.btn-insert2 {
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
 								<% 
-								if (loginMember != null && product.getOrderinfo()!=null
-										&& (loginMember.getUserId().equals("six@six.com") || product.getOrderinfo().contains(loginMember.getUserNo()))) {
+								if (loginMember != null && orderInfo!=null
+										&& (loginMember.getUserId().equals("admin") || orderInfo.contains(loginMember.getUserNo()))) {
 								 %>
 								<h6>후기 작성</h6>
 								<!--  -->
@@ -469,7 +472,8 @@ table.container mt-3 button.btn-insert2 {
 											if (pr.getCommentLevel() == 1) {
 											%>
 											<tr class="level1">
-												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+												<td>
+												<sub class="comment-writer"><%=pr.getUserId()%></sub>
 													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
 													<%=pr.getCommentContent()%></td>
 												<td>
@@ -478,12 +482,12 @@ table.container mt-3 button.btn-insert2 {
 														<!-- 이벤트 함수 실행할때 코멘트 번호 id,value로 가져오기 -->
 													 	<%
 															if (loginMember != null
-																	&& loginMember.getUserId().equals("six@six.com")) {%>
+																	&& loginMember.getUserId().equals("admin")) {%>
 														<button class="btn-reply" value="<%=pr.getCommentNo()%>">답글</button>
 														<%}%>
 														 <%for(ProductsreviewDto cm : comments){%>
-															 <%if (loginMember != null && cm.getMemberNo()==loginMember.getUserNo()){ %>
-															    <button class="btn-delete">삭제</button>
+															 <%if (loginMember != null && (loginMember.getUserId().equals("admin") || cm.getMemberNo()==loginMember.getUserNo())){ %>
+															   <button class="btn-delete" onclick="deleteComment(event,<%=cm.getCommentNo() %>)">삭제</button>
 															<%
 															 break;
 															}%>
@@ -495,7 +499,7 @@ table.container mt-3 button.btn-insert2 {
 											} else {
 											%>
 											<tr class="level2">
-												<td><sub class="comment-writer"><%=pr.getUserId()%></sub>
+												<td class="level2td" style=""><sub class="comment-writer"><%=pr.getUserId()%></sub>
 													<sub class="comment-date"><%=pr.getCommentDate()%></sub><br>
 													<%=pr.getCommentContent()%></td>
 												<td>
@@ -535,11 +539,68 @@ table.container mt-3 button.btn-insert2 {
 		</div>
 </section>
 
+
 <script>
-	<%-- $('#download-container').click(e=>{
-		location.assign("<%=request.getContextPath()%>/boardfiledownload.do?fname=<%=b.getReFname()%>");
-	}) --%>
-	
+function deleteComment(e,commentNo) {
+	const productNo = <%=product.getProductNo()%>;
+	  const currentCount = <%=commentCount%>;
+      const updatedCount = currentCount - 1;
+      <%-- <%=commentCount%> = updatedCount; --%>
+
+    $.ajax({
+        type: "post",
+        data: { commentNo: commentNo, productNo: productNo },
+        url: "<%=request.getContextPath()%>/product/removecomment.do",
+        success: function (data) {
+            console.log('코멘트가 삭제 되었습니다');
+
+            $(e.target).closest('tr').remove();
+            if (updatedCount === 0) {
+                // 여행 후기가 없는 경우 메시지를 표시할 <tr> 요소 생성
+                const noCommentRow = $('<tr>').append($('<td>').attr('colspan', '3').css('text-align', 'center').text('작성된 여행 후기가 없습니다'));
+
+                // 테이블에 추가
+                $('table').append(noCommentRow);
+            }
+            
+           
+            
+        },
+        error: function (data) {
+            console.error('코멘트 삭제에 실패');
+        }
+    });
+};
+
+	function toggleHeartIcon(e){
+		  // Get the product and member information
+          var memberNo = <%= loginMember != null ? loginMember.getUserNo() : 0 %>;
+          var productNo = <%=product.getProductNo()%>;
+          
+          console.log('<%=loginMember%>');
+		 if (<%=loginMember == null%>) {
+	            alert("로그인 후 이용할 수 있는 서비스입니다");
+		 } else {
+			 if(<%=(boolean)request.getAttribute("wishResult")%>){
+	        $.ajax({
+	            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
+	            	type:"get",
+	                data: {memberNo: memberNo, productNo: productNo},
+	                success: function (data) {
+	                    console.log(data);
+	                    
+	                    // Toggle the heart icon by adding the 'filled' class
+	                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
+	                    
+	                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
+	                },
+	                error: function (data) {
+	                    console.error('Error adding to wishlist');
+	                }
+			 });
+			 }
+		 }
+	}
 	
 	$(".btn-reply").click(e=>{
 		const $tr=$("<tr>");
@@ -553,19 +614,7 @@ table.container mt-3 button.btn-insert2 {
 		$td.append($form);
 		$tr.append($td);
 		
-		$(e.target).parents("tr").after($tr);
-		
-		/* tr과 td를 생성 -> 댓글의 form 태그 클론복사 -> td에 form 붙이고 tr에 td붙인다 -> 이벤트 발생한 객체(버튼) 부모는 전체 tr 그 아래 생성한 tr 붙이기*/
-		
-		/* alert('클릭'); */
-		/* 이벤트가 발생한 객체 e.target 브라우저가 알아서 찾아낸다 , 해당 엘리먼트 가져올 수 있다 */
-		/* 이벤트가 발생한 타겟(버튼)의 다음 라인을 찾아서 아래 폼태그 넣기
-		console.log(e.target); */
-			
-		/* 버튼을 포함하고 있는 tr 뒤에 tr 생성 td 붙이기, $("<tr>") createelement태그  *//* console.log($(e.target).parents("tr"));
-		$(e.target).parents("tr")).after($("<tr>").append($("<tr>").text("테스트"))); */
-			
-		
-	})
+		$(e.target).parents("tr").after($tr);		
+	});
 </script>
 <%@ include file="/views/common/footer.jsp"%>

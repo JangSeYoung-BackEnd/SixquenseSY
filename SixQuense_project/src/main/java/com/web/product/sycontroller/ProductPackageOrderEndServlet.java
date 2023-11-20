@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.product.syservice.BookingService;
 import com.web.product.dto.BookinginfoDto;
-
+import com.web.product.dto.ProductDto;
 import com.web.product.dto.BookinginfoDto;
 import com.web.product.dto.ProductorderinfoDto;
 import com.web.product.dto.ProductpaymentDto;
+import com.web.product.model.service.ProductService;
 import com.web.product.syservice.ProductPackageOrderEndService;
 
 /**
@@ -179,15 +179,16 @@ public class ProductPackageOrderEndServlet extends HttpServlet {
         // 서비스 호출
         ProductPackageOrderEndService service = new ProductPackageOrderEndService();
         boolean result=service.insertOrder(b, p, paymentDto, userNo, orderNo);
-
-        //데이터를 List에 추가
+   
+ 
+        
         List<Object> dataList = new ArrayList<>();
         dataList.add(p);
         dataList.add(b);
         dataList.add(paymentDto);
 
         request.setAttribute("dataList", dataList);
-        
+      
         request.getRequestDispatcher("/views/product/paymentsuccess.jsp").forward(request, response);
   	}
 }

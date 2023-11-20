@@ -18,7 +18,7 @@ public class ProductPackageOrderEndDao {
 	private Properties sql = new Properties();
 
     {
-        String path = ProductPackageOrderEndDao.class.getResource("/sql/SYproduct/product_sql.properties").getPath();
+        String path = ProductPackageOrderEndDao.class.getResource("/sql/product/product_sql.properties").getPath();
         try (FileReader fr = new FileReader(path)) {
             sql.load(fr);
         } catch (IOException e) {

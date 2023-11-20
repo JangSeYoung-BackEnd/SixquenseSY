@@ -25,6 +25,8 @@ public class AccompanyDTO {
 	private String accompanyStatus;
 	private List <AccompanyOffer> AcOffer = new ArrayList();
 	private String renameProfilename;
+	private String userIntroduce;
+	
 	
 }
 

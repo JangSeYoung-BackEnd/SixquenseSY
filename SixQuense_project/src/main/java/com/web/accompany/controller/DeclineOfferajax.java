@@ -1,29 +1,25 @@
 package com.web.accompany.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.web.accompany.model.dto.AccompanyDTO;
-import com.web.accompany.service.AccompanyServiceKH;
+import com.web.accompany.service.AccompanyServiceWH;
 
 /**
- * Servlet implementation class AccompanyCoordinateServlet
+ * Servlet implementation class DeclineOfferajax
  */
-@WebServlet("/accompany/accompanycoordinate.do")
-public class AccompanyCoordinateAjaxServlet extends HttpServlet {
+@WebServlet("/accompay/Acommpanydecline.do")
+public class DeclineOfferajax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyCoordinateAjaxServlet() {
+    public DeclineOfferajax() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +28,10 @@ public class AccompanyCoordinateAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String coordinate=request.getParameter("coordinate");
-		System.out.println(coordinate);
-		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyByCoordinate(coordinate);
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(accompanys,response.getWriter());
-		
+		request.setCharacterEncoding("utf-8");
+		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
+		int memberNo =Integer.parseInt(request.getParameter("memberNo"));
+		int result = new AccompanyServiceWH().updateDeclineOffer(acompanyBNo , memberNo);
 	}
 
 	/**

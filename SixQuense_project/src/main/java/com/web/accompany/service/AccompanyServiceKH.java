@@ -35,6 +35,7 @@ public class AccompanyServiceKH {
 			
 		}
 		
+		
 		public List<AccompanyDTO> selectAccompanyByPopularity(){
 			Connection conn=getConnection();
 			List<AccompanyDTO> a=dao.selectAccompanyByPopularity(conn);
@@ -57,5 +58,39 @@ public class AccompanyServiceKH {
 			}
 			close(conn);
 			return	a;
+		}
+		
+		public List<AccompanyDTO> selectAccompanyByCoordinatePopularity(String coordinate){
+			Connection conn=getConnection();
+			List<AccompanyDTO> a=dao.selectAccompanyByCoordinatePopularity(conn, coordinate);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
+		
+		public List<AccompanyDTO> ModifyAccompany(int memberNo, int accompanyNo) {
+			Connection conn=getConnection();
+			List<AccompanyDTO> a=dao.ModifyAccompany(conn, memberNo, accompanyNo);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
+		
+		public int ModifyAccompanyUpdate(AccompanyDTO a, String nation, int memberNo) {
+			Connection conn=getConnection();
+			int result=dao.ModifyAccompanyUpdate(conn, a, nation, memberNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+			
 		}
 }

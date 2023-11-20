@@ -1,4 +1,4 @@
-package com.web.report.controller;
+package com.web.accompany.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.report.service.ReportService;
+import com.web.accompany.service.AccompanyServiceWH;
 
 /**
- * Servlet implementation class ReportServlet
+ * Servlet implementation class AcceptOfferajax
  */
-@WebServlet("/report/report.do")
-public class ReportServlet extends HttpServlet {
+@WebServlet("/accompany/AcceptOfferajax.do")
+public class AcceptOfferajax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportServlet() {
+    public AcceptOfferajax() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +28,10 @@ public class ReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reportType=request.getParameter("report");
-		String reortContent=request.getParameter("textContent");
-		int result = new ReportService().InterReport(reportType,reortContent);
+		request.setCharacterEncoding("utf-8");
+		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
+		int memberNo =Integer.parseInt(request.getParameter("memberNo"));
+		int result = new AccompanyServiceWH().updateAcceptOffer(acompanyBNo , memberNo);
 	}
 
 	/**

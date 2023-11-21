@@ -5,11 +5,11 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="" method="post">
 <fieldset>
 
 <!-- Form Name -->
-<legend>PRODUCTS</legend>
+<legend><b style="padding-left:540px;">상품 등록</b></legend>
 
 <!-- Select Basic -->
 <div class="form-group">
@@ -142,20 +142,28 @@
   </div>
 </div>
 
+<br><b style="padding-left:540px;">코스 등록</b><br><br>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
+  <label class="col-md-4 control-label" for="courseName1">코스명 1</label>  
   <div class="col-md-4">
-  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+  <input id="courseName1" name="courseName1" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
-<!-- Text input-->
+<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_weight">PRODUCT WEIGHT</label>  
+  <label class="col-md-4 control-label" for="courseDetail1">코스소개 1</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="코스소개를 적어주세요"></textarea>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courseName2">코스명 2</label>  
   <div class="col-md-4">
-  <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text">
+  <input id="courseName2" name="courseName2" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
@@ -164,119 +172,78 @@
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_name_fr">코스소개</label>
+  <label class="col-md-4 control-label" for="courseDetail2">코스소개 2</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="product_name_fr" name="product_name_fr"></textarea>
+    <textarea class="form-control" id="courseDetail2" name="courseDetail2" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
 
-<!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="percentage_discount">PERCENTAGE DISCOUNT</label>  
+  <label class="col-md-4 control-label" for="courseName3">코스명 3</label>  
   <div class="col-md-4">
-  <input id="percentage_discount" name="percentage_discount" placeholder="PERCENTAGE DISCOUNT" class="form-control input-md" required="" type="text">
+  <input id="courseName3" name="courseName3" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
-<!-- Text input-->
+
+
+<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="stock_alert">STOCK ALERT</label>  
+  <label class="col-md-4 control-label" for="courseDetail3">코스소개 3</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="courseDetail3" name="courseDetail3" placeholder="코스소개를 적어주세요"></textarea>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courseName4">코스명 4</label>  
   <div class="col-md-4">
-  <input id="stock_alert" name="stock_alert" placeholder="STOCK ALERT" class="form-control input-md" required="" type="text">
+  <input id="courseName4" name="courseName4" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
-<!-- Search input-->
+<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="stock_critical">STOCK CRITICAL</label>
+  <label class="col-md-4 control-label" for="courseDetail4">코스소개 4</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="courseDetail4" name="courseDetail4" placeholder="코스소개를 적어주세요"></textarea>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courseName5">코스명 5</label>  
   <div class="col-md-4">
-    <input id="stock_critical" name="stock_critical" placeholder="STOCK CRITICAL" class="form-control input-md" required="" type="search">
+  <input id="courseName5" name="courseName5" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
-<!-- Search input-->
+<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="tutorial">TUTORIAL</label>
-  <div class="col-md-4">
-    <input id="tutorial" name="tutorial" placeholder="TUTORIAL" class="form-control input-md" required="" type="search">
-    
+  <label class="col-md-4 control-label" for="courseDetail5">코스소개 5</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
 
-<!-- Search input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="tutorial_fr">TUTORIAL FR</label>
-  <div class="col-md-4">
-    <input id="tutorial_fr" name="tutorial_fr" placeholder="TUTORIAL FR" class="form-control input-md" required="" type="search">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="online_date">ONLINE DATE</label>  
-  <div class="col-md-4">
-  <input id="online_date" name="online_date" placeholder="ONLINE DATE" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="author">AUTHOR</label>  
-  <div class="col-md-4">
-  <input id="author" name="author" placeholder="AUTHOR" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="enable_display">ENABLE DISPLAY</label>  
-  <div class="col-md-4">
-  <input id="enable_display" name="enable_display" placeholder="ENABLE DISPLAY" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="comment">COMMENT</label>  
-  <div class="col-md-4">
-  <input id="comment" name="comment" placeholder="COMMENT" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="approuved_by">APPROUVED BY</label>  
-  <div class="col-md-4">
-  <input id="approuved_by" name="approuved_by" placeholder="APPROUVED BY" class="form-control input-md" required="" type="text">
-    
- <!-- File Button --> 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="filebutton">main_image</label>
-  <div class="col-md-4">
-    <input id="filebutton" name="filebutton" class="input-file" type="file">
-  </div>
-</div>
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="filebutton">auxiliary_images</label>
+  <label class="col-md-4 control-label" for="filebutton">이미지 첨부</label>
   <div class="col-md-4">
-    <input id="filebutton" name="filebutton" class="input-file" type="file">
+    <input id="filebutton" name="filebutton" class="input-file" type="file" multiple="multiple" accept=".jpg, .jpeg, .png">
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+  <label class="col-md-4 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+    <input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="등록">
   </div>
   </div>
 

@@ -82,7 +82,6 @@ p {
 								<h5>
 									<a href="<%=request.getContextPath()%>/product/productview.do"><%=p.getProductName() %>
 								</h5>
-								<p><%=p.getProductDetail() %></p>
 								<a
 									href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
 									class="blog__btn"> <%=p.getProductPrice() %>원 <span

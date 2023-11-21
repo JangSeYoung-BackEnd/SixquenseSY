@@ -144,16 +144,16 @@ td.level2td {
 							src="<%=request.getContextPath()%>/img/product/<%=product.getAttachment().get(0).getOrginalFilename()%>"
 							alt="">
 					</div>
-					  <%-- <div class="product__details__pic__slider owl-carousel">
-						<img data-imgbigurl="img/product/details/product-details-2.jpg"
+					   <div class="product__details__pic__slider owl-carousel">
+						<img data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="img/product/details/product-details-3.jpg"
+							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="img/product/details/product-details-5.jpg"
+							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="img/product/details/product-details-4.jpg"
+							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>"
 							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
-					</div>   --%>
+					</div>  
 				</div>
 			</div>
 

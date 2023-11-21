@@ -75,23 +75,25 @@ p {
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
 								<img
-									src="<%=request.getContextPath() %>/img/product/<%=p.getAttachment().get(0).getOrginalFilename() %>"
-									alt="패키지 대표 이미지">
+	                        src="<%=request.getContextPath() %>/upload/product/<%= (p.getAttachment().get(0).getOrginalFilename() != null) ? p.getAttachment().get(0).getOrginalFilename() : "" %>   
+	                        alt="패키지 대표 이미지"> 	
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productview.do"><%=p.getProductName() %>
+									   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>">
+                              <%= (p.getProductName() != null) ? p.getProductName() : "" %>
+                           </a>
 								</h5>
 								<a
-									href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
-									class="blog__btn"> <%=p.getProductPrice() %>원 <span
-									class="arrow_right"></span></a>
+		                           href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
+		                           class="blog__btn"> <%=p.getProductPrice() %>원 <span
+		                           class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png"
 										alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p><%=p.getEditorNote() %></p>
+										   <p><%= (p.getEditorNote() != null) ?p.getEditorNote() : "" %></p>
 									</div>
 								</div>
 							</div>
@@ -117,10 +119,10 @@ p {
 <script>
 	/* 메뉴 버튼 클릭시 색 변하게 하는 이벤트*/
 	// 각 태그에 대한 클릭 이벤트를 처리
-	document.querySelectorAll('.blog__sidebar__item__tags a').forEach(
+	/* document.querySelectorAll('.blog__sidebar__item__tags a').forEach(
 			function(tag) {
 				tag.addEventListener('click', function(event) {
-					event.preventDefault(); // 기본 동작 방지 (예: 링크 이동)
+					event.preventDefault(); */ // 기본 동작 방지 (예: 링크 이동)
 
 					/*             // 선택된 태그에 'selected' 클래스 추가, 다른 태그에서는 제거
 					 document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(otherTag) {
@@ -139,11 +141,9 @@ p {
 					 tag.style.color = '#7fad39'; // 변경할 색상 값으로 대체 */
 
 					// 링크 클릭 시 페이지 이동
-					location.assign(tag.getAttribute('href'));
+					/* location.assign(tag.getAttribute('href'));
 				});
-			});
-</script>
-
+			}); */
 
 
 <!--   function scrollToSection(sectionId) {

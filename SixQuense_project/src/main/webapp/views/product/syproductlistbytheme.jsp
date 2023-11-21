@@ -93,19 +93,18 @@
 							        <h4>최근 상품들</h4>
 							        <div class="latest-product__slider owl-carousel">
 							            <div class="latest-prdouct__slider__item">
-							                <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
+							                <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14 class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+							                        <img src="<%=request.getContextPath() %>/img/product/a영국re.jpg">
 							                    </div>
 							                    <div class="latest-product__item__text">
-							                        <h6>패키지 상품 이름</h6>
-							                        <span>$패키지 가격</span>
+							                        <h6>영국 남부소도시 #세븐시스터즈</h6>
+							                        <span>139000원</span>
 							                    </div>
 							                </a>
-                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14 class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-							                    </div>
+													<img src="<%=request.getContextPath() %>/img/product/a영국re.jpg">							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>패키지 상품 이름</h6>
 							                        <span>$패키지 가격</span>
@@ -167,7 +166,7 @@
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
 										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=8" >
-										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+										     <img src="<%=request.getContextPath() %>/img/product/a영국dis4.jpg">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
 										</div>
@@ -175,7 +174,7 @@
                                         <div class="product__discount__item__text">
                                             <span>영국</span>
                                             <h5><a href="#"></a>런던 서쪽 워킹투어 3시간</h5>
-                                            <div class="product__item__price">55000원<span></span></div>
+                                            <div class="product__item__price">55000원<span>66000원</span></div>
                                         </div>
                                     </div>
                                 </div>

@@ -173,6 +173,15 @@ table#tbl-comment tr.level2 sub.comment-date {
 	color: #ff9c8a;
 	font-size: 10px
 }
+div.subcategory>div{
+   margin: 0px 5px 0px 5px;
+}
+div.subcategory>button{
+   margin: 2px 5px 0px 5px;
+   height:20px;
+   width:40px;
+   font-size:10px;
+}
 
 </style>
 
@@ -328,10 +337,14 @@ table#tbl-comment tr.level2 sub.comment-date {
 					<div>
 						<p><%=b.getAccompanyContent() %></p>
 					</div>
-					<div style="display: flex;">
-						<div><%=b.getAccompanyDate()%></div>
-						<div>조회수 <%=b.getAccompanyReadCount()%></div>
-					</div>
+				<div class="subcategory" style="display: flex;">
+	                <div><%=b.getAccompanyDate()%></div>
+	                <div>조회수 <%=b.getAccompanyReadCount()%></div>
+	          	        <%if(loginMember.getUserNo()==b.getMemberNo()){%>
+	            	         <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
+	                	     <button onclick="deleteaccompanyBoard();" role="delete">삭제</button>
+	                  <%}%>
+	             </div>
 					<div class="comment-section">
 						
 							<div class="comments" id="comments"> 
@@ -651,6 +664,12 @@ table#tbl-comment tr.level2 sub.comment-date {
 	        }    
 	        window.location.href = "<%= request.getContextPath() %>/accompany/deletecomment.do?commentNo=" + commentNo + "&userNo=" + userNo + "&boardNo=" + boardNo;	    }
 
+	 function deleteaccompanyBoard(){
+         confirm("정말 삭제하시겠습니까?");
+         if(confirm){
+            location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
+         }
+      }
 	</script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
  

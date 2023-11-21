@@ -21,6 +21,8 @@ import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
 import com.web.member.dto.MemberToAcompanyWH;
+import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductattachmentDto;
 
 
 
@@ -120,7 +122,65 @@ public class AccompanyWH {
 				.build();
 				
 		}
+	public static ProductattachmentDto getImage(ResultSet rs) throws SQLException {
+		return ProductattachmentDto.builder().OrginalFilename(rs.getString("original_filename"))
+				.RenameFilename(rs.getString("rename_filename")).ProductNo(rs.getInt("product_no")).build();
+	}
+	public static ProductDto getProduct(ResultSet rs) throws SQLException {
+		return ProductDto.builder().ProductNo(rs.getInt("product_no")).ProductName(rs.getString("product_name"))
+				.ProductReadcount(rs.getInt("product_readcount")).ProductInsertdate(rs.getDate("product_insertdate"))
+				.MinCount(rs.getInt("min_count")).MaxCount(rs.getInt("max_count"))
+				.ProductPrice(rs.getInt("prodcut_price")).GuideNo(rs.getInt("guide_no"))
+				.ProductDiscountRate(rs.getDouble("product_discount_rate"))
+				.ProductDetail(rs.getString("product_detail")).ProductDuration(rs.getInt("product_duration"))
+				.ProductDay(rs.getString("product_day") != null ? rs.getString("product_day").split(",") : null)
+				.CoodinateNo(rs.getInt("coordinate_no")).EditorNote(rs.getString("editor_note"))
+				.attachment(new ArrayList())
+				.build();
+	}
 	
+	//상품 검색해서 들고오는 메소드 
+	public List<ProductDto> selectsearchAll(Connection conn, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductDto> result = new ArrayList<ProductDto>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectsearchAll"));
+			pstmt.setString(1, "%" + searchValue + "%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				addProductAndAttachment(result, rs);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	private void addProductAndAttachment(List<ProductDto> products, ResultSet rs) throws SQLException {
+		int pk = rs.getInt("product_no");
+		if (products.stream().anyMatch(e -> pk == e.getProductNo())) {
+			products.stream().filter(e -> Objects.equals(e.getProductNo(), pk)).forEach(e -> {
+				try {
+					if (rs.getString("original_filename") != null) {
+						e.getAttachment().add(getImage(rs));
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			});
+		} else {
+			ProductDto product = getProduct(rs);
+			if (rs.getString("original_filename") != null)
+				product.getAttachment().add(getImage(rs));
+			products.add(product);
+		}
+	}
 	
 	
 	//게시물 번호를 받아서 게시물을 가져오는 메소드 
@@ -173,10 +233,7 @@ public class AccompanyWH {
 		return member;
 			
 	}
-	
-
-	
-	
+		
 //	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
 //		int pk = rs.getInt("ACCOMPANY_NO");
 //		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
@@ -408,6 +465,30 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

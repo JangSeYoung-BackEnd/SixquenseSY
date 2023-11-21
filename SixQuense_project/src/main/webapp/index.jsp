@@ -28,8 +28,6 @@
             </div>
         </div>
     </section>
-   
-
     <!-- 움직이는 바 -->
     <section class="categories">
         <div class="container">

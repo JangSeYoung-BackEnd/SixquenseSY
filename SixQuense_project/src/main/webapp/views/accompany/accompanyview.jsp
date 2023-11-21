@@ -25,9 +25,6 @@
 	
 	
 %>
-
-
-
 <style>
 .accept-button,
     .decline-button {
@@ -173,6 +170,7 @@ table#tbl-comment tr.level2 sub.comment-date {
 	color: #ff9c8a;
 	font-size: 10px
 }
+<<<<<<< HEAD
 div.subcategory>div{
    margin: 0px 5px 0px 5px;
 }
@@ -181,6 +179,24 @@ div.subcategory>button{
    height:20px;
    width:40px;
    font-size:10px;
+=======
+div.subcategory{
+	border:1px solid #6c757d61;
+	border-radius: 10px;
+	margin-bottom:5px;
+	width:400px;
+	overflow:hidden;
+	
+}
+div.subcategory>div{
+	margin: 0px 5px 0px 5px;
+}
+div.subcategory>button{
+	margin: 2px 5px 0px 5px;
+	height:20px;
+	width:40px;
+	font-size:10px;
+>>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
 }
 
 </style>
@@ -337,6 +353,7 @@ div.subcategory>button{
 					<div>
 						<p><%=b.getAccompanyContent() %></p>
 					</div>
+<<<<<<< HEAD
 				<div class="subcategory" style="display: flex;">
 	                <div><%=b.getAccompanyDate()%></div>
 	                <div>조회수 <%=b.getAccompanyReadCount()%></div>
@@ -345,6 +362,17 @@ div.subcategory>button{
 	                	     <button onclick="deleteaccompanyBoard();" role="delete">삭제</button>
 	                  <%}%>
 	             </div>
+=======
+					<div class="subcategory" style="display: flex;">
+						<div><%=b.getAccompanyDate()%></div>
+						<div>조회수 <%=b.getAccompanyReadCount()%></div>
+						<%if(loginMember.getUserNo()==b.getMemberNo()){%>
+							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
+							<button onclick="deleteaccompany();" role="delete">삭제</button>
+						<%}%>
+					</div>
+						
+>>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
 					<div class="comment-section">
 						
 							<div class="comments" id="comments"> 
@@ -422,7 +450,14 @@ div.subcategory>button{
 			$td.append($form);
 			$tr.append($td);
 			$(e.target).parents("tr").after($tr);
-	    })
+	    });
+	    
+	    function deleteaccompany(){
+	    	confirm("정말 삭제하시겠습니까?");
+	    	if(confirm){
+	    		location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
+	    	}
+	    }
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
 
@@ -439,7 +474,7 @@ div.subcategory>button{
 						</div>
 						<div id="profileInfo">
 						<!-- 프로필 정보를 추가하세요 -->
-							<p><%=b.getUserIntroduce() %></p>
+							<p><%=b.getUserIntroduce()%></p>
 						</div>
 					</div>
 					<div style=" margin-left : 150px">
@@ -458,19 +493,20 @@ div.subcategory>button{
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
-			<div class="checkbox-group">
-				<label> <input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보 </label> 
-				<label> <input type="radio" value="abuse" name = "report"> 욕설 </label> 
-				<label> <input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테 </label> 
-				<label> 
-					<input type="radio" value="text" name = "report"> 기타
-					<textarea id="reportReason" name = "report"></textarea>
-				</label>
-			</div>
-			<div>
-				
-				<button onclick="submitReport();">제출</button>
-			</div>
+			<form action="<%=request.getContextPath()%>/report/report.do" method="post">
+				<div class="checkbox-group">
+					<label> <input type="radio" value="illegal_advertising" name="report"> 무단광고/홍보 </label> 
+					<label> <input type="radio" value="abuse" name="report"> 욕설 </label> 
+					<label> <input type="radio" value="offensive_language" name="report"> 불쾌한 언어사용 및 컨테 </label> 
+					<label> 
+						<input type="radio" value="text" name="report"> 기타
+						<textarea id="reportReason" name="textContent"></textarea>
+					</label>
+				</div>
+				<div>
+					<input type="submit" value="제출">
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
@@ -515,26 +551,20 @@ div.subcategory>button{
 		}
 	</script>
 	<script>
-	const radios = $("input[name=report]");
+	<%-- const radios = $("input[name=report]");
 
     function submitReport(){
         radios.click(e => {
             const val = radios.filter(":checked").val();
             if (val === "text") {
                 const textval = $("#reportReason").val();
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
+                location.replace("<%=request.getContextPath()%>/report/report.do?report="+val+"&text=" + textval);
             } else {
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
+                location.replace("<%=request.getContextPath()%>/report/report.do?report=" + val);
             }
-            alert('신고되었습니다.');
         });
-    }
-
-    $(document).ready(function (){
-        submitReport();
-    });
-    
-    
+		alert('신고되었습니다.');
+    } --%>
     //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
     	const acSelect  = document.getElementById("acSelect");
@@ -636,7 +666,7 @@ div.subcategory>button{
 	        alert("동행 신청이 거절되었습니다.");       
 
 	        $.ajax({
-	            url: "<%=request.getContextPath() %>/accompay/Acommpanydecline.do", 
+	            url: "<%=request.getContextPath()%>/accompay/Acommpanydecline.do", 
 	            type: 'POST',
 	            data: {boardNo: boardNo, memberNo: memberNo},
 	            success: function(response) {

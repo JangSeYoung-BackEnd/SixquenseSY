@@ -35,7 +35,8 @@ public class LoginServlet extends HttpServlet {
 		//1. 클라이언트가 보낸 아이디와 패스워드를 받아온다
 		String userId=request.getParameter("userId");
 		String userpw=request.getParameter("userpw");
-		
+		System.out.println(userId);
+		System.out.println(userpw);
 		
 		String saveId=request.getParameter("saveId");
 		if(saveId!=null) {

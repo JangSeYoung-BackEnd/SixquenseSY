@@ -1,3 +1,5 @@
+<%@page import="com.web.member.dto.MemberToAcompanyWH"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.web.accompany.model.dto.AccompanyOffer"%>
 <%@page import="com.web.accompany.model.dto.AccompanyComment"%>
 <%@page import="java.util.List"%>
@@ -10,19 +12,28 @@
 
 
 <%
+	
 	AccompanyDTO b =(AccompanyDTO)request.getAttribute("board");		
-	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer"); 
+	List <AccompanyOffer> offer =(List<AccompanyOffer>)request.getAttribute("offer");
+	
 	double latitude= b.getCoordinate().getLatitude();
 	double longitude = b.getCoordinate().getLongitude();
 	List<AccompanyComment> comments= (List<AccompanyComment>) request.getAttribute("comments");
 	String acUserId= loginMember.getUserId();
-	int acompanyBNo= b.getAccompanyNo(); 	
+	int acompanyBNo= b.getAccompanyNo(); 
+	
+	
 	
 %>
-
-
-
 <style>
+.accept-button,
+    .decline-button {
+        margin-left: 10px;
+        cursor: pointer;
+        padding: 5px 10px; /* Adjust padding to change button size */
+        font-size: 14px; /* Adjust font size */
+        /* Add additional styling as needed */
+    }
     .blog__sidebar__recent {
         border: solid gainsboro;
     }
@@ -159,6 +170,23 @@ table#tbl-comment tr.level2 sub.comment-date {
 	color: #ff9c8a;
 	font-size: 10px
 }
+div.subcategory{
+	border:1px solid #6c757d61;
+	border-radius: 10px;
+	margin-bottom:5px;
+	width:400px;
+	overflow:hidden;
+	
+}
+div.subcategory>div{
+	margin: 0px 5px 0px 5px;
+}
+div.subcategory>button{
+	margin: 2px 5px 0px 5px;
+	height:20px;
+	width:40px;
+	font-size:10px;
+}
 
 </style>
 
@@ -196,18 +224,15 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<div class="col-lg-12 blog__details__author">
 							<div class="row" style="margin-bottom:0px; border:solid gainsboro; width: 290px; height: 80px;" >
 								<div class="blog__details__author__pic col-sm-2">
-								<img src="<%=request.getContextPath() %>/img/profile/<%=b.getRenameProfilename() %>" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+								<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="글쓴이 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
 								
-<%-- <img src="<%=request.getContextPath()%>/img/blog/details/details-author.jpg" alt="" style="height: 60px; width: 50px; padding-top:10px; padding-bottom:0px">--%>							</div>
+								</div>
 								<div class="blog__details__author__text col-sm-9" style="padding-top: 10px; padding-right: 0px; display: flex; align-items: center; padding-bottom:10px">
 									<div class="cols">
 										<div class="gotoprofile,item col-sm-8" id="openProfilePopup">
 										<%= b.getUserId()%>
 										</div>
 										<div class="item col-sm-4">
-											
-											<%-- <img id="followButton" src="<%=request.getContextPath()%>/img/accompany/팔로우(빈거).png" alt="팔로우 버튼"
-											onclick="toggleImage()" width="20" height="20"> --%>
 										</div>
 									</div>
 								</div>
@@ -216,19 +241,22 @@ table#tbl-comment tr.level2 sub.comment-date {
 						<%} %>
 						<div class="row" >
 							<div class="blog__sidebar__item">
-								<%if(loginMember!=null){ 
+								<%MemberToAcompanyWH member= (MemberToAcompanyWH)request.getAttribute("member");
+								//로그인을 했다면 ! 버튼 생성 
+								if(loginMember!=null){ 
 									/* 로그인을 하고 로그인멤버가 글쓴이가 아니면 ~ 버튼 생성  */
 									if(loginMember.getUserNo()!= b.getMemberNo()){
-										if(b.getAcOffer().get(0).getMemberNo()==loginMember.getUserNo() &&
-										b.getAcOffer().get(0).getAccompanyOfferStatus().equals("대기중")) {%>
-										<!--  -->
+										if(	member!=null&& member.getAcOffer().equals("대기중")) {%>
 											<div class="col-sm-12">
-											<button onclick="" style="margin:10px 0 10px 0; width: 290px;">신청했습니다</button>				
+											<button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; ">동행신청 취소하기</button>				
+											<button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청하기</button>
 										<%}else{ %>
 											<div class="col-sm-12">
-											<button onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+											<button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+											<button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청 취소하기</button>
 										<%}
 									}else{%>
+									<!-- 글쓴이라면 나의 글 화인하기  -->
 										<div class="col-sm-12">
 										<button style="margin:10px 0 10px 0; width: 290px;"> <a href="<%=request.getContextPath() %>/mywrite.do">나의 글 확인하기</a></button>
 									<%}
@@ -240,21 +268,46 @@ table#tbl-comment tr.level2 sub.comment-date {
 											<h5>신청자가 없습니다.</h5>
 										<%}else{ %>
 											<h5>동행신청한 목록</h5>
-										<%} %>
+										
 									</div>
 									<div>
-									<%for(int i =0; i < offer.size();i++){ %>
-											<div>
-												<div class="blog__sidebar__recent__item__pic">
-												<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px;">
+									<%for( int i =0; i < offer.size(); i++){ %>
+											<div style ="display: flex;">
+												<div >
+													<img src="<%=request.getContextPath() %>/img/profile/<%=offer.get(i).getOfferRename() %>" alt="동행 신청자 사진"  style="height: 60px; width: 60px; margin-top: 10px; margin-botton : 10px;">
 												</div>
-												<div class="blog__sidebar__recent__item__text">
-													<h6><%=offer.get(i).getUserId() %></h6>
+												<div >
+													<div style ="margin: 5px; margin-bottom: 0px; margin-left: 10px; ">
+														<h4 style ="margin-bottom: 0px"> <%=offer.get(i).getUserId() %></h4>
+														 
+													</div>
+												<!--  로그인회원이랑 작성자가 동일한 인물이라면 버튼을 보이게 하기 	 -->
+													<%if(loginMember.getUserNo() == b.getMemberNo()){ 
+														/* offer status가 대기중이라면 ? */
+														 if(offer.get(i).getAccompanyOfferStatus().equals("대기중")){%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+														<%}else if(offer.get(i).getAccompanyOfferStatus().equals("decline")){
+															/* offer status가 decline이라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<button class="accept-button"  data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="acceptOffer(this)" >수락</button>
+																<span>거절중</span>
+															</div>
+														<%}else{
+															/* offer status가 accept 수락한 상태라면 ? */%>
+															<div style="margin-bottom: 5px; margin-left: 20px; ">
+																<span>수락중</span>
+																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
+															</div>
+														<%}
+													} %>
 												</div>
 											</div>
-										<%} %>
-
-									</div>
+										<%}
+									}%>									
+										</div>
 								</div>
 							</div>
 						</div>
@@ -287,12 +340,17 @@ table#tbl-comment tr.level2 sub.comment-date {
 						</div>
 					</div>
 					<div>
-						<p><%=b.getAccompanyContent() %></p>
+						<p style = "text-align: left"><%=b.getAccompanyContent() %></p>
 					</div>
-					<div style="display: flex;">
+					<div class="subcategory" style="display: flex;">
 						<div><%=b.getAccompanyDate()%></div>
 						<div>조회수 <%=b.getAccompanyReadCount()%></div>
+						<%if(loginMember.getUserNo()==b.getMemberNo()){%>
+							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
+							<button onclick="deleteaccompany();" role="delete">삭제</button>
+						<%}%>
 					</div>
+						
 					<div class="comment-section">
 						
 							<div class="comments" id="comments"> 
@@ -310,7 +368,8 @@ table#tbl-comment tr.level2 sub.comment-date {
 										</td>
 										<td>
 											<button class="btn-reply" value="<%=ac.getAccompanyComtNo()%>">답글</button>
-											<button class="btn-delete">삭제</button>
+											<button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>">삭제</button>
+
 										</td>
 									</tr>
 									<%}else{ %>
@@ -322,6 +381,8 @@ table#tbl-comment tr.level2 sub.comment-date {
 											<%=ac.getAccompanyComtContent() %>
 										</td>
 										<td>
+											<button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>" style = "margin-left: 55px;">삭제</button>
+										
 										</td>
 									</tr>
 									<%} 
@@ -332,11 +393,12 @@ table#tbl-comment tr.level2 sub.comment-date {
 						
 						<div class="comment-editor">
 						<form action = "<%=request.getContextPath() %>/accompany/insertaccompanycomment.do" method="post">
+							<input type="hidden" name="userNo" value="<%=loginMember.getUserNo()%>">
 							<input type="hidden" name="accompanyNo" value="<%=b.getAccompanyNo()%>">
 							<input type="hidden" name="level" value="1">
 							<input type="hidden" name="writer" value="<%=loginMember!=null? loginMember.getUserId():""%>">
 							<input type="hidden" name="accompanyCommentRef" value="0">
-							<input type="text" id="commentText" name="content1" placeholder="댓글을 입력하세요" style="width:620px">
+							<input type="text" id="commentText" name="content" placeholder="댓글을 입력하세요" style="width:620px">
 							<button type="submit" id="btn-insert">댓글 추가</button>
 						</form>
 						</div>
@@ -366,21 +428,38 @@ table#tbl-comment tr.level2 sub.comment-date {
 			$td.append($form);
 			$tr.append($td);
 			$(e.target).parents("tr").after($tr);
-	    })
+	    });
+	    
+	    function deleteaccompany(){
+	    	confirm("정말 삭제하시겠습니까?");
+	    	if(confirm){
+	    		location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
+	    	}
+	    }
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
 
 	<div id="profilePopup" class="popup">
 		<div class="popup-content">
 			<span class="close" id="closeProfilePopup">&times;</span>
-			<h2>프로필 정보</h2>
-			<div id="profileInfo">
-				<!-- 프로필 정보를 추가하세요 -->
-				<p>아이디 넣는 곳 John Doe</p>
-				<p>여기는 소개글 적는 곳</p>
-				<button id="reportButton" onclick="openReportPopup()">신고하기</button>
-				<button id="blockButton">차단하기</button>
-				<button id="followButton">팔로우하기</button>
+			<div>
+				<div> 
+					<img src="<%=request.getContextPath() %>/img/profile/profile_default.png" alt="프로필 사진"  style="display:flex; height: 150px; width: 150px; margin: auto;">
+				</div>
+					<div>
+						<div>
+							<h2><%=b.getUserId() %></h2>
+						</div>
+						<div id="profileInfo">
+						<!-- 프로필 정보를 추가하세요 -->
+							<p><%=b.getUserIntroduce()%></p>
+						</div>
+					</div>
+					<div style=" margin-left : 150px">
+						<button id="reportButton" onclick="openReportPopup()">신고하기</button>
+						<button id="blockButton">차단하기</button>
+						<button id="followButton">팔로우하기</button>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -392,19 +471,20 @@ table#tbl-comment tr.level2 sub.comment-date {
 			<span class="close" onclick="closeReportPopup()">&times;</span>
 			<h2>신고하기</h2>
 			<p>신고 사유를 입력하세요:</p>
-			<div class="checkbox-group">
-				<label> <input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보 </label> 
-				<label> <input type="radio" value="abuse" name = "report"> 욕설 </label> 
-				<label> <input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테 </label> 
-				<label> 
-					<input type="radio" value="text" name = "report"> 기타
-					<textarea id="reportReason" name = "report"></textarea>
-				</label>
-			</div>
-			<div>
-				
-				<button onclick="submitReport();">제출</button>
-			</div>
+			<form action="<%=request.getContextPath()%>/report/report.do" method="post">
+				<div class="checkbox-group">
+					<label> <input type="radio" value="illegal_advertising" name="report"> 무단광고/홍보 </label> 
+					<label> <input type="radio" value="abuse" name="report"> 욕설 </label> 
+					<label> <input type="radio" value="offensive_language" name="report"> 불쾌한 언어사용 및 컨테 </label> 
+					<label> 
+						<input type="radio" value="text" name="report"> 기타
+						<textarea id="reportReason" name="textContent"></textarea>
+					</label>
+				</div>
+				<div>
+					<input type="submit" value="제출">
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
@@ -449,33 +529,26 @@ table#tbl-comment tr.level2 sub.comment-date {
 		}
 	</script>
 	<script>
-	const radios = $("input[name=report]");
+	<%-- const radios = $("input[name=report]");
 
     function submitReport(){
         radios.click(e => {
             const val = radios.filter(":checked").val();
             if (val === "text") {
                 const textval = $("#reportReason").val();
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val + "&text=" + textval);
+                location.replace("<%=request.getContextPath()%>/report/report.do?report="+val+"&text=" + textval);
             } else {
-                location.href("<%=request.getContextPath()%>/report/report.do?report=" + val);
+                location.replace("<%=request.getContextPath()%>/report/report.do?report=" + val);
             }
-            alert('신고되었습니다.');
         });
-    }
-
-    $(document).ready(function (){
-        submitReport();
-    });
-    
-    
+		alert('신고되었습니다.');
+    } --%>
     //동행 모집중인지 여부 확인하는 ajax 
     function accompanySelect(){
-		var acSelect  = document.getElementById("acSelect");
-		var value = (acSelect.options[acSelect.selectedIndex].value);
-		<%-- var User =  "<%= acUserId %>"; --%>
-		var boardNo = <%=acompanyBNo%>;
-		 //console.log(User+boardNo+value)
+    	const acSelect  = document.getElementById("acSelect");
+		const value = (acSelect.options[acSelect.selectedIndex].value);
+		const boardNo = <%=acompanyBNo%>;
+		
 		   $.ajax({
 	            url: "<%=request.getContextPath() %>/accompany/AccompanyResultAjax.do", 
 	            type: 'POST',
@@ -483,35 +556,123 @@ table#tbl-comment tr.level2 sub.comment-date {
 	        });
 	};
 	
-	//동행신청하기 누르기 
+	//회원이 동행신청하기 누르기 
 	function confirmAccompany(){
-		var confirmed=confirm("동행을 신청하시겠습니까?");
-		var userNo =  <%= loginMember.getUserNo() %>;
-		var boardNo = <%=acompanyBNo%>;
+		const confirmed=confirm("동행을 신청하시겠습니까?");
+		const userNo=<%=loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
 		if(confirmed){
 				alert("동행이 신청되었습니다!");
-				
 				 $.ajax({
 			            url: "<%=request.getContextPath() %>/accompay/AcommpanyApply.do", 
 			            type: 'POST',
 			            data: { userNo : userNo ,boardNo :boardNo},
 			            success: function(response) {
-			                console.log('Ajax response:', response);
 			                window.open("<%=b.getOpenChattingLink()%>", "_blank");
+			                $('#cancelButton').show();			                
+			                $('#confirmButton').hide();
 			            },
 			            error: function(error) {
-			                console.error('Ajax error:', error);
+			            	alert("동행 신청 중 오류가 발생했습니다.");
 			            }
 			        });
-				 /* window.open("https://open.kakao.com/o/su9dmOSf", "_blank"); */
-
 			}else{
 				alert("동행 신청이 취소되었습니다.");
 			}
-
 		 }
-	</script>
+	
+	/* 회원이 동행 신청하기누르고 다시 거절을 눌렀을 때  */
+	function deleteAccompany(){
+		const confirmed=confirm("동행 신청을 거절하시겠습니까?");
+		const userNo=<%= loginMember.getUserNo() %>;
+		const boardNo=<%=acompanyBNo%>;
+		if(confirmed){
+			alert("동행이 거절되었습니다!");
+			 $.ajax({
+		            url:"<%=request.getContextPath() %>/accompay/deleteAccompany.do", 
+		            type:'POST',
+		            data:{ userNo : userNo ,boardNo :boardNo},
+		            success: function(response) {
+		            	 $('#cancelButton').hide();
+		                 $('#confirmButton').show();
+		            },
+		            error: function(error) {
+		            	alert("동행 거절 중 오류가 발생했습니다.");
+		            }
+		        });
+		}else{
+			alert("동행 신청 거절이 취되었습니다.");
+		}
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
- -->
+	}
+	
+	/* 동행신청 수락버튼 누르기  */
+	function acceptOffer(button) {
+    const boardNo = <%=acompanyBNo%>;
+    const memberNo = $(button).data("member-no");
+
+    const confirmed = confirm("동행 신청을 수락하시겠습니까?");
+    
+    if (confirmed) {
+        alert("동행이 수락되었습니다");
+        $.ajax({
+            url: "<%=request.getContextPath() %>/accompany/AcceptOfferajax.do", 
+            type: 'POST',
+            data: {boardNo: boardNo, memberNo: memberNo},
+            success: function(response) {
+            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+                        "<span>수락중</span>" +
+                        "<button class='decline-button' data-member-no='" + memberNo + "' onclick='declineOffer(this)'>거절</button>" +
+                     "</div>");
+            },
+            error: function() {
+                alert("동행 신청 수락 중 오류가 발생했습니다.");
+            }
+        });
+    } else {
+        alert("동행 신청이 취소되었습니다.");
+    }
+}
+		
+	//글쓴이가 동행신청 목록에 
+	function declineOffer(button) {
+		const boardNo = <%=acompanyBNo%>;
+		const memberNo = $(button).data("member-no");
+		const confirmed = confirm("동행 신청을 거절하시겠습니까?");
+	    
+	    if (confirmed) {
+	        alert("동행 신청이 거절되었습니다.");       
+
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/accompay/Acommpanydecline.do", 
+	            type: 'POST',
+	            data: {boardNo: boardNo, memberNo: memberNo},
+	            success: function(response) {
+	            	$(button).closest('div').replaceWith("<div style='margin-bottom: 5px; margin-left: 20px; '>" +
+	                                 "<button class='accept-button' data-member-no='" + memberNo + "' onclick='acceptOffer(this)'>수락</button>" +
+	                                 "<span>거절중</span>" +
+	                              "</div>");
+	     
+	            }, 
+	            error: function() {
+	                alert("동행 신청 거절 중 오류가 발생했습니다.");
+	            }
+	        });
+	    } else {
+	        alert("동행 신청 거절이 취소되었습니다.");
+	    }
+	}
+	 function deleteComment(commentNo) {
+	        var userNo = <%=loginMember.getUserNo()%>
+	        var boardNo = <%=b.getAccompanyNo()%>
+	        var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+	        
+	        if (!confirmDelete) {
+	            return;
+	        }    
+	        window.location.href = "<%= request.getContextPath() %>/accompany/deletecomment.do?commentNo=" + commentNo + "&userNo=" + userNo + "&boardNo=" + boardNo;	    }
+
+	</script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+ 
  <%@ include file="/views/common/footer.jsp"%>

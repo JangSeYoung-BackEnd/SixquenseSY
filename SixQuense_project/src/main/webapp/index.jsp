@@ -5,8 +5,7 @@
     <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
-                    
+                <div class="col-lg-9">                 
                     <div class="single-slider hero-overly  slider-height d-flex align-items-center" data-background="assets/img/hero/h1_hero.jpg">
                     <div class="container">
                         <!-- 검색바 -->
@@ -29,8 +28,6 @@
             </div>
         </div>
     </section>
-   
-
     <!-- 움직이는 바 -->
     <section class="categories">
         <div class="container">

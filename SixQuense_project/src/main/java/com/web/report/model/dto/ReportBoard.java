@@ -6,15 +6,13 @@ import java.sql.Date;
 
 
 public class ReportBoard {
-	private int reportNo;
-	private Date reportDate;
+	private Date reportTime;
 	private String reportContent;
+	private String reportStatus;
 	private int accompanyNo;
 	private int reportCategoryNo;
+	private String reportCategoryType;
+	private String reportCategoryContent;
 	private int reportLevel;
-	private Member member;
-	
-	
-	
-	
+	private int memberNo;
 }

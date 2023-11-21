@@ -17,7 +17,7 @@ import com.web.member.password.PasswordEncoder;
 /**
  * Servlet Filter implementation class PasswordEncoderFilter
  */
-@WebFilter(urlPatterns = "/login.do",servletNames={"enrollMemberEnd"})
+@WebFilter(urlPatterns = "/login.do",servletNames={"enrollMemberEnd","memberupdateinfor"})
 public class PasswordEncoderFilter extends HttpFilter implements Filter {
        
     /**

@@ -8,20 +8,14 @@
  <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
             <div class="checkout__form">
-                <div>
-			    <label for="upFile">
-			        	<img src="<%=request.getContextPath() %>/img/icon/수정.png" style="
-			            width: 165px;
-			            padding-left: 0px;
-			            margin-left: 294px;
-			            margin-bottom: 25px; cursor: pointer;">
-			    </label>
-			    		<input type="file" id="upFile" multiple style="display: none;">
-				</div>
-                            <p style="width: 750px;"> 홍 길 동</p>
-            	
-                            <button id="btnupload">수정</button>
-                <form action="#">
+                <img id="profileImage" src="<%=request.getContextPath() %>/img/icon/수정.png" style="
+                            width: 165px;
+                            padding-left: 0px;
+                            margin-left: 294px;
+                            margin-bottom: 25px;">                
+                            <form action="#">
+                            <input type="file" id="upFile">
+							<button id="btnupload">프로필 이미지 업로드</button>
                     <div class="row">
                         <div class="col-lg-8 col-md-6" method="post">
                             <div class="row">
@@ -39,12 +33,12 @@
                             </div>
                             </div>
                             <div class="checkout__input">
-                                <p>비밀번호</p>
-                                <input type="text" value="<%=m.getUserPw()%>" id="pw">
+                                <p>새 비밀번호</p>
+                                <input type="text"  id="pw">
                             </div>
                             <div class="checkout__input">
                                 <p>비밀번호 확인</p>
-                                <input type="text" id="confirmPw">
+                                <input type="text" id="confirmPassword">
                             </div>
                             <div class="checkout__input">
                                 <p>생년월일</p>
@@ -65,7 +59,7 @@
                             <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     SNS/마케팅 수신동의
-                                    <input type="checkbox" id="acc" value="<%=m.getNotificatIonset()%>">
+                                    <input type="checkbox" id="acc" value="<%=m.getNotificatIonset()%>" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -87,13 +81,9 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회,취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="wishBtn">위시리스트</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">
-                                            <button id="alarmBtn">알림</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/다녀온 여행.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="wenttripBtn">다녀온 여행</button></a></li>
+                                            <button id="wishBtn">위시리스트</button></a></li>                                           
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
                                             <button id="mywirteBtn">나의 글</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
@@ -110,73 +100,73 @@
             	</div>
 </section>
 <script>
-    $(document).ready(function () {
-        // 파일 업로드 버튼 클릭 시 이벤트 처리
-        $("#btnupload").click(function (e) {
-            // js FormData 클래스를 제공함
-            const form = new FormData();
-            // FormData 클래스에 append(key, value)로 전송할 데이터를 저장
-            const fileInput = $("#upFile");
-            $.each(fileInput[0].files, function (i, file) {
-                form.append("upfile" + i, file);
-            });
-            $.ajax({
-                url: "<%=request.getContextPath()%>/uploadfro.do",
-                data: form,
-                type: "post",
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    alert("업로드 성공!!");
-                },
-                error: function (r, e) {
-                    alert("업로드 실패 ㅠㅠ");
-                },
-                complete: function () {
-                    fileInput.val('');
-                }
-            });
-        });
+$("#btnupload").click(e => {
+    const form = new FormData();
+    const fileInput = $("#upFile");
+
+    $.each(fileInput[0].files, (i, f) => {
+        form.append("upfile" + i, f);
     });
-</script>
-<script>
-$("#infoupdateBtn").click(e => {
-    var newPassword = $('#pw').val();
-    var confirmPassword = $('#confirmPw').val();
 
-    // 새로운 비밀번호와 확인 비밀번호가 다르면 알림 후 함수 종료
-    if (newPassword !== confirmPassword) {
-        alert("비밀번호가 다릅니다.");
-        return;
-    }
-
-
-    // 이하 코드는 비밀번호가 일치할 때만 실행
     $.ajax({
-        url: "<%=request.getContextPath()%>/update.do?userNo=<%=m.getUserNo()%>",
+        url: "<%=request.getContextPath()%>/uploadfro.do",
+        data: form,
         type: "post",
-        data: {
-            name: $('#name').val(),
-            pw: newPassword,
-            gender: $('#gender').val(),
-            Dd: $('#Dd').val(),
-            enroll: $('#enroll').val(),
-            phone: $('#phone').val(),
-            intro: $('#intro').val(),
-            acc: $('#acc').val()
+        processData: false,
+        contentType: false,
+        success: data => {
+            // 서버로부터 이미지 경로를 받아서 프로필 이미지 변경
+            $("#profileImage").attr("src", "<%=request.getContextPath()%>" + data.profileImagePath);
+            alert("업로드 성공!!");
         },
-        success: function(data, status, xhr) {
-            if (data != null) {
-
-                alert("정보가 수정되었습니다!");
-            }
+        error: (r, e) => {
+            alert("업로드 실패 ㅠㅠ");
         },
-        error: function(xhr, status, error) {
-            console.error("에러:", error);
+        complete: () => {
+            fileInput.val('');
         }
     });
 });
 
+</script>
+<script>
+$("#infoupdateBtn").click(e => {
+    var newPassword = $('#pw').val();
+    var confirmPassword = $('#confirmPassword').val();
+
+    if (newPassword === confirmPassword) {
+        $.ajax({
+            url: "<%=request.getContextPath()%>/update.do?userNo=<%=m.getUserNo()%>",
+            type: "post",
+            data: {
+            	name: $('#name').val(),
+                pw: newPassword, // 여기에서 새 비밀번호 사용
+                gender: $('#gender').val(),
+                Dd: $('#Dd').val(),
+                enroll: $('#enroll').val(),
+                phone: $('#phone').val(),
+                intro: $('#intro').val(),
+                acc: $('#acc').val()
+            },
+            success: function(data, status, xhr) {
+                if (data != null && data.success) {
+                    alert("업데이트되었습니다!");
+                    // Checkout 섹션에 프로필 이미지 업데이트
+                    $("#profileImage").attr("src", "<%=request.getContextPath()%>" + data.profileImagePath);
+                } else {
+                    alert("정보 업데이트에 실패했습니다!");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("에러:", error);
+            }
+        });
+    } else {
+        alert("입력한 비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+    }
+});
+
+</script>
 </script>
 <script>
 	$("#updateBtn").click(e=>{
@@ -216,18 +206,6 @@ $("#infoupdateBtn").click(e => {
 		});
 	});		
 	</script>
-   <script>
-	$("#wenttripBtn").click(e=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wenttrip.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				}
-		});
-	});		
-	</script>
 	 <script>
 	$("#mywirteBtn").click(e=>{
 		$.ajax({
@@ -251,4 +229,4 @@ $("#infoupdateBtn").click(e => {
 				}
 		});
 	});		
-	</script>
+	</script> 

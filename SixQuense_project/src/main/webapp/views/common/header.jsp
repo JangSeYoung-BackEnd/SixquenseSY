@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@page import ="com.web.member.dto.Member"%>
+   pageEncoding="UTF-8"%>
+   <%@page import ="com.web.member.dto.Member"%>
 <%
 
-	Member loginMember=(Member)session.getAttribute("loginMember");
-	Cookie[] cookies=request.getCookies();
-	String saveId=null;
-	if(cookies!=null){
-		for(Cookie c:cookies){
-			String name=c.getName();
-			if(name.equals("saveId")){
-				saveId=c.getValue();
-				break;
-			}
-		}
-	}
+   Member loginMember=(Member)session.getAttribute("loginMember");
+   Cookie[] cookies=request.getCookies();
+   String saveId=null;
+   if(cookies!=null){
+      for(Cookie c:cookies){
+         String name=c.getName();
+         if(name.equals("saveId")){
+            saveId=c.getValue();
+            break;
+         }
+      }
+   }
 %>
-	
+   
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -29,42 +29,53 @@
 
 <!-- Google Font -->
 <link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+   rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/bootstrap.min.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.min.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/font-awesome.min.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/elegant-icons.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/elegant-icons.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/nice-select.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/nice-select.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/jquery-ui.min.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/jquery-ui.min.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/owl.carousel.min.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/owl.carousel.min.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/slicknav.min.css"
-	type="text/css">
+   href="<%=request.getContextPath()%>/css/slicknav.min.css"
+   type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-	
-	
+   href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+   
+   
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 
-<body>
-	<!-- 페이지 넘어갈때 로딩바 -->
-	
+<style>
+    
+    #search {
+        width: 200px;
+        padding: 10px;
+    }
 
-	<!--style="position: fixed; z-index: 999; background-color: white;-->
+    #data {
+        display: none;
+    }
+</style>   
+<body>
+   <!-- 페이지 넘어갈때 로딩바 -->
+   
+
+   <!--style="position: fixed; z-index: 999; background-color: white;-->
     <!-- 헤더 -->
     <header class="header" style="display: flex; justify-content: center;">
         <div style="position: fixed; z-index: 999; background-color: white;">
@@ -75,12 +86,12 @@
                     </div>
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
-                        <form action="#">
-                            <input type="search" id="search" list="data" placeholder="어디로 떠나실 건가요?">
-                            <button type="submit" class="site-btn">SEARCH</button>
-							<datalist id="data"></datalist>
-                        </form>
-                    </div>
+                   <form action="<%=request.getContextPath()%>/member/searchTotalservlet.do">
+                      <input type="search" name="searchValue" id="searchValue" list="data" placeholder="어디로 떠나실 건가요?">
+                      <button type="submit" class="site-btn" >SEARCH</button>
+                      <datalist id="data"></datalist>
+                  </form>
+            </div>
                     <%if(loginMember==null) {%>
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
@@ -100,10 +111,10 @@
                     style="width: 120px; height: 44px; margin-bottom: 25px;"><b>글쓰기</b></button>
                 </div>
                 <div class="logoutBtn" style=" margin-top: 30px; margin-left: 20px;">
-				<input type="button" class="btn btn-secondary"
-					onclick="location.replace('<%=request.getContextPath()%>/logout.do');" 
-					value="로그아웃">
-				</div>         
+            <input type="button" class="btn btn-secondary"
+               onclick="location.replace('<%=request.getContextPath()%>/logout.do');" 
+               value="로그아웃">
+            </div>         
                 
                 <%} %>
             </div>
@@ -119,5 +130,42 @@
                 </nav>
         </div>
     </header>
+    <script>
+    //검색 구현하는 기능 
+    function searchOnClickForm() {
+       var searchValue = document.getElementById("searchValue").value;
+       console.log(searchValue);
+       location.assign("<%=request.getContextPath()%>/member/searchTotalservlet.do?searchValue="+searchValue);
+   }
+    
+    <%-- function searchSubmitForm() {
+       
+        var searchValue = document.getElementById("searchvalue").value;
+        var form = document.getElementById("searchForm");
+        console.log("Search value: " + searchValue);
+        form.action = "<%=request.getContextPath()%>/member/searchTotalservlet.do?searchValue=" + searchValue;
+        // 폼 제출
+        form.submit();  
+        return false; 
+    } --%>
+    //검색 데이터를 보여주는 ajax
+    $(document).ready(function () {
+	    $("#searchValue").on("input", function () {
+	        var keyword = $(this).val();
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/search.do",
+	            method: "GET",
+	            data: { keyword: keyword },
+	            success: function (data) {
+	                var dataList = $("#data");
+	                dataList.empty();
+	                $.each(data, function (index, value) {
+	                    dataList.append("<option value='" + value + "'>");
+	                });
+	            }
+	        });
+	    });
+	});
+</script>
     <!-- 헤더 -->
     <html>

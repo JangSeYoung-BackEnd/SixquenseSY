@@ -205,6 +205,27 @@ public class AccompanyDAOKH {
 		return resultTotal;
 	}
 	
+	public List<AccompanyDTO> selectAccompanyByMemberNo(Connection conn,int memberNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectAccompanyByMemberNo"));
+			pstmt.setInt(1, memberNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+			System.out.println(result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
 		return AccompanyDTO.builder()
 					.accompanyNo(rs.getInt("ACCOMPANY_NO"))

@@ -21,95 +21,98 @@ import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
 import com.web.member.dto.MemberToAcompanyWH;
+import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductattachmentDto;
 
 
 
 public class AccompanyWH {
-	private Properties sql=new Properties();
-	{
-		String path=AccompanyWH.class.getResource("/sql/accompany/accompany_sql.properties").getPath();
-		try(FileReader fr=new FileReader(path)) {
-			sql.load(fr);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
-		return AccompanyDTO.builder()
-					.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-					.accompanyTitle(rs.getString("ACCOMPANY_TITLE"))
-					.accompanyContent(rs.getString("ACCOMPANY_CONTENT"))
-					.accompanyCount(rs.getInt("ACCOMPANY_COUNT"))
-					.accompanyDate(rs.getDate("ACCOMPANY_DATE"))
-					.memberNo(rs.getInt("MEMBER_NO"))
-					.accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
-					.coordinate(getCoordinate(rs))		
-					.originalFilename(rs.getString("ORIGINAL_FILENAME"))
-					.renameFilename(rs.getString("RENAME_FILENAME"))
-					.accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
-					.openChattingLink(rs.getString("OPENCHATTING_LINK"))
-					.AcOffer(new ArrayList<>())
-					.userId(rs.getString("USER_ID"))
-					.renameProfilename(rs.getString("PROFILE_RE_FILNAME"))
-					.userIntroduce(rs.getString("USER_INTRODUCE"))
-					.build();
-	}
-	private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
-		return AccompanyOffer.builder()
-				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.memberNo(rs.getInt("MEMBER_NO"))
-				.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
-				.offerRename(rs.getString("PROFILE_RE_FILNAME"))
-				.userId(rs.getString("USER_ID"))
-				.build();
-	}
-	private AccompanyOffer getOffer (ResultSet rs) throws SQLException{
-		return AccompanyOffer.builder()
-				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.memberNo(rs.getInt("MEMBER_NO"))
-				.accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
-				.build();
-	}
-	
-	private List<AccompanyAttachment> getAttachment(ResultSet rs) throws SQLException {
-	    return Collections.singletonList(
-	        AccompanyAttachment.builder()
-	            .originalFilename(rs.getString("ORIGINAL_FILENAME"))
-	            .renameFilename(rs.getString("RENAME_FILENAME"))
-	            .build()
-	    );
-	}
+   private Properties sql=new Properties();
+   {
+      String path=AccompanyWH.class.getResource("/sql/accompany/accompany_sql.properties").getPath();
+      try(FileReader fr=new FileReader(path)) {
+         sql.load(fr);
+      }catch(IOException e) {
+         e.printStackTrace();
+      }
+   }
+      
+   public AccompanyDTO getAccompanyDTO(ResultSet rs) throws SQLException{
+      return AccompanyDTO.builder()
+               .accompanyNo(rs.getInt("ACCOMPANY_NO"))
+               .accompanyTitle(rs.getString("ACCOMPANY_TITLE"))
+               .accompanyContent(rs.getString("ACCOMPANY_CONTENT"))
+               .accompanyCount(rs.getInt("ACCOMPANY_COUNT"))
+               .accompanyDate(rs.getDate("ACCOMPANY_DATE"))
+               .memberNo(rs.getInt("MEMBER_NO"))
+               .accompanyReadCount(rs.getInt("ACCOMPANY_READCOUNT"))
+               .coordinate(getCoordinate(rs))      
+               .originalFilename(rs.getString("ORIGINAL_FILENAME"))
+               .renameFilename(rs.getString("RENAME_FILENAME"))
+               .accompanyStatus(rs.getString("ACCOMPANY_STATUS"))
+               .openChattingLink(rs.getString("OPENCHATTING_LINK"))
+               .AcOffer(new ArrayList<>())
+               .userId(rs.getString("USER_ID"))
+               .renameProfilename(rs.getString("PROFILE_RE_FILNAME"))
+               .userIntroduce(rs.getString("USER_INTRODUCE"))
+               .build();
+   }
+   private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
+      return AccompanyOffer.builder()
+            .accompanyNo(rs.getInt("ACCOMPANY_NO"))
+            .memberNo(rs.getInt("MEMBER_NO"))
+            .accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
+            .offerRename(rs.getString("PROFILE_RE_FILNAME"))
+            .userId(rs.getString("USER_ID"))
+            .build();
+   }
+   private AccompanyOffer getOffer (ResultSet rs) throws SQLException{
+      return AccompanyOffer.builder()
+            .accompanyNo(rs.getInt("ACCOMPANY_NO"))
+            .memberNo(rs.getInt("MEMBER_NO"))
+            .accompanyOfferStatus(rs.getString("ACCOMPANY_OFFER_STATUS"))
+            .build();
+   }
+   
+   private List<AccompanyAttachment> getAttachment(ResultSet rs) throws SQLException {
+       return Collections.singletonList(
+           AccompanyAttachment.builder()
+               .originalFilename(rs.getString("ORIGINAL_FILENAME"))
+               .renameFilename(rs.getString("RENAME_FILENAME"))
+               .build()
+       );
+   }
 
-	
-	public Coordinate getCoordinate(ResultSet rs) throws SQLException{
-		return Coordinate.builder()
-				.coordinateNo(rs.getInt("COORDINATE_NO"))
-				.nation(rs.getString("NATION"))
-				.latitude(rs.getDouble("LATITUDE"))
-				.longitude(rs.getDouble("LONGITUDE"))
-				.continent(getContinent(rs))
-				.build();
-	}
-	
-	private Continent getContinent(ResultSet rs) throws SQLException{
-		return Continent.builder()
-				.continentNo(rs.getInt("CONTINENT_NO"))
-				.continentName(rs.getString("CONTINENT_NAME"))
-				.build();
-	}
-	
-	//댓글 빌더 
-	private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
-		return AccompanyComment.builder()
-				.accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
-				.accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
-				.accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
-				.accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
-				.accompanyComtDate(rs.getDate("COMMENT_DATE"))
-				.accompanyNo(rs.getInt("ACCOMPANY_NO"))
-				.userId(rs.getString("USER_ID"))
-				.build();
+   
+   public Coordinate getCoordinate(ResultSet rs) throws SQLException{
+      return Coordinate.builder()
+            .coordinateNo(rs.getInt("COORDINATE_NO"))
+            .nation(rs.getString("NATION"))
+            .latitude(rs.getDouble("LATITUDE"))
+            .longitude(rs.getDouble("LONGITUDE"))
+            .continent(getContinent(rs))
+            .build();
+   }
+   
+   private Continent getContinent(ResultSet rs) throws SQLException{
+      return Continent.builder()
+            .continentNo(rs.getInt("CONTINENT_NO"))
+            .continentName(rs.getString("CONTINENT_NAME"))
+            .build();
+   }
+   
+   //댓글 빌더 
+   private AccompanyComment getAccompanyComment(ResultSet rs) throws SQLException {
+      return AccompanyComment.builder()
+            .accompanyComtNo(rs.getInt("ACCOMPANY_COMMENT_NO"))
+            .accompanyComtLevel(rs.getInt("ACCOMPANY_COMMENT_LEVEL"))
+            .accompanyComtContent(rs.getString("ACCOMPANY_COMMENT_CONTENT"))
+            .accompanyComtRef(rs.getInt("ACCOMPANY_COMMENT_REF"))
+            .accompanyComtDate(rs.getDate("COMMENT_DATE"))
+            .accompanyNo(rs.getInt("ACCOMPANY_NO"))
+            .userId(rs.getString("USER_ID"))
+            .build();
+
 
 	}
 	private MemberToAcompanyWH getMemberToAccompanyWH(ResultSet rs) throws SQLException {
@@ -120,7 +123,65 @@ public class AccompanyWH {
 				.build();
 				
 		}
+	public static ProductattachmentDto getImage(ResultSet rs) throws SQLException {
+		return ProductattachmentDto.builder().OrginalFilename(rs.getString("original_filename"))
+				.RenameFilename(rs.getString("rename_filename")).ProductNo(rs.getInt("product_no")).build();
+	}
+	public static ProductDto getProduct(ResultSet rs) throws SQLException {
+		return ProductDto.builder().ProductNo(rs.getInt("product_no")).ProductName(rs.getString("product_name"))
+				.ProductReadcount(rs.getInt("product_readcount")).ProductInsertdate(rs.getDate("product_insertdate"))
+				.MinCount(rs.getInt("min_count")).MaxCount(rs.getInt("max_count"))
+				.ProductPrice(rs.getInt("prodcut_price")).GuideNo(rs.getInt("guide_no"))
+				.ProductDiscountRate(rs.getDouble("product_discount_rate"))
+				.ProductDetail(rs.getString("product_detail")).ProductDuration(rs.getInt("product_duration"))
+				.ProductDay(rs.getString("product_day") != null ? rs.getString("product_day").split(",") : null)
+				.CoodinateNo(rs.getInt("coordinate_no")).EditorNote(rs.getString("editor_note"))
+				.attachment(new ArrayList())
+				.build();
+	}
 	
+	//상품 검색해서 들고오는 메소드 
+	public List<ProductDto> selectsearchAll(Connection conn, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductDto> result = new ArrayList<ProductDto>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectsearchAll"));
+			pstmt.setString(1, "%" + searchValue + "%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				addProductAndAttachment(result, rs);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	private void addProductAndAttachment(List<ProductDto> products, ResultSet rs) throws SQLException {
+		int pk = rs.getInt("product_no");
+		if (products.stream().anyMatch(e -> pk == e.getProductNo())) {
+			products.stream().filter(e -> Objects.equals(e.getProductNo(), pk)).forEach(e -> {
+				try {
+					if (rs.getString("original_filename") != null) {
+						e.getAttachment().add(getImage(rs));
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			});
+		} else {
+			ProductDto product = getProduct(rs);
+			if (rs.getString("original_filename") != null)
+				product.getAttachment().add(getImage(rs));
+			products.add(product);
+		}
+	}
 	
 	
 	//게시물 번호를 받아서 게시물을 가져오는 메소드 
@@ -173,10 +234,7 @@ public class AccompanyWH {
 		return member;
 			
 	}
-	
-
-	
-	
+		
 //	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
 //		int pk = rs.getInt("ACCOMPANY_NO");
 //		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
@@ -266,61 +324,63 @@ public class AccompanyWH {
 	}
 	
 
-	public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt= conn.prepareStatement(sql.getProperty("insertAccompanyComment"));
-			pstmt.setInt(1,ac.getAccompanyComtLevel());
-			pstmt.setString(2,ac.getAccompanyComtContent());
-			pstmt.setString(3,ac.getAccompanyComtRef()==0?null:String.valueOf(ac.getAccompanyComtRef()));
-			pstmt.setInt(4,ac.getAccompanyNo());
-			pstmt.setString(5,ac.getUserId());
-			result=pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
 
-		return result;
-	}
-	public int deletecomment(Connection conn, int commentNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		System.out.println("dao"+commentNo+"댓글번호");
+   public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
+      PreparedStatement pstmt = null;
+      int result = 0;
+      try {
+         pstmt= conn.prepareStatement(sql.getProperty("insertAccompanyComment"));
+         pstmt.setInt(1,ac.getAccompanyComtLevel());
+         pstmt.setString(2,ac.getAccompanyComtContent());
+         pstmt.setString(3,ac.getAccompanyComtRef()==0?null:String.valueOf(ac.getAccompanyComtRef()));
+         pstmt.setInt(4,ac.getAccompanyNo());
+         pstmt.setString(5,ac.getUserId());
+         result=pstmt.executeUpdate();
+         
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
 
-		try {
-			pstmt= conn.prepareStatement(sql.getProperty("deletecomment"));
-			pstmt.setInt(1,commentNo);
-			result=pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		System.out.println(result+"dao 결과");
-		return result;
-	}
-	
-	
-	//조회수 카운트 메소드 
-	public int updateAccompanyReadCount(Connection conn, int no) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(sql.getProperty("updateAccompanyReadCount"));
-			pstmt.setInt(1, no);
-			result=pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-		
-	}
+      return result;
+   }
+   public int deletecomment(Connection conn, int commentNo) {
+      PreparedStatement pstmt = null;
+      int result = 0;
+      System.out.println("dao"+commentNo+"댓글번호");
+
+      try {
+         pstmt= conn.prepareStatement(sql.getProperty("deletecomment"));
+         pstmt.setInt(1,commentNo);
+         result=pstmt.executeUpdate();
+         
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }
+      System.out.println(result+"dao 결과");
+      return result;
+   }
+   
+   
+   //조회수 카운트 메소드 
+   public int updateAccompanyReadCount(Connection conn, int no) {
+      PreparedStatement pstmt = null;
+      int result = 0;
+      try {
+         pstmt = conn.prepareStatement(sql.getProperty("updateAccompanyReadCount"));
+         pstmt.setInt(1, no);
+         result=pstmt.executeUpdate();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }return result;
+      
+   }
+
 
 	public int insertAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
 		PreparedStatement pstmt=null;
@@ -408,6 +468,30 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

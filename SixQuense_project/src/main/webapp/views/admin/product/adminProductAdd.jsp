@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상품 등록</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
 <!------ Include the above in your HEAD tag ---------->
 
 <form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
@@ -250,10 +258,45 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="등록">
+    <input type="submit" id="submitbutton" name="submitbutton" class="btn btn-primary" value="등록">
   </div>
   </div>
 
 </fieldset>
 </form>
-    
+<script>
+$("#submitbutton").click(e=>{
+	//js Formdata클래스를 제공함 -> 폼태그랑 비슷
+	const form = new FormData();
+	//FormData클래스에 append(key,value)로 전송할 데이터를 저장
+	const fileInput = $("#upfile");
+	console.log(fileInput[0].files[0]); /* 파일을 저장하는 속성 files, 여러개로 저장되기 때문에 인덱스 부여 */
+	$.each(fileInput[0].files,(i,f)=>{ /* 배열로 만들어서 반복문 돌 수 있게 만든다 */
+		form.append("upfile"+i,f);
+	})
+	form.append("userId","bsyoo");
+	
+		$.ajax({
+		url: "<%=request.getContextPath()%>/ajax/uploadFile.do",
+		data:form,
+		type:"post",
+		processData:false, /* form형식에서 바이너리형식(파일전송)으로 바꾸기 위해서 false */
+		contentType:false,
+		success:data=>{
+			alert("성공");
+		},
+		error:(r,e)=>{
+			alert("실패");
+		},
+		complete:()=>{
+			fileInput.val('');
+		}
+	}) 
+})
+
+
+
+
+</script>
+</body>
+</html>

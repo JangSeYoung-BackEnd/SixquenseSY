@@ -40,7 +40,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(!ServletFileUpload.isMultipartContent(request)) { //HttpServletRequest를 대입
-			throw new BadAccessException("잘못된 접근입니다. 관리자에게 문의하세요");
+			throw new IllegalArgumentException("안돼");
 		}else {
 			//1. 파일을 저장할 위치를 절대 경로(c드라이브부터)로 가져오기
 			//ServletContext클래스에서 getRealPath("/") -> 루트부터 webapp폴더로 바로 잡힌다
@@ -57,6 +57,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 			MultipartRequest mr =new MultipartRequest(request, path, maxSize, encoding, dfr);
 			
 			//db에 해당 내용을 저장(MultipartRequest로 가져와야한다)
+			//상품 정보
 			String nation = mr.getParameter("nation");
 			String productName =mr.getParameter("productName");
 			int price = Integer.parseInt(request.getParameter("price"));
@@ -64,15 +65,15 @@ public class ProductInsertEndServlet extends HttpServlet {
 			int minCount = Integer.parseInt(request.getParameter("minCount"));
 			int maxCount = Integer.parseInt(request.getParameter("maxCount"));
 			int productDuration = Integer.parseInt(request.getParameter("productDuration"));
-			
-			
-			
 			String productDetail = mr.getParameter("productDetail"); 
 			String editorNote = mr.getParameter("editorNote");
-			String guideName = mr.getParameter("guideName");
-			String guidePhone = mr.getParameter("guidePhone");
 			String[] productDay = mr.getParameterValues("productDay");
 			
+			//가이드 정보
+			String guideName = mr.getParameter("guideName");
+			String guidePhone = mr.getParameter("guidePhone");
+			
+			//코스 설명
 			String courseName1 = mr.getParameter("courseName1");
 			String courseDetail1 = mr.getParameter("courseDetail1");
 			String courseName2 = mr.getParameter("courseName2");
@@ -94,10 +95,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 			//내부적으로 사용할 때는 rename(rename된게 실질적인 데이터)
 			//어떤 파일인지 다운로드 할 수 있게 볼 수 있게 할때는 ori
 			//원본 파일 이름 주지 않아도 될때는 그냥 rename만 저장
-			
-			//Notice객체를 만들때 정보 다 써야하나? 
-			//내가 저장해야되는 값만 넣어서 객체 생성해도 된다
-			//dto에서 만든 객체는 그냥 데이터 뭉쳐서 만든 거라고 생각하자
+		
 			ProductDto p = ProductDto.builder()	
 		    		.build();
 			
@@ -108,6 +106,8 @@ public class ProductInsertEndServlet extends HttpServlet {
 					.build();
 			
 			ProductattachmentDto a = ProductattachmentDto.builder()
+					.OrginalFilename(ori)
+					.RenameFilename(rename)
 					.build();
 			
 			//int result = new AdminProductService().insertProduct(p);

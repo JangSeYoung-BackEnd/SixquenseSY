@@ -113,162 +113,217 @@ public class AccompanyWH {
             .userId(rs.getString("USER_ID"))
             .build();
 
-z
-   }
-   private MemberToAcompanyWH getMemberToAccompanyWH(ResultSet rs) throws SQLException {
-      return MemberToAcompanyWH.builder()
-            .userNo(rs.getInt("MEMBER_NO"))
-            .accompany(rs.getInt("ACCOMPANY_NO"))
-            .AcOffer(rs.getString("ACCOMPANY_OFFER_STATUS"))
-            .build();
-            
-      }
-   
-   
-   
-   //게시물 번호를 받아서 게시물을 가져오는 메소드 
-   public AccompanyDTO selectAccompanyByNo(Connection conn, int no) {
-      PreparedStatement pstmt = null;
-      ResultSet rs = null;
-      List<AccompanyDTO> board = new ArrayList<AccompanyDTO>();
-      try {
-         pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyByNo"));
-         pstmt.setInt(1, no);
-         rs=pstmt.executeQuery();
-         
-          while (rs.next()) {
-            //a = getAccompanyDTO(rs);
-            addselectOffer(board,rs);
-         }
-      } catch (Exception e) {
-         e.printStackTrace();
-      }finally {
-         close(rs);
-         close(pstmt);
-      }
-      //System.out.println(board.get(0));
-      return board.get(0);
-      
-   } 
-   public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
-      PreparedStatement pstmt = null;
-      ResultSet rs = null;
-      //List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
-      MemberToAcompanyWH member =  null;
-      System.out.println(userNo+" "+ no);
-      try {
-         pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
-         pstmt.setInt(1, no);
-         pstmt.setInt(2, userNo);
-         rs=pstmt.executeQuery();
-         
-          if (rs.next()) {
-            member = getMemberToAccompanyWH(rs);
-            //addMemberOffer(member,rs);
-         }
-      } catch (Exception e) {
-         e.printStackTrace();
-      }finally {
-         close(rs);
-         close(pstmt);
-      }
-      System.out.println(member+"dao");
-      return member;
-         
-   }
-   
 
-   
-   
-//   private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
-//      int pk = rs.getInt("ACCOMPANY_NO");
-//      if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
-//         member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
-//               try {
-//                  if (rs.getInt("ACCOMPANY_NO") != 0) {
-//                     e.getAcOffer().add(getAccompanyOffer(rs));
-//                  }
-//                  
-//               } catch (SQLException e1) {
-//                  e1.printStackTrace();
-//               }
-//            });
-//         } else {
-//            AccompanyDTO members = getAccompanyDTO(rs);
-//            if( rs.getInt("ACCOMPANY_NO") != 0) {
-//               members.getAcOffer().add(getAccompanyOffer(rs));
-//               member.add(members);
-//            }
-//            
-//         }
-//      
-//   }
-   private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
-        int pk = rs.getInt("ACCOMPANY_NO");
-         if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {
-            board.stream().filter(e -> Objects.equals(e.getAccompanyNo(), pk)).forEach(e -> {
-               try {
-                  if (rs.getInt("ACCOMPANY_NO") != 0) {
-                     e.getAcOffer().add(getAccompanyOffer(rs));
-                  }
-                  
-               } catch (SQLException e1) {
-                  e1.printStackTrace();
-               }
-            });
-         } else {
-            AccompanyDTO boards = getAccompanyDTO(rs);
-            if( rs.getInt("ACCOMPANY_NO") != 0) {
-               boards.getAcOffer().add(getAccompanyOffer(rs));
-               board.add(boards);
-            }
-            
-         }
-   }
-   
-   
-   //댓글 가져오는 메소드 
-   public List<AccompanyComment> selectAccompanyComment(Connection conn, int no) {
-      PreparedStatement pstmt= null;
-      ResultSet rs = null;
-      List <AccompanyComment> result= new ArrayList<>();
-      try {
-         pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyComment"));
-         pstmt.setInt(1, no);
-         rs=pstmt.executeQuery();
-         while(rs.next())result.add(getAccompanyComment(rs));
-      } catch (Exception e) {
-         e.printStackTrace();
-      }finally {
-         close(rs);
-         close(pstmt);
-      }
-      return result;
-   }
-   
-   public List<AccompanyOffer> selectOfferByNo(Connection conn, int no) {
-      PreparedStatement pstm = null;
-      ResultSet rs = null;
-      List<AccompanyOffer> result = new ArrayList<>();
-      //System.out.println(no +"dao 번호1!!!!!!!!!!!!");
-      try {
-         pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
-         pstm.setInt(1, no);
-         rs=pstm.executeQuery();
-         while(rs.next())result.add(getAccompanyOffer(rs));
-         //System.out.println(rs.next() +"rs.next() 번호1!!!!!!!!!!!!");
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(rs);
-         close(pstm);
-      }
-      System.out.println(result);
-      return result;
-      
-   }
-   
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
+	}
+	private MemberToAcompanyWH getMemberToAccompanyWH(ResultSet rs) throws SQLException {
+		return MemberToAcompanyWH.builder()
+				.userNo(rs.getInt("MEMBER_NO"))
+				.accompany(rs.getInt("ACCOMPANY_NO"))
+				.AcOffer(rs.getString("ACCOMPANY_OFFER_STATUS"))
+				.build();
+				
+		}
+	public static ProductattachmentDto getImage(ResultSet rs) throws SQLException {
+		return ProductattachmentDto.builder().OrginalFilename(rs.getString("original_filename"))
+				.RenameFilename(rs.getString("rename_filename")).ProductNo(rs.getInt("product_no")).build();
+	}
+	public static ProductDto getProduct(ResultSet rs) throws SQLException {
+		return ProductDto.builder().ProductNo(rs.getInt("product_no")).ProductName(rs.getString("product_name"))
+				.ProductReadcount(rs.getInt("product_readcount")).ProductInsertdate(rs.getDate("product_insertdate"))
+				.MinCount(rs.getInt("min_count")).MaxCount(rs.getInt("max_count"))
+				.ProductPrice(rs.getInt("prodcut_price")).GuideNo(rs.getInt("guide_no"))
+				.ProductDiscountRate(rs.getDouble("product_discount_rate"))
+				.ProductDetail(rs.getString("product_detail")).ProductDuration(rs.getInt("product_duration"))
+				.ProductDay(rs.getString("product_day") != null ? rs.getString("product_day").split(",") : null)
+				.CoodinateNo(rs.getInt("coordinate_no")).EditorNote(rs.getString("editor_note"))
+				.attachment(new ArrayList())
+				.build();
+	}
+	
+	//상품 검색해서 들고오는 메소드 
+	public List<ProductDto> selectsearchAll(Connection conn, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductDto> result = new ArrayList<ProductDto>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectsearchAll"));
+			pstmt.setString(1, "%" + searchValue + "%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				addProductAndAttachment(result, rs);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	private void addProductAndAttachment(List<ProductDto> products, ResultSet rs) throws SQLException {
+		int pk = rs.getInt("product_no");
+		if (products.stream().anyMatch(e -> pk == e.getProductNo())) {
+			products.stream().filter(e -> Objects.equals(e.getProductNo(), pk)).forEach(e -> {
+				try {
+					if (rs.getString("original_filename") != null) {
+						e.getAttachment().add(getImage(rs));
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			});
+		} else {
+			ProductDto product = getProduct(rs);
+			if (rs.getString("original_filename") != null)
+				product.getAttachment().add(getImage(rs));
+			products.add(product);
+		}
+	}
+	
+	
+	//게시물 번호를 받아서 게시물을 가져오는 메소드 
+	public AccompanyDTO selectAccompanyByNo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<AccompanyDTO> board = new ArrayList<AccompanyDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyByNo"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			
+			 while (rs.next()) {
+				//a = getAccompanyDTO(rs);
+				addselectOffer(board,rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		//System.out.println(board.get(0));
+		return board.get(0);
+		
+	} 
+	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
+		MemberToAcompanyWH member =  null;
+		System.out.println(userNo+" "+ no);
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, userNo);
+			rs=pstmt.executeQuery();
+			
+			 if (rs.next()) {
+				member = getMemberToAccompanyWH(rs);
+				//addMemberOffer(member,rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(member+"dao");
+		return member;
+			
+	}
+		
+//	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
+//		int pk = rs.getInt("ACCOMPANY_NO");
+//		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
+//			member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
+//	            try {
+//	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+//	                  e.getAcOffer().add(getAccompanyOffer(rs));
+//	               }
+//	               
+//	            } catch (SQLException e1) {
+//	               e1.printStackTrace();
+//	            }
+//	         });
+//	      } else {
+//	    	  AccompanyDTO members = getAccompanyDTO(rs);
+//	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+//	        	 members.getAcOffer().add(getAccompanyOffer(rs));
+//	        	 member.add(members);
+//	         }
+//	         
+//	      }
+//		
+//	}
+	private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
+		  int pk = rs.getInt("ACCOMPANY_NO");
+	      if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {
+	    	  board.stream().filter(e -> Objects.equals(e.getAccompanyNo(), pk)).forEach(e -> {
+	            try {
+	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+	                  e.getAcOffer().add(getAccompanyOffer(rs));
+	               }
+	               
+	            } catch (SQLException e1) {
+	               e1.printStackTrace();
+	            }
+	         });
+	      } else {
+	    	  AccompanyDTO boards = getAccompanyDTO(rs);
+	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+	        	 boards.getAcOffer().add(getAccompanyOffer(rs));
+	        	 board.add(boards);
+	         }
+	         
+	      }
+	}
+	
+	
+	//댓글 가져오는 메소드 
+	public List<AccompanyComment> selectAccompanyComment(Connection conn, int no) {
+		PreparedStatement pstmt= null;
+		ResultSet rs = null;
+		List <AccompanyComment> result= new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectAccompanyComment"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next())result.add(getAccompanyComment(rs));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<AccompanyOffer> selectOfferByNo(Connection conn, int no) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<AccompanyOffer> result = new ArrayList<>();
+		//System.out.println(no +"dao 번호1!!!!!!!!!!!!");
+		try {
+			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
+			pstm.setInt(1, no);
+			rs=pstm.executeQuery();
+			while(rs.next())result.add(getAccompanyOffer(rs));
+			//System.out.println(rs.next() +"rs.next() 번호1!!!!!!!!!!!!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		System.out.println(result);
+		return result;
+		
+	}
+	
+
 
    public int insertAccompanyComment(Connection conn, AccompanyComment ac) {
       PreparedStatement pstmt = null;

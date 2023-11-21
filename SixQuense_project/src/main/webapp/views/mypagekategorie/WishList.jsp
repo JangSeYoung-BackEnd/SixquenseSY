@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
+<%@ page import="com.web.product.dto.ProductwishilistDto" %>  
+<%
+	ProductwishilistDto wish = (ProductwishilistDto)session.getAttribute("wish");
+%>
+<%System.out.println(wish); %>
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
@@ -10,26 +15,25 @@
                             width: 165px;
                             padding-left: 0px;
                             margin-left: 294px;
-                            margin-bottom: 25px;">
-                            
+                            margin-bottom: 25px;">                   
                             <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <div class="checkout__input">
-                                <p style="font-size: xx-large;">나의 위시리스트</p>
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
+                            <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg" style="height: 200px;">
+										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+										     </a>
+										</div>
+
+                                        <div class="product__discount__item__text">
+                                            <span><input type="text" value="<%=wish.getProductNo()%>"></span>
+                                            <h5><a href="#"></a>방콕 5일#디너크루즈#마하나콘#담넌사두억</h5>
+                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
-                                </div>
-                                <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
-                                </div>
-                                <hr />
-                            </div>
                             
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
@@ -46,13 +50,9 @@
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             <button id="updateBtn">개인정보 수정</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회&취소</button></a></li>
+                                            <button id="checkcancelBtn">결제상품 조회</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="wishBtn">위시리스트</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/알림.png" style="width: 45px; margin-right: 10px;">
-                                            <button id="alarmBtn">알림</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/다녀온 여행.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="wenttripBtn">다녀온 여행</button></a></li>
+                                            <button id="wishBtn">위시리스트</button></a></li>                                          
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
                                             <button id="mywirteBtn">나의 글</button></a></li>
                                             <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
@@ -72,7 +72,7 @@
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/update.do",
+			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
@@ -99,18 +99,6 @@
 	$("#checkcancelBtn").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ProductList.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				}
-		});
-	});		
-	</script>
-   <script>
-	$("#wenttripBtn").click(e=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wenttrip.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);

@@ -49,7 +49,7 @@ p {
 		<div class="container">
 			<div class="blog__item-container">
 				<div class="col-lg-4 col-md-5">
-					<div class="country_package">'<%=searchResult%>' 검색결과 
+					<div class="country_package">'<%=searchValue%>' 검색결과 
 					</div>
 					<div class="blog__sidebar">
 						<div class="blog__sidebar__item">
@@ -65,24 +65,25 @@ p {
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
-								<img
-									src="<%=request.getContextPath() %>/upload/product/<%=p.getAttachment().get(0).getOrginalFilename() %>"
-									alt="패키지 대표 이미지">
+								 <img
+								src="<%=request.getContextPath() %>/upload/product/<%= (p.getAttachment().get(0).getOrginalFilename() != null) ? p.getAttachment().get(0).getOrginalFilename() : "" %>	
+								alt="패키지 대표 이미지"> 
 							</div>
 							<div class="blog__item__text">
 								<h5>
-									<a href="<%=request.getContextPath()%>/product/productview.do"><%=p.getProductName() %>
-								</h5>
-								<a
-									href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
-									class="blog__btn"> <%=p.getProductPrice() %>원 <span
+								<a>상품이름</a>
+							
+<%-- 									<a href="<%=request.getContextPath()%>/product/productview.do"><%= (p.getProductName() != null) ?p.getProductName() : "" %>
+ --%>								</h5>
+								<a	href="<%=request.getContextPath()%>/product/productview.do?productNo=<%= (p!=null) ? p.getProductNo() : "" %>
+									class="blog__btn"> <%= (p!= null) ?p.getProductPrice() : "" %>원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png"
 										alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
-										<p><%=p.getEditorNote() %></p>
+										<p><%= (p.getEditorNote() != null) ?p.getEditorNote() : "" %></p>
 									</div>
 								</div>
 							</div>

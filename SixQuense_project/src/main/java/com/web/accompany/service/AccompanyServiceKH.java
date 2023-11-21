@@ -102,4 +102,16 @@ public class AccompanyServiceKH {
 			close(conn);
 			return result;
 		}
-}
+		
+		public List<AccompanyDTO> selectAccompanyByMemberNo(int memberNo){
+			Connection conn=getConnection();
+			List<AccompanyDTO> a=dao.selectAccompanyByMemberNo(conn, memberNo);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
+		}

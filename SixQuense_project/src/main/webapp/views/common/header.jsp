@@ -60,8 +60,8 @@
 	
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 
-	<style>
-    /* 기존 CSS 스타일 유지 */
+<style>
+    
     #search {
         width: 200px;
         padding: 10px;

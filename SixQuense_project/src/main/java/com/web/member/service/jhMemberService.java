@@ -7,6 +7,7 @@ import java.sql.Connection;
 
 import com.web.member.dao.jhMemberDao;
 import com.web.member.dto.Member;
+import com.web.product.dto.ProductwishilistDto;
 
 public class jhMemberService {
     private jhMemberDao dao = new jhMemberDao();
@@ -25,8 +26,14 @@ public class jhMemberService {
         close(conn);
         return result;
     }
+    public int selectWishListByNo(ProductwishilistDto wish) {
+        Connection conn = getConnection();
+        int result = dao.selectWishListByNo(conn, wish);        
+        close(conn);
+        return result;
+    }
     
-    
-}
+	}	
+
 
 

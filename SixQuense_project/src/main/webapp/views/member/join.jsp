@@ -226,7 +226,10 @@
 		</div>
 		
 	</form>
-	<!-- <script>
+
+
+ 	<script>
+
 		const fn_membervalidate=()=>{
 			 const userId=$("userId").val().trim();
 			 if(userId.ienght<8){

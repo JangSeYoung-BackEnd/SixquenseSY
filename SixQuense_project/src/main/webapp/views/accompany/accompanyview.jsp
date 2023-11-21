@@ -250,7 +250,7 @@ div.subcategory>button{
 									}else{%>
 									<!-- 글쓴이라면 나의 글 화인하기  -->
 										<div class="col-sm-12">
-										<button style="margin:10px 0 10px 0; width: 290px;"> <a href="<%=request.getContextPath() %>/mywrite.do">나의 글 확인하기</a></button>
+										<button style="margin:10px 0 10px 0; width: 290px;color: #ffffff;"> <a href="<%=request.getContextPath() %>/mywrite.do">나의 글 확인하기</a></button>
 									<%}
 								}%>
 								</div>
@@ -332,7 +332,7 @@ div.subcategory>button{
 						</div>
 					</div>
 					<div>
-						<p><%=b.getAccompanyContent() %></p>
+						<p style = "text-align: left"><%=b.getAccompanyContent() %></p>
 					</div>
 
 				<div class="subcategory" style="display: flex;">
@@ -659,7 +659,7 @@ div.subcategory>button{
 	        var boardNo = <%=b.getAccompanyNo()%>
 	        var confirmDelete = confirm("정말로 삭제하시겠습니까?");
 	        
-	        if (!confirmDelete) {
+	        if (!confirmDelete) {r
 	            return;
 	        }    
 	        window.location.href = "<%= request.getContextPath() %>/accompany/deletecomment.do?commentNo=" + commentNo + "&userNo=" + userNo + "&boardNo=" + boardNo;	    }
@@ -671,6 +671,6 @@ div.subcategory>button{
          }
       }
 	</script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script>  -->
  
  <%@ include file="/views/common/footer.jsp"%>

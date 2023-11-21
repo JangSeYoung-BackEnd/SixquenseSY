@@ -74,6 +74,7 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+		
 		public int deletecomment(int userNo) {
 			Connection conn = getConnection();
 			int result = dao.deletecomment(conn,userNo);

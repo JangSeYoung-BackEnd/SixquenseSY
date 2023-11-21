@@ -459,15 +459,15 @@ div.subcategory>button{
          <h2>신고하기</h2>
          <p>신고 사유를 입력하세요:</p>
          <form action="<%=request.getContextPath() %>/report/report.do?no=<%=b.getAccompanyNo() %>&userNo=<%=loginMember.getUserNo() %>" method="post">
-	         <div class="checkbox-group">
-	            <label><input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보</label> 
-	            <label><input type="radio" value="abuse" name = "report"> 욕설 </label> 
-	            <label><input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테</label> 
-	            <label><input type="radio" value="text" name = "report"> 기타
-	               <textarea id="reportReason" name = "reporttext"></textarea>
-	            </label>
-	         </div>
-	         <div><input type="submit" value="제출"></div>
+            <div class="checkbox-group">
+               <label><input type="radio" value="illegal_advertising" name = "report"> 무단광고/홍보</label> 
+               <label><input type="radio" value="abuse" name = "report"> 욕설 </label> 
+               <label><input type="radio" value="offensive_language" name = "report"> 불쾌한 언어사용 및 컨테</label> 
+               <label><input type="radio" value="text" name = "report"> 기타
+                  <textarea id="reportReason" name = "reporttext"></textarea>
+               </label>
+            </div>
+            <div><input type="submit" value="제출"></div>
          </form>
       </div>
    </div>

@@ -228,9 +228,12 @@
 		</div>
 		
 		</div>
+
 		</form>
 	</body>
+	
 	<script>
+
 		const fn_membervalidate=()=>{
 			 const userId=$("userId").val().trim();
 			 if(userId.iength<8){
@@ -246,6 +249,7 @@
 				 return false;
 			 }
 		}
+
 	</script> 
 
   	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -261,7 +265,23 @@
 	    }
 	}
 </script>
-<script>
+	<script>
+		// 아이디 비밀번호 OutBox 입력값 입히면 안내려가고 올라가는 JS
+        var loginBox = document.querySelector('.outBox');
+        var loginInputBox = document.querySelectorAll('.inputBox input');
+        loginInputBox.forEach(e=>{
+                e.addEventListener('keyup', function(){
+                if(!e.value == ''){
+                    e.classList.add('existence');   
+                }else{
+                    e.classList.remove('existence');   
+                }
+            });
+        });
+  	</script>
+ 
+ 	<script>
+
  		// 폰 번호 ***-****-**** 자동으로 나오게 하는 JS
  		function phone(str){
         str = str.replace(/[^0-9]/g, '');
@@ -393,6 +413,4 @@ cellPhone.onkeyup = function(event){
 		}
 		
 	</script>
-			
-
 </html>

@@ -15,7 +15,7 @@ import com.web.accompany.service.AccompanyServiceKH;
 /**
  * Servlet implementation class MypageMyWriteServlet
  */
-@WebServlet("/mywrite.do")
+@WebServlet("/mypage/mywrite.do")
 public class MypageMyWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class MypageMyWriteServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("userNo"));
 		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyByMemberNo(memberNo);
 		request.setAttribute("accompanys", accompanys);
-		request.getRequestDispatcher("/views/mypagecategory/MyWirte.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypagekategorie/MyWrite.jsp").forward(request, response);
 		
 	}
 

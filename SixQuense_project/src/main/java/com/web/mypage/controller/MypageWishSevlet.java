@@ -42,7 +42,7 @@ public class MypageWishSevlet extends HttpServlet {
 		 int result = new jhMemberService().selectWishListByNo(wish);
 			if (result > 0) {
                 request.setAttribute("wish", wish);
-                request.getRequestDispatcher("/views/mypagekategorie/Updatedata.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/mypagekategsorie/Updatedata.jsp").forward(request, response);
             } else {
                 // 업데이트 실패 처리
                 

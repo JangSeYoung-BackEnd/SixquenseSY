@@ -28,7 +28,7 @@
 										</div>
 
                                         <div class="product__discount__item__text">
-                                            <span>동남아·대만</span>
+                                            <span><input type="text" value="<%=wish.getProductNo()%>"></span>
                                             <h5><a href="#"></a>방콕 5일#디너크루즈#마하나콘#담넌사두억</h5>
                                             <div class="product__item__price">$30.00 <span>$36.00</span></div>
                                         </div>

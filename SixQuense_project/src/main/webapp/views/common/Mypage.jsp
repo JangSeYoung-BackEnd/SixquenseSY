@@ -211,15 +211,9 @@
    });       --%>
    </script>
    
-<<<<<<< HEAD
     <script>
-   <%-- $("#mywirteBtn").click(e=>{
-      e.preventDefault();
-=======
-	 <script>
 	<%-- $("#mywirteBtn").click(e=>{
 		e.preventDefault();
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
         var $button = $(this);
         $button.prop("disabled", true);
       $.ajax({
@@ -232,21 +226,19 @@
          complete: function () {
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
-<<<<<<< HEAD
       });
    });    --%>   
    </script>
    <script>
    $("#questionBtn").click(e=>{
       e.preventDefault();
-=======
+
 		});
 	});	 --%>	
 	</script>
 	<script>
 	$("#questionBtn").click(e=>{
 		e.preventDefault();
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
         var $button = $(this);
         $button.prop("disabled", true);
       $.ajax({

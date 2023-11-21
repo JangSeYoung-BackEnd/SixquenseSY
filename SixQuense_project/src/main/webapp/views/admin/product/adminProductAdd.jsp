@@ -5,7 +5,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
 <fieldset>
 
 <!-- Form Name -->
@@ -109,6 +109,13 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="editorNote">Editor's Note</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="editorNote" name="editorNote" placeholder="에디터 노트를 입력해주세요"></textarea>
+  </div>
+</div>
+
 <!-- Text input 가이드 파트-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="guideName">가이드 이름</label>  
@@ -130,7 +137,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_categorie">출발 요일</label>
+  <label class="col-md-4 control-label" for="productDay">출발 요일</label>
   <div class="col-md-4">
 		<label>월<input type="checkbox" name="productDay" value="월"></label>
 		<label>화<input type="checkbox" name="productDay" value="화"></label>

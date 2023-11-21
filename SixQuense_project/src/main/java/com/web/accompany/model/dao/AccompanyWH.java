@@ -471,6 +471,30 @@ public class AccompanyWH {
 	
 	
 	
+	public List<AccompanyDTO> selectsearchAccompanyAll(Connection conn, String searchValue) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AccompanyDTO> result=new ArrayList<>();
+		try {
+			pstmt=conn.prepareCall(sql.getProperty("selectsearchAccompanyAll"));
+			pstmt.setString(1, "%" + searchValue + "%");
+			pstmt.setString(2, "%" + searchValue + "%");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getAccompanyDTO(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		//System.out.println(result);
+		return result;
+	}
+	
+	
+	
 	
 	
 	

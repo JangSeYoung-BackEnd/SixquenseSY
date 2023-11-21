@@ -88,7 +88,8 @@
                                                </a>
                                             </li>
                                             <li style="margin-bottom: 15px;">
-                                               <a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
+											<a onclick="location.assign('<%=request.getContextPath()%>/mypage/product/productview.do?userNo=<%=loginMember.getUserNo()%>')">
+                                              <img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
                                                   <button id="checkcancelBtn">결제상품 조회</button>
                                                </a>
                                             </li>
@@ -160,7 +161,7 @@
       
    </script>
    <script>
-   $("#checkcancelBtn").click(e=>{
+  <%--  $("#checkcancelBtn").click(e=>{
       e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true);
@@ -175,7 +176,7 @@
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
       });
-   });      
+   });       --%>
    </script>
    
     <script>

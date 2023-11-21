@@ -1,8 +1,8 @@
 package com.web.product.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -31,4 +31,5 @@ public class ProductDto {
 	private List<ProductcourseDto> course; //상품코스
 	private List<ProductorderinfoDto> orderinfo; //상품(패키지)주문정보
 	private List<ProductwishilistDto> wishlist; //위시리스트
+	private ProductCoordinateDto coordinate; //나라 정보
 }

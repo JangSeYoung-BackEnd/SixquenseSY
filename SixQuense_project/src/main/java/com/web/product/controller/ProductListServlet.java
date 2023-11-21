@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.web.product.dto.ProductCoordinateDto;
 import com.web.product.dto.ProductDto;
 import com.web.product.model.service.ProductService;
 
@@ -34,20 +36,31 @@ public class ProductListServlet extends HttpServlet {
 		
 		int coordinateNo = Integer.parseInt(request.getParameter("coordinateNo"));
 		
-		List<ProductDto> bestProducts = new ProductService().selectBestproductByCountry(coordinateNo);
-		List<ProductDto> recentProducts = new ProductService().selectRecentproductByCountry(coordinateNo);
+		//List<ProductDto> allProducts = new ProductService().selectproductAllByCountry(coordinateNo);
+		List<ProductDto> products = new ProductService().selectBestproductByCountry(coordinateNo);
+		ProductCoordinateDto coordinate = new ProductService().selectCoordinateByNo(coordinateNo);
 		
-		List<ProductDto> dicountProducts = new ProductService().selectDicountproductByCountry(coordinateNo);
 		
-		request.setAttribute("recentProducts", recentProducts);
-		request.setAttribute("bestProducts", bestProducts);
-		request.setAttribute("dicountProducts", dicountProducts);
-		System.out.println(recentProducts);
-		System.out.println(bestProducts);
-		System.out.println(dicountProducts);
-		
-	
-		request.getRequestDispatcher("/views/product/productlistbycountry.jsp").forward(request, response);
+		/*
+		 * response.setContentType("applicaion/json;charset=utf-8"); Gson gson = new
+		 * Gson();
+		 * 
+		 * gson.toJson(dicountProducts,response.getWriter());
+		 * gson.toJson(recentProducts,response.getWriter());
+		 * gson.toJson(dicountProducts,response.getWriter());
+		 */
+		System.out.println(coordinateNo);
+		  //request.setAttribute("allProducts", allProducts);
+		  request.setAttribute("products", products);
+		  request.setAttribute("coordinateNo", coordinateNo);
+		  request.setAttribute("coordinate", coordinate);
+		  System.out.println(products);
+		  
+		 
+		  request.getRequestDispatcher("/views/product/productlistbycountry.jsp").
+		  forward(request, response);
+		  
+		 
 	}
 
 	/**

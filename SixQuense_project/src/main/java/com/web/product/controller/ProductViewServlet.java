@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.web.member.dto.Member;
 import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductcourseDto;
+import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
+import com.web.product.dto.ProductwishilistDto;
 import com.web.product.model.service.ProductService;
 
 /**
@@ -21,21 +25,24 @@ import com.web.product.model.service.ProductService;
 @WebServlet("/product/productview.do")
 public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductViewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ProductViewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		
+		System.out.println("프로덕트 번호"+productNo);
+
 		// 이전 쿠키값이 있는 지 확인
 		// 읽은 글이 있을 때 boardNo가 들어가 있다
 		Cookie[] cookies = request.getCookies();
@@ -51,41 +58,46 @@ public class ProductViewServlet extends HttpServlet {
 				break;
 			}
 		}
-		
+
 		// 글 안읽었을 때 readReault false
 		if (!readResult) {
 			Cookie c = new Cookie("readProduct", "" + readProduct + "|" + productNo + "|");
 			c.setMaxAge(60 * 60 * 24); // 하루동안 유지
 			response.addCookie(c);
 		}
-		
-		ProductDto product = new ProductService().selectProductByNo(productNo,readResult);
+
+		ProductDto product = new ProductService().selectProductByNo(productNo, readResult);
 		List<ProductsreviewDto> comments = new ProductService().selectProductComment(productNo);
 		int commentCount = new ProductService().selectProductCountByNo(productNo);
 		int wishlistCount = new ProductService().selectWishlistCountByNo(productNo);
-		/*
-		 * Member loginMember=(Member)request.getSession().getAttribute("loginMember");
-		 * boolean wishresult=false; if(loginMember!=null) {
-		 * wishresult=product.getWishlist().stream().anyMatch(e->e.getMemberNo()==
-		 * loginMember.getUserNo()); }
-		 */
+		List<ProductwishilistDto> wishlists = new ProductService().selectwishlistByNo(productNo);
+		List<ProductcourseDto> course = new ProductService().selectCourseByNo(productNo);
+		List<ProductorderinfoDto> orderInfo = new ProductService().selectOrderInfoByNo(productNo);
+
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		boolean wishresult = false;
+			if (loginMember != null) {
+				wishresult = wishlists.stream().anyMatch(e -> loginMember.getUserNo() == e.getMemberNo());
+		}
+
 		request.setAttribute("product", product);
 		request.setAttribute("comments", comments);
+		request.setAttribute("course", course);
+		request.setAttribute("orderInfo", orderInfo);
 		request.setAttribute("commentCount", commentCount);
 		request.setAttribute("wishlistCount", wishlistCount);
-		//request.setAttribute("wishResult", wishresult);
-		System.out.println(comments);
-		System.out.println(product);
-		
-		
-		//상품 상 jsp로 이동
+		request.setAttribute("wishResult", wishresult);
+
+		// 상품 상 jsp로 이동
 		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

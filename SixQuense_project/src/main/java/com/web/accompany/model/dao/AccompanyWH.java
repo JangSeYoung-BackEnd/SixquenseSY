@@ -20,6 +20,7 @@ import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.model.dto.Continent;
 import com.web.accompany.model.dto.Coordinate;
+import com.web.member.dto.MemberToAcompanyWH;
 
 
 
@@ -51,6 +52,7 @@ public class AccompanyWH {
 					.AcOffer(new ArrayList<>())
 					.userId(rs.getString("USER_ID"))
 					.renameProfilename(rs.getString("PROFILE_RE_FILNAME"))
+					.userIntroduce(rs.getString("USER_INTRODUCE"))
 					.build();
 	}
 	private AccompanyOffer getAccompanyOffer (ResultSet rs) throws SQLException{
@@ -110,6 +112,14 @@ public class AccompanyWH {
 				.build();
 
 	}
+	private MemberToAcompanyWH getMemberToAccompanyWH(ResultSet rs) throws SQLException {
+		return MemberToAcompanyWH.builder()
+				.userNo(rs.getInt("MEMBER_NO"))
+				.accompany(rs.getInt("ACCOMPANY_NO"))
+				.AcOffer(rs.getString("ACCOMPANY_OFFER_STATUS"))
+				.build();
+				
+		}
 	
 	
 	
@@ -136,33 +146,60 @@ public class AccompanyWH {
 		//System.out.println(board.get(0));
 		return board.get(0);
 		
+	} 
+	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
+		MemberToAcompanyWH member =  null;
+		System.out.println(userNo+" "+ no);
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, userNo);
+			rs=pstmt.executeQuery();
+			
+			 if (rs.next()) {
+				member = getMemberToAccompanyWH(rs);
+				//addMemberOffer(member,rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(member+"dao");
+		return member;
+			
 	}
-//	public List<AccompanyOffer> selectselectOffer(Connection conn, int no) {
-//		PreparedStatement pstm = null;
-//		ResultSet rs = null;
-//		List<AccompanyOffer> result = new ArrayList<>();
-//		System.out.println();
-//		try {
-//			pstm = conn.prepareStatement(sql.getProperty("selectselectOffer"));
-//			pstm.setInt(1, no);
-//			rs=pstm.executeQuery();
-//			System.out.println("여기는 dao의 rs"+rs.next());
-//			while(rs.next()) {
-//				result.add(getAccompanyOffer(rs));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstm);
-//		}
-//		System.out.println("여기는 dao의 result"+result);
-//		return result;
-//		
-//		
+	
+
+	
+	
+//	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
+//		int pk = rs.getInt("ACCOMPANY_NO");
+//		if (member.stream().anyMatch(e -> pk == e.getUserNo())) {
+//			member.stream().filter(e -> Objects.equals(e.getUserNo(), pk)).forEach(e -> {
+//	            try {
+//	               if (rs.getInt("ACCOMPANY_NO") != 0) {
+//	                  e.getAcOffer().add(getAccompanyOffer(rs));
+//	               }
+//	               
+//	            } catch (SQLException e1) {
+//	               e1.printStackTrace();
+//	            }
+//	         });
+//	      } else {
+//	    	  AccompanyDTO members = getAccompanyDTO(rs);
+//	         if( rs.getInt("ACCOMPANY_NO") != 0) {
+//	        	 members.getAcOffer().add(getAccompanyOffer(rs));
+//	        	 member.add(members);
+//	         }
+//	         
+//	      }
 //		
 //	}
-	
 	private void addselectOffer(List<AccompanyDTO> board, ResultSet rs) throws SQLException {
 		  int pk = rs.getInt("ACCOMPANY_NO");
 	      if (board.stream().anyMatch(e -> pk == e.getAccompanyNo())) {
@@ -249,6 +286,24 @@ public class AccompanyWH {
 
 		return result;
 	}
+	public int deletecomment(Connection conn, int commentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println("dao"+commentNo+"댓글번호");
+
+		try {
+			pstmt= conn.prepareStatement(sql.getProperty("deletecomment"));
+			pstmt.setInt(1,commentNo);
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result+"dao 결과");
+		return result;
+	}
 	
 	
 	//조회수 카운트 메소드 
@@ -276,13 +331,33 @@ public class AccompanyWH {
 			pstmt.setInt(1, acompanyBNo);
 			pstmt.setInt(2, userNo);
 			result=pstmt.executeUpdate();
-		//System.out.println(result +"dao");
+		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
 	}
+	
+	
+	public int deleteAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteAccompanyOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, userNo);
+			result=pstmt.executeUpdate();
+			System.out.println(result  +"dao삭제 결과");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}	
+	
+	
 	
 	public int updateAccompanyOffer(Connection conn, int acompanyBNo, String value) {
 		PreparedStatement pstmt=null;
@@ -300,11 +375,40 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
-
-
-
 	
-
-
+	public int updateAcceptOffer(Connection conn, int acompanyBNo, int memberNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		//System.out.println(acompanyBNo+" " +memberNo);
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateAcceptOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int updateDeclineOffer(Connection conn, int acompanyBNo, int memberNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		//System.out.println(acompanyBNo+" " +memberNo);
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateDeclineOffer"));
+			pstmt.setInt(1, acompanyBNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+			System.out.println(result+"거절결과");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
 	
 }

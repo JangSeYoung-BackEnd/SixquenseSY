@@ -31,10 +31,13 @@ public class ProductCommentInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int productNo=Integer.parseInt(request.getParameter("productNo"));
 		int commentLevel=Integer.parseInt(request.getParameter("commentLevel"));
+		System.out.println(commentLevel);
 		String userId=request.getParameter("userId");
 		int memberNo = Integer.parseInt(request.getParameter("member_no"));
 		String content=request.getParameter("content");
 		int CommentRef=Integer.parseInt(request.getParameter("CommentRef"));
+		System.out.println(CommentRef);
+
 		
 		ProductsreviewDto pr = ProductsreviewDto.builder()
 		  .ProductNo(productNo)

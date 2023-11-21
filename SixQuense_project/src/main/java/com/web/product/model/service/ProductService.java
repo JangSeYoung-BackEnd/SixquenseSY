@@ -9,14 +9,27 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.web.product.dao.ProductDao;
+import com.web.product.dto.ProductCoordinateDto;
 import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductcourseDto;
+import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 
 public class ProductService {
 
 	private ProductDao dao = new ProductDao();
-
+	//나라별 전체 상품 조회
+	public List<ProductDto> selectproductAllByCountry(int coordinateNo) {
+		Connection conn = getConnection();
+		List<ProductDto> allProducts = dao.selectRecentproductByCountry(conn, coordinateNo);
+		close(conn);
+		return allProducts;
+	}
+	
+	
+	
 	// 나라별 최신상품 리스트 가져오기
 	public List<ProductDto> selectRecentproductByCountry(int coordinateNo) {
 		Connection conn = getConnection();
@@ -96,6 +109,26 @@ public class ProductService {
 		return comments;
 
 	}
+	
+	//댓글 번호로 댓글 조회하는 메소드
+	public ProductsreviewDto selectCommentByCoNo(int commentNo) {
+		Connection conn = getConnection();
+		ProductsreviewDto comment = dao.selectCommentByCoNo(conn, commentNo);
+		close(conn);
+		return comment;
+	}
+	
+	//댓글 삭제하는 메소드
+	public int removeProductComment(int commentNo) {
+		Connection conn = getConnection();
+		int result = dao.removeProductComment(conn, commentNo);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
 
 	// 댓글 카운트 하는 메소드
 	public int selectProductCountByNo(int productNo) {
@@ -130,6 +163,15 @@ public class ProductService {
 		return result;
 	}
 	
+	//위시리스트 조회하는 메소드
+	public List<ProductwishilistDto> selectwishlistByNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductwishilistDto> wishlists = dao.selectwishlistByNo(conn, productNo);
+		close(conn);
+		return wishlists;
+
+	}
+	
 	//위시리스트 카운트 하는 메소드
 	public int selectWishlistCountByNo(int productNo) {
 		Connection conn = getConnection();
@@ -137,6 +179,30 @@ public class ProductService {
 		close(conn);
 		return commentCount;
 
+	}
+	
+	//상품 코스 조회하는 메소드
+	public List<ProductcourseDto> selectCourseByNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductcourseDto> course = dao.selectCourseByNo(conn, productNo);
+		close(conn);
+		return course;
+	}
+	
+	//나라 조회하는 메소드
+	public ProductCoordinateDto selectCoordinateByNo(int coordinateNo) {
+		Connection conn = getConnection();
+		ProductCoordinateDto coordinate = dao.selectCoordinateByNo(conn, coordinateNo);
+		close(conn);
+		return coordinate;
+	}
+	
+	//상품별 오더 정보 조회하는 메소드
+	public List<ProductorderinfoDto> selectOrderInfoByNo(int productNo){
+		Connection conn = getConnection();
+		List<ProductorderinfoDto> orderInfo = dao.selectOrderInfoByNo(conn, productNo);
+		close(conn);
+		return orderInfo;
 	}
 
 	// 상품 등록
@@ -148,14 +214,11 @@ public class ProductService {
 
 	// 상품 삭제
 
-	// 리뷰 코멘트 등록
-	// public int insertProductComment(ProductComment pc) {
-
-	// }
 
 	// 리뷰 코멘트 수정
 
 	// 리뷰 코멘트 삭제
+	
 
 	// 주문 등록
 

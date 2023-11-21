@@ -1,7 +1,6 @@
 package com.web.accompany.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.service.AccompanyServiceKH;
 
 /**
- * Servlet implementation class AccompanyModifyServlet
+ * Servlet implementation class AccompanyDeleteServlet
  */
-@WebServlet("/accompany/accompanymodify.do")
-public class AccompanyModifyServlet extends HttpServlet {
+@WebServlet("/accompany/accompanydelete.do")
+public class AccompanyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyModifyServlet() {
+    public AccompanyDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +29,22 @@ public class AccompanyModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		request.setCharacterEncoding("utf-8");
 		int accompanyNo=Integer.parseInt(request.getParameter("accompanyNo"));
-		List<AccompanyDTO> accompanys=new AccompanyServiceKH().ModifyAccompany(memberNo,accompanyNo);
-		request.setAttribute("accompanys", accompanys);
-		request.getRequestDispatcher("/views/accompany/accompanymodify.jsp").forward(request, response);
+		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
+		int result=new AccompanyServiceKH().DeleteAccompany(accompanyNo,memberNo);
+		String msg, loc;
+		if(result>0) {
+			msg="삭제 완료되었습니다!";
+			loc="/accompany/accompanylist.do";
+		}else {
+			msg="삭제 실패하였습니다!";
+			loc="/accompany/accompanylist.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

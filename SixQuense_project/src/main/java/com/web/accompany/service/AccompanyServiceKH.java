@@ -93,4 +93,13 @@ public class AccompanyServiceKH {
 			return result;
 			
 		}
+		
+		public int DeleteAccompany(int AccompanyNo, int memberNo) {
+			Connection conn=getConnection();
+			int result=dao.DeleteAccompany(conn, AccompanyNo, memberNo);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
 }

@@ -302,7 +302,7 @@ div.subcategory>button{
 																<span>수락중</span>
 																<button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
 															</div>
-													<%}
+														<%}
 													} %>
 												</div>
 											</div>
@@ -347,11 +347,8 @@ div.subcategory>button{
 						<div>조회수 <%=b.getAccompanyReadCount()%></div>
 						<%if(loginMember.getUserNo()==b.getMemberNo()){%>
 							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
-							<button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="delete">삭제</button>
-						<%}else{ %>
-							<button onclick="modifyaccompany();" role="modify" value="modify" style="display:none;">수정</button>
-							<button onclick="deleteaccompany();" role="delete" value="delete" style="display:none;">삭제</button>
-						<%} %>
+							<button onclick="deleteaccompany();" role="delete">삭제</button>
+						<%}%>
 					</div>
 						
 					<div class="comment-section">
@@ -432,6 +429,13 @@ div.subcategory>button{
 			$tr.append($td);
 			$(e.target).parents("tr").after($tr);
 	    });
+	    
+	    function deleteaccompany(){
+	    	confirm("정말 삭제하시겠습니까?");
+	    	if(confirm){
+	    		location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
+	    	}
+	    }
 	    </script>          
 <!------------------------프로필 Popup 부분 ------------------------>
 

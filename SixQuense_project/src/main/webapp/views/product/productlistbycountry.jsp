@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.web.product.dto.ProductDto,com.web.product.dto.ProductCoordinateDto, java.util.List" %>
+<%@ page
+	import="com.web.product.dto.ProductDto,com.web.product.dto.ProductCoordinateDto, java.util.List"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
 	List<ProductDto> products = (List<ProductDto>)request.getAttribute("products");
@@ -14,7 +15,9 @@
 	font-size: 14px; ! important;
 	margin: 20px 0px; ! important;
 	padding: 10px 16px; ! important;
-	width: 1106px; !important;
+	width: 1106px;
+	!
+	important;
 }
 
 p {
@@ -39,7 +42,6 @@ p {
 	background: #7fad39;
 	color: #ffffff;
 }
-
 </style>
 <body>
 	<!-- Blog Section Begin -->
@@ -47,35 +49,46 @@ p {
 		<div class="container">
 			<div class="blog__item-container">
 				<div class="col-lg-4 col-md-5">
-					<div class="country_package"><%=coordinate.getNation()%> 패키지</div>
+					<div class="country_package"><%=coordinate.getNation()%>
+						패키지
+					</div>
 					<div class="blog__sidebar">
 						<div class="blog__sidebar__item">
 							<h4>어떤 여행을 찾고 있나요</h4>
 							<div class="blog__sidebar__item__tags">
-								<a href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=<%=coordinateNo %>" class="tag">조회순</a> 
-								<a href="<%=request.getContextPath() %>/product/productlistlatest.do?coordinateNo=<%=coordinateNo %>" class="tag">최신순</a> 
-								<a href="<%=request.getContextPath() %>/product/productlistspecial.do?coordinateNo=<%=coordinateNo %>" class="tag">특가순</a>
+								<a
+									href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=<%=coordinateNo %>"
+									class="tag">조회순</a> <a
+									href="<%=request.getContextPath() %>/product/productlistlatest.do?coordinateNo=<%=coordinateNo %>"
+									class="tag">최신순</a> <a
+									href="<%=request.getContextPath() %>/product/productlistspecial.do?coordinateNo=<%=coordinateNo %>"
+									class="tag">특가순</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- 여기서 부터  -->
 				<div class="col-lg-8 col-md-7">
+					<%if(!products.isEmpty()){ %>
 					<%for(ProductDto p : products){ %>
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
-								<img src="<%=request.getContextPath() %>/img/product/<%=p.getAttachment().get(0).getOrginalFilename() %>" alt="패키지 대표 이미지">
+								<img
+									src="<%=request.getContextPath() %>/img/product/<%=p.getAttachment().get(0).getOrginalFilename() %>"
+									alt="패키지 대표 이미지">
 							</div>
 							<div class="blog__item__text">
 								<h5>
 									<a href="<%=request.getContextPath()%>/product/productview.do"><%=p.getProductName() %>
 								</h5>
-								<p><%=p.getProductDetail() %></p>
-								<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>" class="blog__btn"> <%=p.getProductPrice() %>원 <span
+								<a
+									href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
+									class="blog__btn"> <%=p.getProductPrice() %>원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
-									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png" alt="로고이미지입니다" width="120px"><br>
+									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png"
+										alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">
 										<span>Editor's note</span><br>
 										<p><%=p.getEditorNote() %></p>
@@ -84,9 +97,16 @@ p {
 							</div>
 						</div>
 					</div>
+					<%}
+					}else{ %>
+					<div style="width:1106px">
+						<p style="text-align: center; padding:100px;">상품 준비중입니다:-)</p>
+					</div>
 					<%} %>
 					<div class="button-container">
-						<button type="button" class="btn btn-secondary btn-lg btn-block" width="1160px" onclick="location.replace('<%=request.getContextPath() %>/product/productmain.do')">다른
+						<button type="button" class="btn btn-secondary btn-lg btn-block"
+							width="1160px"
+							onclick="location.replace('<%=request.getContextPath() %>/product/productmain.do')">다른
 							지역 둘러보기</button>
 					</div>
 				</div>
@@ -95,36 +115,37 @@ p {
 	</section>
 </body>
 <script>
-/* 메뉴 버튼 클릭시 색 변하게 하는 이벤트*/
-  // 각 태그에 대한 클릭 이벤트를 처리
- document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(tag) {
-        tag.addEventListener('click', function(event) {
-            event.preventDefault(); // 기본 동작 방지 (예: 링크 이동)
+	/* 메뉴 버튼 클릭시 색 변하게 하는 이벤트*/
+	// 각 태그에 대한 클릭 이벤트를 처리
+	document.querySelectorAll('.blog__sidebar__item__tags a').forEach(
+			function(tag) {
+				tag.addEventListener('click', function(event) {
+					event.preventDefault(); // 기본 동작 방지 (예: 링크 이동)
 
-/*             // 선택된 태그에 'selected' 클래스 추가, 다른 태그에서는 제거
-            document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(otherTag) {
-                otherTag.classList.remove('selected');
-            });
+					/*             // 선택된 태그에 'selected' 클래스 추가, 다른 태그에서는 제거
+					 document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(otherTag) {
+					 otherTag.classList.remove('selected');
+					 });
 
-            // 클릭한 태그에 'selected' 클래스 추가
-            tag.classList.add('selected');
+					 // 클릭한 태그에 'selected' 클래스 추가
+					 tag.classList.add('selected');
 
-            // 기존에 변경된 색상을 초기화
-            document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(otherTag) {
-                otherTag.style.color = 'f5f5f5'; // 기본 색상으로 초기화
-            });
+					 // 기존에 변경된 색상을 초기화
+					 document.querySelectorAll('.blog__sidebar__item__tags a').forEach(function(otherTag) {
+					 otherTag.style.color = 'f5f5f5'; // 기본 색상으로 초기화
+					 });
 
-            // 선택된 태그의 색상을 변경
-            tag.style.color = '#7fad39'; // 변경할 색상 값으로 대체 */
+					 // 선택된 태그의 색상을 변경
+					 tag.style.color = '#7fad39'; // 변경할 색상 값으로 대체 */
 
-            // 링크 클릭 시 페이지 이동
-            location.assign(tag.getAttribute('href'));
-        });
-    });
+					// 링크 클릭 시 페이지 이동
+					location.assign(tag.getAttribute('href'));
+				});
+			});
 </script>
-  
-  
-  
+
+
+
 <!--   function scrollToSection(sectionId) {
 	    var element = document.getElementById(sectionId);
 	    // 해당 섹션의 위치를 가져와서 스크롤
@@ -144,7 +165,7 @@ p {
  
  
 	 ajax 시도  -->
-	<%-- $("#bestP").click(e=>{
+<%-- $("#bestP").click(e=>{
 		const member={
 				userId:"bsyoo",
 				password:"bslove",
@@ -182,6 +203,6 @@ p {
 				}
 			);
 	} --%>
-</script> 
- 
+</script>
+
 <%@ include file="/views/common/footer.jsp"%>

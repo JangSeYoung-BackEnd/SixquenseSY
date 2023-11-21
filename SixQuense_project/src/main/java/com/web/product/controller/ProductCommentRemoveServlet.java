@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.model.service.ProductService;
 
 /**
- * Servlet implementation class ProductCommentInsertServlet
+ * Servlet implementation class ProductCommentRemoveServlet
  */
-@WebServlet("/product/insertComment.do")
-public class ProductCommentInsertServlet extends HttpServlet {
+@WebServlet("/product/removecomment.do")
+public class ProductCommentRemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductCommentInsertServlet() {
+    public ProductCommentRemoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +30,15 @@ public class ProductCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int productNo=Integer.parseInt(request.getParameter("productNo"));
-		int commentLevel=Integer.parseInt(request.getParameter("commentLevel"));
-		System.out.println(commentLevel);
-		String userId=request.getParameter("userId");
-		int memberNo = Integer.parseInt(request.getParameter("member_no"));
-		String content=request.getParameter("content");
-		int CommentRef=Integer.parseInt(request.getParameter("CommentRef"));
-		System.out.println(CommentRef);
-
+		request.setCharacterEncoding("utf-8");
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		System.out.println("코멘트 프로덕트No"+productNo);
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		System.out.println("받아온 코멘트 넘버"+commentNo);
 		
-		ProductsreviewDto pr = ProductsreviewDto.builder()
-		  .ProductNo(productNo)
-		  .UserId(userId)
-		  .CommentContent(content)
-		  .CommentRef(CommentRef)
-		  .CommentLevel(commentLevel)
-		  .memberNo(memberNo)
-		  .build();
 		
-		int result=new ProductService().insertProductComment(pr);
-		System.out.println(result);
-		
+		int result=new ProductService().removeProductComment(commentNo);
+		//System.out.println("댓글 삭제 결과"+result);
 		
 		
 		response.sendRedirect(request.getContextPath()+"/product/productview.do?productNo="+productNo);

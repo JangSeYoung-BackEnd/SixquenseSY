@@ -74,6 +74,14 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+		public int deletecomment(int userNo) {
+			Connection conn = getConnection();
+			int result = dao.deletecomment(conn,userNo);
+			if(result > 0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
 
 		//동행글에서 모집여부를 업데이트하는 메소드 
 		public int updateAccompanyOffer(int acompanyBNo, String value) {
@@ -124,6 +132,8 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+
+		
 
 
 		

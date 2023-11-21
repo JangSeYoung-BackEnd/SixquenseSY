@@ -22,13 +22,17 @@ public class ReportDao {
 		}
 	}
 	
-	public int InterReport(Connection conn, String reportType, String reortContent) {
+	public int InterReport(Connection conn, String report, String reporttext,int accompanyNo, int memberNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("InterReport"));
-			pstmt.setString(1, reportType);
-			pstmt.setString(2, reortContent);
+			pstmt.setString(1, report);
+			pstmt.setInt(2, accompanyNo);
+			pstmt.setInt(3, 0);
+			pstmt.setInt(4, memberNo);
+			pstmt.setString(5, reporttext!=null?reporttext:null);
+			result=pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {

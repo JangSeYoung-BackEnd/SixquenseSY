@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.web.member.dto.Member;
 import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductcourseDto;
+import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductreviewattachmentDto;
 import com.web.product.dto.ProductsreviewDto;
 import com.web.product.dto.ProductwishilistDto;
 import com.web.product.model.service.ProductService;
@@ -39,6 +41,7 @@ public class ProductViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		System.out.println("프로덕트 번호"+productNo);
 
 		// 이전 쿠키값이 있는 지 확인
 		// 읽은 글이 있을 때 boardNo가 들어가 있다
@@ -69,26 +72,21 @@ public class ProductViewServlet extends HttpServlet {
 		int wishlistCount = new ProductService().selectWishlistCountByNo(productNo);
 		List<ProductwishilistDto> wishlists = new ProductService().selectwishlistByNo(productNo);
 		List<ProductcourseDto> course = new ProductService().selectCourseByNo(productNo);
+		List<ProductorderinfoDto> orderInfo = new ProductService().selectOrderInfoByNo(productNo);
 
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		boolean wishresult = false;
-		if (wishlists != null) {
 			if (loginMember != null) {
-				wishresult = wishlists.stream().anyMatch(e -> loginMember.getUserNo() == e.getMemberNo() );
-			}
+				wishresult = wishlists.stream().anyMatch(e -> loginMember.getUserNo() == e.getMemberNo());
 		}
-		System.out.println(wishresult);
-		System.out.println(wishlists);
-		System.out.println(loginMember);
 
 		request.setAttribute("product", product);
 		request.setAttribute("comments", comments);
 		request.setAttribute("course", course);
+		request.setAttribute("orderInfo", orderInfo);
 		request.setAttribute("commentCount", commentCount);
 		request.setAttribute("wishlistCount", wishlistCount);
 		request.setAttribute("wishResult", wishresult);
-		System.out.println(comments);
-		System.out.println(product);
 
 		// 상품 상 jsp로 이동
 		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);

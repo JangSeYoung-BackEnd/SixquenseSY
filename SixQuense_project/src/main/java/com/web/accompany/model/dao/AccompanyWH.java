@@ -381,7 +381,7 @@ public class AccompanyWH {
       
    }
 
-<<<<<<< HEAD
+
 	public int insertAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -496,95 +496,3 @@ public class AccompanyWH {
 	
 	
 }
-=======
-   public int insertAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
-      PreparedStatement pstmt=null;
-      int result=0;
-      //System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
-      try {
-         pstmt=conn.prepareStatement(sql.getProperty("insertAccompanyOffer"));
-         pstmt.setInt(1, acompanyBNo);
-         pstmt.setInt(2, userNo);
-         result=pstmt.executeUpdate();
-      
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-   }
-   
-   
-   public int deleteAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
-      PreparedStatement pstmt=null;
-      int result=0;
-      System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
-      try {
-         pstmt=conn.prepareStatement(sql.getProperty("deleteAccompanyOffer"));
-         pstmt.setInt(1, acompanyBNo);
-         pstmt.setInt(2, userNo);
-         result=pstmt.executeUpdate();
-         System.out.println(result  +"dao삭제 결과");
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-   }   
-   
-   
-   
-   public int updateAccompanyOffer(Connection conn, int acompanyBNo, String value) {
-      PreparedStatement pstmt=null;
-      int result=0;
-      
-      try {
-         pstmt=conn.prepareStatement(sql.getProperty("updateAccompanyOffer"));
-         pstmt.setString(1, value);
-         pstmt.setInt(2, acompanyBNo);
-         result=pstmt.executeUpdate();
-         //System.out.println(result +"이건 dao");
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-   }
-   
-   public int updateAcceptOffer(Connection conn, int acompanyBNo, int memberNo) {
-      PreparedStatement pstmt=null;
-      int result=0;
-      //System.out.println(acompanyBNo+" " +memberNo);
-      try {
-         pstmt=conn.prepareStatement(sql.getProperty("updateAcceptOffer"));
-         pstmt.setInt(1, acompanyBNo);
-         pstmt.setInt(2, memberNo);
-         result=pstmt.executeUpdate();
-         
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-   }
-   public int updateDeclineOffer(Connection conn, int acompanyBNo, int memberNo) {
-      PreparedStatement pstmt=null;
-      int result=0;
-      //System.out.println(acompanyBNo+" " +memberNo);
-      try {
-         pstmt=conn.prepareStatement(sql.getProperty("updateDeclineOffer"));
-         pstmt.setInt(1, acompanyBNo);
-         pstmt.setInt(2, memberNo);
-         result=pstmt.executeUpdate();
-         System.out.println(result+"거절결과");
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(pstmt);
-      }return result;
-   }
-   
-   
-   
-}
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git

@@ -340,7 +340,7 @@ div.subcategory>button{
 						</div>
 					</div>
 					<div>
-						<p><%=b.getAccompanyContent() %></p>
+						<p style = "text-align: left"><%=b.getAccompanyContent() %></p>
 					</div>
 					<div class="subcategory" style="display: flex;">
 						<div><%=b.getAccompanyDate()%></div>

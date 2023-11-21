@@ -9,7 +9,7 @@ import java.sql.Connection;
 import com.web.member.dao.jhMemberDao;
 import com.web.member.dto.Member;
 
-public class jhMemberService {
+public class JhMemberService {
     private jhMemberDao dao = new jhMemberDao();
     
     public int selectMemberUpdate(int userId) {

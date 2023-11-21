@@ -32,15 +32,16 @@ public class AccompanyResultAjax extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String value = request.getParameter("value");
-		String user =request.getParameter("acUser");
-//		String acompanyBNo =request.getParameter("acompanyBNo");
-		PrintWriter out=response.getWriter();
-		out.print(value);
-		out.print(user);
-		System.out.println(value+"servlet");
-		System.out.println(user+"servlet");
-		int result = new AccompanyServiceWH().updateAccompanyOffer(user,value);
-		System.out.println(result);
+//		String user =request.getParameter("acUser");
+		int acompanyBNo =Integer.parseInt(request.getParameter("boardNo"));
+//		PrintWriter out=response.getWriter();
+//		out.print(value);
+//		out.print(user);
+//		System.out.println(value+"servlet");
+//		System.out.println(user+"servlet");
+//		System.out.println(acompanyBNo+"servlet");
+		int result = new AccompanyServiceWH().updateAccompanyOffer(acompanyBNo,value);
+//		System.out.println(result);
 		//request.setAttribute("result", result);
 		
 	}

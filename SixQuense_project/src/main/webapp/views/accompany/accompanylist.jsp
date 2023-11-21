@@ -1,3 +1,4 @@
+<%@page import="com.web.product.dto.ProductCoordinateDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
@@ -48,6 +49,14 @@
         color: white;
         background-color: #7fad39;
     }
+    div.accompany-tca>div{
+     	display:flex;
+     	/* display: inline-block; */
+     	overflow: hidden;
+     	text-overflow: ellipsis;
+     	width: 250px;
+    	
+    }
 </style>
 <body>
 	<section class="product spad" style="margin-top: 150px;">
@@ -81,19 +90,19 @@
                         <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanypopularity.do')" class="popularity-btn">인기순</button>
                     </div>
                     <div class="row">
-                    	<% if(!accompanys.isEmpty()){ 
+                    	<% if(!accompanys.isEmpty()){
                     		for(AccompanyDTO a:accompanys){%>
-		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>');">
+		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>&userNo=<%=loginMember.getUserNo()%>');">
 		                            <div class="product__item">
 		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
 		                                    <ul class="product__item__pic__hover">
 		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
 		                                    </ul>
 		                                </div>
-		                                <div class="product__item__text">
-		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("asClose")?"모집마감":"모집중"%>]</a>
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
+		                                <div class="product__item__text accompany-tca">
+			                                <div style="font-weight:bolder; font-size:18px">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</div>
+			                                <div style="font-weight:bolder; height:26px;"><%=a.getAccompanyTitle() %></div>
+			                                <div style="height:50px;"><%=a.getAccompanyContent() %></div>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -109,16 +118,13 @@
 	    $(".menu li").click(function(){
 	        const temp = $(this).text();
 	        console.log(temp);
-	        $.ajax({
-	        	type:"post",
-	        	url:"<%=request.getContextPath()%>/accompany/accompanycoordinate.do",
-	        	date:{coordinate:temp},
-	        	success:function(){
-	        		console.log("되니");
-	        	}
-	        });
-	    });
-	});
+	        if(temp!="전체보기"){
+	        	location.assign("<%=request.getContextPath()%>/accompany/accompanycoordinatelist.do?coordinate="+temp);
+	        }else{
+	        	location.assign("<%=request.getContextPath()%>/accompany/accompanylist.do")
+	        }
+        });
+    });
 	</script>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

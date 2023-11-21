@@ -7,6 +7,9 @@
 <% 
 ProductDto product = (ProductDto)request.getAttribute("product");
 /* Member loginMember = (Member)session.getAttribute("loginMember"); */
+ int productPrice=product.getProductPrice();
+ int selectOption=(int) request.getAttribute("selectOption");
+ int totalPrice=productPrice * selectOption;
 %>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -48,41 +51,105 @@ ProductDto product = (ProductDto)request.getAttribute("product");
                  merchant_uid: "IMP"+makeMerchantUid, 
                  name : $("div.shoping__cart__item>h3").text(),
                  amount : parseInt($("td.shoping__cart__item__close").text()),
-                 buyer_email : 'sixquence',
-                 buyer_name : '장세영',
-                 buyer_tel : '010-1234-5678',
-                 buyer_addr : 'gdacadamey',
-                 buyer_postcode : '123-456'
              }, function (rsp) { // callback
                  if (rsp.success) {
+                	 $("#orderInfo div.nice-select").removeClass("disabled");
+                     
+                     //주문번호 merchant_uid : rsp.merchant_uid, //주문번호
+                     //결제번호  imp_uid : rsp.imp_uid, //결제 고유번호
+                     //결제상태 status * string
+                      $("#orderInfo>select").removeAttr("disabled");
                      //주문정보 저장
-                     $("#orderInfo").submit();
+                     const paidTime=new Date(rsp.paid_at*1000)
+                      $("#paid_at").val(paidTime.getFullYear()+"-"
+                    		  +(paidTime.getMonth()+1)+"-"
+                    		  +paidTime.getDate()+"T"
+                    		  +paidTime.getHours()+":"
+                    		  +paidTime.getMinutes()+":"
+                    		  +paidTime.getSeconds()); // 결제승인시각
+				     
+                      
+                      $("#merchant_uid").val(rsp.merchant_uid); // 주문번호
+				      $("#imp_uid").val(rsp.imp_uid); // 결제 고유번호
+				      $("#status").val(rsp.status); // 결제상태
+                      $("#orderInfo").submit(); 
                  } else {
-                     console.log(rsp);
+                	 alert("주문이 취소됐습니다.");
                  }
              });
          }
          function payment_card() {
              IMP.request_pay({
                  pg : "kcp.AO09C", // 결제사명.PG상점아이디
-                 pay_method : "card", // 지불방법
-                 merchant_uid: "1234567", // 주문번호가 들어가야함.
-                 name : $("div.shoping__cart__item>h3").text(), // 결제창에 노출될 상품명
-                 amount: parseInt($("td.shoping__cart__item__close").text()), // 결제 금액
-                 buyer_email : "mkty0328@gmail.com", // 주문자 email
-                 buyer_name : "홍길동", // 주문자 이름
-                 buyer_tel : "01064269887", // 주문자 전화번호
-                 buyer_addr : "경기도 안양시 만안구", // 주문자 주소
-                 buyer_postcode : "139-91", // 주문자 우편번호
+                 pay_method : 'card',
+                 merchant_uid: "IMP"+makeMerchantUid, 
+                 name : $("div.shoping__cart__item>h3").text(),
+                 amount : parseInt($("td.shoping__cart__item__close").text()),
              }, function (rsp) { // callback
                  if (rsp.success) {
+                	 $("#orderInfo div.nice-select").removeClass("disabled");
+                     
+                     //주문번호 merchant_uid : rsp.merchant_uid, //주문번호
+                     //결제번호  imp_uid : rsp.imp_uid, //결제 고유번호
+                     //결제상태 status * string
+                      $("#orderInfo>select").removeAttr("disabled");
                      //주문정보 저장
-                     $("#orderInfo").submit();
+                     const paidTime=new Date(rsp.paid_at*1000)
+                      $("#paid_at").val(paidTime.getFullYear()+"-"
+                    		  +(paidTime.getMonth()+1)+"-"
+                    		  +paidTime.getDate()+"T"
+                    		  +paidTime.getHours()+":"
+                    		  +paidTime.getMinutes()+":"
+                    		  +paidTime.getSeconds()); // 결제승인시각
+				     
+                      
+                      $("#merchant_uid").val(rsp.merchant_uid); // 주문번호
+				      $("#imp_uid").val(rsp.imp_uid); // 결제 고유번호
+				      $("#status").val(rsp.status); // 결제상태
+                      $("#orderInfo").submit(); 
                  } else {
-                     console.log(rsp);
+                	 alert("주문이 취소됐습니다.");
                  }
              });
          }
+</script>
+<script>
+function inputs() {
+	//event.preventDefault();	//폼태그 방지 */
+	  document.getElementById('name2').value = document.getElementById("name").value;
+	  //document.getElementById('name2').readonly = true;
+	
+	  document.getElementById('phone2').value = document.getElementById("phone").value;
+	 // document.getElementById('phone2').readonly = true;
+	
+	  document.getElementById('birthDate2').value = document.getElementById("birthDate").value;
+	  //document.getElementById('birthDate2').readonly = true;
+	  //$.each($("#orderInfo input"),(i,e)=>{console.log(e);e.attr("readonly");});
+	  console.log($("#orderInfo input").attr("readonly",true));
+	  document.querySelector('div.nice-select[tabindex="0"] span').innerText = document.getElementById('gender').value;
+	  //document.querySelector('div.nice-select[tabindex="0"] option.selected').classList.toggle('seleted');
+	  const choiceGender=document.getElementById('gender').value;
+	  switch(choiceGender){
+	  case 'M':
+		  document.querySelector('div.nice-select[tabindex="0"] li[data-value="M"]').classList.toggle('selected');
+		  break;
+	  case 'F':
+		  document.querySelector('div.nice-select[tabindex="0"] li[data-value="F"]').classList.toggle('selected');
+		  break;
+	  }
+	  $.each($("#gender2 > option"),(i,e)=>{$(e).removeAttr("selected"); if(e.value==choiceGender) {$(e).attr('selected',true);}});
+	  document.querySelector('#orderInfo div.nice-select').classList.toggle('disabled');
+	
+/*   var gender = document.getElementById("gender").value;
+
+  if (gender == "male") {
+    document.getElementById("gender2").value = "male";
+  } else if (gender == "female") {
+    document.getElementById("gender2").value = "female";
+  } else {
+    document.getElementById("gender2").value = "";
+  } */
+}
 </script>
 <section class="body">
     <div style="display: flex;margin-top:170px;">
@@ -135,6 +202,7 @@ ProductDto product = (ProductDto)request.getAttribute("product");
             </style>
   
             <h3>예약하기</h3><br>
+            
               <div class="row">
               <div class="col-lg-12">
                 <div class="shoping__cart__table">
@@ -163,12 +231,7 @@ ProductDto product = (ProductDto)request.getAttribute("product");
                          <%= request.getAttribute("selectOption") %>
                         </td>
                         <td class="shoping__cart__item__close">
-                          <% 
-						    int productPrice=product.getProductPrice();
-						    int selectOption=(int) request.getAttribute("selectOption");
-						    int totalPrice=productPrice * selectOption;
-						    out.print(totalPrice);
-						    %>원
+						    <%=totalPrice %>원
                         </td>
                       </tr>
                     </tbody>
@@ -181,33 +244,33 @@ ProductDto product = (ProductDto)request.getAttribute("product");
                 <div class="col-lg-12">  
                 </div>
                 <div class="form-containerbox">
-                <form action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
+                <form>
+                    
                     <h2>예약자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
-                    <input type="text"id="name" name="name" required>
+                    <input type="text"id="name" name="name" value="<%=loginMember.getUserName() %>" readonly>
                   
                     
                      <div>
                         <label for="name">전화번호:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="phone" name="phone" value="<%=loginMember.getPhone() %>" readonly>
                      </div>
                     <div class="flex-containerbox">
                       <div>
                         <label for="birthDate">생년월일:</label>
-                        <input type="date" id="birthDate" name="birthDate" required>
+                        <input type="date" id="birthDate" name="birthDate" value="<%=loginMember.getUserDd() %>" readonly>
                       </div>
                     </div>
                     <label for="gender">성별:</label>
-                    <select id="gender" name="gender" required>
-               			<option disabled selected>성별 선택</option>
-                      <option value="male">M</option>
-                      <option value="female">F</option>
+                    <select id="gender" name="gender" disabled>
+                      <option value="M" <%=loginMember.getGender().equals("M")?"selected":"" %>>M</option>
+                      <option value="F" <%=loginMember.getGender().equals("F")?"selected":"" %>>F</option>
                     </select>
                     
                   </form>
                   
                   <style>
-                    form {
+                    form  {
                         max-width: 600px;
                         margin: 20px 0 20px 500px;
                         padding: 0 20px;
@@ -255,40 +318,38 @@ ProductDto product = (ProductDto)request.getAttribute("product");
                     }
                 </style>
                 <form id="orderInfo" action="<%=request.getContextPath()%>/productpackage/orderend.do" method="post">
+                  	<input type="hidden" name="productNo" value="<%=product.getProductNo()%>">
+                    <input type="hidden" name="productStack" value="<%= request.getAttribute("selectOption") %>">
+                    <input type="hidden" name="totalPrice" value="<%= totalPrice %>">
+                    <input type="hidden" name="userNo" value="<%=loginMember.getUserNo() %>">
+                    <input type="hidden" id="paid_at" name="paidat"/>
+                    <input type="hidden" id="merchant_uid" name="merchantuid"/>
+                    <input type="hidden" id="imp_uid" name="impuid"/>
+                    <input type="hidden" id="status" name="status"/>
+                   
                     <h2>대표 여행자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name2" name="name2" required>
                   
-                    <div class="flex-containerbox">
-                      <div>
-                        <label for="englishFirstName">영문 이름:</label>
-                        <input type="text" id="englishFirstName" name="englishFirstName" required>
-                      </div>
-                      <div>
-                        <label for="englishLastName">영문 성:</label>
-                        <input type="text" id="englishLastName" name="englishLastName" required>
-                      </div>
-                    </div>
                     <div>
                     <label for="name">전화번호:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="phone2" name="phone2" required>
                     </div>
                   
                     <div class="flex-containerbox">
                       <div>
                         <label for="birthDate">생년월일:</label>
-                        <input type="date" id="birthDate" name="birthDate" required>
+                        <input type="date" id="birthDate2" name="birthDate2" required>
                       </div>
                     </div>
+                    
                     <label for="gender">성별:</label>
-                    <select id="gender" name="gender" required>
-                      <option value="" disabled selected>성별 선택</option>
-                      <option value="male">M</option>
-                      <option value="female">F</option>
+                    <select id="gender2" name="gender2" >
+               			<option  selected >선택</option>
+                      <option value="M">M</option>
+                      <option value="F">F</option>
                     </select>
-                    <input type="button" 
-            		<%-- onclick="location.assign('<%=request.getContextPath() %>/user/userview.do?useremail=<%=loginMember.getUserId() %>')" --%>
-                   value="로그인 정보와 동일">
+                    <button type="button" onclick="inputs()">로그인 정보와 동일</button>
                   </form>
             </div>
         </div>
@@ -436,7 +497,7 @@ ProductDto product = (ProductDto)request.getAttribute("product");
         </div>
        
         <div class="infocheck" style="border: 2px solid grey";>
-              "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"<input type="checkbox" id="infocheckbox">
+              "위 약관을 확인하였으며 회원 본인은 약관 및 결제에 동의합니다"<input type="checkbox" id="infocheckbox" onclick="checkConsent()"/>
         </div>
 
         <div>
@@ -548,21 +609,31 @@ ProductDto product = (ProductDto)request.getAttribute("product");
   </style>
 
  <script>
-    function checkConsent() {
-        let personalinfo = document.getElementById("personalInfoConsent").checked;
-        let infoprovide = document.getElementById("infoProvidingConsent").checked;
-        let identifiinfo = document.getElementById("identificationConsent").checked;
-        let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
+ function checkConsent() {
+	    let personalinfo = document.getElementById("personalInfoConsent").checked;
+	    let infoprovide = document.getElementById("infoProvidingConsent").checked;
+	    let identifiinfo = document.getElementById("identificationConsent").checked;
+	    let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
 
-        var infocheckbox = document.getElementById("infocheckbox");
-        if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
-            infocheckbox.checked = true;
-            infocheckbox.disabled = false;
-        } else {
-            infocheckbox.checked = false;
-            infocheckbox.disabled = true;
-        }
-    }
+	    let infocheckbox = document.getElementById("infocheckbox");
+
+	   
+	    if (infocheckbox.checked) {
+	        document.getElementById("personalInfoConsent").checked = true;
+	        document.getElementById("infoProvidingConsent").checked = true;
+	        document.getElementById("identificationConsent").checked = true;
+	        document.getElementById("identificationTransferConsent").checked = true;
+	    }
+	    
+	    
+	    if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
+	        infocheckbox.checked = true;
+	        infocheckbox.disabled = false;
+	    } else {
+	        infocheckbox.checked = false;
+	        infocheckbox.disabled = false;
+	    }
+	}
 
     function showModal() {
         var modal = document.getElementById("termsModal");
@@ -610,9 +681,6 @@ ProductDto product = (ProductDto)request.getAttribute("product");
     }
 
     window.onload = function() {
-        var infocheckbox = document.getElementById("infocheckbox");
-        infocheckbox.disabled = true;
-
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() {
             var modal = document.getElementById("termsModal");

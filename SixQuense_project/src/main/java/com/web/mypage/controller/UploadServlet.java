@@ -20,55 +20,58 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 /**
  * Servlet implementation class UploadServlet
  */
-@WebServlet("/upload.do")
+@WebServlet("/uploadfro.do")
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UploadServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(!ServletFileUpload.isMultipartContent(request)) { throw new
-		IllegalArgumentException("안돼!!"); }else {
-		
-		String path = getServletContext().getRealPath("/upload/");
-
-		MultipartRequest mr = new MultipartRequest(request, path, 10224 * 1024 * 100, "UTF-8",
-				new DefaultFileRenamePolicy());
-
-//		String ori = mr.getOriginalFileName("upfile");
-//		String rename = mr.getFilesystemName("upfile");
-//		System.out.println(ori + " : " + rename);
-		Enumeration names=mr.getFileNames();
-		List<Map<String,String>> files=new ArrayList<>();
-		while(names.hasMoreElements()) {
-			String name=(String)names.nextElement();
-			String re=mr.getFilesystemName(name);
-			String ori=mr.getOriginalFileName(name);
-			files.add(Map.of("rename",re,"oriName",ori));
-			
-		}
-		files.forEach(e->{System.out.println(e);});
-		
-		String userId=mr.getParameter("userId");
-		System.out.println(userId);
+	public UploadServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-}
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+		 if (!ServletFileUpload.isMultipartContent(request)) {
+	            throw new IllegalArgumentException("올바른 파일이 아닙니다.");
+	        } else {
+	            // 파일 저장 경로 설정
+	            String path = getServletContext().getRealPath("/upload/mypage");
+	            MultipartRequest mr = new MultipartRequest(request, path, 10224 * 1024 * 100, "UTF-8",
+	                    new DefaultFileRenamePolicy());
+	            List<Map<String, String>> files = new ArrayList<>();
+
+	            Enumeration names = mr.getFileNames();
+	            while (names.hasMoreElements()) {
+	                String name = (String) names.nextElement();
+	                String re = mr.getFilesystemName(name);
+	                String ori = mr.getOriginalFileName(name);
+	                files.add(Map.of("rename", re, "oriName", ori));
+	            }
+
+	            files.forEach(e -> {
+	                System.out.println(e);
+	            });
+
+	            String userNo = mr.getParameter("userNo");
+	            System.out.println(userNo);
+	            
+	            String imagePath = request.getContextPath() + "/upload/mypage/" + files.get(0).get("rename");
+	            response.getWriter().write("업로드 성공!");
+	        }
+	    }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

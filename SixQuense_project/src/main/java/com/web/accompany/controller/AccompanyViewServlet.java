@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.accompany.service.AccompanyServiceWH;
+import com.web.member.dto.MemberToAcompanyWH;
 
 /**
  * Servlet implementation class AccompanyViewServlet
@@ -35,7 +37,7 @@ public class AccompanyViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//글번호를 받아서 조회하도록 한다. 
 		int no = Integer.parseInt(request.getParameter("no"));
-		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		//쿠키를 확인해서 전에 해당하는 게시물을 읽었는지 안읽었는지 확인을 위해 쿠키값을 가져온다. 
 		Cookie[] cookies= request.getCookies();
 		String readBoard="";
@@ -51,8 +53,6 @@ public class AccompanyViewServlet extends HttpServlet {
 				break;
 			}
 		}
-		
-		
 		//한번 글을 클릭했으면 쿠키기간동안은 조회수가 증가되지 않게 한다. 
 		if(!readResult) {
 			Cookie cookie = new Cookie("readBoard", readBoard+"|"+no+"|");
@@ -61,13 +61,19 @@ public class AccompanyViewServlet extends HttpServlet {
 		}
 		
 		
-		
-		
+		//이건 동행 신청상태 여부를 확인하는 member 
+		MemberToAcompanyWH member =  new AccompanyServiceWH().selectMemberToAcompany(userNo,no);
 		AccompanyDTO a = new AccompanyServiceWH().selectBoardByNo(no,readResult);
+		List <AccompanyOffer> offer = new AccompanyServiceWH().selectOfferByNo(no);
 		List <AccompanyComment> comments = new AccompanyServiceWH().selectAccompanyComment(no);
-		System.out.println(a);
+		
+		//System.out.println(a);
 		request.setAttribute("board", a);
+		//System.out.println(a);
+		
+		request.setAttribute("offer", offer);
 		request.setAttribute("comments", comments);
+		request.setAttribute("member", member);
 		request.getRequestDispatcher("/views/accompany/accompanyview.jsp").forward(request, response);
 
 	}

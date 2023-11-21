@@ -6,10 +6,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.web.member.dto.Member;
+import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductwishilistDto;
 
 public class jhMemberDao {
 
@@ -25,7 +30,7 @@ public class jhMemberDao {
 			e.printStackTrace();
 		}
 	}
-	public int updateMember(Connection conn, Member m) {
+	public int mypageupdate(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
@@ -36,32 +41,87 @@ public class jhMemberDao {
 			pstmt.setDate(4, m.getUserDd());
 			pstmt.setString(5, m.getUserIntroduce());
 			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getNotificatIonset());
-			pstmt.setString(8, m.getOriginalFilename());
-			pstmt.setString(9, m.getRenameFilename());
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	
-	
-	public int selectMemberUpdate(Connection conn, int userId) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectmember")); 
-			pstmt.setInt(1, userId);
-			result=pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
+			pstmt.setString(7, m.getNotificatIonset());	
+			pstmt.setInt(8, m.getUserNo());			
 
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
+	
+	public int selectMemberByNo(Connection conn, int userNo) {
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int result = 0;
+	    try {
+	        pstmt = conn.prepareStatement(sql.getProperty("selectMemberByNo"));
+	        pstmt.setInt(1, userNo);
+	        rs = pstmt.executeQuery();
+
+	        // ResultSet에서 결과가 있는지 확인
+	        if (rs.next()) {
+	            result = 1; // 결과가 있다면 1로 설정
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return result;
+	}
+	public List<ProductwishilistDto> selectWishListByNo(Connection conn, int memberNo ) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<ProductwishilistDto> wish = new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectWishListByNo")); 
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				wish.add(getProductwishilistDto(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return wish;
+	}
+	public List<ProductorderinfoDto> selectProductByNo(Connection conn, int memberNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		List<ProductorderinfoDto> info= new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectProductByNo"));
+			pstmt.setInt(1, 0);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return info;
+		
+	}
+	
+	private ProductwishilistDto getProductwishilistDto(ResultSet rs) throws SQLException{
+		return ProductwishilistDto.builder()
+				.ProductNo(rs.getInt("PRODUCT_WISHLIST_NO"))
+				.MemberNo(rs.getInt("MEMBER_NO"))
+				.ProductNo(rs.getInt("PRODUCT_NO"))
+				.build();				
+	}
+	private ProductorderinfoDto getProductorderinfoDto(ResultSet rs) throws SQLException{
+		return ProductorderinfoDto.builder()
+				.OrderNo(rs.getInt("ORDER_NO"))
+				.OrderCount(rs.getInt("ORDER_COUNT"))
+				.OrderDate(rs.getDate("ORDER_DATE"))
+				.MemberNO(rs.getInt("MEMBER_NO"))
+				.ProductNo(rs.getInt("PROUCT_NO"))
+				.build();
+	}
+}

@@ -1,6 +1,6 @@
 package com.web.product.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,11 +8,9 @@ import lombok.Data;
 @Data
 @Builder
 public class ProductorderinfoDto {
-	private int OrderNo;
+	private int OrderNo; 
 	private int OrderCount;
 	private Date OrderDate;
-	private int MemberNO;
-	private int ProductNo;
-	private BookinginfoDto bookinginfo;
-	private ProductpaymentDto payment; //결제
+	private int MemberNO; //회원번호
+	private int ProductNo; //상품번호
 }

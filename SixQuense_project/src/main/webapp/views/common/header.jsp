@@ -60,6 +60,17 @@
 	
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 
+<style>
+    
+    #search {
+        width: 200px;
+        padding: 10px;
+    }
+
+    #data {
+        display: none;
+    }
+</style>	
 <body>
 	<!-- 페이지 넘어갈때 로딩바 -->
 	
@@ -75,11 +86,12 @@
                     </div>
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
-                        <form action="#">
-                            <input type="text" placeholder="어디로 떠나실건가요?">
-                            <button type="submit" class="site-btn">SEARCH</button>
-                        </form>
-                    </div>
+					    <form action="#">
+					        <input type="search" id="search" list="data" placeholder="어디로 떠나실 건가요?">
+					        <button type="submit" class="site-btn">SEARCH</button>
+					        <datalist id="data"></datalist>
+					    </form>
+				</div>
                     <%if(loginMember==null) {%>
                     <div class="header__cart" style="margin-left: 60px;">
                         <ul>
@@ -118,5 +130,24 @@
                 </nav>
         </div>
     </header>
+    <script>
+    $(document).ready(function () {
+        $("#search").on("input", function () {
+            var keyword = $(this).val();
+            $.ajax({
+                url: "<%=request.getContextPath()%>/search.do",
+                method: "GET",
+                data: { keyword: keyword },
+                success: function (data) {
+                    var dataList = $("#data");
+                    dataList.empty();
+                    $.each(data, function (index, value) {
+                        dataList.append("<option value='" + value + "'>");
+                    });
+                }
+            });
+        });
+    });
+</script>
     <!-- 헤더 -->
     <html>

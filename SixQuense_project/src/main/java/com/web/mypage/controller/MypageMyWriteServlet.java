@@ -1,16 +1,21 @@
 package com.web.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.web.accompany.model.dto.AccompanyDTO;
+import com.web.accompany.service.AccompanyServiceKH;
+
 /**
  * Servlet implementation class MypageMyWriteServlet
  */
-@WebServlet("/mywrite.do")
+@WebServlet("/mypage/mywrite.do")
 public class MypageMyWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +31,11 @@ public class MypageMyWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int memberNo=Integer.parseInt(request.getParameter("userNo"));
+		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyByMemberNo(memberNo);
+		request.setAttribute("accompanys", accompanys);
 		request.getRequestDispatcher("/views/mypagekategorie/MyWrite.jsp").forward(request, response);
+		
 	}
 
 	/**

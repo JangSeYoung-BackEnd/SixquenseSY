@@ -5,8 +5,7 @@
     <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
-                    
+                <div class="col-lg-9">                 
                     <div class="single-slider hero-overly  slider-height d-flex align-items-center" data-background="assets/img/hero/h1_hero.jpg">
                     <div class="container">
                         <!-- 검색바 -->
@@ -29,8 +28,6 @@
             </div>
         </div>
     </section>
-   
-
     <!-- 움직이는 바 -->
     <section class="categories">
         <div class="container">
@@ -336,7 +333,7 @@
                  <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="">
-                        <a href= "<%=request.getContextPath() %>/product/productlist.do">
+                        <a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=10">
                         <img src="./img/japen/후쿠오카.png"width="250px;"height="265px">
                         </a>
                             <ul class="featured__item__pic__hover">

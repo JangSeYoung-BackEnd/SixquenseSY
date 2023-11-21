@@ -209,6 +209,7 @@ div.subcategory>button{
 
 
 <body>
+<<<<<<< HEAD
    <!-- Blog Details Section Begin -->
    <section class="blog-details spad" style="padding-top:250px;">
       <div class="container">
@@ -363,7 +364,6 @@ div.subcategory>button{
                               <td>
                                  <button class="btn-reply" value="<%=ac.getAccompanyComtNo()%>">답글</button>
                                  <button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>">삭제</button>
-
                               </td>
                            </tr>
                            <%}else{ %>

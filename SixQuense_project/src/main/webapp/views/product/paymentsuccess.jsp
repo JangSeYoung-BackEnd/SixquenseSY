@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.web.product.dto.ProductorderinfoDto" %>
+<%@ page import="com.web.product.dto.BookinginfoDto" %>
+<%@ page import="com.web.product.dto.ProductpaymentDto" %>
+<%@ page import="com.web.product.dto.ProductDto" %>	
 <%@ include file="/views/common/header.jsp"%>
+<%
+List<Object> dataList = (List<Object>) request.getAttribute("dataList");
+ProductorderinfoDto p = (ProductorderinfoDto) dataList.get(0);
+BookinginfoDto b = (BookinginfoDto) dataList.get(1);
+ProductpaymentDto paymentDto = (ProductpaymentDto) dataList.get(2);
+ProductDto product=(ProductDto)request.getAttribute("product");
+%>
 <style>
 * {
 	margin: 0;
@@ -279,73 +291,74 @@ a {
 </style>
 <body>
 	<section style="padding-top: 250px">
-		<table class="body-wrap">
-			<tbody>
-				<tr>
-					<td></td>
-					<td class="container" width="600">
-						<div class="content">
-							<table class="main" width="100%" cellpadding="0" cellspacing="0">
-								<tbody>
-									<tr>
-										<td class="content-wrap aligncenter">
-											<table width="100%" cellpadding="0" cellspacing="0">
-												<tbody>
-													<tr>
-														<td class="checkimg"><img
-															src="<%=request.getContextPath()%>/img/checkicon.png"
-															alt="체크 이미지 입니다" width="60px" height="60px" ></td>
-													</tr>
-													<tr>
-														<td class="content-block">
-															<h2>예약 접수</h2> <br> <strong>예약을 확인하기까지 조금만
-																기다려주세요!<br> 영업일 기준 24시간 이내로 확정 여부를 알려드려요
-														</strong>
-														</td>
-													</tr>
-													<tr>
-														<td class="content-block">
-															<table class="invoice">
-																<tr>
-																	<td>
-																		<table class="invoice-items" cellpadding="0"
-																			cellspacing="0">
-																			<tbody>
-																				<tr>
-																					<td>주문 금액</td>
-																					<td class="alignright">199,000원</td>
-																				</tr>
-																				<tr>
-																					<td class="totalamount">총 결제 금액</td>
-																					<td class="alignright totalamount">199,000원</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</td>
-																</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
+	<table class="body-wrap">
+		<tbody>
+		<tr>
+			<td></td>
+			<td class="container" width="600">
+				<div class="content">
+					<table class="main" width="100%" cellpadding="0" cellspacing="0">
+						<tbody>
+							<tr>
+							<td class="content-wrap aligncenter">
+							<table width="100%" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr>
+									<td class="checkimg"><img
+										src="<%=request.getContextPath()%>/img/checkicon.png"
+										alt="체크 이미지 입니다" width="60px" height="60px" ></td>
+								</tr>
 									<tr>
 										<td class="content-block">
-											<button type="button" class="btn btn-light">홈으로 가기</button>
-											<button type="button" class="btn btn-success">예약 상세
-												가기</button>
+										<strong><h2>결제 완료 됐습니다.</h2></strong>
+											<h2>주문번호  : <%= p.getOrderNo() %></h2>
+												<br> 결제 일자 : <%= p.getOrderDate() %>
+												<br> 결제 번호 : <%= paymentDto.getPaymentId() %>
 										</td>
 									</tr>
-								</tbody>
-							</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		</div>
-		</td>
-		<td></td>
+									<tr>
+									<td class="content-block">
+										<table class="invoice">
+											<tr>
+												<td>
+													<table class="invoice-items" cellpadding="0"
+														cellspacing="0">
+														<tbody>
+															<tr>
+																<td>주문 금액</td>
+																<td class="alignright"><%= paymentDto.getTotalAmount() %>원</td>
+															</tr>
+															<tr>
+																<td class="totalamount">총 결제 금액</td>
+																<td class="alignright totalamount"><%= paymentDto.getTotalAmount() %>원</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>	
+									</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="content-block">
+								<button type="button" class="btn btn-light" 
+							        onclick="location.replace('<%=request.getContextPath()%>/index.jsp')">
+									결제 확인
+									</button>
+								
+							</td>
+							</tr>
+						</tbody>
+					</table>
+			</td>
 		</tr>
 		</tbody>
-		</table>
+	</table>
+	</div>
+	</td>
+	</tbody>
+	</table>
 	</section>
 </body>
 <%@ include file="/views/common/footer.jsp"%>

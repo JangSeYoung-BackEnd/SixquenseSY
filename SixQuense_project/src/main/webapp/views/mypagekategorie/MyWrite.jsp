@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>  
-    <!-- Breadcrumb Section End -->
-
-    <!-- Checkout Section Begin -->
 <section class="checkout spad" style="padding-top: 0px";>
 	<div class="container">
 		<div class="checkout__form">
@@ -65,7 +62,7 @@
 <script>
 	$("#updateBtn").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/update.do",
+			url:"<%=request.getContextPath()%>/updateview.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);
@@ -92,18 +89,6 @@
 	$("#checkcancelBtn").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ProductList.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				}
-		});
-	});		
-	</script>
-   <script>
-	$("#wenttripBtn").click(e=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wenttrip.do",
 			dataType:"html",
 			success:function(data){
 					console.log(data);

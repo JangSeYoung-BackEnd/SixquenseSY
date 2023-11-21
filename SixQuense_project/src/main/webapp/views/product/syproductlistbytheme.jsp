@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
-                <!-- Product Section Begin -->
-                <section class="product spad" style="padding-top:250px";>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-5">
-                                <div class="sidebar">
-                                    <div class="sidebar__item">
-                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
+<%@ include file="/views/common/header.jsp"%>               
+<section class="product spad" style="padding-top:250px";>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
         ul {list-style: none; padding: 0;}
         ul li {display: inline-block; margin-right: 10px;}
         .sub-menu {display: none;}
@@ -18,7 +17,7 @@
         .continent .sub-menu li:hover a {color: green; font-weight: bold;}
         .continent a.active {color: purple; font-weight: bold;}
         .continent a:hover {color: purple; font-weight:bold;}
-    </style>
+</style>
   
 </head>
 <section class="body">
@@ -26,43 +25,43 @@
     <ul>
         <li class="continent"><a href="#">[동남아·대만]</a>
             <ul class="sub-menu">
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">다낭</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">방콕</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">대만</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">보라카이</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">보홀</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">세부</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">코타키나발루</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">푸켓</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">호치민</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">푸켓</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=43">다낭</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=34">방콕</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=38">대만</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=42">보라카이</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=39">보홀</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=41">세부</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=37">코타키나발루</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=36">푸켓</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=35">호치민</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=40">싱가포르</a></li>
             </ul>
         </li>
         <li class="continent"><a href="#">[일본]</a>
             <ul class="sub-menu">
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">도쿄</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">삿포르</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오사카/교토</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">오키나와</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=12">도쿄</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=13">삿포르</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=11">오사카/교토</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=14">오키나와</a></li>
                 <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=10">후쿠오카</a></li>
             </ul>
         </li>
         <li class="continent"><a href="#">[유럽]</a>
             <ul class="sub-menu">
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">스위스</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">스페인</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">영국</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">이탈리아</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">프랑스</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=18">스위스</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=19">스페인</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=15">영국</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=17">이탈리아</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=16">프랑스</a></li>
             </ul>
         </li>
         <li class="continent"><a href="#">[미주·캐나다·대양주]</a>
             <ul class="sub-menu">
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">미동부</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">미서부</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">캐나다</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">하와이</a></li>
-                <li><a href= "<%=request.getContextPath() %>/product/productlist.do">호주</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=21">미동부</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=20">미서부</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=23">캐나다</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=22">하와이</a></li>
+                <li><a href= "<%=request.getContextPath() %>/product/productlist.do?coordinateNo=24">호주</a></li>
             </ul>
         </li>
     </ul>
@@ -94,25 +93,24 @@
 							        <h4>최근 상품들</h4>
 							        <div class="latest-product__slider owl-carousel">
 							            <div class="latest-prdouct__slider__item">
-							                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+							                <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14 class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+							                        <img src="<%=request.getContextPath() %>/img/product/a영국re.jpg">
 							                    </div>
+							                    <div class="latest-product__item__text">
+							                        <h6>영국 남부소도시 #세븐시스터즈</h6>
+							                        <span>139000원</span>
+							                    </div>
+							                </a>
+                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14 class="latest-product__item">
+							                    <div class="latest-product__item__pic">
+													<img src="<%=request.getContextPath() %>/img/product/a영국re.jpg">							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>패키지 상품 이름</h6>
 							                        <span>$패키지 가격</span>
 							                    </div>
 							                </a>
-                                        <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
-							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-							                    </div>
-							                    <div class="latest-product__item__text">
-							                        <h6>패키지 상품 이름</h6>
-							                        <span>$패키지 가격</span>
-							                    </div>
-							                </a>
-                                        <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
 							                    <div class="latest-product__item__pic">
 							                        <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 							                    </div>
@@ -123,7 +121,7 @@
 							                </a>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
-								    <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
+								    <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -132,7 +130,7 @@
 								            <span>$패키지 가격2</span>
 								        </div>
 								    </a>
-                                        <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -141,7 +139,7 @@
 								            <span>$패키지 가격2</span>
 								        </div>
 								    </a>
-                                        <a href="<%=request.getContextPath() %>/product/productview.do" class="latest-product__item">
+                                        <a href="<%=request.getContextPath()%>/product/productview.do?productNo= class="latest-product__item">
 								        <div class="latest-product__item__pic">
 								            <img src="<%=request.getContextPath() %>/img/japen/삿포르.png" alt="">
 								        </div>
@@ -167,23 +165,23 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
-										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=8" >
+										     <img src="<%=request.getContextPath() %>/img/product/a영국dis4.jpg">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
 										</div>
 
                                         <div class="product__discount__item__text">
-                                            <span>동남아·대만</span>
-                                            <h5><a href="#"></a>방콕 5일#디너크루즈#마하나콘#담넌사두억</h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                            <span>영국</span>
+                                            <h5><a href="#"></a>런던 서쪽 워킹투어 3시간</h5>
+                                            <div class="product__item__price">55000원<span>66000원</span></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                          <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=" >
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -198,7 +196,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=" >
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -213,7 +211,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=" >
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -228,7 +226,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=" >
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -243,7 +241,7 @@
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                          <div class="product__discount__item__pic set-bg">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
+										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=" >
 										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
@@ -261,17 +259,17 @@
                     <div class="여행태마">
                         <h2 style="font-weight: bold; text-align: left;">겨울에 어디로 갈까요?</h2>
                         <div class="product_item">
-                        <a href="<%=request.getContextPath() %>/product/productlist.do">
+                        <a href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=13">
     					<img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
     					</a>
-                        <a href="<%=request.getContextPath() %>/product/productlist.do">
-    					<img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <a href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=11">
+    					<img src="<%=request.getContextPath() %>/img/japen/오사카교토.png"> 
     					</a>
-                        <a href="<%=request.getContextPath() %>/product/productlist.do">
-    					<img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <a href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=15">
+    					<img src="<%=request.getContextPath() %>/img/europe/영국.png"> 
     					</a>
-                        <a href="<%=request.getContextPath() %>/product/productlist.do">
-    					<img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
+                        <a href="<%=request.getContextPath() %>/product/productlist.do?coordinateNo=22">
+    					<img src="<%=request.getContextPath() %>/img/america/하와이.png"> 
     					</a>
                     </div>
                     </div> 

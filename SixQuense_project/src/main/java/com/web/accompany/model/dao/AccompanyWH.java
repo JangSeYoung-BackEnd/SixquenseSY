@@ -286,24 +286,6 @@ public class AccompanyWH {
 
 		return result;
 	}
-	public int deletecomment(Connection conn, int commentNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		System.out.println("dao"+commentNo+"댓글번호");
-
-		try {
-			pstmt= conn.prepareStatement(sql.getProperty("deletecomment"));
-			pstmt.setInt(1,commentNo);
-			result=pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		System.out.println(result+"dao 결과");
-		return result;
-	}
 	
 	
 	//조회수 카운트 메소드 
@@ -375,7 +357,6 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
-	
 	public int updateAcceptOffer(Connection conn, int acompanyBNo, int memberNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -408,7 +389,6 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
-	
 	
 	
 }

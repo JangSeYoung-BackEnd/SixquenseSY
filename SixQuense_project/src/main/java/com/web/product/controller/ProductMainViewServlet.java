@@ -1,10 +1,6 @@
 package com.web.product.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.web.product.dto.ProductDto;
-import com.web.product.model.service.ProductService;
+import com.web.product.syservice.ProductMainService;
 
 /**
  * Servlet implementation class ProductMainViewServlet
@@ -34,6 +30,8 @@ public class ProductMainViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		
 		request.getRequestDispatcher("/views/product/syproductlistbytheme.jsp").forward(request, response);
 	}
 
@@ -41,24 +39,19 @@ public class ProductMainViewServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//		ProductService productService = new ProductService();
+//		// 사용자의 요청에서 상품 번호를 가져옵니다.
+//	    int productNo = Integer.parseInt(request.getParameter("productNo"));
 //
-//		List<Integer> coordinateNos = Arrays.asList(10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43);
+//	    // ProductMainService를 이용해 상품 정보를 가져옵니다.
+//	    ProductMainService service = new ProductMainService();
+//	    ProductDto product = service.selectProductByNo(productNo, true);
 //
-//		Map<Integer, List<ProductDto>> recentProductsByCountry=new HashMap<>();
-//		Map<Integer, List<ProductDto>> discountProductsByCountry=new HashMap<>();
+//	    // 상품 정보를 요청에 추가합니다.
+//	    request.setAttribute("product", product);
 //
-//		for(Integer coordinateNo : coordinateNos) {
-//		    List<ProductDto> recentProducts=productService.selectRecentproductByCountry(coordinateNo);
-//		    List<ProductDto> discountProducts=productService.selectDicountproductByCountry(coordinateNo);
-//		    recentProductsByCountry.put(coordinateNo, recentProducts);
-//		    discountProductsByCountry.put(coordinateNo, discountProducts);
-//		}
-//		System.out.println(recentProductsByCountry);
-//		System.out.println(discountProductsByCountry);
-//		request.setAttribute("recentProductsByCountry", recentProductsByCountry);
-//		request.setAttribute("discountProductsByCountry", discountProductsByCountry);
+//	    
+//	    // 상품 정보를 보여줄 JSP 페이지로 포워딩합니다.
+	  // request.getRequestDispatcher("/views/product/syproductlistbytheme.jsp").forward(request, response);
 
 	}
 

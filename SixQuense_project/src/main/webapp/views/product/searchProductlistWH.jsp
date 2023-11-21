@@ -70,13 +70,14 @@ p {
 								alt="패키지 대표 이미지"> 
 							</div>
 							<div class="blog__item__text">
-								<h5>
-								<a>상품이름</a>
-							
-<%-- 									<a href="<%=request.getContextPath()%>/product/productview.do"><%= (p.getProductName() != null) ?p.getProductName() : "" %>
- --%>								</h5>
-								<a	href="<%=request.getContextPath()%>/product/productview.do?productNo=<%= (p!=null) ? p.getProductNo() : "" %>
-									class="blog__btn"> <%= (p!= null) ?p.getProductPrice() : "" %>원 <span
+								<h5>							
+									<a href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>">
+									   <%= (p.getProductName() != null) ? p.getProductName() : "" %>
+									</a>
+								</h5>
+								<a
+									href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
+									class="blog__btn"> <%=p.getProductPrice() %>원 <span
 									class="arrow_right"></span></a>
 								<div class="edit_note">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png"
@@ -92,7 +93,7 @@ p {
 					<%}
 					}else{ %>
 					<div style="width:1106px">
-						<p style="text-align: center; padding:100px;">상품 준비중입니다:-)</p>
+						<p style="text-align: center; padding:100px;">검색 결과가 없습니다 </p>
 					</div>
 					<%} %>
 					<div class="button-container">

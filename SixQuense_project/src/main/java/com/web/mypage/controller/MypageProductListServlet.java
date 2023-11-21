@@ -1,12 +1,18 @@
 package com.web.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.web.member.dto.Member;
+import com.web.member.service.jhMemberService;
+import com.web.product.dto.ProductwishilistDto;
 
 /**
  * Servlet implementation class MypageWishSevlet
@@ -28,6 +34,12 @@ public class MypageProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		int memberNo = loginMember.getUserNo();
+		List<ProductwishilistDto> info = new jhMemberService().selectWishListByNo(memberNo);
+		request.setAttribute("info", info);
+		
 		request.getRequestDispatcher("/views/mypagekategorie/ProductList.jsp").forward(request, response);
 	}
 

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.web.product.dto.ProductwishilistDto" %>  
+<%@page import="com.web.product.dto.ProductwishilistDto,java.util.List" %>
 <%
-	ProductwishilistDto wish = (ProductwishilistDto)session.getAttribute("wish");
+	List<ProductwishilistDto> wish = (List<ProductwishilistDto>)request.getAttribute("wish");
 %>
-<%System.out.println(wish); %>
+
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
@@ -19,6 +19,8 @@
                             <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
+                        <%if(!wish.isEmpty()) {
+                        	for(ProductwishilistDto w:wish){%>
                             <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg" style="height: 200px;">
@@ -28,13 +30,14 @@
 										</div>
 
                                         <div class="product__discount__item__text">
-                                            <span><input type="text" value="<%=wish.getProductNo()%>"></span>
+                                            <span>123</span>
                                             <h5><a href="#"></a>방콕 5일#디너크루즈#마하나콘#담넌사두억</h5>
                                             <div class="product__item__price">$30.00 <span>$36.00</span></div>
                                         </div>
                                     </div>
                                 </div>
-                            
+                            <%} %>
+                           <%} %>
                         </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">

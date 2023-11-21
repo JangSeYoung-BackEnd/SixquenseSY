@@ -49,6 +49,14 @@
         color: white;
         background-color: #7fad39;
     }
+    div.accompany-tca>div{
+     	display:flex;
+     	/* display: inline-block; */
+     	overflow: hidden;
+     	text-overflow: ellipsis;
+     	width: 250px;
+    	
+    }
 </style>
 <body>
 	<section class="product spad" style="margin-top: 150px;">
@@ -91,10 +99,10 @@
 		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
 		                                    </ul>
 		                                </div>
-		                                <div class="product__item__text">
-		                                	<a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</a>
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyTitle() %></a>
-		                                    <a style="display: inline-block; overflow: hidden; width: 210px; text-overflow: ellipsis;"><%=a.getAccompanyContent() %></a>
+		                                <div class="product__item__text accompany-tca">
+			                                <div style="font-weight:bolder; font-size:18px">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</div>
+			                                <div style="font-weight:bolder; height:26px;"><%=a.getAccompanyTitle() %></div>
+			                                <div style="height:50px;"><%=a.getAccompanyContent() %></div>
 		                                </div>
 		                            </div>
 		                        </div>

@@ -43,15 +43,10 @@ public class UploadServlet extends HttpServlet {
 	        } else {
 	            // 파일 저장 경로 설정
 	            String path = getServletContext().getRealPath("/upload/mypage");
-
-	            // 파일 업로드 처리를 위한 MultipartRequest 객체 생성
 	            MultipartRequest mr = new MultipartRequest(request, path, 10224 * 1024 * 100, "UTF-8",
 	                    new DefaultFileRenamePolicy());
-
-	            // 업로드된 파일 정보 저장을 위한 리스트
 	            List<Map<String, String>> files = new ArrayList<>();
 
-	            // 업로드된 파일 정보 추출
 	            Enumeration names = mr.getFileNames();
 	            while (names.hasMoreElements()) {
 	                String name = (String) names.nextElement();
@@ -60,19 +55,14 @@ public class UploadServlet extends HttpServlet {
 	                files.add(Map.of("rename", re, "oriName", ori));
 	            }
 
-	            // 업로드된 파일 정보 출력
 	            files.forEach(e -> {
 	                System.out.println(e);
 	            });
 
-	            // 사용자 아이디 가져오기
 	            String userNo = mr.getParameter("userNo");
 	            System.out.println(userNo);
-
-	            // 여기에 데이터베이스 업데이트 코드 추가
-	            // ...
-
-	            // 파일 업로드 성공 시 클라이언트에게 응답
+	            
+	            String imagePath = request.getContextPath() + "/upload/mypage/" + files.get(0).get("rename");
 	            response.getWriter().write("업로드 성공!");
 	        }
 	    }

@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.web.member.dto.Member;
+import com.web.product.dto.ProductorderinfoDto;
 import com.web.product.dto.ProductwishilistDto;
 
 public class jhMemberDao {
@@ -71,43 +74,54 @@ public class jhMemberDao {
 	    }
 	    return result;
 	}
-	public int selectWishListByNo(Connection conn, ProductwishilistDto wish) {
-	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
-	    int result = 0;
-
-	    try {
-	        // "wish" 객체가 null인지 확인
-	        if (wish != null) {
-	            Integer productWishlistNo = wish.getProductWishlistNo();
-	            
-	            // "productWishlistNo"가 null이 아닌지 확인
-	            if (productWishlistNo != null) {
-	                pstmt = conn.prepareStatement(sql.getProperty("selectWishListByNo"));
-	                pstmt.setInt(1, productWishlistNo);
-	                pstmt.setInt(2, wish.getMemberNo());
-	                pstmt.setInt(3, wish.getProductNo());
-
-	                rs = pstmt.executeQuery();
-
-	                // 나머지 코드 작성...
-	                // ...
-
-	            } else {
-	                // "productWishlistNo"가 null일 때 처리
-	                System.out.println("productWishlistNo가 null입니다.");
-	            }
-	        } else {
-	            // "wish" 객체가 null일 때 처리
-	            System.out.println("Wish 객체가 null입니다.");
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(rs);
-	        close(pstmt);
-	    }
-
-	    return result;
+	public List<ProductwishilistDto> selectWishListByNo(Connection conn, int memberNo ) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<ProductwishilistDto> wish = new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectWishListByNo")); 
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				wish.add(getProductwishilistDto(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return wish;
+	}
+	public List<ProductorderinfoDto> selectProductByNo(Connection conn, int memberNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		List<ProductorderinfoDto> info= new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectProductByNo"));
+			pstmt.setInt(1, 0);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return info;
+		
+	}
+	
+	private ProductwishilistDto getProductwishilistDto(ResultSet rs) throws SQLException{
+		return ProductwishilistDto.builder()
+				.ProductNo(rs.getInt("PRODUCT_WISHLIST_NO"))
+				.MemberNo(rs.getInt("MEMBER_NO"))
+				.ProductNo(rs.getInt("PRODUCT_NO"))
+				.build();				
+	}
+	private ProductorderinfoDto getProductorderinfoDto(ResultSet rs) throws SQLException{
+		return ProductorderinfoDto.builder()
+				.OrderNo(rs.getInt("ORDER_NO"))
+				.OrderCount(rs.getInt("ORDER_COUNT"))
+				.OrderDate(rs.getDate("ORDER_DATE"))
+				.MemberNO(rs.getInt("MEMBER_NO"))
+				.ProductNo(rs.getInt("PROUCT_NO"))
+				.build();
 	}
 }

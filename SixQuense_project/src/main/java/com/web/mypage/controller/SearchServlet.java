@@ -28,13 +28,11 @@ public class SearchServlet extends HttpServlet {
         // 데이터베이스에서 검색어 가져오기
         List<String> suggestions = getSearchSuggestionsFromDB(conn, keyword);
 
-        // Convert suggestions to JSON
         JSONArray jsonArray = new JSONArray();
         for (String suggestion : suggestions) {
             jsonArray.add(suggestion);
         }
 
-        // Send JSON response
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonArray.toJSONString());
@@ -89,4 +87,5 @@ public class SearchServlet extends HttpServlet {
         }
         return suggestions;
     }
+    
 }

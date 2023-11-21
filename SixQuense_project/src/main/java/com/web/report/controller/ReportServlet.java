@@ -28,9 +28,24 @@ public class ReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reportType=request.getParameter("report");
-		String reortContent=request.getParameter("textContent");
-		int result = new ReportService().InterReport(reportType,reortContent);
+		int accompanyNo=Integer.parseInt(request.getParameter("no"));
+		int memberNo=Integer.parseInt(request.getParameter("userNo"));
+		String report=request.getParameter("report");
+		String reporttext=request.getParameter("reporttext");
+		System.out.println(accompanyNo+""+memberNo);
+		System.out.println(report+""+reporttext);
+		int result = new ReportService().InterReport(report,reporttext,accompanyNo,memberNo);
+		String msg, loc;
+		if(result>0) {
+			msg="신고가 완료되었습니다";
+			loc="/accompany/accompanylist.do";
+		}else {
+			msg="신고가 안되었습니다";
+			loc="/accompany/accompanylist.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

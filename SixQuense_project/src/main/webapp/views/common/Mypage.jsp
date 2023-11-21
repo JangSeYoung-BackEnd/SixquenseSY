@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
 <%System.out.println(loginMember.getUserName()); %>
@@ -19,15 +19,13 @@
             </div>
         </div>
 </section>
-    <!-- Breadcrumb Section End -->
-    <!-- Checkout Section Begin -->
 <section class="checkout spad">
-	<div id="htmlcontainer">
-	
+   <div id="htmlcontainer">
+   
         <div class="container">
             <div class="checkout__form">
                 <img src="<%=request.getContextPath() %>/img/icon/프로필사진.png"
-     				style="width: 165px; padding-left: 0px; margin-left: 294px; margin-bottom: 25px;">
+                 style="width: 165px; padding-left: 0px; margin-left: 294px; margin-bottom: 25px;">
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -79,121 +77,182 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="updateBtn">개인정보 수정</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="wishBtn">위시리스트</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="mywirteBtn">나의 글</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="questionBtn">문의사항</button></a></li>
+                                            <li style="margin-bottom: 15px;">
+
+                                               <a href="<%=request.getContextPath()%>/views/common/Mypage.jsp">
+                                                  <img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디
+                                               </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                               <a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
+                                                  <button id="updateBtn">개인정보 수정</button>
+                                               </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+											<a onclick="location.assign('<%=request.getContextPath()%>/mypage/product/productview.do?userNo=<%=loginMember.getUserNo()%>')">
+                                              <img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
+                                                  <button id="checkcancelBtn">결제상품 조회</button>
+                                               </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                            	<a onclick="location.assign('<%=request.getContextPath()%>/mypage/Wish.do?userNo=<%=loginMember.getUserNo()%>')">
+                                               <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
+                                                  <button id="wishBtn">위시리스트</button>
+                                               </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                               <a onclick="location.assign('<%=request.getContextPath()%>/mypage/mywrite.do?userNo=<%=loginMember.getUserNo()%>')">
+                                                  <img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
+                                                  <button id="mywirteBtn">나의 글</button>
+                                               </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                               <a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
+                                                  <button id="questionBtn">문의사항</button>
+                                               </a>
+                                            	<a href="<%=request.getContextPath()%>/views/common/Mypage.jsp">
+                                            		<img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디
+                                            	</a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                            	<a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
+                                            		<button id="updateBtn">개인정보 수정</button>
+                                            	</a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                         	<a onclick="location.assign('<%=request.getContextPath()%>/mypage/ProductList.do?userNo=<%=loginMember.getUserNo()%>')">                                           	<
+                                            	<img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="checkcancelBtn">결제상품 조회</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+													<a onclick="location.assign('<%=request.getContextPath()%>/mypage/Wish.do?userNo=<%=loginMember.getUserNo()%>')">	                                            
+	                                            <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="wishBtn">위시리스트</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+	                                            <a onclick="location.assign('<%=request.getContextPath()%>/mypage/mywrite.do?userNo=<%=loginMember.getUserNo()%>')">
+		                                            <img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
+		                                            <button id="mywirteBtn">나의 글</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+	                                            <a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="questionBtn">문의사항</button>
+	                                            </a>
+                                            </li>
                                         </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    	</div>
-                     </div>   	
-                	</form>
-                	</div>
-            	</div>
-        	</div>
+                       </div>
+                     </div>      
+                   </form>
+                   </div>
+               </div>
+           </div>
 </section>
 <script>
-	$("#updateBtn").click(e=>{
-		e.preventDefault();
+   $("#updateBtn").click(e=>{
+      e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true); 
-		$.ajax({
-			url:"<%=request.getContextPath()%>/updateview.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				},
-				complete: function () {
-	                $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
-	            }
-			});
-		});		
-		
-	</script>
+      $.ajax({
+         url:"<%=request.getContextPath()%>/updateview.do",
+         dataType:"html",
+         success:function(data){
+               console.log(data);
+               $("#htmlcontainer").html(data);
+            },
+            complete: function () {
+                   $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
+               }
+         });
+      });      
+      
+   </script>
 <script>
-	$("#wishBtn").click(e=>{
-		e.preventDefault();
+<%--    $("#wishBtn").click(e=>{
+      e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true);
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wish.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				},
-			complete: function () {
+      $.ajax({
+         url:"<%=request.getContextPath()%>/Wish.do",
+         dataType:"html",
+         success:function(data){
+               console.log(data);
+               $("#htmlcontainer").html(data);
+            },
+         complete: function () {
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
-			});
-		});		
-		
-	</script>
-	<script>
-	$("#checkcancelBtn").click(e=>{
-		e.preventDefault();
+         });
+      });    --%>   
+      
+   </script>
+   <script>
+  <%--  $("#checkcancelBtn").click(e=>{
+      e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true);
-		$.ajax({
-			url:"<%=request.getContextPath()%>/ProductList.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				},
-			complete: function () {
+      $.ajax({
+         url:"<%=request.getContextPath()%>/ProductList.do",
+         dataType:"html",
+         success:function(data){
+               console.log(data);
+               $("#htmlcontainer").html(data);
+            },
+         complete: function () {
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
-		});
-	});		
-	</script>
+      });
+   });       --%>
+   </script>
    
-	 <script>
-	$("#mywirteBtn").click(e=>{
+    <script>
+	<%-- $("#mywirteBtn").click(e=>{
 		e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true);
-		$.ajax({
-			url:"<%=request.getContextPath()%>/mywrite.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				},
-			complete: function () {
+      $.ajax({
+         url:"<%=request.getContextPath()%>/mywrite.do",
+         dataType:"html",
+         success:function(data){
+               console.log(data);
+               $("#htmlcontainer").html(data);
+            },
+         complete: function () {
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
+      });
+   });    --%>   
+   </script>
+   <script>
+   $("#questionBtn").click(e=>{
+      e.preventDefault();
+
 		});
-	});		
+	});	 --%>	
 	</script>
 	<script>
 	$("#questionBtn").click(e=>{
 		e.preventDefault();
         var $button = $(this);
         $button.prop("disabled", true);
-		$.ajax({
-			url:"<%=request.getContextPath()%>/question.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				},
-			complete: function () {
+      $.ajax({
+         url:"<%=request.getContextPath()%>/question.do",
+         dataType:"html",
+         success:function(data){
+               console.log(data);
+               $("#htmlcontainer").html(data);
+            },
+         complete: function () {
                 $button.prop("disabled", false); // 요청 완료 후 버튼 활성화
             }
-		});
-	});		
-	</script>
+      });
+   });      
+   </script>
     <!-- Checkout Section End -->
 <%@ include file="/views/common/footer.jsp"%>

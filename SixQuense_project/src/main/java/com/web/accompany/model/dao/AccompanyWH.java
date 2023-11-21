@@ -112,6 +112,14 @@ public class AccompanyWH {
 				.build();
 
 	}
+	private MemberToAcompanyWH getMemberToAccompanyWH(ResultSet rs) throws SQLException {
+		return MemberToAcompanyWH.builder()
+				.userNo(rs.getInt("MEMBER_NO"))
+				.accompany(rs.getInt("ACCOMPANY_NO"))
+				.AcOffer(rs.getString("ACCOMPANY_OFFER_STATUS"))
+				.build();
+				
+		}
 	
 	
 	
@@ -139,32 +147,35 @@ public class AccompanyWH {
 		return board.get(0);
 		
 	} 
-//	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
-//		try {
-//			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
-//			pstmt.setInt(1, userNo);
-//			pstmt.setInt(2, no);
-//			rs=pstmt.executeQuery();
-//			
-//			 while (rs.next()) {
-//				a = getAccompanyDTO(rs);
-//				//addMemberOffer(member,rs);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		//System.out.println(board.get(0));
-//		return member.get(0);
+	public MemberToAcompanyWH selectMemberToAcompany(Connection conn, int userNo, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//List<MemberToAcompanyWH> member = new ArrayList<MemberToAcompanyWH>();
+		MemberToAcompanyWH member =  null;
+		System.out.println(userNo+" "+ no);
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMemberToAcompany"));
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, userNo);
+			rs=pstmt.executeQuery();
 			
-//	}
+			 if (rs.next()) {
+				member = getMemberToAccompanyWH(rs);
+				//addMemberOffer(member,rs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(member+"dao");
+		return member;
+			
+	}
 	
 
+	
 	
 //	private void addMemberOffer(List<MemberToAcompanyWH> member, ResultSet rs) {
 //		int pk = rs.getInt("ACCOMPANY_NO");
@@ -275,6 +286,24 @@ public class AccompanyWH {
 
 		return result;
 	}
+	public int deletecomment(Connection conn, int commentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println("dao"+commentNo+"댓글번호");
+
+		try {
+			pstmt= conn.prepareStatement(sql.getProperty("deletecomment"));
+			pstmt.setInt(1,commentNo);
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result+"dao 결과");
+		return result;
+	}
 	
 	
 	//조회수 카운트 메소드 
@@ -302,7 +331,7 @@ public class AccompanyWH {
 			pstmt.setInt(1, acompanyBNo);
 			pstmt.setInt(2, userNo);
 			result=pstmt.executeUpdate();
-		//System.out.println(result +"dao");
+		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -314,13 +343,13 @@ public class AccompanyWH {
 	public int deleteAccompanyOffer(Connection conn, int userNo, int acompanyBNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		//System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
+		System.out.println(userNo +"유저값 "+acompanyBNo +" 게시물 값 여기는 dao");
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteAccompanyOffer"));
 			pstmt.setInt(1, acompanyBNo);
 			pstmt.setInt(2, userNo);
 			result=pstmt.executeUpdate();
-			System.out.println(result);
+			System.out.println(result  +"dao삭제 결과");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -346,6 +375,7 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
+	
 	public int updateAcceptOffer(Connection conn, int acompanyBNo, int memberNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -378,6 +408,7 @@ public class AccompanyWH {
 			close(pstmt);
 		}return result;
 	}
+	
 	
 	
 }

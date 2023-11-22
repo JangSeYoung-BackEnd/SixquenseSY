@@ -405,6 +405,7 @@ cellPhone.onkeyup = function(event){
 		const sendEmail=(e)=>{
 			const clientEmail=$("#userId").val();
 			if(clientEmail.length>6){
+				$(e.target).attr("disabled", true);
 				$.post("<%=request.getContextPath()%>/email/sendemail.do",{"email":clientEmail})
 				.done((d)=>{
 					
@@ -424,17 +425,19 @@ cellPhone.onkeyup = function(event){
 				})
 				.fail((e)=>{
 					alert("인증번호 발송을 실패했습니다. 이메일주소를 다시 확인해주세요");
+					$(e.target).attr("disabled", false);
 				});
 			}else{
 				alert("이메일을 입력하세요!");
 				$("#userId").focus();
 			}
 		}
-	
+		
 		const confirmBtn=(e)=>{
 			const num=$("#confirmNum").val();
 			console.log(num);
 			if(num.length>=6){
+				
 				$.get("<%=request.getContextPath()%>/email/confirmemail.do?num="+num)
 				.done(d=>{
 					console.log(d);

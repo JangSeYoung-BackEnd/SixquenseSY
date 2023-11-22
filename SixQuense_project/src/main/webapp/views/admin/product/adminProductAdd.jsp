@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 등록</title>
+<%@ include file="/views/common/header.jsp"%>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-</head>
-<body>
+ <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+<section style="padding-top: 250px">
 <!------ Include the above in your HEAD tag ---------->
 
 <form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
@@ -104,7 +99,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="productDuration">소요 시간</label>  
   <div class="col-md-4">
-  <input id="productDurationt" name="productDuration" placeholder="소요시간을 입력해주세요 ex) 5" class="form-control input-md" required="" type="text">
+  <input id="productDuration" name="productDuration" placeholder="소요시간을 입력해주세요 ex) 5" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
@@ -160,7 +155,7 @@
 <br><b style="padding-left:540px;">코스 등록</b><br><br>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName1">코스명 1</label>  
+  <label class="col-md-4 control-label" for="courseName1">코스명</label>  
   <div class="col-md-4">
   <input id="courseName1" name="courseName1" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
     
@@ -169,13 +164,14 @@
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail1">코스소개 1</label>
+  <label class="col-md-4 control-label" for="courseDetail1">코스소개</label>
   <div class="col-md-4">                     
     <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
 
-<div class="form-group">
+
+ <div class="form-group">
   <label class="col-md-4 control-label" for="courseName2">코스명 2</label>  
   <div class="col-md-4">
   <input id="courseName2" name="courseName2" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
@@ -184,8 +180,6 @@
 </div>
 
 
-
-<!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="courseDetail2">코스소개 2</label>
   <div class="col-md-4">                     
@@ -203,7 +197,6 @@
 
 
 
-<!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="courseDetail3">코스소개 3</label>
   <div class="col-md-4">                     
@@ -220,7 +213,7 @@
   </div>
 </div>
 
-<!-- Textarea -->
+
 <div class="form-group">
   <label class="col-md-4 control-label" for="courseDetail4">코스소개 4</label>
   <div class="col-md-4">                     
@@ -236,14 +229,14 @@
   </div>
 </div>
 
-<!-- Textarea -->
+
 <div class="form-group">
   <label class="col-md-4 control-label" for="courseDetail5">코스소개 5</label>
   <div class="col-md-4">                     
     <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
-
+ 
 
 
 <!-- File Button --> 
@@ -258,7 +251,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <input type="submit" id="submitbutton" name="submitbutton" class="btn btn-primary" value="등록">
+    <input type="button" id="submitbutton" name="submitbutton" class="btn btn-primary" value="등록">
   </div>
   </div>
 
@@ -273,25 +266,37 @@
 	console.log(fileInput[0].files[0]); /* 파일을 저장하는 속성 files, 여러개로 저장되기 때문에 인덱스 부여 */
 	$.each(fileInput[0].files,(i,f)=>{ /* 배열로 만들어서 반복문 돌 수 있게 만든다 */
 		form.append("upfile"+i,f);
-	})
+	});
+	$(".form-horizontal input").each((i,e)=>{
+		console.log(e.name,e.value);
+		form.append(e.name,e.value);
+	});
+	 const selectedNation = $("#nation").find(":selected").val();
+	 form.append("nation", selectedNation);
+	 
+	 $('.form-horizontal textarea').each((i,e)=>{
+			console.log(e.name,e.value);
+			form.append(e.name,e.value);
+		});
+
 		$.ajax({
-		url: "<%=request.getContextPath()%>/admin/admin/productinsertend.do",
+		url: "<%=request.getContextPath()%>/admin/productinsertend.do",
 		data:form,
 		type:"post",
 		processData:false, /* form형식에서 바이너리형식(파일전송)으로 바꾸기 위해서 false */
 		contentType:false,
 		success:data=>{
-			alert("성공");
+			alert("등록이 성공 되었습니다");
 		},
 		error:(r,e)=>{
-			alert("실패");
+			alert("등록이 실패되었습니다");
 		},
 		complete:()=>{
 			fileInput.val('');
 		}
 	}) 
-})
+});
  
 </script>
-</body>
-</html>
+</section>
+<%@ include file="/views/common/footer.jsp"%>

@@ -148,6 +148,18 @@ public class AccompanyServiceWH {
 			return	result;
 		}
 
+		public List<AccompanyDTO> selectsearchAccompanyAll(String searchValue) {
+			Connection conn=getConnection();
+			List<AccompanyDTO> a = dao.selectsearchAccompanyAll(conn,searchValue);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
+		}
+
 		
 
 

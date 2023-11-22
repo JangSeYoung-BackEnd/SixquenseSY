@@ -211,15 +211,15 @@ input{
 		</div>
 		<div class="inputBox">
 				<input autocomplete="off" id="userId" name="userId" type="text" onkeyup="userIdCheckFunction();">
-				<label for="userId">이메일</label>
+				<label for="userId">이메일(이메일 양식으로 입력해주세요)</label>
 				<button	type="button" onclick="sendEmail(event);">이메일전송</button>		 
 		</div>
 		
 		<h5 style="color:red;" id="IdChekMessage"></h5>
 			<div class="inputBox">
 	    		<input autocapitalize="off" id="userpw" class="inputBoxinput"  onkeyup="passwordCheckFunction();"
-	        		name="userpw" type="password" stlye="">
-	   			 <label for="userpw">비밀번호</label>
+	        		name="userpw" type="password" stlye="" placeholder="">
+	   			 <label for="userpw">비밀번호(대/소영문자,숫자,특수문자 넣어주세요)</label>
 			</div>
 		<div class="inputBox">
 	   		<input autocapitalize="off" id="userpw2" class="inputBoxinput" name="userpw2" onkeyup="passwordCheckFunction();"

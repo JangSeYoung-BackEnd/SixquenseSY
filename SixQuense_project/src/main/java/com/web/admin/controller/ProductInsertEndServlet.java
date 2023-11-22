@@ -3,8 +3,8 @@ package com.web.admin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +19,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.web.admin.service.AdminProductService;
-import com.web.product.dto.GuideDto;
 import com.web.product.dto.ProductDto;
 
 /**
@@ -73,6 +72,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 			String productDetail = mr.getParameter("productDetail"); 
 			String editorNote = mr.getParameter("editorNote");
 			String[] productDay = mr.getParameterValues("productDay");
+			System.out.println("dydlf"+Arrays.toString(productDay));
 			
 			//가이드 정보
 			String guideName = mr.getParameter("guideName");
@@ -80,15 +80,33 @@ public class ProductInsertEndServlet extends HttpServlet {
 			String guidePhone = mr.getParameter("guidePhone");
 			
 			// 코스 정보를 저장할 맵 생성
-			Map<String, String> courseMap = new HashMap<>();
 
+			String[] courseName=mr.getParameterValues("courseName");
+			String[] courseDetail=mr.getParameterValues("courseDetail");
+			List<Map<String,String>> courseList=new ArrayList();
+			if(courseName!=null&&courseDetail!=null) {
+				for(int i=0;i<courseName.length;i++) {
+					//System.out.println(courseName[i]+" : "+courseDetail[i]);
+					courseList.add(Map.of("name",courseName[i],"detail",courseDetail[i]));
+				}
+			}
+			
+			
 			// 매개변수에서 값을 검색하고 맵에 저장합니다.
-			courseMap.put( mr.getParameter("courseName1"), mr.getParameter("courseDetail1"));
-			courseMap.put( mr.getParameter("courseName2"), mr.getParameter("courseDetail2"));
-			courseMap.put( mr.getParameter("courseName3"), mr.getParameter("courseDetail3"));
-			courseMap.put( mr.getParameter("courseName4"), mr.getParameter("courseDetail4"));
-			courseMap.put( mr.getParameter("courseName5"), mr.getParameter("courseDetail5"));
-
+			
+//			if(mr.getParameter("courseName1")!=null ||mr.getParameter("courseDetail1")!=null) {
+//				courseMap.put( mr.getParameter("courseName1"), mr.getParameter("courseDetail1"));
+//			}if(mr.getParameter("courseName2")!=null ||mr.getParameter("courseDetail2")!=null){
+//				courseMap.put( mr.getParameter("courseName2"), mr.getParameter("courseDetail2"));
+//			}if(mr.getParameter("courseName3")!=null ||mr.getParameter("courseDetail3")!=null) {
+//				courseMap.put( mr.getParameter("courseName3"), mr.getParameter("courseDetail3"));
+//			}if(mr.getParameter("courseName4")!=null ||mr.getParameter("courseDetail4")!=null) {
+//				courseMap.put( mr.getParameter("courseName4"), mr.getParameter("courseDetail4"));
+//			}if(mr.getParameter("courseName5")!=null ||mr.getParameter("courseDetail5")!=null) {
+//				courseMap.put( mr.getParameter("courseName5"), mr.getParameter("courseDetail5"));
+//			}
+			
+			
 			//저장된 파일들 db에 넣어주기
 			Enumeration names = mr.getFileNames();
 			List<Map<String,String>> files = new ArrayList<>(); //여러개 들어가니까 List, file이름 ori, rename 넣으려고 Map
@@ -114,7 +132,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 		    		.build();
 			
 		
-			boolean result = new AdminProductService().insertProduct(nation, guideName, p, files, courseMap);
+			boolean result = new AdminProductService().insertProduct(nation, guideName, p, files, courseList);
 		
 			if(!result) {
 				  for (Map<String, String> file : files) {

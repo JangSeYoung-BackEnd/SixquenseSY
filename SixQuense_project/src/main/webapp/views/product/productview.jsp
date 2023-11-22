@@ -141,18 +141,18 @@ td.level2td {
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="<%=request.getContextPath()%>/img/product/<%=product.getAttachment().get(0).getOrginalFilename()%>"
+							src="<%=request.getContextPath()%>/upload/product/<%= (product.getAttachment().get(0).getOrginalFilename() != null) ? product.getAttachment().get(0).getOrginalFilename() : "" %>"
 							alt="">
 					</div>
 					   <div class="product__details__pic__slider owl-carousel">
-						<img data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(1).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(2).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(3).getOrginalFilename() %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>"
-							src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(4).getOrginalFilename() %>" alt="">
+						<img data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>"
+							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>" alt=""> <img
+							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>"
+							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>" alt=""> <img
+							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>"
+							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>" alt=""> <img
+							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>"
+							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>" alt="">
 					</div>  
 				</div>
 			</div>

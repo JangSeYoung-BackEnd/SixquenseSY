@@ -152,26 +152,27 @@
   </div>
 </div>
 
-<br><b style="padding-left:540px;">코스 등록</b><br><br>
+<br><b style="padding-left:540px;">코스 등록</b> <button id="addCourse" type="button">추가</button><br><br>
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseName1">코스명</label>  
-  <div class="col-md-4">
-  <input id="courseName1" name="courseName1" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
-    
-  </div>
+
+<div id="courseList">
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="courseName">코스명</label>  
+	  <div class="col-md-4">
+	  <input id="courseName" name="courseName" placeholder="코스명을 적어주세요" class="form-control input-md" required type="text">
+	  </div>
+	</div>
+	
+	<!-- Textarea -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="courseDetail">코스소개</label>
+	  <div class="col-md-4">                     
+	    <textarea class="form-control" id="courseDetail" name="courseDetail" placeholder="코스소개를 적어주세요"></textarea>
+	  </div>
+	</div>
 </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail1">코스소개</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="코스소개를 적어주세요"></textarea>
-  </div>
-</div>
-
-
- <div class="form-group">
+<!--  <div class="form-group">
   <label class="col-md-4 control-label" for="courseName2">코스명 2</label>  
   <div class="col-md-4">
   <input id="courseName2" name="courseName2" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
@@ -236,7 +237,7 @@
     <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
- 
+  -->
 
 
 <!-- File Button --> 
@@ -269,10 +270,15 @@
 	});
 	$(".form-horizontal input").each((i,e)=>{
 		console.log(e.name,e.value);
+		if ($(e).is(":checkbox") && !$(e).is(":checked")) {
+		      return; // 체크박스가 체크되지 않았을 경우 건너뜁니다.
+		    }
 		form.append(e.name,e.value);
 	});
+	
 	 const selectedNation = $("#nation").find(":selected").val();
 	 form.append("nation", selectedNation);
+	 
 	 
 	 $('.form-horizontal textarea').each((i,e)=>{
 			console.log(e.name,e.value);
@@ -296,6 +302,12 @@
 		}
 	}) 
 });
+	$("#addCourse").click((()=>{
+		let count=0;
+		return e=>{
+		const cloneCourse=$("#courseList").clone();
+		$("#courseList").after(cloneCourse);
+	}})())
  
 </script>
 </section>

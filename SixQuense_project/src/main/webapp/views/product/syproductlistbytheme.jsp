@@ -95,7 +95,7 @@
 							            <div class="latest-prdouct__slider__item">
 							                <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/img/product/a영국re.jpg">
+							                        <img src="<%=request.getContextPath() %>/upload/product/a영국re.jpg">
 							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>영국 남부소도시 #세븐시스터즈</h6>
@@ -166,7 +166,7 @@
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg">
 										   <a href="<%=request.getContextPath()%>/product/productview.do?productNo=8" >
-										     <img src="<%=request.getContextPath() %>/img/product/a영국dis4.jpg">
+										     <img src="<%=request.getContextPath() %>/upload/product/a영국dis4.jpg">
 										     <div class="product__discount__percent">-20%</div>
 										    </a>
 										</div>

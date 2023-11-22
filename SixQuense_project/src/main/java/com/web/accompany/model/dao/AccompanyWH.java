@@ -148,6 +148,7 @@ public class AccompanyWH {
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectsearchAll"));
 			pstmt.setString(1, "%" + searchValue + "%");
+			pstmt.setString(2, "%" + searchValue + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				addProductAndAttachment(result, rs);

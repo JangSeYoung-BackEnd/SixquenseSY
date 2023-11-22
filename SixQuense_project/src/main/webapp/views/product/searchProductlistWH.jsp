@@ -47,7 +47,7 @@ p {
 </style>
 <body>
 	<!-- Blog Section Begin -->
-	<section class="blog spad" style="padding-top: 250px";>
+	<section class="blog spad" style="padding-top: 200px";>
 		<div class="container">
 			<div class="blog__item-container">
 				<div class="col-lg-4 col-md-5">
@@ -56,11 +56,54 @@ p {
 					<div class="blog__sidebar">
 						<div class="blog__sidebar__item">
 							<h4>어떤 여행을 찾고 있나요</h4>
-							
 						</div>
 					</div>
 				</div>
 				<!-- 여기서 부터  -->
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-7">
+<%--                     <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                        <img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="50px" height="50px" style="margin:0px 0px 10px 0px">
+                            <span style="font-size:25px; font-weight:bold">동행 게시글</span>
+                            <div style="border: 2px solid #7fad39; width: 200px;"></div>
+                        </div>
+                        <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
+                       
+                    </div> --%>
+                    <div class="row">
+                    	<% if(!accompanys.isEmpty()){
+                    		for(AccompanyDTO a:accompanys){%>
+		                        <div class="col-lg-3 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>&userNo=<%=loginMember.getUserNo()%>');">
+		                            <div class="product__item">
+		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
+		                                    <ul class="product__item__pic__hover">
+		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+		                                    </ul>
+		                                </div>
+		                                <div class="product__item__text accompany-tca">
+			                                <div style="font-weight:bolder; font-size:18px">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</div>
+			                                <div style="font-weight:bolder; height:26px;"><%=a.getAccompanyTitle() %></div>
+			                               <%--  <div style="height:50px;"><%=a.getAccompanyContent() %></div> --%>
+		                                </div>
+		                            </div>
+		                        </div>
+	                        <%} %>
+                        <%}else{ %>
+					<div style="width:1106px">
+						<p style="text-align: center; padding:100px;"> 동행 검색 결과가 없습니다 </p>
+					</div>
+					<%} %>
+					
+                    </div>
+                    <div class="button-container">
+						<button type="button" class="btn btn-secondary btn-lg btn-block"
+							width="1160px"onclick="location.replace('<%=request.getContextPath() %>/accompany/accompanylist.do')">다른지역 동행글 둘러보기</button>
+					</div>
+                </div>
+            </div>
+        </div>
 				<div class="col-lg-8 col-md-7">
 					<%if(!searchResult.isEmpty()){ %>
 					<%for(ProductDto p : searchResult){ %>
@@ -100,55 +143,12 @@ p {
 					<%} %>
 					<div class="button-container">
 						<button type="button" class="btn btn-secondary btn-lg btn-block"
-							width="1160px"onclick="location.replace('<%=request.getContextPath() %>/product/productmain.do')">다른지역 둘러보기</button>
+							width="1160px"onclick="location.replace('<%=request.getContextPath() %>/product/productmain.do')">다른지역 상품 둘러보기</button>
 					</div>
+					
 				</div>
 			</div>
 		</div>
-	<section class="product spad" >
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-5">
-
-                </div>
-                <div class="col-lg-9 col-md-7">
-                    <div class="product__discount">
-                        <div class="section-title product__discount__title">
-                        <img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="50px" height="50px" style="margin:0px 0px 10px 0px">
-                            <span style="font-size:25px; font-weight:bold">동행 게시글</span>
-                            <div style="border: 2px solid #7fad39; width: 200px;"></div>
-                        </div>
-                        <!-- 최신순, 인기순으로 동행게시글 보여주는 기능 -->
-                       
-                    </div>
-                    <div class="row">
-                    	<% if(!accompanys.isEmpty()){
-                    		for(AccompanyDTO a:accompanys){%>
-		                        <div class="col-lg-4 col-md-6 col-sm-6" onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanyview.do?no=<%=a.getAccompanyNo() %>&userNo=<%=loginMember.getUserNo()%>');">
-		                            <div class="product__item">
-		                                <div class="product__item__pic set-bg" data-setbg="<%=request.getContextPath()%>/upload/accompany/<%=a.getRenameFilename()%>" style="border-radius: 20%;">
-		                                    <ul class="product__item__pic__hover">
-		                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-		                                    </ul>
-		                                </div>
-		                                <div class="product__item__text accompany-tca">
-			                                <div style="font-weight:bolder; font-size:18px">[<%=a.getAccompanyStatus().equals("acClose")?"모집마감":"모집중"%>]</div>
-			                                <div style="font-weight:bolder; height:26px;"><%=a.getAccompanyTitle() %></div>
-			                                <div style="height:50px;"><%=a.getAccompanyContent() %></div>
-		                                </div>
-		                            </div>
-		                        </div>
-	                        <%} %>
-                        <%}else{ %>
-					<div style="width:1106px">
-						<p style="text-align: center; padding:100px;"> 동행 검색 결과가 없습니다 </p>
-					</div>
-					<%} %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 	</section>
 </body>
 <script>

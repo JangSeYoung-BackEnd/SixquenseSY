@@ -33,8 +33,8 @@ public class MypageWishSevlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo = Integer.parseInt(request.getParameter("userNo"));
-		List<ProductwishilistDto> wish = new jhMemberService().selectWishListByNo(memberNo);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		List<ProductwishilistDto> wish = new jhMemberService().selectWishListByNo(userNo);
 		request.setAttribute("wish", wish);	
 		request.getRequestDispatcher("/views/mypagekategorie/WishList.jsp").forward(request, response);
 		

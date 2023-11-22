@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.web.member.dto.Member;
 import com.web.member.service.jhMemberService;
-import com.web.product.dto.ProductwishilistDto;
+import com.web.product.dto.ProductDto;
+import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductpaymentDto;
 
 /**
  * Servlet implementation class MypageWishSevlet
@@ -33,13 +33,16 @@ public class MypageProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		int memberNo = loginMember.getUserNo();
-		List<ProductwishilistDto> info = new jhMemberService().selectWishListByNo(memberNo);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		List<ProductDto> pro = new jhMemberService().selectproductnameByNo(userNo);
+		List<ProductorderinfoDto> info = new jhMemberService().selectProductByNo(userNo);
+		List<ProductpaymentDto> pay = new jhMemberService().selectpayByNo(userNo);
+		System.out.println(info+"info");
+		System.out.println(pay+"pay");
+		System.out.println(pro+"pro");
+		request.setAttribute("pay", pay);
 		request.setAttribute("info", info);
-		
+		request.setAttribute("pro", pro);
 		request.getRequestDispatcher("/views/mypagekategorie/ProductList.jsp").forward(request, response);
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp"%>
 <%@page import="com.web.product.dto.ProductwishilistDto,java.util.List" %>
 <%
 	List<ProductwishilistDto> wish = (List<ProductwishilistDto>)request.getAttribute("wish");
@@ -10,15 +11,11 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad" style="padding-top: 0px";>
         <div class="container">
-            <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="
-                            width: 165px;
-                            padding-left: 0px;
-                            margin-left: 294px;
-                            margin-bottom: 25px;">                   
-                            <form action="#">
+            <div class="checkout__form" style="margin-top: 200px;">
+                <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style=" width: 165px; padding-left: 0px ;margin-left: 294px; margin-bottom: 25px;">                   
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
+                        <hr />
                         <%if(!wish.isEmpty()) {
                         	for(ProductwishilistDto w:wish){%>
                             <div class="col-lg-4">
@@ -67,7 +64,6 @@
                             </div>
                     	</div>
                      </div>   	
-                	</form>
                 	</div>
             	</div>
         	</div>
@@ -134,3 +130,4 @@
 		});
 	});		
 	</script>
+<%@ include file="/views/common/footer.jsp"%>

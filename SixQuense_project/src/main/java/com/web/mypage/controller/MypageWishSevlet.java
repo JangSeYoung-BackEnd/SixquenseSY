@@ -33,13 +33,9 @@ public class MypageWishSevlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-		HttpSession session = request.getSession();	
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		int memberNo = loginMember.getUserNo();
+		int memberNo = Integer.parseInt(request.getParameter("userNo"));
 		List<ProductwishilistDto> wish = new jhMemberService().selectWishListByNo(memberNo);
-		request.setAttribute("wish", wish);
-		
+		request.setAttribute("wish", wish);	
 		request.getRequestDispatcher("/views/mypagekategorie/WishList.jsp").forward(request, response);
 		
 	}

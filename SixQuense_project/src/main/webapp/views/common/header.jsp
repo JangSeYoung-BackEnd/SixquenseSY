@@ -150,22 +150,23 @@
     } --%>
     //검색 데이터를 보여주는 ajax
     $(document).ready(function () {
-	    $("#searchValue").on("input", function () {
-	        var keyword = $(this).val();
-	        $.ajax({
-	            url: "<%=request.getContextPath()%>/search.do",
-	            method: "GET",
-	            data: { keyword: keyword },
-	            success: function (data) {
-	                var dataList = $("#data");
-	                dataList.empty();
-	                $.each(data, function (index, value) {
-	                    dataList.append("<option value='" + value + "'>");
-	                });
-	            }
-	        });
-	    });
-	});
+
+        $("#searchvalue").on("input", function () {
+            var keyword = $(this).val();
+            $.ajax({
+                url: "<%=request.getContextPath()%>/search.do",
+                method: "GET",
+                data: { keyword: keyword },
+                success: function (data) {
+                    var dataList = $("#data");
+                    dataList.empty();
+                    $.each(data, function (index, value) {
+                        dataList.append("<option value='" + value + "'>");
+                    });
+                }
+            });
+        });
+    });
 </script>
     <!-- 헤더 -->
     <html>

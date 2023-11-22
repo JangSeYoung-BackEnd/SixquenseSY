@@ -28,14 +28,14 @@ import com.web.product.dto.ProductDto;
 @WebServlet("/admin/productinsertend.do")
 public class ProductInsertEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductInsertEndServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProductInsertEndServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,10 +64,12 @@ public class ProductInsertEndServlet extends HttpServlet {
 			System.out.println("다낭"+nation);
 			String productName =mr.getParameter("productName");
 			int price = Integer.parseInt(mr.getParameter("price"));
+			System.out.println(price);
 			double discountRate  = Double.parseDouble(mr.getParameter("discountRate"));
 			int minCount = Integer.parseInt(mr.getParameter("minCount"));
 			int maxCount = Integer.parseInt(mr.getParameter("maxCount"));
 			int productDuration = Integer.parseInt(mr.getParameter("productDuration"));
+			System.out.println("시간"+productDuration);
 			String productDetail = mr.getParameter("productDetail"); 
 			String editorNote = mr.getParameter("editorNote");
 			String[] productDay = mr.getParameterValues("productDay");
@@ -111,59 +113,26 @@ public class ProductInsertEndServlet extends HttpServlet {
 					.EditorNote(editorNote)
 		    		.build();
 			
-			
-			/*
-			 * GuideDto g = GuideDto.builder() .GuideName(guideName) .GuidePhone(guidePhone)
-			 * .build();
-			 */
-			
 		
 			boolean result = new AdminProductService().insertProduct(nation, guideName, p, files, courseMap);
 		
-	
-			
-			
-			//인서트 성공 여부
-			//추가한 결과 사용자에게 보여주기
-		    //result==0 등록실패, result==1이면 등록성공
-		    //등록 실패 : 등록실패 메시지 출력하고 입력화면으로 이동
-		    //등록 성공 : 등록 성공 메시지 출력하고 조회페이지로 이동 
-			//-> 메시지.jsp없을 때 등록성공시 request.getRequestDispatcher 안된다 
-			//-> 요청하는 서블릿 주소에 남아있고 데이터 계속 전달하면서 계속 등록됨(이해안되면 1031 쌤 강의보기)
-		    //String msg,loc;
-			
-			
-			/*
-			 * if(result=false) { msg="등록성공되었습니다"; loc="/notice/noticeList.do"; //서블릿으로
-			 * 연결해줘야함(서블릿으로 연결해야 데이터가 list에 들어가고 연결된 화면 jsp로 연결) }else { msg="등록실패되었습니다";
-			 * loc="/notice/makeNotice.do";
-			 * 
-			 * File delFile = new File(path+"/"+rename); if(delFile.exists())
-			 * delFile.delete(); //실패해도 저장된 파일 삭제
-			 * 
-			 * }
-			 */
-			/*
-			 * request.setAttribute("msg", msg); request.setAttribute("loc", loc);
-			 * 
-			 * request.getRequestDispatcher("/views/common/msg.jsp").forward(request,
-			 * response);
-			 */
-			 
+			if(!result) {
+				  for (Map<String, String> file : files) {
+		                File deleteFile = new File(path+"/"+file.get("rename"));
+		                if (deleteFile.exists()) {
+		                    deleteFile.delete();
+		                }
+		            }
+			}
 		}
-			
-			
-			
-			
-			
 	}
-	
-	
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

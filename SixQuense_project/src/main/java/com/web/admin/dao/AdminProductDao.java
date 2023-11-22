@@ -37,8 +37,8 @@ public class AdminProductDao {
 			pstmt.setInt(4, p.getProductPrice());
 			pstmt.setString(5, "%"+guideName+"%");
 			pstmt.setDouble(6, p.getProductDiscountRate());
-			pstmt.setInt(7, p.getProductDuration());
-			pstmt.setString(8, p.getProductDetail());
+			pstmt.setString(7, p.getProductDetail());
+			pstmt.setInt(8, p.getProductDuration());
 			pstmt.setString(9, String.join(",", p.getProductDay()));
 			pstmt.setString(10, "%"+nation+"%");
 			pstmt.setString(11, p.getEditorNote());

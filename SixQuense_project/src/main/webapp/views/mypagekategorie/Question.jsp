@@ -17,15 +17,15 @@
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
                                 <p style="font-size: xx-large;">문의사항</p>
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                <div class="box1" style="width:100%; height: 260px;">
                                     안에 사진 및 설명
                                 </div>
                                 <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                <div class="box1" style="width:100%; height: 260px;">
                                     안에 사진 및 설명
                                 </div>
                                 <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
+                                <div class="box1" style="width:100%; height: 260px;">
                                     안에 사진 및 설명
                                 </div>
                                 <hr />

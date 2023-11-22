@@ -242,15 +242,21 @@ div.subcategory>button{
                         if(loginMember!=null){ 
                            /* 로그인을 하고 로그인멤버가 글쓴이가 아니면 ~ 버튼 생성  */
                            if(loginMember.getUserNo()!= b.getMemberNo()){
-                              if(   member!=null&& member.getAcOffer().equals("대기중")) {%>
-                                 <div class="col-sm-12">
-                                 <button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; ">동행신청 취소하기</button>            
-                                 <button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청하기</button>
-                              <%}else{ %>
-                                 <div class="col-sm-12">
-                                 <button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
-                                 <button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청 취소하기</button>
-                              <%}
+                        	  /* 글의 모집이 마감되었고  */
+                        	   if(b.getAccompanyStatus().equals("acRecruiting")){
+		                              if(member!=null &&  member.getAcOffer().equals("대기중")) {%>
+		                                 <div class="col-sm-12">
+		                                 <button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; ">동행신청 취소하기</button>            
+		                                 <button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청하기</button>
+		                              <%}else{ %>
+		                                 <div class="col-sm-12">
+		                                 <button id="confirmButton" onclick="confirmAccompany()" style="margin:10px 0 10px 0; width: 290px;">동행신청하기</button>
+		                                 <button id="cancelButton" onclick="deleteAccompany()" style="margin:10px 0 10px 0; width: 290px; display: none;">동행신청 취소하기</button>
+		                              <%}
+                        	   }else{ %>
+                        		   <div class="col-sm-12">
+		                                 <button id="acClosebtn" onclick="acClosebtn()" style="margin:10px 0 10px 0; width: 290px;"  >신청이 마감되었습니다.</button>
+                        	  <% }
                            }else{%>
                            <!-- 글쓴이라면 나의 글 화인하기  -->
                               <div class="col-sm-12">
@@ -648,6 +654,9 @@ div.subcategory>button{
             location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
          }
       }
+    function acClosebtn() {
+        alert("신청이 마감되었습니다.");
+    }
    </script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxoCNyxIo2ayez96wuzbEDnutsv4MquEs&callback=myMap"></script> 
  

@@ -8,7 +8,9 @@ import java.util.List;
 
 import com.web.member.dao.jhMemberDao;
 import com.web.member.dto.Member;
+import com.web.product.dto.ProductDto;
 import com.web.product.dto.ProductorderinfoDto;
+import com.web.product.dto.ProductpaymentDto;
 import com.web.product.dto.ProductwishilistDto;
 
 public class jhMemberService {
@@ -32,11 +34,23 @@ public class jhMemberService {
         close(conn);
         return wish;
     }
-    public List<ProductorderinfoDto> selectProductByNo(int memberNo){
+    public List<ProductorderinfoDto> selectProductByNo(int userNo){
     	Connection conn = getConnection();
-    	List<ProductorderinfoDto> info = dao.selectProductByNo(conn, memberNo);
+    	List<ProductorderinfoDto> info = dao.selectProductByNo(conn, userNo);
     	close(conn);
         return info;
+    }
+    public List<ProductpaymentDto> selectpayByNo(int userNo){
+    	Connection conn = getConnection();
+    	List<ProductpaymentDto> pay = dao.selectpayByNo(conn, userNo);
+    	close(conn);
+        return pay;
+    }
+    public List<ProductDto> selectproductnameByNo(int userNo) {
+    	 Connection conn = getConnection();
+    	 List<ProductDto> pro= dao.selectproductnameByNo(conn, userNo);
+         close(conn);
+         return pro;
     }
 }
 

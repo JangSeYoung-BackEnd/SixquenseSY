@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    	
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -36,6 +38,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		if(request.getParameter("userYear").equals("")) {
 			String msg="입력정보를 다시 확인해주세요";
 			String loc="/member/joinServlet.do";
+			request.setAttribute("loc", loc);
+			request.setAttribute("msg", msg);	
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			
 		}else {

@@ -82,51 +82,20 @@
                                                <a href="<%=request.getContextPath()%>/views/common/Mypage.jsp">
                                                   <img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디
                                                </a>
-                                            </li>
-                                            <li style="margin-bottom: 15px;">
-                                               <a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
-                                                  <button id="updateBtn">개인정보 수정</button>
-                                               </a>
-                                            </li>
-                                            <li style="margin-bottom: 15px;">
-											<a onclick="location.assign('<%=request.getContextPath()%>/mypage/product/productview.do?userNo=<%=loginMember.getUserNo()%>')">
-                                              <img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                                  <button id="checkcancelBtn">결제상품 조회</button>
-                                               </a>
-                                            </li>
-                                            <li style="margin-bottom: 15px;">
-                                            	<a onclick="location.assign('<%=request.getContextPath()%>/mypage/Wish.do?userNo=<%=loginMember.getUserNo()%>')">
-                                               <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                                  <button id="wishBtn">위시리스트</button>
-                                               </a>
-                                            </li>
-                                            <li style="margin-bottom: 15px;">
-                                               <a onclick="location.assign('<%=request.getContextPath()%>/mypage/mywrite.do?userNo=<%=loginMember.getUserNo()%>')">
-                                                  <img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
-                                                  <button id="mywirteBtn">나의 글</button>
-                                               </a>
-                                            </li>
-                                            <li style="margin-bottom: 15px;">
-                                               <a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
-                                                  <button id="questionBtn">문의사항</button>
-                                               </a>
-                                            	<a href="<%=request.getContextPath()%>/views/common/Mypage.jsp">
-                                            		<img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디
-                                            	</a>
-                                            </li>
+                                            </li>                                     
                                             <li style="margin-bottom: 15px;">
                                             	<a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
                                             		<button id="updateBtn">개인정보 수정</button>
                                             	</a>
                                             </li>
                                             <li style="margin-bottom: 15px;">
-                                         	<a onclick="location.assign('<%=request.getContextPath()%>/mypage/ProductList.do?userNo=<%=loginMember.getUserNo()%>')">                                           	<
+                                         	<a onclick="location.assign('<%=request.getContextPath()%>/ProductList.do?userNo=<%=loginMember.getUserNo()%>')">                                           	<
                                             	<img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
 	                                            	<button id="checkcancelBtn">결제상품 조회</button>
 	                                            </a>
                                             </li>
                                             <li style="margin-bottom: 15px;">
-													<a onclick="location.assign('<%=request.getContextPath()%>/mypage/Wish.do?userNo=<%=loginMember.getUserNo()%>')">	                                            
+													<a onclick="location.assign('<%=request.getContextPath()%>/Wish.do?userNo=<%=loginMember.getUserNo()%>')">	                                            
 	                                            <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
 	                                            	<button id="wishBtn">위시리스트</button>
 	                                            </a>
@@ -229,13 +198,6 @@
       });
    });    --%>   
    </script>
-   <script>
-   $("#questionBtn").click(e=>{
-      e.preventDefault();
-
-		});
-	});	 --%>	
-	</script>
 	<script>
 	$("#questionBtn").click(e=>{
 		e.preventDefault();

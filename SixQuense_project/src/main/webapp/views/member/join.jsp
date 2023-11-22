@@ -211,15 +211,15 @@ input{
 		</div>
 		<div class="inputBox">
 				<input autocomplete="off" id="userId" name="userId" type="text" onkeyup="userIdCheckFunction();">
-				<label for="userId">이메일</label>
+				<label for="userId">이메일(이메일 양식으로 입력해주세요)</label>
 				<button	type="button" onclick="sendEmail(event);">이메일전송</button>		 
 		</div>
 		
 		<h5 style="color:red;" id="IdChekMessage"></h5>
 			<div class="inputBox">
 	    		<input autocapitalize="off" id="userpw" class="inputBoxinput"  onkeyup="passwordCheckFunction();"
-	        		name="userpw" type="password" stlye="">
-	   			 <label for="userpw">비밀번호</label>
+	        		name="userpw" type="password" stlye="" placeholder="">
+	   			 <label for="userpw">비밀번호(대/소영문자,숫자,특수문자 넣어주세요)</label>
 			</div>
 		<div class="inputBox">
 	   		<input autocapitalize="off" id="userpw2" class="inputBoxinput" name="userpw2" onkeyup="passwordCheckFunction();"
@@ -297,6 +297,7 @@ input{
 				 return false;
 			 }
 		}
+
 	</script> 
 
   	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -405,6 +406,7 @@ cellPhone.onkeyup = function(event){
 		const sendEmail=(e)=>{
 			const clientEmail=$("#userId").val();
 			if(clientEmail.length>6){
+				$(e.target).attr("disabled", true);
 				$.post("<%=request.getContextPath()%>/email/sendemail.do",{"email":clientEmail})
 				.done((d)=>{
 					
@@ -424,17 +426,19 @@ cellPhone.onkeyup = function(event){
 				})
 				.fail((e)=>{
 					alert("인증번호 발송을 실패했습니다. 이메일주소를 다시 확인해주세요");
+					$(e.target).attr("disabled", false);
 				});
 			}else{
 				alert("이메일을 입력하세요!");
 				$("#userId").focus();
 			}
 		}
-	
+		
 		const confirmBtn=(e)=>{
 			const num=$("#confirmNum").val();
 			console.log(num);
 			if(num.length>=6){
+				
 				$.get("<%=request.getContextPath()%>/email/confirmemail.do?num="+num)
 				.done(d=>{
 					console.log(d);

@@ -7,7 +7,7 @@
 %>
 <section class="checkout spad" style="padding-top: 0px";>
 	<div class="container">
-		<div class="checkout__form">
+		<div class="checkout__form" style="margin-top: 200px;">
 			<img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 165px; padding-left: 0px; margin-left: 294px; margin-bottom: 25px;">   
 			<form action="#">
 				<div class="row">
@@ -31,10 +31,10 @@
 		                        <%} %>
 	                        <%} %>
 						<div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
-							<div class="checkout__order" style="padding-left: 20px; width: 360px;">
+							<div class="checkout__order" style="padding-left: 20px; width: 360px; margin-left: 800px;">
 								<div class="col-lg-3">
 									<div class="hero__categories">
-										<div class="hero__categories__all" style="width: 292px;">
+										<div class="hero__categories__all" style="width: 292px; ">
 											<i class="fa fa-bars"></i>
 											<span>메뉴</span>
 										</div> 
@@ -66,7 +66,6 @@
 			</form>
 		</div>
 	</div>
->>>>>>> branch 'test' of https://github.com/ImmortalDeveloper/Sixquense.git
 </section>
 <script>
    $("#updateBtn").click(e=>{
@@ -88,7 +87,7 @@
       
    </script>
 <script>
-<<<<<<< HEAD
+
    $("#wishBtn").click(e=>{
       e.preventDefault();
         var $button = $(this);
@@ -162,18 +161,6 @@
       });
    });      
    </script>
-    <!-- Checkout Section End -->
-
-	$("#wishBtn").click(e=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/Wish.do",
-			dataType:"html",
-			success:function(data){
-					console.log(data);
-					$("#htmlcontainer").html(data);
-				}
-			});
-		});		
 		
 	</script>
 	<script>

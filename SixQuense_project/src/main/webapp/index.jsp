@@ -14,7 +14,7 @@
                                
                                 <div class="hero__item set-bg"><img src="./img/10.png" alt="">
                                     <div class="hero__text">
-                                        <span>FRUIT FRESH</span>
+                                        <span>TRIP TOGETHER</span>
                                         <h2>여행을 떠나세요</h2>
                                         <p>go trip together</p>
                                         <a href="#" class="primary-btn">SHOP NOW</a>

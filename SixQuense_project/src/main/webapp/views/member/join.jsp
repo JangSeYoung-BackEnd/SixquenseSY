@@ -112,7 +112,7 @@
    justify-content: center;   
 }
 .inputBox{
-   	margin-bottom:30px;
+   	margin-bottom:45px;
 }
 .hr-sect {
         display: flex;
@@ -149,6 +149,53 @@
 	   height: 50px;
 }
 
+.btn-5 {
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: rgb(255,255,255,1);
+}
+.btn-5:hover {
+	color: #2828CD;
+  background: transparent;
+   box-shadow:none;
+}
+.btn-5:before,
+.btn-5:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0000CD;
+  box-shadow:
+   -1px -1px 5px 0px #fff,
+   7px 7px 20px 0px #0003,
+   4px 4px 5px 0px #0002;
+  transition:400ms ease all;
+}
+.btn-5:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn-5:hover:before,
+.btn-5:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+button[type="button"], input[type="submit"]{
+	background-color:white;
+	border:1px solid #d9d9d9;
+	cursor:pointer;
+}
+input{
+	margin-bottom:5px;
+}
 </style>
 
 </head>
@@ -162,16 +209,16 @@
 					class="image" style="display: flex; justify-content: center;">
 				</a>
 		</div>
-		<div class="inputBox" style="margin-bottom: 20px;">
+		<div class="inputBox">
 				<input autocomplete="off" id="userId" name="userId" type="text" onkeyup="userIdCheckFunction();">
 				<label for="userId">이메일</label>
-				<button	type="button" onclick="sendEmail(event);" >이메일전송</button>
-				 
+				<button	type="button" onclick="sendEmail(event);">이메일전송</button>		 
 		</div>
+		
 		<h5 style="color:red;" id="IdChekMessage"></h5>
 			<div class="inputBox">
 	    		<input autocapitalize="off" id="userpw" class="inputBoxinput"  onkeyup="passwordCheckFunction();"
-	        		name="userpw" type="password">
+	        		name="userpw" type="password" stlye="">
 	   			 <label for="userpw">비밀번호</label>
 			</div>
 		<div class="inputBox">
@@ -241,7 +288,8 @@
 			 	 return false;
 			 }
 			 const reg='^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$';
-			 const password=$("#password"){
+			 const password=$("#password")
+			 if(!reg.test(password)){
 				 alert("비밀번호는 영문자, 특수기호,숫자를 반드시 포함해야합니다.");
 				 $("#userpw").val("");
 				 $("#userpw2").val("");
@@ -249,7 +297,6 @@
 				 return false;
 			 }
 		}
-
 	</script> 
 
   	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

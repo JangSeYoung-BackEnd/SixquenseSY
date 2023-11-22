@@ -25,7 +25,7 @@ import com.web.product.dto.ProductwishilistDto;
 public class ProductDao {
 	private Properties sql = new Properties();
 	{
-		String path = ProductDao.class.getResource("/sql/product/product_sql.properties").getPath();
+		String path = ProductDao.class.getResource("/sql/resources_product_admin/product_sql.properties").getPath();
 		try (FileReader fr = new FileReader(path)) {
 			sql.load(fr);
 		} catch (IOException e) {

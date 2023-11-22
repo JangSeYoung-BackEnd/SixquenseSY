@@ -33,51 +33,56 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//화면에서 전달한 데이터 받아오기
-		String userId=request.getParameter("userId");
-		String userPw=request.getParameter("userpw");
-		String userName=request.getParameter("username");
-		String phone=request.getParameter("phone");
-		
-		Date userDd = Date.valueOf(LocalDate.of(Integer.parseInt(request.getParameter("userYear")),
-				Integer.parseInt(request.getParameter("userMonth")), Integer.parseInt(request.getParameter("userDd"))));
-
-		String gender=request.getParameter("gender");
-		String userIntroduce=request.getParameter("userIntroduce");
-		String travleType=request.getParameter("travleType");
-		String notificatIonset=request.getParameter("notificatIonset");
-		String originalFilename=request.getParameter("originalFilename");
-		String renameFilename=request.getParameter("renameFilename");
-		
-		Member m=Member.builder()
-				.userId(userId)
-				.userPw(userPw)
-				.phone(phone)
-				.userDd(userDd)
-				.gender(gender)
-				.userIntroduce(userIntroduce)
-				.travleType(travleType)
-				.notificatIonset(notificatIonset)
-				.originalFilename(originalFilename)
-				.renameFilename(renameFilename)
-				.userName(userName)
-				.build();
-		//DB에 저장하기
-		int result=new MemberService().insertMember(m);
-		
-		//저장 후 메세세지 출력 후 메인화면으로 이동
-		String msg,loc;
-		if(result>0) {
-			msg=m.getUserId()+"가입완료";
-			loc="/";
+		if(request.getParameter("userYear").equals("")) {
+			String msg="입력정보를 다시 확인해주세요";
+			String loc="/member/joinServlet.do";
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			
 		}else {
-			msg="가입 실패";
-			loc="/member/enrollMember.do";
+			String userId=request.getParameter("userId");
+			String userPw=request.getParameter("userpw");
+			String userName=request.getParameter("username");
+			String phone=request.getParameter("phone");
+			Date userDd = Date.valueOf(LocalDate.of(Integer.parseInt(request.getParameter("userYear")),
+			Integer.parseInt(request.getParameter("userMonth")), Integer.parseInt(request.getParameter("userDd"))));
+			
+			String gender=request.getParameter("gender");
+			String userIntroduce=request.getParameter("userIntroduce");
+			String travleType=request.getParameter("travleType");
+			String notificatIonset=request.getParameter("notificatIonset");
+			String originalFilename=request.getParameter("originalFilename");
+			String renameFilename=request.getParameter("renameFilename");
+			Member m=Member.builder()
+					.userId(userId)
+					.userPw(userPw)
+					.phone(phone)
+					.userDd(userDd)
+					.gender(gender)
+					.userIntroduce(userIntroduce)
+					.travleType(travleType)
+					.notificatIonset(notificatIonset)
+					.originalFilename(originalFilename)
+					.renameFilename(renameFilename)
+					.userName(userName)
+					.build();
+			//DB에 저장하기
+			int result=new MemberService().insertMember(m);
+			
+			//저장 후 메세세지 출력 후 메인화면으로 이동
+			String msg,loc;
+			if(result>0) {
+				msg=m.getUserId()+"가입완료";
+				loc="/";
+			}else {
+				msg="가입 실패";
+				loc="/member/enrollMember.do";
+			}
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			
+			request.getRequestDispatcher("/views/common/msg.jsp")
+			.forward(request, response);
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
 	}
 
 	/**

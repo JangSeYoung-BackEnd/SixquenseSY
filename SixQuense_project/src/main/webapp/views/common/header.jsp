@@ -150,6 +150,7 @@
     } --%>
     //검색 데이터를 보여주는 ajax
     $(document).ready(function () {
+
         $("#searchvalue").on("input", function () {
             var keyword = $(this).val();
             $.ajax({

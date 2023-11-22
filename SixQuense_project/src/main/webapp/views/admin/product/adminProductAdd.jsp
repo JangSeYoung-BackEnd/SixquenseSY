@@ -1,63 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>»óÇ° µî·Ï</title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp"%>
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
-<body>
+ <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+<section style="padding-top: 250px">
 <!------ Include the above in your HEAD tag ---------->
 
 <form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
 <fieldset>
 
 <!-- Form Name -->
-<legend><b style="padding-left:540px;">»óÇ° µî·Ï</b></legend>
+<legend><b style="padding-left:540px;">ìƒí’ˆ ë“±ë¡</b></legend>
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="nation">Áö¿ª¸í</label>
+  <label class="col-md-4 control-label" for="nation">ì§€ì—­ëª…</label>
   <div class="col-md-4">
     <select id="nation" name="nation" class="form-control">
-	    <option value="´Ù³¶">´Ù³¶</option>
-		<option value="¹æÄÛ¡¤ÆÄÅ¸¾ß">¹æÄÛ¡¤ÆÄÅ¸¾ß</option>
-		<option value="´ë¸¸">´ë¸¸</option>
-		<option value="º¸¶óÄ«ÀÌ">º¸¶óÄ«ÀÌ</option>
-		<option value="º¸È¦">º¸È¦</option>
-		<option value="¼¼ºÎ">¼¼ºÎ</option>
-		<option value="ÄÚÅ¸Å°³ª¹ß·ç">ÄÚÅ¸Å°³ª¹ß·ç</option>
-		<option value="ÇªÄÏ">ÇªÄÏ</option>
-		<option value="½Ì°¡Æ÷¸£">ÇªÄÏ</option>
-		<option value="È£Ä¡¹Î¡¤³ªÆ®¶û¡¤´Þ¶ù">È£Ä¡¹Î¡¤³ªÆ®¶û¡¤´Þ¶ù</option>
-		<option value="µµÄì">µµÄì</option>
-		<option value="»ñÆ÷·Î">»ñÆ÷·Î</option>
-		<option value="¿À»çÄ«¡¤±³Åä">¿À»çÄ«¡¤±³Åä</option>
-		 <option value="¿ÀÅ°³ª¿Í">¿ÀÅ°³ª¿Í</option>
-		<option value="ÈÄÄí¿ÀÄ«">ÈÄÄí¿ÀÄ«</option>
-		<option value="½ºÀ§½º">½ºÀ§½º</option>
-		<option value="½ºÆäÀÎ¡¤Æ÷¸£ÅõÄ®">½ºÆäÀÎ¡¤Æ÷¸£ÅõÄ®</option>
-		<option value="¿µ±¹">¿µ±¹</option>
-		<option value="ÀÌÅ»¸®¾Æ">ÀÌÅ»¸®¾Æ</option>
-		<option value="ÇÁ¶û½º">ÇÁ¶û½º</option>
-		<option value="¹Ìµ¿ºÎ">¹Ìµ¿ºÎ</option>
-		<option value="¹Ì¼­ºÎ">¹Ì¼­ºÎ</option>
-		<option value="Ä³³ª´Ù">Ä³³ª´Ù</option>
-		<option value="ÇÏ¿ÍÀÌ">ÇÏ¿ÍÀÌ</option>
-		<option value="È£ÁÖ">È£ÁÖ</option>
+	    <option value="ë‹¤ë‚­">ë‹¤ë‚­</option>
+		<option value="ë°©ì½•Â·íŒŒíƒ€ì•¼">ë°©ì½•Â·íŒŒíƒ€ì•¼</option>
+		<option value="ëŒ€ë§Œ">ëŒ€ë§Œ</option>
+		<option value="ë³´ë¼ì¹´ì´">ë³´ë¼ì¹´ì´</option>
+		<option value="ë³´í™€">ë³´í™€</option>
+		<option value="ì„¸ë¶€">ì„¸ë¶€</option>
+		<option value="ì½”íƒ€í‚¤ë‚˜ë°œë£¨">ì½”íƒ€í‚¤ë‚˜ë°œë£¨</option>
+		<option value="í‘¸ì¼“">í‘¸ì¼“</option>
+		<option value="ì‹±ê°€í¬ë¥´">ì‹±ê°€í¬ë¥´</option>
+		<option value="í˜¸ì¹˜ë¯¼Â·ë‚˜íŠ¸ëž‘Â·ë‹¬ëž">í˜¸ì¹˜ë¯¼Â·ë‚˜íŠ¸ëž‘Â·ë‹¬ëž</option>
+		<option value="ë„ì¿„">ë„ì¿„</option>
+		<option value="ì‚¿í¬ë¡œ">ì‚¿í¬ë¡œ</option>
+		<option value="ì˜¤ì‚¬ì¹´Â·êµí† ">ì˜¤ì‚¬ì¹´Â·êµí† </option>
+		 <option value="ì˜¤í‚¤ë‚˜ì™€">ì˜¤í‚¤ë‚˜ì™€</option>
+		<option value="í›„ì¿ ì˜¤ì¹´">í›„ì¿ ì˜¤ì¹´</option>
+		<option value="ìŠ¤ìœ„ìŠ¤">ìŠ¤ìœ„ìŠ¤</option>
+		<option value="ìŠ¤íŽ˜ì¸Â·í¬ë¥´íˆ¬ì¹¼">ìŠ¤íŽ˜ì¸Â·í¬ë¥´íˆ¬ì¹¼</option>
+		<option value="ì˜êµ­">ì˜êµ­</option>
+		<option value="ì´íƒˆë¦¬ì•„">ì´íƒˆë¦¬ì•„</option>
+		<option value="í”„ëž‘ìŠ¤">í”„ëž‘ìŠ¤</option>
+		<option value="ë¯¸ë™ë¶€">ë¯¸ë™ë¶€</option>
+		<option value="ë¯¸ì„œë¶€">ë¯¸ì„œë¶€</option>
+		<option value="ìºë‚˜ë‹¤">ìºë‚˜ë‹¤</option>
+		<option value="í•˜ì™€ì´">í•˜ì™€ì´</option>
+		<option value="í˜¸ì£¼">í˜¸ì£¼</option>
     </select>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="productName">»óÇ°¸í</label>  
+  <label class="col-md-4 control-label" for="productName">ìƒí’ˆëª…</label>  
   <div class="col-md-4">
-  <input id="productName" name="productName" placeholder="»óÇ°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="productName" name="productName" placeholder="ìƒí’ˆëª…ì„ ìž…ë ¥í•˜ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
@@ -66,77 +61,77 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="price">°¡°Ý</label>  
+  <label class="col-md-4 control-label" for="price">ê°€ê²©</label>  
   <div class="col-md-4">
-  <input id="price" name="price" placeholder="°¡°ÝÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 10000" class="form-control input-md" required="" type="text">
+  <input id="price" name="price" placeholder="ê°€ê²©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 10000" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="discountRate">ÇÒÀÎÀ²</label>  
+  <label class="col-md-4 control-label" for="discountRate">í• ì¸ìœ¨</label>  
   <div class="col-md-4">
-  <input id="discountRate" name="discountRate" placeholder="ÇÒÀÎÀ²À» ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 0.2" class="form-control input-md" required="" type="text">
+  <input id="discountRate" name="discountRate" placeholder="í• ì¸ìœ¨ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 0.2" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="minCount">ÃÖ¼Ò ÀÎ¿ø</label>  
+  <label class="col-md-4 control-label" for="minCount">ìµœì†Œ ì¸ì›</label>  
   <div class="col-md-4">
-  <input id="minCount" name="minCount" placeholder="ÃÖ¼ÒÀÎ¿øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 3" class="form-control input-md" required="" type="text">
+  <input id="minCount" name="minCount" placeholder="ìµœì†Œì¸ì›ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 3" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="maxCount">ÃÖ´ë ÀÎ¿ø</label>  
+  <label class="col-md-4 control-label" for="maxCount">ìµœëŒ€ ì¸ì›</label>  
   <div class="col-md-4">
-  <input id="maxCount" name="maxCount" placeholder="ÃÖ´ëÀÎ¿øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 10" class="form-control input-md" required="" type="text">
+  <input id="maxCount" name="maxCount" placeholder="ìµœëŒ€ì¸ì›ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 10" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="productDuration">¼Ò¿ä ½Ã°£</label>  
+  <label class="col-md-4 control-label" for="productDuration">ì†Œìš” ì‹œê°„</label>  
   <div class="col-md-4">
-  <input id="productDurationt" name="productDuration" placeholder="¼Ò¿ä½Ã°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 5" class="form-control input-md" required="" type="text">
+  <input id="productDuration" name="productDuration" placeholder="ì†Œìš”ì‹œê°„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 5" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="productDetail">»óÇ° Á¤º¸</label>
+  <label class="col-md-4 control-label" for="productDetail">ìƒí’ˆ ì •ë³´</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="productDetail" name="productDetail" placeholder="»óÇ° Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="productDetail" name="productDetail" placeholder="ìƒí’ˆ ì •ë³´ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="editorNote">Editor's Note</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="editorNote" name="editorNote" placeholder="¿¡µðÅÍ ³ëÆ®¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="editorNote" name="editorNote" placeholder="ì—ë””í„° ë…¸íŠ¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
 
-<!-- Text input °¡ÀÌµå ÆÄÆ®-->
+<!-- Text input ê°€ì´ë“œ íŒŒíŠ¸-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="guideName">°¡ÀÌµå ÀÌ¸§</label>  
+  <label class="col-md-4 control-label" for="guideName">ê°€ì´ë“œ ì´ë¦„</label>  
   <div class="col-md-4">
-  <input id="guideName" name="guideName" placeholder="°¡ÀÌµå ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="guideName" name="guideName" placeholder="ê°€ì´ë“œ ì´ë¦„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="guidePhone">°¡ÀÌµå ¿¬¶ôÃ³</label>  
+  <label class="col-md-4 control-label" for="guidePhone">ê°€ì´ë“œ ì—°ë½ì²˜</label>  
   <div class="col-md-4">
-  <input id="guidePhone" name="guidePhone" placeholder="°¡ÀÌµå ¿¬¶ôÃ³¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 010-0000-0000" class="form-control input-md" required="" type="text">
+  <input id="guidePhone" name="guidePhone" placeholder="ê°€ì´ë“œ ì—°ë½ì²˜ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš” ex) 010-0000-0000" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
@@ -145,112 +140,110 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="productDay">Ãâ¹ß ¿äÀÏ</label>
+  <label class="col-md-4 control-label" for="productDay">ì¶œë°œ ìš”ì¼</label>
   <div class="col-md-4">
-		<label>¿ù<input type="checkbox" name="productDay" value="¿ù"></label>
-		<label>È­<input type="checkbox" name="productDay" value="È­"></label>
-		<label>¼ö<input type="checkbox" name="productDay" value="¼ö"></label>
-		<label>¸ñ<input type="checkbox" name="productDay" value="¸ñ"></label>
-		<label>±Ý<input type="checkbox" name="productDay" value="±Ý"></label>
-		<label>Åä<input type="checkbox" name="productDay" value="Åä"></label>
-		<label>ÀÏ<input type="checkbox" name="productDay" value="ÀÏ"></label>
+		<label>ì›”<input type="checkbox" name="productDay" value="ì›”"></label>
+		<label>í™”<input type="checkbox" name="productDay" value="í™”"></label>
+		<label>ìˆ˜<input type="checkbox" name="productDay" value="ìˆ˜"></label>
+		<label>ëª©<input type="checkbox" name="productDay" value="ëª©"></label>
+		<label>ê¸ˆ<input type="checkbox" name="productDay" value="ê¸ˆ"></label>
+		<label>í† <input type="checkbox" name="productDay" value="í† "></label>
+		<label>ì¼<input type="checkbox" name="productDay" value="ì¼"></label>
   </div>
 </div>
 
-<br><b style="padding-left:540px;">ÄÚ½º µî·Ï</b><br><br>
+<br><b style="padding-left:540px;">ì½”ìŠ¤ ë“±ë¡</b><br><br>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName1">ÄÚ½º¸í 1</label>  
+  <label class="col-md-4 control-label" for="courseName1">ì½”ìŠ¤ëª…</label>  
   <div class="col-md-4">
-  <input id="courseName1" name="courseName1" placeholder="ÄÚ½º¸íÀ» Àû¾îÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="courseName1" name="courseName1" placeholder="ì½”ìŠ¤ëª…ì„ ì ì–´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail1">ÄÚ½º¼Ò°³ 1</label>
+  <label class="col-md-4 control-label" for="courseDetail1">ì½”ìŠ¤ì†Œê°œ</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="ÄÚ½º¼Ò°³¸¦ Àû¾îÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="ì½”ìŠ¤ì†Œê°œë¥¼ ì ì–´ì£¼ì„¸ìš”"></textarea>
+  </div>
+</div>
+
+
+ <div class="form-group">
+  <label class="col-md-4 control-label" for="courseName2">ì½”ìŠ¤ëª… 2</label>  
+  <div class="col-md-4">
+  <input id="courseName2" name="courseName2" placeholder="ì½”ìŠ¤ëª…ì„ ì ì–´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courseDetail2">ì½”ìŠ¤ì†Œê°œ 2</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="courseDetail2" name="courseDetail2" placeholder="ì½”ìŠ¤ì†Œê°œë¥¼ ì ì–´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName2">ÄÚ½º¸í 2</label>  
+  <label class="col-md-4 control-label" for="courseName3">ì½”ìŠ¤ëª… 3</label>  
   <div class="col-md-4">
-  <input id="courseName2" name="courseName2" placeholder="ÄÚ½º¸íÀ» Àû¾îÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="courseName3" name="courseName3" placeholder="ì½”ìŠ¤ëª…ì„ ì ì–´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 
 
-<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail2">ÄÚ½º¼Ò°³ 2</label>
+  <label class="col-md-4 control-label" for="courseDetail3">ì½”ìŠ¤ì†Œê°œ 3</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail2" name="courseDetail2" placeholder="ÄÚ½º¼Ò°³¸¦ Àû¾îÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="courseDetail3" name="courseDetail3" placeholder="ì½”ìŠ¤ì†Œê°œë¥¼ ì ì–´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
 
+
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName3">ÄÚ½º¸í 3</label>  
+  <label class="col-md-4 control-label" for="courseName4">ì½”ìŠ¤ëª… 4</label>  
   <div class="col-md-4">
-  <input id="courseName3" name="courseName3" placeholder="ÄÚ½º¸íÀ» Àû¾îÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="courseName4" name="courseName4" placeholder="ì½”ìŠ¤ëª…ì„ ì ì–´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 
-
-<!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail3">ÄÚ½º¼Ò°³ 3</label>
+  <label class="col-md-4 control-label" for="courseDetail4">ì½”ìŠ¤ì†Œê°œ 4</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail3" name="courseDetail3" placeholder="ÄÚ½º¼Ò°³¸¦ Àû¾îÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="courseDetail4" name="courseDetail4" placeholder="ì½”ìŠ¤ì†Œê°œë¥¼ ì ì–´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
 
-
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName4">ÄÚ½º¸í 4</label>  
+  <label class="col-md-4 control-label" for="courseName5">ì½”ìŠ¤ëª… 5</label>  
   <div class="col-md-4">
-  <input id="courseName4" name="courseName4" placeholder="ÄÚ½º¸íÀ» Àû¾îÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
+  <input id="courseName5" name="courseName5" placeholder="ì½”ìŠ¤ëª…ì„ ì ì–´ì£¼ì„¸ìš”" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
-<!-- Textarea -->
+
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail4">ÄÚ½º¼Ò°³ 4</label>
+  <label class="col-md-4 control-label" for="courseDetail5">ì½”ìŠ¤ì†Œê°œ 5</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail4" name="courseDetail4" placeholder="ÄÚ½º¼Ò°³¸¦ Àû¾îÁÖ¼¼¿ä"></textarea>
+    <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="ì½”ìŠ¤ì†Œê°œë¥¼ ì ì–´ì£¼ì„¸ìš”"></textarea>
   </div>
 </div>
-
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseName5">ÄÚ½º¸í 5</label>  
-  <div class="col-md-4">
-  <input id="courseName5" name="courseName5" placeholder="ÄÚ½º¸íÀ» Àû¾îÁÖ¼¼¿ä" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail5">ÄÚ½º¼Ò°³ 5</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="ÄÚ½º¼Ò°³¸¦ Àû¾îÁÖ¼¼¿ä"></textarea>
-  </div>
-</div>
-
+ 
 
 
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="filebutton">ÀÌ¹ÌÁö Ã·ºÎ</label>
+  <label class="col-md-4 control-label" for="upfile">ì´ë¯¸ì§€ ì²¨ë¶€</label>
   <div class="col-md-4">
-    <input id="filebutton" name="filebutton" class="input-file" type="file" multiple="multiple" accept=".jpg, .jpeg, .png">
+    <input id="upfile" name="upfile" class="input-file" type="file" multiple="multiple" accept=".jpg, .jpeg, .png">
   </div>
 </div>
 
@@ -258,45 +251,52 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <input type="submit" id="submitbutton" name="submitbutton" class="btn btn-primary" value="µî·Ï">
+    <input type="button" id="submitbutton" name="submitbutton" class="btn btn-primary" value="ë“±ë¡">
   </div>
   </div>
 
 </fieldset>
 </form>
 <script>
-$("#submitbutton").click(e=>{
-	//js FormdataÅ¬·¡½º¸¦ Á¦°øÇÔ -> ÆûÅÂ±×¶û ºñ½Á
+ $("#submitbutton").click(e=>{
+	//js Formdataí´ëž˜ìŠ¤ë¥¼ ì œê³µí•¨ -> í¼íƒœê·¸ëž‘ ë¹„ìŠ·
 	const form = new FormData();
-	//FormDataÅ¬·¡½º¿¡ append(key,value)·Î Àü¼ÛÇÒ µ¥ÀÌÅÍ¸¦ ÀúÀå
+	//FormDataí´ëž˜ìŠ¤ì— append(key,value)ë¡œ ì „ì†¡í•  ë°ì´í„°ë¥¼ ì €ìž¥
 	const fileInput = $("#upfile");
-	console.log(fileInput[0].files[0]); /* ÆÄÀÏÀ» ÀúÀåÇÏ´Â ¼Ó¼º files, ¿©·¯°³·Î ÀúÀåµÇ±â ¶§¹®¿¡ ÀÎµ¦½º ºÎ¿© */
-	$.each(fileInput[0].files,(i,f)=>{ /* ¹è¿­·Î ¸¸µé¾î¼­ ¹Ýº¹¹® µ¹ ¼ö ÀÖ°Ô ¸¸µç´Ù */
+	console.log(fileInput[0].files[0]); /* íŒŒì¼ì„ ì €ìž¥í•˜ëŠ” ì†ì„± files, ì—¬ëŸ¬ê°œë¡œ ì €ìž¥ë˜ê¸° ë•Œë¬¸ì— ì¸ë±ìŠ¤ ë¶€ì—¬ */
+	$.each(fileInput[0].files,(i,f)=>{ /* ë°°ì—´ë¡œ ë§Œë“¤ì–´ì„œ ë°˜ë³µë¬¸ ëŒ ìˆ˜ ìžˆê²Œ ë§Œë“ ë‹¤ */
 		form.append("upfile"+i,f);
-	})
-	form.append("userId","bsyoo");
-	
+	});
+	$(".form-horizontal input").each((i,e)=>{
+		console.log(e.name,e.value);
+		form.append(e.name,e.value);
+	});
+	 const selectedNation = $("#nation").find(":selected").val();
+	 form.append("nation", selectedNation);
+	 
+	 $('.form-horizontal textarea').each((i,e)=>{
+			console.log(e.name,e.value);
+			form.append(e.name,e.value);
+		});
+
 		$.ajax({
-		url: "<%=request.getContextPath()%>/ajax/uploadFile.do",
+		url: "<%=request.getContextPath()%>/admin/productinsertend.do",
 		data:form,
 		type:"post",
-		processData:false, /* formÇü½Ä¿¡¼­ ¹ÙÀÌ³Ê¸®Çü½Ä(ÆÄÀÏÀü¼Û)À¸·Î ¹Ù²Ù±â À§ÇØ¼­ false */
+		processData:false, /* formí˜•ì‹ì—ì„œ ë°”ì´ë„ˆë¦¬í˜•ì‹(íŒŒì¼ì „ì†¡)ìœ¼ë¡œ ë°”ê¾¸ê¸° ìœ„í•´ì„œ false */
 		contentType:false,
 		success:data=>{
-			alert("¼º°ø");
+			alert("ë“±ë¡ì´ ì„±ê³µ ë˜ì—ˆìŠµë‹ˆë‹¤");
 		},
 		error:(r,e)=>{
-			alert("½ÇÆÐ");
+			alert("ë“±ë¡ì´ ì‹¤íŒ¨ë˜ì—ˆìŠµë‹ˆë‹¤");
 		},
 		complete:()=>{
 			fileInput.val('');
 		}
 	}) 
-})
-
-
-
-
+});
+ 
 </script>
-</body>
-</html>
+</section>
+<%@ include file="/views/common/footer.jsp"%>

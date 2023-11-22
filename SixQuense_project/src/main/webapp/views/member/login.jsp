@@ -13,6 +13,7 @@
 	max-width: 720px;
 	border: 1px solid #999;
 	border-radius: 6px;
+	
 }
 
 .outBox .inputBox label {
@@ -27,6 +28,7 @@
 	transform: scale(1) translate(4px, -18px);
 	transition: all .15s;
 	pointer-events: none;
+	
 }
 
 .outBox .inputBox input[type="text"]:focus, .inputBox input.existence,
@@ -56,6 +58,7 @@
 	box-sizing: border-box;
 	border: 1px solid #999;
 	outline: none;
+	
 }
 
 .outBox .inputBox label {
@@ -70,6 +73,7 @@
 	transform: scale(1) translate(4px, -18px);
 	transition: all .15s;
 	pointer-events: none;
+	
 }
 
 .outBox .inputBox input[type="text"]:focus,.inputBox input[type="text"]
@@ -87,9 +91,11 @@
 	justify-content: center;
 	padding-top: 10px;
 	margin-top: 200px;
+	
 }
 .outBox{
 		margin-top:100px !important;
+		
 }
 .sh{
 	margin-top: 3%;
@@ -176,12 +182,53 @@
 		  font-size: 15px;
 		  border: none;
 }
+
+.btn-5 {
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: rgb(255,255,255,1);
+}
+.btn-5:hover {
+	color: #2828CD;
+  background: transparent;
+   box-shadow:none;
+}
+.btn-5:before,
+.btn-5:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0000CD;
+  box-shadow:
+   -1px -1px 5px 0px #fff,
+   7px 7px 20px 0px #0003,
+   4px 4px 5px 0px #0002;
+  transition:400ms ease all;
+}
+.btn-5:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn-5:hover:before,
+.btn-5:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
 </style>
 </head>
  <body>
 <div class="sh">
 	<form action="<%=request.getContextPath()%>/login.do">
-		<div class="outBox">
+		<div class="outBox" color=#2828CD;>
 			<div class="logo">
 				<a href="http://192.168.1.11:5500/main.html" target="_blank" style="display: flex; justify-content: center;">
 					<img src="<%=request.getContextPath()%>/img/logo/ttlogo.png" width="250" height="100"
@@ -200,26 +247,22 @@
 				<input autocapitalize="off" id="userpw"
 					name="userpw" type="password"> <label for="userpw">비밀번호</label>
 			</div>
-			<div class="find">이메일을 잊으셨나요?
-			<div class="loginbtn-container">
-			<div class="hr-sect">계정 만들기 || 간편로그인</div>
 			
-			<div class="llog">
-				<div class="login-btn">
-					<button id="login-btn" >다음</button>
-				</div>
-			<div class="dropdown">
-			  <button class="dropbtn">계정 만들기</button>
-			  	<div class="dropdown-content">
-			   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
-			    	<a href="#">google</a>
-			   	    <a href="#">kakao</a> 
-			  </div>
+			<div class="loginbtn-container">
+				<div class="hr-sect">계정 만들기 || 간편로그인</div>
+				
+				<div class="llog">
+					<div class="login-btn dropdown">
+						 <button class="custom-btn btn-5" style="cursor:pointer;"><span>로그인</span></button>
+					</div>
+				<div class="dropdown" style="padding-top:7px;">
+				  <button class="custom-btn btn-5">계정 만들기</button>
+				  	<div class="dropdown-content">
+				   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
+				    	<a href="<%=request.getContextPath() %>/views/member/googleapi.jsp">google</a>	    
+				  	</div>
 				</div>
 			</div>
-				
-
-				
 		</div>
 	</form>
 </div>

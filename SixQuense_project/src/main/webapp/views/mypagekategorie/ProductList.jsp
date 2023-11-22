@@ -1,44 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.web.product.dto.ProductorderinfoDto,java.util.List" %>
+<%@ include file="/views/common/header.jsp"%>
+<%@ page import="com.web.product.dto.ProductorderinfoDto,java.util.List" %>
+<%@ page import="com.web.product.dto.ProductpaymentDto,java.util.List" %>
+<%@ page import="com.web.product.dto.ProductDto,java.util.List" %>
+
 <%
-	List<ProductorderinfoDto> info = (List<ProductorderinfoDto>)request.getAttribute("info");
+	List<ProductDto> pro = (List<ProductDto>) request.getAttribute("pro");
+	List<ProductorderinfoDto> info = (List<ProductorderinfoDto>) request.getAttribute("info");
+	List<ProductpaymentDto> pay = (List<ProductpaymentDto>) request.getAttribute("pay");
+	System.out.println(info);
+	System.out.println(pay);
+	System.out.println(pro);
 %>  
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
     <section class="checkout spad" style="padding-top: 0px";>
-        <div class="container">
-            <div class="checkout__form">
-                <img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="
-                            width: 165px;
-                            padding-left: 0px;
-                            margin-left: 294px;
-                            margin-bottom: 25px;">
-                            
-                            <form action="#">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                        <%if(!info.isEmpty()) {
-                        	for(ProductorderinfoDto i:info){%>
-                            <div class="checkout__input">
-                                <p style="font-size: xx-large;">결제상품 조회 & 취소</p>
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
+    <div class="container">
+        <div class="checkout__form" style="margin-top: 200px;">
+            <img src="<%= request.getContextPath() %>/img/icon/결제상품.png" style="
+                        width: 165px;
+                        padding-left: 0px;
+                        margin-left: 294px;
+                        margin-bottom: 25px;">
+
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="checkout__input">
+                            <p style="font-size: xx-large;">결제상품 조회</p>
+                            <% if (!info.isEmpty()) {
+                                for (ProductorderinfoDto i : info) { %>
+                            <hr />
+                            <div class="box1" style="width:100%; height: 260px; display: flex; align-items: center;"
+                                value="<%= i.getProductNo() %>">
+                                <div style="width:200px; padding-left: 20px;">
+                                    <div><%= i.getMemberNO() %></div>
                                 </div>
-                                <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
-                                </div>
-                                <hr />
-                                <div class="box1" style="width:100%; height: 260px; border: solid;">
-                                    안에 사진 및 설명
-                                </div>
-                                <hr />
                             </div>
-                             <%} %>
-                           <%} %>
+                            <% }
+                                } %>
                         </div>
+                        <% if (!pro.isEmpty()) {
+                                for (ProductDto p : pro) { %>
+                        <div><%= p.getProductName() %></div>
+                        <% }
+                                } %>
+                    </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">
                                 <div class="col-lg-3">
@@ -134,3 +143,4 @@
 		});
 	});		
 	</script>
+<%@ include file="/views/common/footer.jsp"%>

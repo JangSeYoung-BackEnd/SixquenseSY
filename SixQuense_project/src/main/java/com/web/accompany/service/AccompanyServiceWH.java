@@ -10,6 +10,7 @@ import com.web.accompany.model.dto.AccompanyComment;
 import com.web.accompany.model.dto.AccompanyDTO;
 import com.web.accompany.model.dto.AccompanyOffer;
 import com.web.member.dto.MemberToAcompanyWH;
+import com.web.product.dto.ProductDto;
 
 
 public class AccompanyServiceWH {
@@ -74,6 +75,7 @@ public class AccompanyServiceWH {
 			close(conn);
 			return result;
 		}
+		
 		public int deletecomment(int userNo) {
 			Connection conn = getConnection();
 			int result = dao.deletecomment(conn,userNo);
@@ -131,6 +133,31 @@ public class AccompanyServiceWH {
 			else rollback(conn);
 			close(conn);
 			return result;
+		}
+
+		public List<ProductDto> selectsearchAll(String searchValue) {
+			Connection conn=getConnection();
+			System.out.println(searchValue);
+			List<ProductDto> result=dao.selectsearchAll(conn,searchValue);
+			if(result!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	result;
+		}
+
+		public List<AccompanyDTO> selectsearchAccompanyAll(String searchValue) {
+			Connection conn=getConnection();
+			List<AccompanyDTO> a = dao.selectsearchAccompanyAll(conn,searchValue);
+			if(a!=null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return	a;
 		}
 
 		

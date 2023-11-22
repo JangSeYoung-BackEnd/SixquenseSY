@@ -20,6 +20,8 @@ int wishlistCount = (int) request.getAttribute("wishlistCount");
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -140,23 +142,22 @@ td.level2td {
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
-						<img class="product__details__pic__item--large"
-							src="<%=request.getContextPath()%>/upload/product/<%= (product.getAttachment().get(0).getOrginalFilename() != null) ? product.getAttachment().get(0).getOrginalFilename() : "" %>"
-							alt="">
-					</div>
-					   <div class="product__details__pic__slider owl-carousel">
-						<img data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>" alt="">
-					</div>  
-				</div>
-			</div>
-
+						 <img class="product__details__pic__item--large"
+                     src="<%=request.getContextPath()%>/upload/product/<%= (product.getAttachment().get(0).getOrginalFilename() != null) ? product.getAttachment().get(0).getOrginalFilename() : "" %>"
+                     alt="">
+               </div>
+                  <div class="product__details__pic__slider owl-carousel">
+                  <img data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>" alt="">
+               </div>  
+            </div>
+         </div>
 			<!-- 여기부터 -->
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__text">
@@ -287,6 +288,8 @@ td.level2td {
 						  // Get the product and member information
 				            var memberNo = <%=loginMember != null ? loginMember.getUserNo() : 0%>;
 				            var productNo = <%=product.getProductNo()%>;
+				            console.log(memberNo);
+				            console.log(productNo);
 				            
 				            console.log('<%=loginMember%>');
 						 if (<%=loginMember == null%>) {
@@ -546,6 +549,7 @@ td.level2td {
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 </section>
 

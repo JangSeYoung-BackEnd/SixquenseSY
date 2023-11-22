@@ -13,4 +13,8 @@ public class ProductorderinfoDto {
 	private Date OrderDate;
 	private int MemberNO; //회원번호
 	private int ProductNo; //상품번호
+	private String paymentId ;
+	private String ProductName ;
+	private int totalAmount;
+	
 }

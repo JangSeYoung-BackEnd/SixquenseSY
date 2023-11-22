@@ -313,7 +313,7 @@ a {
 														<tbody>
 															<tr>
 																<td>환불 금액</td>
-																<td class="alignright">원</td>
+																<td class="alignright">${total}원</td>
 															</tr>
 														</tbody>
 													</table>
@@ -326,7 +326,7 @@ a {
 							<tr>
 								<td class="content-block">
 								<button type="button" class="btn btn-light" 
-							        onclick="location.replace('<%=request.getContextPath()%>/ProductList.jsp')">
+							        onclick="location.assign('<%=request.getContextPath()%>/views/common/Mypage.jsp')">
 									환불 확인
 									</button>
 								

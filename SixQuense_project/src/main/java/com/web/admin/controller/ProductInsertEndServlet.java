@@ -87,7 +87,7 @@ public class ProductInsertEndServlet extends HttpServlet {
 			if(courseName!=null&&courseDetail!=null) {
 				for(int i=0;i<courseName.length;i++) {
 					//System.out.println(courseName[i]+" : "+courseDetail[i]);
-					courseList.add(Map.of("name",courseName[i],"detail",courseDetail[i]));
+					courseList.add(Map.of(courseName[i],courseDetail[i]));
 				}
 			}
 			

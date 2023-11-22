@@ -6,12 +6,9 @@
 <%@ page import="com.web.product.dto.ProductDto,java.util.List" %>
 
 <%
-	List<ProductDto> pro = (List<ProductDto>) request.getAttribute("pro");
 	List<ProductorderinfoDto> info = (List<ProductorderinfoDto>) request.getAttribute("info");
-	List<ProductpaymentDto> pay = (List<ProductpaymentDto>) request.getAttribute("pay");
 	System.out.println(info);
-	System.out.println(pay);
-	System.out.println(pro);
+
 %>  
     <!-- Breadcrumb Section End -->
 
@@ -36,17 +33,24 @@
                             <div class="box1" style="width:100%; height: 260px; display: flex; align-items: center;"
                                 value="<%= i.getProductNo() %>">
                                 <div style="width:200px; padding-left: 20px;">
-                                    <div><%= i.getMemberNO() %></div>
+                                    <div><%= i.getProductName() %></div>
+                                    <div><%= i.getPaymentId() %></div>
                                 </div>
+							     <form action="<%=request.getContextPath() %>/productpackage/refund.do" method="post">
+							        <label for="imp_uid">결제번호:</label><br>
+							        <input type="hidden" value = "<%= i.getTotalAmount() %>" name ="total">
+							        <input value="<%= i.getPaymentId() %>"id="imp_uid" name="imp_uid"><br>
+							        <button type="submit">환불 요청</button>
+							    </form> 
+                                
                             </div>
                             <% }
+                                
                                 } %>
                         </div>
-                        <% if (!pro.isEmpty()) {
-                                for (ProductDto p : pro) { %>
-                        <div><%= p.getProductName() %></div>
-                        <% }
-                                } %>
+                       
+                        <div></div>
+                       
                     </div>
                         <div class="col-lg-4 col-md-6" style="padding-left: 170px; padding-right: 80px;">
                             <div class="checkout__order" style="padding-left: 20px; width: 360px;">

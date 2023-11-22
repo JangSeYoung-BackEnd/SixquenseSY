@@ -189,11 +189,10 @@
   line-height: 42px;
   padding: 0;
   border: none;
-  background: rgb(255,27,0);
-background: linear-gradient(0deg, #0000CD 0%, #A0D1F7 100%);
+  background: rgb(255,255,255,1);
 }
 .btn-5:hover {
-  color: #2828CD;
+	color: #2828CD;
   background: transparent;
    box-shadow:none;
 }
@@ -223,6 +222,7 @@ background: linear-gradient(0deg, #0000CD 0%, #A0D1F7 100%);
   width:100%;
   transition:800ms ease all;
 }
+
 </style>
 </head>
  <body>
@@ -247,26 +247,22 @@ background: linear-gradient(0deg, #0000CD 0%, #A0D1F7 100%);
 				<input autocapitalize="off" id="userpw"
 					name="userpw" type="password"> <label for="userpw">비밀번호</label>
 			</div>
-			<div class="find">이메일을 잊으셨나요?
-			<div class="loginbtn-container">
-			<div class="hr-sect">계정 만들기 || 간편로그인</div>
 			
-			<div class="llog">
-				<div class="login-btn">
-					 <button class="custom-btn btn-5"><span>로그인</span></button>
-				</div>
-			<div class="dropdown">
-			  <button class="custom-btn btn-5">계정 만들기</button>
-			  	<div class="dropdown-content">
-			   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
-			    	<a href="<%=request.getContextPath() %>/views/member/googleapi.jsp">google</a>
-			   	    <a href="#">kakao</a> 
-			  </div>
+			<div class="loginbtn-container">
+				<div class="hr-sect">계정 만들기 || 간편로그인</div>
+				
+				<div class="llog">
+					<div class="login-btn dropdown">
+						 <button class="custom-btn btn-5" style="cursor:pointer;"><span>로그인</span></button>
+					</div>
+				<div class="dropdown" style="padding-top:7px;">
+				  <button class="custom-btn btn-5">계정 만들기</button>
+				  	<div class="dropdown-content">
+				   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
+				    	<a href="<%=request.getContextPath() %>/views/member/googleapi.jsp">google</a>	    
+				  	</div>
 				</div>
 			</div>
-				
-
-				
 		</div>
 	</form>
 </div>

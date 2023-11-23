@@ -34,6 +34,7 @@ public class MypageProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		System.out.println("유저"+userNo);
 		List<ProductorderinfoDto> info = new jhMemberService().selectProductByNo(userNo);
 //		 여기서 부터 
 		

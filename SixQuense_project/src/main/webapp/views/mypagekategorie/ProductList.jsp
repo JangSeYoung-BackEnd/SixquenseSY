@@ -30,6 +30,7 @@
                             <% if (!info.isEmpty()) {
                                 for (ProductorderinfoDto i : info) { %>
                             <hr />
+                            <div >
                             <div class="box1" style="width:100%; height: 260px; display: flex; align-items: center;"
                                 value="<%= i.getProductNo() %>">
                                 <div style="width:200px; padding-left: 20px;">
@@ -41,8 +42,9 @@
 							        <input type="hidden" value = "<%= i.getTotalAmount() %>" name ="total">
 							        <input value="<%= i.getPaymentId() %>"id="imp_uid" name="imp_uid"><br>
 							        <button type="submit">환불 요청</button>
+							        
 							    </form> 
-                                
+                                </div>
                             </div>
                             <% }
                                 

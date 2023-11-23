@@ -220,7 +220,7 @@ function inputs() {
                       <tr>
                         <td>
                           <div class="shoping__cart__item">
-                          <img src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>">
+                          <img src="<%=request.getContextPath() %>/upload/product/<%=product.getAttachment().get(0).getOrginalFilename() %>">
                             <h3 style="font-size: 20px;"><b><%=product.getProductName() %></b></h3>
                           </div>
                         </td>

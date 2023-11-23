@@ -64,6 +64,33 @@ p {
 									href="<%=request.getContextPath() %>/product/productlistspecial.do?coordinateNo=<%=coordinateNo %>"
 									class="tag">특가순</a>
 							</div>
+							<script>
+							var links = document.getElementsByClassName('tag');
+
+							// 클릭한 링크의 색상을 저장할 변수를 선언합니다.
+							var selectedColor = '#7fad39'; 
+							var originalColor = '#f5f5f5'; 
+							var lastClicked = null;
+
+							// 클릭 이벤트 핸들러를 정의합니다.
+							function handleClick(event) {
+							  // 마지막에 클릭된 요소가 있으면, 그 요소의 색상을 원래대로 돌립니다.
+							  if (lastClicked) {
+							    lastClicked.style.backgroundColor = originalColor;
+							  }
+
+							  // 클릭한 링크의 색상을 변경합니다.
+							  event.target.style.backgroundColor = selectedColor;
+
+							  // 마지막에 클릭된 요소를 업데이트 합니다.
+							  lastClicked = event.target;
+							}
+
+							// 각 링크에 클릭 이벤트를 추가합니다.
+							for (var i = 0; i < links.length; i++) {
+							  links[i].addEventListener('click', handleClick);
+							}
+							</script>
 						</div>
 					</div>
 				</div>

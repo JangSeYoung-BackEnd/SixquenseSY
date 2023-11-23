@@ -5,16 +5,28 @@
  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
-<section style="padding-top: 250px">
+<section style="padding-top: 200px">
 <!------ Include the above in your HEAD tag ---------->
 
+<!-- Select Basic -->
+		<div class="card-body">
+				<table class="table table-hover table-striped">
+					<tbody>
+						<tr style="width:700px">
+							<th style="text-align:center">회원관리</th>
+							<th style="text-align:center"><a href="<%=request.getContextPath()%>/views/admin/product/adminProductAdd.jsp">상품등록</a></th>
+							<th style="text-align:center">주문현황</th>
+							<th style="text-align:center">환불관리</th>
+							<th style="text-align:center">동행신고관리</th>
+							<th style="text-align:center">후기관리</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 <form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
 <fieldset>
-
 <!-- Form Name -->
 <legend><b style="padding-left:540px;">상품 등록</b></legend>
-
-<!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="nation">지역명</label>
   <div class="col-md-4">

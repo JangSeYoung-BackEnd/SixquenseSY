@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 /**
  * Servlet implementation class EmailSenderServlet
  */
@@ -38,21 +40,21 @@ public class EmailSenderServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+		String oriPw=(String)request.getAttribute("oriPw");
 		String clientEmail=request.getParameter("email");
 		String confirmNum=getRandomData(6);
 		HttpSession httpSession=request.getSession();
 		httpSession.setAttribute("confirmNum", confirmNum);
-		
+		boolean result=false;
 		try {
 			String title="트립투게더 인증번호";
-			String content="<h3>인증번호 : "+confirmNum+"</h3>";
+			String content=oriPw==null?"<h3>인증번호 : "+confirmNum+"</h3>"
+						:"<h3>임시비밀번호 : "+oriPw+"</h3>";
 			Properties props = new Properties();
 			//이메일요청 기본 세팅값 -> 네트워크통신관련 
 			props.put("mail.transport.protocol", "smtp");
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.port", "465");
-//			props.put("mail.debug","true");
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.socketFactory.port", "465");
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -76,16 +78,13 @@ public class EmailSenderServlet extends HttpServlet {
 			
 			System.out.println("이메일전송완료");
 			
-					
+			response.setContentType("application/json;charset=utf-8");
+			result=true;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
-		
+		new Gson().toJson(result,response.getWriter());
 		
 	}
 	private String getRandomData(int n) {

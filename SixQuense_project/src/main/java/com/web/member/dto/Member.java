@@ -11,7 +11,7 @@ public class Member {
 	private int userNo;
 	private String userId;
 	private String userPw;
-	private String userName;
+	private String KruserName;
 	private String phone;
 	private Date userDd;
 	private Date enrollData;

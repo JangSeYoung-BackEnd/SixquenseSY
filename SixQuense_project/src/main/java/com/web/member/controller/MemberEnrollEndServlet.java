@@ -20,6 +20,7 @@ import com.web.member.service.MemberService;
 @WebServlet(name="enrollMemberEnd",urlPatterns="/member/enrollMemberEnd.do")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String KR_USER_NAME = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,8 +45,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			
 		}else {
 			String userId=request.getParameter("userId");
-			String userPw=request.getParameter("userpw");
-			String userName=request.getParameter("username");
+			String userPw =request.getParameter("userpw");
+			String KrUserName=request.getParameter("userName");
 			String phone=request.getParameter("phone");
 			Date userDd = Date.valueOf(LocalDate.of(Integer.parseInt(request.getParameter("userYear")),
 			Integer.parseInt(request.getParameter("userMonth")), Integer.parseInt(request.getParameter("userDd"))));
@@ -67,7 +68,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 					.notificatIonset(notificatIonset)
 					.originalFilename(originalFilename)
 					.renameFilename(renameFilename)
-					.userName(userName)
+					.KruserName(KrUserName)
 					.build();
 			//DB에 저장하기
 			int result=new MemberService().insertMember(m);

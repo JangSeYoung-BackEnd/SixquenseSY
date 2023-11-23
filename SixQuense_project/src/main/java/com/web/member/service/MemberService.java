@@ -44,6 +44,21 @@ public class MemberService {
 	}
 	
 	
+	public Member selectMemberByEmailAndName(String email, String name) {
+		Connection conn=getConnection();
+		Member m=dao.selectMemberByEmailAndName(conn,email,name);
+		close(conn);
+		return m;
+	}
+	
+	public int updatePassword(String userId, String pw) {
+		Connection conn=getConnection();
+		int result=dao.updatePassword(conn,userId,pw);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 	
 	

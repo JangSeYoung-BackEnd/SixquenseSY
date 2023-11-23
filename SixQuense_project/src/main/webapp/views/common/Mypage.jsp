@@ -2,7 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
-<%System.out.println(loginMember.getUserName()); %>
+<%System.out.println(loginMember.getKrUserName()); %>
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <div class="container">
@@ -33,7 +33,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" value="<%=loginMember.getUserName()%>" readonly>
+                                        <input type="text" value="<%=loginMember.getKrUserName()%>" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

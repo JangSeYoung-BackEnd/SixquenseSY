@@ -25,7 +25,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>메인페이지</title>
+<title>Triptogether::여행을 떠나요</title>
 
 <!-- Google Font -->
 <link

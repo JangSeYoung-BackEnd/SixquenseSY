@@ -199,6 +199,7 @@ input{
 </style>
 
 </head>
+<title>Triptogether::여행을 떠나요</title>
 <body>
  <div class="sh">
 	<form action="<%=request.getContextPath()%>/member/enrollMemberEnd.do" method="post" onsubmit="" id="pwform">

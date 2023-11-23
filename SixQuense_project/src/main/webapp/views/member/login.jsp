@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>Triptogether::로그인</title>
 <style>
 .outBox {
 	width: 368px;

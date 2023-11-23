@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>triptogether</title>
+<title>triptogether::여행을 떠나요</title>
 </head>
 <body>
 	<script>

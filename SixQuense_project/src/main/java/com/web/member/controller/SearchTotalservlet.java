@@ -35,17 +35,25 @@ public class SearchTotalservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//검색값을 받아옴 
 		String searchValue = request.getParameter("searchValue");
-		System.out.println(searchValue);
+		String userId=request.getParameter("userId");
 		//상품이랑 동행 게시글을 list로 들고온다 
+		if(!userId.equals("null")) {
 		List<ProductDto> searchResult =new AccompanyServiceWH().selectsearchAll(searchValue);
 		List<AccompanyDTO> accompanys =new AccompanyServiceWH().selectsearchAccompanyAll(searchValue);
-		
-		request.setAttribute("searchResult", searchResult);
-		request.setAttribute("searchValue", searchValue);
-		request.setAttribute("accompanys", accompanys);
-		System.out.println(searchResult + "servlet");
-		System.out.println(accompanys + "servlet");
-		request.getRequestDispatcher("/views/product/searchProductlistWH.jsp").forward(request, response);
+			request.setAttribute("searchResult", searchResult);
+			request.setAttribute("searchValue", searchValue);
+			request.setAttribute("accompanys", accompanys);
+			System.out.println(searchResult + "servlet");
+			System.out.println(accompanys + "servlet");
+			request.getRequestDispatcher("/views/product/searchProductlistWH.jsp").forward(request, response);
+			
+		}else {
+			String msg="로그인후 이용해주세요";
+			String loc="/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 		
 		
 	}

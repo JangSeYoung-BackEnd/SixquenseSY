@@ -94,6 +94,7 @@
                 </div>              
                     <div class="hero__search__form" style="margin-left: 70px;">
                    <form action="<%=request.getContextPath()%>/member/searchTotalservlet.do">
+                   		<input type="hidden" name="userId" value="<%=loginMember%>">
                       <input type="search" name="searchValue" id="searchValue" list="data" placeholder="어디로 떠나실 건가요?">
                       <button type="submit" class="site-btn" >SEARCH</button>
                       <datalist id="data"></datalist>
@@ -130,7 +131,7 @@
                         <li class="active"><a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath() %>/img/mainicon/홈1.png" width="25px"> 홈</a></li>
                         <li><a href= "<%=request.getContextPath() %>/product/productmain.do"><img src="<%=request.getContextPath() %>/img/mainicon/상품.png" width="25px;"> 상품</a>
                         </li>
-                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do"><img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="25px;"> 동행</a>
+                        <li><a href= "<%=request.getContextPath() %>/accompany/accompanylist.do?userId=<%=loginMember%>"><img src="<%=request.getContextPath() %>/img/mainicon/동행.png" width="25px;"> 동행</a>
                         </li>
                         <li><a href= "<%=request.getContextPath()%>/views/common/inquiry.jsp"><img src="<%=request.getContextPath() %>/img/mainicon/문의사항.png" width="25px;"> 문의사항</a></li>
                     </ul>

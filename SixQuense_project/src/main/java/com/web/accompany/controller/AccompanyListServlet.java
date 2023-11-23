@@ -31,9 +31,18 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
-		request.setAttribute("accompanys", accompanys);
-		request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);
+		String userId=request.getParameter("userId");
+		if(!userId.equals("null")) {
+			List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
+			request.setAttribute("accompanys", accompanys);
+			request.getRequestDispatcher("/views/accompany/accompanylist.jsp").forward(request, response);			
+		}else {
+			String msg="로그인후 이용해주세요";
+			String loc="/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

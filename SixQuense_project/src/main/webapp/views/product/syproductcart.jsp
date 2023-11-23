@@ -248,7 +248,7 @@ function inputs() {
                     
                     <h2>예약자 정보 입력</h2>
                     <label for="name">한글 이름:</label>
-                    <input type="text"id="name" name="name" value="<%=loginMember.getKrUserName() %>" readonly>
+                    <input type="text"id="name" name="name" value="<%=loginMember.getKruserName() %>" readonly>
                   
                     
                      <div>

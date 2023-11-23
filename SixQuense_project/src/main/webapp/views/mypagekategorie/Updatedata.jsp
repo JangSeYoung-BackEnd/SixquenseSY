@@ -21,7 +21,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>이름</p>
-                                        <input type="text" value="<%=m.getKrUserName()%>" id="name">
+                                        <input type="text" value="<%=m.getKruserName()%>" id="name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

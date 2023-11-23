@@ -113,7 +113,7 @@
 	        if(temp!="전체보기"){
 	        	location.assign("<%=request.getContextPath()%>/accompany/accompanycoordinatelist.do?coordinate="+temp);
 	        }else{
-	        	location.assign("<%=request.getContextPath()%>/accompany/accompanylist.do")
+	        	location.assign("<%=request.getContextPath()%>/accompany/accompanylist.do?userId=notnull");
 	        }
         });
     });

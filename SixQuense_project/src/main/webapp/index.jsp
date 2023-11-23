@@ -559,63 +559,63 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>최근 상품</h4>
+                        <h4>추천 국가</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=38" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/대만.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>대만</h6>
-                                        <span>$30.00</span>
+                                        <span>판타스틱 대만</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=12" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/도쿄.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>도쿄</h6>
-                                        <span>$30.00</span>
+                                        <span>도쿄 완전정복</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=18" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/스위스.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>스위스</h6>
-                                        <span>$30.00</span>
+                                        <span>요를레이 호~!</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=15" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/영국.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>영국</h6>
-                                        <span>$30.00</span>
+                                        <span>역사와 전통의 나라</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=17" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/이탈리아.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>이탈리아</h6>
-                                        <span>$30.00</span>
+                                        <span>고대 제국의 모습!!</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=21" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/미동부.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>미동부</h6>
-                                        <span>$30.00</span>
+                                        <span>지구촌의 중심 미국 동부!!</span>
                                     </div>
                                 </a>
                             </div>
@@ -624,63 +624,63 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>베스트 상품</h4>
+                        <h4>베스트 국가</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=11" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/오사카교토.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>오사카/교토</h6>
-                                        <span>$30.00</span>
+                                        <span>구경거리&맛집 완전정복!!</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=23" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/캐나다.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>캐나다</h6>
-                                        <span>$30.00</span>
+                                        <span>대자연의 풍경</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=24" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/호주.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>호주</h6>
-                                        <span>$30.00</span>
+                                        <span>캥거루와 함께 춤을~</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=22" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/하와이.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>하와이</h6>
-                                        <span>$30.00</span>
+                                        <span>하와이에서 훌라춤을!</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=42" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/보라카이.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>보라카이</h6>
-                                        <span>$30.00</span>
+                                        <span>동남아의 보물~</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=34" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/방.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>방콕</h6>
-                                        <span>$30.00</span>
+                                        <span>사와디캅~@@</span>
                                     </div>
                                 </a>
                             </div>
@@ -689,63 +689,63 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>리뷰 많은 상품</h4>
+                        <h4>리뷰 많은 국가</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=20" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/america/미서부.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>미서부</h6>
-                                        <span>$30.00</span>
+                                        <span>할리우드 배우들과 함께~</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=16" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/europe/프랑스.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>프랑스</h6>
-                                        <span>$30.00</span>
+                                        <span>봉쥬르 마카롱</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=13" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/삿포르.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>삿포로</h6>
-                                        <span>$30.00</span>
+                                        <span>오뎅끼 데스까~~@</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=36" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/푸켓.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>푸켓</h6>
-                                        <span>$30.00</span>
+                                        <span>푹 쉬다 가세요~</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=11" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/japen/오사카교토.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>오사카/교토</h6>
-                                        <span>$30.00</span>
+                                        <span>구경거리&맛집 완전정복!!</span>
                                     </div>
                                 </a>
-                                <a href="<%=request.getContextPath()%>/product/productview.do" class="latest-product__item">
+                                <a href="<%=request.getContextPath()%>/product/productlist.do?coordinateNo=34" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/eastsouthasia/방.png" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>방콕</h6>
-                                        <span>$30.00</span>
+                                        <span>사와디캅~@@</span>
                                     </div>
                                 </a>
                             </div>

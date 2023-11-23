@@ -14,7 +14,7 @@
     }
 </style>
 <!-- 검색바 -->
-<section style="padding-top: 100px">
+<section style="padding-top: 80px">
     <section class="hero">
         <div class="container">
             <div class="row">
@@ -30,7 +30,7 @@
                                         <span>TRIP TOGETHER</span>
                                         <h2>여행을 떠나세요</h2>
                                         <p>go trip together</p>
-                                        <a href="#" class="primary-btn">SHOP NOW</a>
+                                        <a href="<%=request.getContextPath() %>/views/product/syproductlistbytheme.jsp" class="primary-btn">SHOP NOW</a>
                                     </div>
                                 </div>
                             </div>

@@ -14,6 +14,7 @@
     }
 </style>
 <!-- 검색바 -->
+<section style="padding-top: 100px">
     <section class="hero">
         <div class="container">
             <div class="row">
@@ -767,6 +768,7 @@
         </div>
     </div>
 </div>
+</section>
     
 
 

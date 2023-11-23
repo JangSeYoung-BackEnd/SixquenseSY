@@ -77,8 +77,15 @@
 
    <!--style="position: fixed; z-index: 999; background-color: white;-->
     <!-- 헤더 -->
+    
     <header class="header" style="display: flex; justify-content: center;">
         <div style="position: fixed; z-index: 999; background-color: white;">
+        	<%if(loginMember!=null && loginMember.getUserId().equals("admin")) {%>
+        	<div style="text-align:right;width: 2000px;padding-right: 400px; padding-top: 10px">
+            <b>관리자님 반갑습니다!</b>
+            <a href="<%=request.getContextPath()%>/views/admin/product/adminProductAdd.jsp">관리자 페이지</a>
+            </div>
+            <%} %>
             <div class="row" style="display: flex; justify-content: center;">
                 <div class="col-lg-2">
                     <div class="header__logo">

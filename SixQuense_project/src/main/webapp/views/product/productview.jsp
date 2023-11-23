@@ -407,8 +407,9 @@ td.level2td {
 							<div class="product__details__tab__desc">
 								<!-- 리뷰 입력 창 : 상품이 구매되면 볼 수 있도록 해야됨 -->
 								<% 
+								for(ProductorderinfoDto order : orderInfo){
 								if (loginMember != null && orderInfo!=null
-										&& (loginMember.getUserId().equals("admin") || orderInfo.contains(loginMember.getUserNo()))) {
+										&& (loginMember.getUserId().equals("admin") || order.getMemberNO()==loginMember.getUserNo())) {
 								 %>
 								<h6>후기 작성</h6>
 								<!--  -->
@@ -438,6 +439,7 @@ td.level2td {
 									</form>
 								</div>
 								<%
+									}break;
 								}
 								%>
 								<h6 style="margin-top: 26px;">
@@ -472,7 +474,7 @@ td.level2td {
 														<button class="btn-reply" value="<%=pr.getCommentNo()%>">답글</button>
 														<%}%>
 														 <%for(ProductsreviewDto cm : comments){%>
-															 <%if (loginMember != null && (loginMember.getUserId().equals("123@123") || cm.getMemberNo()==loginMember.getUserNo())){ %>
+															 <%if (loginMember != null && (loginMember.getUserId().equals("admin") || cm.getMemberNo()==loginMember.getUserNo())){ %>
 															   <button class="btn-delete" onclick="fn_removecomment(<%=cm.getCommentNo()%>,<%=product.getProductNo()%>)">삭제</button>
 															<%
 															 break;
@@ -491,7 +493,7 @@ td.level2td {
 												<td>
 													<div style="display: flex">
 														 <%for(ProductsreviewDto cm : comments){%>
-															 <%if (loginMember != null && (loginMember.getUserId().equals("123@123"))){ %>
+															 <%if (loginMember != null && (loginMember.getUserId().equals("admin"))){ %>
 															   <button class="btn-delete" onclick="fn_removecomment(<%=cm.getCommentNo()%>,<%=product.getProductNo()%>);">삭제</button>
 															<%
 															 break;

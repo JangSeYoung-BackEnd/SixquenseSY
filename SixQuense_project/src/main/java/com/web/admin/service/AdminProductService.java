@@ -13,14 +13,14 @@ public class AdminProductService {
 	private AdminProductDao dao = new AdminProductDao();
 
 	public boolean insertProduct(String nation, String guideName, ProductDto p, List<Map<String, String>> files,
-			Map<String, String> courseMap) {
+			List<Map<String, String>> courseList) {
 		boolean result = false;
 		Connection conn = getConnection();
 		int productResult = dao.insertProduct(conn, nation, guideName, p);
 		if (productResult > 0) {
 			/* int guideResult = dao.insertGuide(conn, g); */
 			int filesResult = dao.insertFiles(conn, files);
-			int CourseResult = dao.insertCourse(conn, courseMap);
+			int CourseResult = dao.insertCourse(conn, courseList);
 
 			if (filesResult > 0 && CourseResult > 0) {
 				commit(conn);

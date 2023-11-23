@@ -75,7 +75,7 @@ public class ProductViewServlet extends HttpServlet {
 		List<ProductorderinfoDto> orderInfo = new ProductService().selectOrderInfoByNo(productNo);
 
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-		boolean wishresult = false;
+		boolean wishresult=false;
 			if (loginMember != null) {
 				wishresult = wishlists.stream().anyMatch(e -> loginMember.getUserNo() == e.getMemberNo());
 		}
@@ -87,6 +87,7 @@ public class ProductViewServlet extends HttpServlet {
 		request.setAttribute("commentCount", commentCount);
 		request.setAttribute("wishlistCount", wishlistCount);
 		request.setAttribute("wishResult", wishresult);
+		System.out.println("위시리스트 결과"+wishresult);
 
 		// 상품 상 jsp로 이동
 		request.getRequestDispatcher("/views/product/productview.jsp").forward(request, response);

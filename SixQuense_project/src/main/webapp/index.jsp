@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<style>
+    .announcementbtn2 a {
+        color: #000; 
+        text-decoration: none;
+        padding: 5px 10px; 
+        transition: background-color 0.3s ease;
+    }
+
+    .announcementbtn2 a:hover {
+        background-color: #74D36D; 
+    }
+</style>
 <!-- 검색바 -->
     <section class="hero">
         <div class="container">
@@ -743,68 +755,19 @@
         </div>
     </section>
     <!--최근,베스트,리뷰상품-->
-
+	<hr />
     <!--공지사항-->
     <div class="announcementtable">
-        <div class="btnList">
-            <div class="announcementbtn">
-                <div class="announcementbtn2" style="padding: 0px; margin-left: 220px;">
-                    <button class="anbtn" onclick="showAnnouncements()">공지사항</button>
-                    <button class="faqbtn" onclick="showFAQ()">FAQ</button>
-                </div>
+    <div class="btnList">
+        <div class="announcementbtn">
+            <div class="announcementbtn2" style="padding: 0px; margin-left: 220px; font-size: 20px;">
+			<a href="<%=request.getContextPath()%>/views/common/announcement.jsp">공지사항</a>
+            <a href="<%=request.getContextPath()%>/views/common/FAQ.jsp">FAQ</a>
             </div>
         </div>
     </div>
+</div>
     
-    <div class="sc-4eac9403-24 jQrVBe">
-        <div class="notificationtable" style="margin-right: 650px;">
-            <div class="notificationlist">
-                <p class="notification">공지사항입니다 1</p>
-            </div>
-            <div class="notificationlist">
-                <p class="notification">공지사항입니다 2</p>
-            </div>
-            <div class="notificationlist">
-                <p class="notification">공지사항입니다 3</p>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        function showAnnouncements() {
-            var notificationTable = document.querySelector('.notificationtable');
-            notificationTable.innerHTML = `
-                <div class="notificationlist">
-                    <p class="notification">공지사항입니다 1</p>
-                </div>
-                <div class="notificationlist">
-                    <p class="notification">공지사항입니다 2</p>
-                </div>
-                <div class="notificationlist">
-                    <p class="notification">공지사항입니다 3</p>
-                </div>
-            `;
-        }
-    
-        function showFAQ() {
-            var notificationTable = document.querySelector('.notificationtable');
-            notificationTable.innerHTML = `
-                <div class="notificationlist">
-                    <p class="notification">FAQ 내용입니다 1</p>
-                </div>
-                <div class="notificationlist">
-                    <p class="notification">FAQ 내용입니다 2</p>
-                </div>
-                <div class="notificationlist">
-                    <p class="notification">FAQ 내용입니다 3</p>
-                </div>
-            `;
-        }
-    </script>
-
-
-
-
 
 
 

@@ -34,15 +34,12 @@ public class MypageProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		List<ProductDto> pro = new jhMemberService().selectproductnameByNo(userNo);
 		List<ProductorderinfoDto> info = new jhMemberService().selectProductByNo(userNo);
-		List<ProductpaymentDto> pay = new jhMemberService().selectpayByNo(userNo);
+//		 여기서 부터 
+		
+		
 		System.out.println(info+"info");
-		System.out.println(pay+"pay");
-		System.out.println(pro+"pro");
-		request.setAttribute("pay", pay);
 		request.setAttribute("info", info);
-		request.setAttribute("pro", pro);
 		request.getRequestDispatcher("/views/mypagekategorie/ProductList.jsp").forward(request, response);
 	}
 

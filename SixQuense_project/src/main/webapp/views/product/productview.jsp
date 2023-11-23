@@ -15,11 +15,11 @@ int commentCount = (int) request.getAttribute("commentCount");
 int wishlistCount = (int) request.getAttribute("wishlistCount");
 
 %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style_je.css" type="text/css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style>
 .heart-icon {
 	cursor: pointer;
@@ -31,8 +31,7 @@ int wishlistCount = (int) request.getAttribute("wishlistCount");
 	width: 290px;
 	text-align: center;
 	padding: 15px 28px 10px;
-	!
-	important;
+
 }
 
 .icon_heart_alt::before {
@@ -134,29 +133,28 @@ td.level2td {
 
 </style>
 <!-- Product Details Section Begin -->
-<section class="product-details spad" style="padding-top: 250px";>
+<section class="product-details spad" style="padding-top: 250px">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
-						<img class="product__details__pic__item--large"
-							src="<%=request.getContextPath()%>/upload/product/<%= (product.getAttachment().get(0).getOrginalFilename() != null) ? product.getAttachment().get(0).getOrginalFilename() : "" %>"
-							alt="">
-					</div>
-					   <div class="product__details__pic__slider owl-carousel">
-						<img data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>" alt=""> <img
-							data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>"
-							src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>" alt="">
-					</div>  
-				</div>
-			</div>
-
+						 <img class="product__details__pic__item--large"
+                     src="<%=request.getContextPath()%>/upload/product/<%= (product.getAttachment().get(0).getOrginalFilename() != null) ? product.getAttachment().get(0).getOrginalFilename() : "" %>"
+                     alt="">
+               </div>
+                  <div class="product__details__pic__slider owl-carousel">
+                  <img data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(1).getOrginalFilename() != null) ? product.getAttachment().get(1).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(2).getOrginalFilename() != null) ? product.getAttachment().get(2).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(3).getOrginalFilename() != null) ? product.getAttachment().get(3).getOrginalFilename() : "" %>" alt=""> <img
+                     data-imgbigurl="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>"
+                     src="<%=request.getContextPath() %>/upload/product/<%= (product.getAttachment().get(4).getOrginalFilename() != null) ? product.getAttachment().get(4).getOrginalFilename() : "" %>" alt="">
+               </div>  
+            </div>
+         </div>
 			<!-- 여기부터 -->
 			<div class="col-lg-6 col-md-6">
 				<div class="product__details__text">
@@ -231,8 +229,6 @@ td.level2td {
 							    <% } %>
 							</select>
 						</div>
-						
-
 						<div class="button-container">
 						 	<input type="submit" class="primary-btn" value="예약하기">
 							
@@ -262,31 +258,18 @@ td.level2td {
 						}; 					
 					</script> 
 
-
-
-
-
-
-
-
-
 					<div style="width: 290px; height: 51px; text-align: center;">
-						<b style="color: darkgrey; font-size: 13px;"><span
-							style="color: red"><%=wishlistCount%>명</span>이 이 상품을 위시리스트에
+						<b style="color: darkgrey; font-size: 13px;"><span id="wishlist-count"
+							style="color: red"><%=wishlistCount%></span>명이 이 상품을 위시리스트에
 							담았습니다</b>
 					</div>
 					<script>
-					
-					
-					
-					
-													
-						
-				     
 					 function toggleHeartIcon(e){
 						  // Get the product and member information
 				            var memberNo = <%=loginMember != null ? loginMember.getUserNo() : 0%>;
 				            var productNo = <%=product.getProductNo()%>;
+				            console.log(memberNo);
+				            console.log(productNo);
 				            
 				            console.log('<%=loginMember%>');
 						 if (<%=loginMember == null%>) {
@@ -320,6 +303,9 @@ td.level2td {
 						                    
 						                    // Toggle the heart icon by adding the 'filled' class
 						                    $("a.heart-icon").find('.icon_heart_alt').addClass('filled');
+						                    
+						                    var count = parseInt($('#wishlist-count').text());
+						                    $('#wishlist-count').text(count + 1);
 						                    
 						                    alert("해당 상품이 위시리스트에 담겼습니다");
 						                },
@@ -547,6 +533,7 @@ td.level2td {
 				</div>
 			</div>
 		</div>
+		</div>
 </section>
 
 
@@ -586,35 +573,7 @@ td.level2td {
     });
 }; --%>
 
-	function toggleHeartIcon(e){
-		  // Get the product and member information
-          var memberNo = <%= loginMember != null ? loginMember.getUserNo() : 0 %>;
-          var productNo = <%=product.getProductNo()%>;
-          
-          console.log('<%=loginMember%>');
-		 if (<%=loginMember == null%>) {
-	            alert("로그인 후 이용할 수 있는 서비스입니다");
-		 } else {
-			 if(<%=(boolean)request.getAttribute("wishResult")%>){
-	        $.ajax({
-	            	url: "<%=request.getContextPath()%>/product/removewishlist.do",
-	            	type:"get",
-	                data: {memberNo: memberNo, productNo: productNo},
-	                success: function (data) {
-	                    console.log(data);
-	                    
-	                    // Toggle the heart icon by adding the 'filled' class
-	                    $("a.heart-icon").find('.icon_heart_alt').removeClass('filled');
-	                    
-	                    alert("해당 상품이 위시리스트에서 삭제 되었습니다");
-	                },
-	                error: function (data) {
-	                    console.error('Error adding to wishlist');
-	                }
-			 });
-			 }
-		 }
-	}
+
 	
 	$(".btn-reply").click(e=>{
 		const $tr=$("<tr>");

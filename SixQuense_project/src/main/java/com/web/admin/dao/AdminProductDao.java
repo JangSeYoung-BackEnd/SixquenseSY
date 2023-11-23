@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.web.product.dao.ProductDao;
-import com.web.product.dto.GuideDto;
 import com.web.product.dto.ProductDto;
+import com.web.product.dto.GuideDto;
 
 public class AdminProductDao {
 	private Properties sql = new Properties();

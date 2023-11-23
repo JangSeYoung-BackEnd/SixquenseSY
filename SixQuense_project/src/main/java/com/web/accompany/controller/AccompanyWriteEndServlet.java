@@ -59,7 +59,7 @@ public class AccompanyWriteEndServlet extends HttpServlet {
 					.build();
 			int result=new AccompanyServiceKH().insertAccompany(a,nation,userId);
 		}		
-		response.sendRedirect(request.getContextPath()+"/accompany/accompanylist.do");
+		request.getRequestDispatcher("/accompany/accompanylist.do").forward(request, response);
 	}
 
 	/**

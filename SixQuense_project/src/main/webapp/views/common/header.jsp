@@ -149,24 +149,28 @@
         return false; 
     } --%>
     //검색 데이터를 보여주는 ajax
-    $(document).ready(function () {
-
-        $("#searchvalue").on("input", function () {
-            var keyword = $(this).val();
-            $.ajax({
-                url: "<%=request.getContextPath()%>/search.do",
-                method: "GET",
-                data: { keyword: keyword },
-                success: function (data) {
-                    var dataList = $("#data");
-                    dataList.empty();
-                    $.each(data, function (index, value) {
-                        dataList.append("<option value='" + value + "'>");
-                    });
-                }
-            });
-        });
-    });
-</script>
+	   $(document).ready(function () {
+	    $("#searchvalue").on("input", function () {
+	        var keyword = $(this).val();
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/search.do",
+	            method: "GET",
+	            data: { keyword: keyword },
+	            dataType: 'json',  // 데이터 형식을 명시적으로 지정
+	            success: function (data) {
+	                var dataList = $("#data");
+	                dataList.empty();
+	                $.each(data, function (index, value) {
+	                    dataList.append("<option value='" + value + "'>" + value + "</option>");
+	                    // 옵션 요소를 닫아줌
+	                });
+	            },
+	            error: function (xhr, status, error) {
+	                console.error("Ajax request failed. Status: " + status + ", Error: " + error);
+	            }
+	        });
+	    });
+	});
+	</script>
     <!-- 헤더 -->
     <html>

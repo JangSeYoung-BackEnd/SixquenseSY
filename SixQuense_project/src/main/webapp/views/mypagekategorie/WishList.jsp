@@ -9,7 +9,7 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
-    <section class="checkout spad" style="padding-top: 0px";>
+    <section class="checkout spad";>
         <div class="container">
             <div class="checkout__form" style="margin-top: 200px;">
                 <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style=" width: 165px; padding-left: 0px ;margin-left: 294px; margin-bottom: 25px;">                   
@@ -19,19 +19,16 @@
                         <hr />
                         <%if(!wish.isEmpty()) {
                         	for(ProductwishilistDto w:wish){%>
-                            <div class="col-lg-4" value="<%=w.getOrginalFilename()%>">
+                            <div class="col-lg-4" >
+                            <img style="width: 200px;" src=<%=request.getContextPath() %>/upload/product/<%=w.getOrginalFilename()%>>
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg" style="height: 200px;">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
-										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-										     </a>
-										</div>
-
+										   <a href="<%=request.getContextPath() %>/product/productview.do"></a>
                                         <div class="product__discount__item__text">
                                             <div><%=w.getProductWishlistNo() %></div>
                                             <div><%=w.getProductName() %></div>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
+                                        </div>										    										     
+										</div>
                                     </div>
                                 </div>
                             <%} %>

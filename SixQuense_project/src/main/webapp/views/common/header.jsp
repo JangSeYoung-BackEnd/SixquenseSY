@@ -77,8 +77,15 @@
 
    <!--style="position: fixed; z-index: 999; background-color: white;-->
     <!-- 헤더 -->
+    
     <header class="header" style="display: flex; justify-content: center;">
         <div style="position: fixed; z-index: 999; background-color: white;">
+        	<%if(loginMember!=null && loginMember.getUserId().equals("admin")) {%>
+        	<div style="text-align:right;width: 2000px;padding-right: 400px; padding-top: 10px">
+            <b>관리자님 반갑습니다!</b>
+            <a href="<%=request.getContextPath()%>/views/admin/product/adminProductAdd.jsp">관리자 페이지</a>
+            </div>
+            <%} %>
             <div class="row" style="display: flex; justify-content: center;">
                 <div class="col-lg-2">
                     <div class="header__logo">
@@ -149,24 +156,28 @@
         return false; 
     } --%>
     //검색 데이터를 보여주는 ajax
-    $(document).ready(function () {
-
-        $("#searchvalue").on("input", function () {
-            var keyword = $(this).val();
-            $.ajax({
-                url: "<%=request.getContextPath()%>/search.do",
-                method: "GET",
-                data: { keyword: keyword },
-                success: function (data) {
-                    var dataList = $("#data");
-                    dataList.empty();
-                    $.each(data, function (index, value) {
-                        dataList.append("<option value='" + value + "'>");
-                    });
-                }
-            });
-        });
-    });
-</script>
+	   $(document).ready(function () {
+	    $("#searchvalue").on("input", function () {
+	        var keyword = $(this).val();
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/search.do",
+	            method: "GET",
+	            data: { keyword: keyword },
+	            dataType: 'json',  // 데이터 형식을 명시적으로 지정
+	            success: function (data) {
+	                var dataList = $("#data");
+	                dataList.empty();
+	                $.each(data, function (index, value) {
+	                    dataList.append("<option value='" + value + "'>" + value + "</option>");
+	                    // 옵션 요소를 닫아줌
+	                });
+	            },
+	            error: function (xhr, status, error) {
+	                console.error("Ajax request failed. Status: " + status + ", Error: " + error);
+	            }
+	        });
+	    });
+	});
+	</script>
     <!-- 헤더 -->
     <html>

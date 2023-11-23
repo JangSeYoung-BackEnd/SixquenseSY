@@ -9,28 +9,26 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
-    <section class="checkout spad" style="padding-top: 0px";>
+    <section class="checkout spad";>
         <div class="container">
             <div class="checkout__form" style="margin-top: 200px;">
                 <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style=" width: 165px; padding-left: 0px ;margin-left: 294px; margin-bottom: 25px;">                   
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
+                        <p style="font-size: xx-large;">위시리스트</p>
                         <hr />
                         <%if(!wish.isEmpty()) {
                         	for(ProductwishilistDto w:wish){%>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4" >
+                            <img style="width: 200px;" src=<%=request.getContextPath() %>/upload/product/<%=w.getOrginalFilename()%>>
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg" style="height: 200px;">
-										   <a href="<%=request.getContextPath() %>/product/productview.do">
-										     <img src="<%=request.getContextPath() %>/img/japen/삿포르.png">
-										     </a>
-										</div>
-
+										   <a href="<%=request.getContextPath() %>/product/productview.do"></a>
                                         <div class="product__discount__item__text">
-                                            <span>123</span>
-                                            <h5><a href="#"></a>방콕 5일#디너크루즈#마하나콘#담넌사두억</h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
+                                            <div><%=w.getProductWishlistNo() %></div>
+                                            <div><%=w.getProductName() %></div>
+                                        </div>										    										     
+										</div>
                                     </div>
                                 </div>
                             <%} %>
@@ -46,23 +44,46 @@
                                         </div> 
                                         <div id="Listlist"> 
                                         <ul style="width: 292px; height: 870px;">
-                                            <li style="margin-bottom: 15px;"><a href="<%=request.getContextPath()%>/views/common/Mypage.jsp"><img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디</a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="updateBtn">개인정보 수정</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="checkcancelBtn">결제상품 조회</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="wishBtn">위시리스트</button></a></li>                                          
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
-                                            <button id="mywirteBtn">나의 글</button></a></li>
-                                            <li style="margin-bottom: 15px;"><a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
-                                            <button id="questionBtn">문의사항</button></a></li>
+                                            <li style="margin-bottom: 15px;">
+
+                                               <a href="<%=request.getContextPath()%>/views/common/Mypage.jsp">
+                                                  <img src="<%=request.getContextPath() %>/img/icon/사용자아이디.png" style="width: 40px; margin-right: 10px;">사용자아이디
+                                               </a>
+                                            </li>                                     
+                                            <li style="margin-bottom: 15px;">
+                                            	<a href="#"><img src="<%=request.getContextPath() %>/img/icon/수정.png" style="width: 40px; margin-right: 10px;">
+                                            		<button id="updateBtn">개인정보 수정</button>
+                                            	</a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+                                         	<a onclick="location.assign('<%=request.getContextPath()%>/ProductList.do?userNo=<%=loginMember.getUserNo()%>')">                                           	
+                                            	<img src="<%=request.getContextPath() %>/img/icon/결제상품.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="checkcancelBtn">결제상품 조회</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+													<a onclick="location.assign('<%=request.getContextPath()%>/Wish.do?userNo=<%=loginMember.getUserNo()%>')">	                                            
+	                                            <img src="<%=request.getContextPath() %>/img/icon/위시리스트.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="wishBtn">위시리스트</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+	                                            <a onclick="location.assign('<%=request.getContextPath()%>/mypage/mywrite.do?userNo=<%=loginMember.getUserNo()%>')">
+		                                            <img src="<%=request.getContextPath() %>/img/icon/나의글.png" style="width: 40px; margin-right: 10px;">
+		                                            <button id="mywirteBtn">나의 글</button>
+	                                            </a>
+                                            </li>
+                                            <li style="margin-bottom: 15px;">
+	                                            <a href="#"><img src="<%=request.getContextPath() %>/img/icon/문의사항.png" style="width: 50px; margin-right: 10px;">
+	                                            	<button id="questionBtn">문의사항</button>
+	                                            </a>
+                                            </li>
                                         </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    	</div>
+                       </div>
                      </div>   	
                 	</div>
             	</div>

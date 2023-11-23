@@ -14,8 +14,7 @@
                             margin-left: 294px;
                             margin-bottom: 25px;">                
                             <form action="#">
-                            <input type="file" id="upFile">
-							<button id="btnupload">프로필 이미지 업로드</button>
+							
                     <div class="row">
                         <div class="col-lg-8 col-md-6" method="post">
                             <div class="row">
@@ -99,36 +98,7 @@
                 	</div>
             	</div>
 </section>
-<script>
-$("#btnupload").click(e => {
-    const form = new FormData();
-    const fileInput = $("#upFile");
 
-    $.each(fileInput[0].files, (i, f) => {
-        form.append("upfile" + i, f);
-    });
-
-    $.ajax({
-        url: "<%=request.getContextPath()%>/uploadfro.do",
-        data: form,
-        type: "post",
-        processData: false,
-        contentType: false,
-        success: data => {
-            // 서버로부터 이미지 경로를 받아서 프로필 이미지 변경
-            $("#profileImage").attr("src", "<%=request.getContextPath()%>" + data.profileImagePath);
-            alert("업로드 성공!!");
-        },
-        error: (r, e) => {
-            alert("업로드 실패 ㅠㅠ");
-        },
-        complete: () => {
-            fileInput.val('');
-        }
-    });
-});
-
-</script>
 <script>
 $("#infoupdateBtn").click(e => {
     var newPassword = $('#pw').val();

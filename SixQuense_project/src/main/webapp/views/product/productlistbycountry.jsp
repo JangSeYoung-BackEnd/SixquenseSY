@@ -49,7 +49,7 @@ p {
 		<div class="container">
 			<div class="blog__item-container">
 				<div class="col-lg-4 col-md-5">
-					<div class="country_package"><%=coordinate.getNation()%>
+					<div class="country_package" style="width:500px"><%=coordinate.getNation()%>
 						패키지
 					</div>
 					<div class="blog__sidebar">
@@ -64,6 +64,33 @@ p {
 									href="<%=request.getContextPath() %>/product/productlistspecial.do?coordinateNo=<%=coordinateNo %>"
 									class="tag">특가순</a>
 							</div>
+							<script>
+							var links = document.getElementsByClassName('tag');
+
+							// 클릭한 링크의 색상을 저장할 변수를 선언합니다.
+							var selectedColor = '#7fad39'; 
+							var originalColor = '#f5f5f5'; 
+							var lastClicked = null;
+
+							// 클릭 이벤트 핸들러를 정의합니다.
+							function handleClick(event) {
+							  // 마지막에 클릭된 요소가 있으면, 그 요소의 색상을 원래대로 돌립니다.
+							  if (lastClicked) {
+							    lastClicked.style.backgroundColor = originalColor;
+							  }
+
+							  // 클릭한 링크의 색상을 변경합니다.
+							  event.target.style.backgroundColor = selectedColor;
+
+							  // 마지막에 클릭된 요소를 업데이트 합니다.
+							  lastClicked = event.target;
+							}
+
+							// 각 링크에 클릭 이벤트를 추가합니다.
+							for (var i = 0; i < links.length; i++) {
+							  links[i].addEventListener('click', handleClick);
+							}
+							</script>
 						</div>
 					</div>
 				</div>
@@ -75,7 +102,7 @@ p {
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
 								<img
-	                        src="<%=request.getContextPath() %>/upload/product/<%= (p.getAttachment().get(0).getOrginalFilename() != null) ? p.getAttachment().get(0).getOrginalFilename() : "" %>   
+	                        src="<%=request.getContextPath() %>/upload/product/<%= (p.getAttachment().get(0).getOrginalFilename() != null) ? p.getAttachment().get(0).getOrginalFilename() : "" %>"  
 	                        alt="패키지 대표 이미지"> 	
 							</div>
 							<div class="blog__item__text">
@@ -88,7 +115,7 @@ p {
 		                           href="<%=request.getContextPath()%>/product/productview.do?productNo=<%=p.getProductNo()%>"
 		                           class="blog__btn"> <%=p.getProductPrice() %>원 <span
 		                           class="arrow_right"></span></a>
-								<div class="edit_note">
+								<div class="edit_note" style="height:180px">
 									<img src="<%=request.getContextPath() %>/img/logo/ttlogo.png"
 										alt="로고이미지입니다" width="120px"><br>
 									<div class="edit_text">

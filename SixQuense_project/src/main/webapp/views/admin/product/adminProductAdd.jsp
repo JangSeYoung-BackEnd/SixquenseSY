@@ -5,16 +5,28 @@
  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
-<section style="padding-top: 250px">
+<section style="padding-top: 200px">
 <!------ Include the above in your HEAD tag ---------->
 
+<!-- Select Basic -->
+		<div class="card-body">
+				<table class="table table-hover table-striped">
+					<tbody>
+						<tr style="width:700px">
+							<th style="text-align:center">회원관리</th>
+							<th style="text-align:center"><a href="<%=request.getContextPath()%>/views/admin/product/adminProductAdd.jsp">상품등록</a></th>
+							<th style="text-align:center">주문현황</th>
+							<th style="text-align:center">환불관리</th>
+							<th style="text-align:center">동행신고관리</th>
+							<th style="text-align:center">후기관리</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 <form class="form-horizontal" action="<%=request.getContextPath() %>/admin/productinsertend.do" method="post" enctype="multipart/form-data">
 <fieldset>
-
 <!-- Form Name -->
 <legend><b style="padding-left:540px;">상품 등록</b></legend>
-
-<!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="nation">지역명</label>
   <div class="col-md-4">
@@ -152,26 +164,27 @@
   </div>
 </div>
 
-<br><b style="padding-left:540px;">코스 등록</b><br><br>
+<br><b style="padding-left:540px;">코스 등록</b> <button id="addCourse" type="button">추가</button><br><br>
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseName1">코스명</label>  
-  <div class="col-md-4">
-  <input id="courseName1" name="courseName1" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
-    
-  </div>
+
+<div id="courseList">
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="courseName">코스명</label>  
+	  <div class="col-md-4">
+	  <input id="courseName" name="courseName" placeholder="코스명을 적어주세요" class="form-control input-md" required type="text">
+	  </div>
+	</div>
+	
+	<!-- Textarea -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="courseDetail">코스소개</label>
+	  <div class="col-md-4">                     
+	    <textarea class="form-control" id="courseDetail" name="courseDetail" placeholder="코스소개를 적어주세요"></textarea>
+	  </div>
+	</div>
 </div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="courseDetail1">코스소개</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="courseDetail1" name="courseDetail1" placeholder="코스소개를 적어주세요"></textarea>
-  </div>
-</div>
-
-
- <div class="form-group">
+<!--  <div class="form-group">
   <label class="col-md-4 control-label" for="courseName2">코스명 2</label>  
   <div class="col-md-4">
   <input id="courseName2" name="courseName2" placeholder="코스명을 적어주세요" class="form-control input-md" required="" type="text">
@@ -236,7 +249,7 @@
     <textarea class="form-control" id="courseDetail5" name="courseDetail5" placeholder="코스소개를 적어주세요"></textarea>
   </div>
 </div>
- 
+  -->
 
 
 <!-- File Button --> 
@@ -269,10 +282,15 @@
 	});
 	$(".form-horizontal input").each((i,e)=>{
 		console.log(e.name,e.value);
+		if ($(e).is(":checkbox") && !$(e).is(":checked")) {
+		      return; // 체크박스가 체크되지 않았을 경우 건너뜁니다.
+		    }
 		form.append(e.name,e.value);
 	});
+	
 	 const selectedNation = $("#nation").find(":selected").val();
 	 form.append("nation", selectedNation);
+	 
 	 
 	 $('.form-horizontal textarea').each((i,e)=>{
 			console.log(e.name,e.value);
@@ -296,6 +314,12 @@
 		}
 	}) 
 });
+	$("#addCourse").click((()=>{
+		let count=0;
+		return e=>{
+		const cloneCourse=$("#courseList").clone();
+		$("#courseList").after(cloneCourse);
+	}})())
  
 </script>
 </section>

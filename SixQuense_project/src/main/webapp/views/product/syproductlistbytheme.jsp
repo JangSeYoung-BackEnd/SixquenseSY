@@ -17,6 +17,7 @@
         .continent .sub-menu li:hover a {color: green; font-weight: bold;}
         .continent a.active {color: purple; font-weight: bold;}
         .continent a:hover {color: purple; font-weight:bold;}
+       .product__discount__item__pic img {width: 100%; height: 100%; object-fit: cover;}
 </style>
   
 </head>
@@ -95,7 +96,7 @@
 							            <div class="latest-prdouct__slider__item">
 							                <a href="<%=request.getContextPath()%>/product/productview.do?productNo=14" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/upload/product/a영국re.jpg">
+							                        <img src="<%=request.getContextPath() %>/upload/product/a영국re.jpg" class="latest-img">
 							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>영국 남부소도시 #세븐시스터즈</h6>
@@ -104,7 +105,7 @@
 							                </a>
                                         <a href="<%=request.getContextPath()%>/product/productview.do?productNo=30" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-													<img src="<%=request.getContextPath() %>/upload/product/b프랑스re.jpg">							                    </div>
+													<img src="<%=request.getContextPath() %>/upload/product/b프랑스re.jpg" class="latest-img">							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>12년차 파리지앵이 안내하는 꿀팁 가득 투어</h6>
 							                        <span>45000원</span>
@@ -112,7 +113,7 @@
 							                </a>
                                         <a href="<%=request.getContextPath()%>/product/productview.do?productNo=31" class="latest-product__item">
 							                    <div class="latest-product__item__pic">
-							                        <img src="<%=request.getContextPath() %>/upload/product/c이탈리아re.jpg">
+							                        <img src="<%=request.getContextPath() %>/upload/product/c이탈리아re.jpg" class="latest-img">
 							                    </div>
 							                    <div class="latest-product__item__text">
 							                        <h6>고대 로마와 바로크 로마를 함께</h6>
@@ -123,7 +124,7 @@
                                     <div class="latest-prdouct__slider__item">
 								    <a href="<%=request.getContextPath()%>/product/productview.do?productNo=32" class="latest-product__item">
 								        <div class="latest-product__item__pic">
-								            <img src="<%=request.getContextPath() %>/upload/product/d스위스re.jpg" alt="">
+								            <img src="<%=request.getContextPath() %>/upload/product/d스위스re.jpg" class="latest-img">
 								        </div>
 								        <div class="latest-product__item__text">
 								            <h6>스위스 수도 베른, 필수 투어</h6>
@@ -132,7 +133,7 @@
 								    </a>
                                         <a href="<%=request.getContextPath()%>/product/productview.do?productNo=38" class="latest-product__item">
 								        <div class="latest-product__item__pic">
-								            <img src="<%=request.getContextPath() %>/upload/product/j호주re.jpg" alt="">
+								            <img src="<%=request.getContextPath() %>/upload/product/j호주re.jpg" class="latest-img">
 								        </div>
 								        <div class="latest-product__item__text">
 								            <h6>걸어서 멜버른 시티 정복!</h6>
@@ -141,7 +142,7 @@
 								    </a>
                                         <a href="<%=request.getContextPath()%>/product/productview.do?productNo=35" class="latest-product__item">
 								        <div class="latest-product__item__pic">
-								            <img src="<%=request.getContextPath() %>/upload/product/g미동부re.jpg" alt="">
+								            <img src="<%=request.getContextPath() %>/upload/product/g미동부re.jpg" class="latest-img">
 								        </div>
 								        <div class="latest-product__item__text">
 								            <h6>보스턴 백 베이</h6>
@@ -256,6 +257,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     <div class="여행태마">
                         <h2 style="font-weight: bold; text-align: left;">겨울에 어디로 갈까요?</h2>
                         <div class="product_item">

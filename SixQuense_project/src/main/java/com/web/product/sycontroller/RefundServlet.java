@@ -37,7 +37,7 @@ public class RefundServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String imp_uid = request.getParameter("imp_uid");
-
+		String totalAmount = request.getParameter("total");
         // API 키와 시크릿 키를 사용하여 액세스 토큰을 요청
         String accessToken = getToken("2016848622817237", "ERk2KLQLdhnDwi9BDSG7ZydoSk4Ny5BpXTPPCKKGxdPTpml7voPb6Fhak5YF017VMnMygAcvqmOt9ZoE");
 
@@ -56,6 +56,7 @@ public class RefundServlet extends HttpServlet {
 
         JsonObject json = new JsonObject();
         json.addProperty("imp_uid", imp_uid);
+        json.addProperty("amount", totalAmount);
         json.addProperty("reason", "환불 요청");
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -76,6 +77,7 @@ public class RefundServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         request.setAttribute("imp_uid", imp_uid);
+        request.setAttribute("total", totalAmount);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/product/paymentrefund.jsp"); 
         dispatcher.forward(request, response);
         out.println("<h1>환불 결과</h1>");

@@ -111,7 +111,7 @@ p {
 						<div class="blog__item" id="best">
 							<div class="blog__item__pic">
 								 <img
-								src="<%=request.getContextPath() %>/upload/product/<%= (p.getAttachment().get(0).getOrginalFilename() != null) ? p.getAttachment().get(0).getOrginalFilename() : "" %>	
+								src="<%=request.getContextPath() %>/upload/product/<%=(p.getAttachment().get(0).getRenameFilename()!=null)?p.getAttachment().get(0).getRenameFilename():""%>"	
 								alt="패키지 대표 이미지"> 
 							</div>
 							<div class="blog__item__text">

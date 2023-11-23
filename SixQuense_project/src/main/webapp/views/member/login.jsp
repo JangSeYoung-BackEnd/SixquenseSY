@@ -230,7 +230,7 @@
 	<form action="<%=request.getContextPath()%>/login.do">
 		<div class="outBox" color=#2828CD;>
 			<div class="logo">
-				<a href="http://192.168.1.11:5500/main.html" target="_blank" style="display: flex; justify-content: center;">
+				<a href="<%=request.getContextPath() %>" target="_blank" style="display: flex; justify-content: center;">
 					<img src="<%=request.getContextPath()%>/img/logo/ttlogo.png" width="250" height="100"
 					class="image" style="display: flex; justify-content: center;">
 				</a>

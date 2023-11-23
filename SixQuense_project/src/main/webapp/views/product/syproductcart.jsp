@@ -209,7 +209,7 @@ function inputs() {
                   <table>
                     <thead>
                       <tr>
-                        <th class="shoping__product">상품정보</th>
+                        <th class="shoping__product">상품이름</th>
                         <th>가격</th>
                         <th>수량</th>
                         <th>총합</th>
@@ -220,8 +220,8 @@ function inputs() {
                       <tr>
                         <td>
                           <div class="shoping__cart__item">
-                          <img src="<%=request.getContextPath() %>/img/product/<%=product.getAttachment().get(0).getOrginalFilename() %>">
-                            <h3><%=product.getProductName() %></h3>
+                          <img src="<%=request.getContextPath() %>/upload/product/<%=product.getAttachment().get(0).getOrginalFilename() %>">
+                            <h3 style="font-size: 20px;"><b><%=product.getProductName() %></b></h3>
                           </div>
                         </td>
                         <td class="shoping__cart__price">
@@ -231,7 +231,7 @@ function inputs() {
                          <%= request.getAttribute("selectOption") %>
                         </td>
                         <td class="shoping__cart__item__close">
-						    <%=totalPrice %>원
+						    <%=totalPrice %>
                         </td>
                       </tr>
                     </tbody>
@@ -610,29 +610,28 @@ function inputs() {
 
  <script>
  function checkConsent() {
-	    let personalinfo = document.getElementById("personalInfoConsent").checked;
-	    let infoprovide = document.getElementById("infoProvidingConsent").checked;
-	    let identifiinfo = document.getElementById("identificationConsent").checked;
-	    let identifiinfotrans = document.getElementById("identificationTransferConsent").checked;
+	    let personalinfo = document.getElementById("personalInfoConsent");
+	    let infoprovide = document.getElementById("infoProvidingConsent");
+	    let identifiinfo = document.getElementById("identificationConsent");
+	    let identifiinfotrans = document.getElementById("identificationTransferConsent");
 
 	    let infocheckbox = document.getElementById("infocheckbox");
 
-	   
-	    if (infocheckbox.checked) {
-	        document.getElementById("personalInfoConsent").checked = true;
-	        document.getElementById("infoProvidingConsent").checked = true;
-	        document.getElementById("identificationConsent").checked = true;
-	        document.getElementById("identificationTransferConsent").checked = true;
-	    }
-	    
-	    
-	    if (personalinfo && infoprovide && identifiinfo && identifiinfotrans) {
-	        infocheckbox.checked = true;
-	        infocheckbox.disabled = false;
-	    } else {
-	        infocheckbox.checked = false;
-	        infocheckbox.disabled = false;
-	    }
+	    // infocheckbox 체크 시, 다른 체크박스들도 모두 체크
+	    infocheckbox.addEventListener('change', function() {
+	        personalinfo.checked = this.checked;
+	        infoprovide.checked = this.checked;
+	        identifiinfo.checked = this.checked;
+	        identifiinfotrans.checked = this.checked;
+	    });
+
+	    // 다른 체크박스들이 모두 체크될 때 infocheckbox도 체크
+	    let checkboxes = [personalinfo, infoprovide, identifiinfo, identifiinfotrans];
+	    checkboxes.forEach(function(checkbox) {
+	        checkbox.addEventListener('change', function() {
+	            infocheckbox.checked = checkboxes.every(item => item.checked);
+	        });
+	    });
 	}
 
     function showModal() {

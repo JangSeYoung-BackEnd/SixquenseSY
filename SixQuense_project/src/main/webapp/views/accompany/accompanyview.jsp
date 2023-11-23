@@ -285,6 +285,7 @@ div.subcategory>button{
                                        </div>
                                     <!--  로그인회원이랑 작성자가 동일한 인물이라면 버튼을 보이게 하기     -->
                                        <%if(loginMember.getUserNo() == b.getMemberNo()){ 
+                                    	   if(b.getAccompanyStatus().equals("acRecruiting")){
                                           /* offer status가 대기중이라면 ? */
                                            if(offer.get(i).getAccompanyOfferStatus().equals("대기중")){%>
                                              <div style="margin-bottom: 5px; margin-left: 20px; ">
@@ -304,6 +305,7 @@ div.subcategory>button{
                                                 <button class="decline-button" data-member-no="<%=offer.get(i).getMemberNo() %>" onclick="declineOffer(this)">거절</button>
                                              </div>
                                           <%}
+                                    	 }
                                        } %>
                                     </div>
                                  </div>

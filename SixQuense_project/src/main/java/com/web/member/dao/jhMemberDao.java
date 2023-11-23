@@ -41,7 +41,7 @@ public class jhMemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("mypageupdate")); 
 			pstmt.setString(1, m.getUserPw());
-			pstmt.setString(2, m.getUserName());
+			pstmt.setString(2, m.getKruserName());
 			pstmt.setString(3, m.getPhone());
 			pstmt.setDate(4, m.getUserDd());
 			pstmt.setString(5, m.getUserIntroduce());

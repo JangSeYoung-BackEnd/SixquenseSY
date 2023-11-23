@@ -254,11 +254,14 @@
 				<div class="llog">
 					<div class="login-btn dropdown">
 						 <button class="custom-btn btn-5" style="cursor:pointer;"><span>로그인</span></button>
+						 <div class="dropdown-content">
+				   	    	<a href="<%=request.getContextPath() %>/views/member/find.jsp">계정 찾기</a>	    
+				  	</div>
 					</div>
 				<div class="dropdown" style="padding-top:7px;">
 				  <button class="custom-btn btn-5">계정 만들기</button>
 				  	<div class="dropdown-content">
-				   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">Sixquense</a>
+				   	    <a href="<%=request.getContextPath() %>/member/joinServlet.do">SixQuense</a>
 				    	<a href="<%=request.getContextPath() %>/views/member/googleapi.jsp">google</a>	    
 				  	</div>
 				</div>

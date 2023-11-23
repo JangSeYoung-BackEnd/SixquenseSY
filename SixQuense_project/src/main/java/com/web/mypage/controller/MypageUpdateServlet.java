@@ -26,7 +26,7 @@ public class MypageUpdateServlet extends HttpServlet {
         Member loginMember = (Member) session.getAttribute("loginMember");
         if (loginMember != null) {
         	loginMember.setUserPw(request.getParameter("pw"));
-        	loginMember.setUserName(request.getParameter("name"));
+        	loginMember.setKruserName(request.getParameter("name"));
         	loginMember.setPhone(request.getParameter("phone"));
         	loginMember.setUserDd(Date.valueOf(request.getParameter("Dd")));
         	loginMember.setUserIntroduce(request.getParameter("intro"));

@@ -25,7 +25,7 @@ public class PasswordEncoder extends HttpServletRequestWrapper{
 		return super.getParameter(name);
 	}
 	
-	private String getSHA512(String orival) {
+	public static String getSHA512(String orival) {
 		MessageDigest md=null;
 		try {
 		md=MessageDigest.getInstance("SHA-512");

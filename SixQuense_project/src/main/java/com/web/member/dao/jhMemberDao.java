@@ -191,8 +191,12 @@ public class jhMemberDao {
 
 	private ProductwishilistDto getProductwishilistDto(ResultSet rs) throws SQLException{
 		return ProductwishilistDto.builder()
-				.ProductNo(rs.getInt("PRODUCT_WISHLIST_NO"))
+				.ProductWishlistNo(rs.getInt("PRODUCT_WISHLIST_NO"))
 				.MemberNo(rs.getInt("MEMBER_NO"))
+				.ProductNo(rs.getInt("PRODUCT_NO"))
+				.ProductName(rs.getString("PRODUCT_NAME"))
+				.OrginalFilename(rs.getString("ORIGINAL_FILENAME"))
+				.RenameFilename(rs.getString("RENAME_FILENAME"))
 				.build();				
 	}
 	private ProductorderinfoDto getProductorderinfoDto(ResultSet rs) throws SQLException{

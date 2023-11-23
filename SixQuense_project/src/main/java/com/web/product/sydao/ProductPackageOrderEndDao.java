@@ -16,7 +16,6 @@ import com.web.product.dto.ProductpaymentDto;
 
 public class ProductPackageOrderEndDao {
 	private Properties sql = new Properties();
-
     {
         String path = ProductPackageOrderEndDao.class.getResource("/sql/product/product_sql.properties").getPath();
         try (FileReader fr = new FileReader(path)) {

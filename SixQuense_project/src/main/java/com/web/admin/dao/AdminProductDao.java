@@ -18,7 +18,7 @@ import com.web.product.dto.GuideDto;
 public class AdminProductDao {
 	private Properties sql = new Properties();
 	{
-		String path = ProductDao.class.getResource("/sql/admin/adminproduct_sql.properties").getPath();
+		String path = ProductDao.class.getResource("/sql/product/adminproduct_sql.properties").getPath();
 		try (FileReader fr = new FileReader(path)) {
 			sql.load(fr);
 		} catch (IOException e) {

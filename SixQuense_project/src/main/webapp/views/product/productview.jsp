@@ -481,7 +481,7 @@ td.level2td {
 								</div>
 								<%
 								}
-								break;
+								
 								}
 								%>
 								<h6 style="margin-top: 26px;">
@@ -548,7 +548,7 @@ td.level2td {
 														for (ProductsreviewDto cm : comments) {
 														%>
 														<%
-														if (loginMember != null && (loginMember.getUserId().equals("admin"))) {
+														if (loginMember != null && (cm.getMemberNo()==loginMember.getUserNo() || (loginMember.getUserId().equals("admin")))) {
 														%>
 														<button class="btn-delete"
 															onclick="fn_removecomment(<%=cm.getCommentNo()%>,<%=product.getProductNo()%>);">삭제</button>

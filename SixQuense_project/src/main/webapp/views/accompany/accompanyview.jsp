@@ -371,7 +371,9 @@ div.subcategory>button{
                               </td>
                               <td>
                                  <button class="btn-reply" value="<%=ac.getAccompanyComtNo()%>">답글</button>
+                                 <%if(ac.getUserId().equals(loginMember.getUserId())){ %>
                                  <button class="btn-delete" onclick="deleteComment(<%=ac.getAccompanyComtNo()%>)" value="<%=ac.getAccompanyComtNo()%>">삭제</button>
+                                 <%} %>
                               </td>
                            </tr>
                            <%}else{ %>

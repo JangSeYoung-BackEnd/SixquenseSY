@@ -19,7 +19,7 @@ import com.web.product.dto.ProductpaymentDto;
  */
 @WebServlet("/ProductList.do")
 public class MypageProductListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,26 +29,31 @@ public class MypageProductListServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		System.out.println("유저"+userNo);
-		List<ProductorderinfoDto> info = new jhMemberService().selectProductByNo(userNo);
-//		 여기서 부터 
-		
-		
-		System.out.println(info+"info");
-		request.setAttribute("info", info);
-		request.getRequestDispatcher("/views/mypagekategorie/ProductList.jsp").forward(request, response);
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String userNoStr = request.getParameter("userNo");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
+           if (userNoStr == null || userNoStr.isEmpty()) {
+               response.sendRedirect(request.getContextPath() + "/error.jsp");
+           } else {
+               try {
+                   int userNo = Integer.parseInt(userNoStr);
+                   List<ProductorderinfoDto> info = new jhMemberService().selectProductByNo(userNo);
+                   System.out.println("유저" + userNo);
+                   System.out.println(info + "info");
+                   request.setAttribute("info", info);
+                   request.getRequestDispatcher("/views/mypagekategorie/ProductList.jsp").forward(request, response);
+               } catch (NumberFormatException e) {
+                   response.sendRedirect(request.getContextPath() + "/error.jsp");
+               }
+           }
+       }
+
+
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+   }
 
 }

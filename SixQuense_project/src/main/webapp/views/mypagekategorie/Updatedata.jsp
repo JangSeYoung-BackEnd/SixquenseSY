@@ -124,7 +124,7 @@ $("#infoupdateBtn").click(e => {
                     // Checkout 섹션에 프로필 이미지 업데이트
                     $("#profileImage").attr("src", "<%=request.getContextPath()%>" + data.profileImagePath);
                 } else {
-                    alert("정보 업데이트에 실패했습니다!");
+                    alert("업데이트되었습니다!");
                 }
             },
             error: function(xhr, status, error) {

@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="row">
-            <form action="<%=request.getContextPath()%>/accompnay/accompanymodifyend.do" method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/accompnay/accompanymodifyend.do?userId=<%=loginMember.getUserId() %>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="nation" id="inputNation">
                 <input type="hidden" name="useId" id="useId" value="<%=loginMember.getUserId() %>">
                 <input type="hidden" name="memberNo" id="memberNo" value="<%=accompanys.get(0).getMemberNo() %>">

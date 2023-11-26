@@ -32,6 +32,7 @@ public class AccompanyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
+		System.out.println(userId);
 		if(!userId.equals("null")) {
 			List<AccompanyDTO> accompanys=new AccompanyServiceKH().selectAccompanyAll();
 			request.setAttribute("accompanys", accompanys);

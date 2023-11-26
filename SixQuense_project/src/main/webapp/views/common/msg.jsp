@@ -13,7 +13,7 @@
 <body>
 	<script>
 		alert("<%= msg %>");
-	    location.replace("<%= request.getContextPath() + loc %>");
+	    location.replace("<%= request.getContextPath() + loc %>?userId=userId");
 	</script>
 </body>
 </html>

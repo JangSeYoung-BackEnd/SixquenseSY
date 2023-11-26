@@ -59,6 +59,7 @@ public class AccompanyModifyEndServlet extends HttpServlet {
 					.renameFilename(rename)
 					.build();
 			int result=new AccompanyServiceKH().ModifyAccompanyUpdate(a,nation,memberNo);
+			request.setAttribute("userId", userId);
 		}		
 		request.getRequestDispatcher("/accompany/accompanylist.do").forward(request, response);
 	}

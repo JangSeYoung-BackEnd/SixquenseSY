@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="row">
-            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do?useId=<%=loginMember.getUserId() %>" method="post" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/accompnay/accompanywriteend.do?userId=<%=loginMember.getUserId() %>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="nation" id="inputNation">
                 <div>
                     <input type="text" id="accompany-title" name="accompany-title" placeholder="제목 : 여행지/날짜/제목내용 으로 작성해주세요" style="width: 700px; border:solid gainsboro; margin-bottom: 10px;">

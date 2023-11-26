@@ -350,7 +350,7 @@ div.subcategory>button{
                    <div><%=b.getAccompanyDate()%></div>
                    <div>조회수 <%=b.getAccompanyReadCount()%></div>
                         <%if(loginMember.getUserNo()==b.getMemberNo()){%>
-                           <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>');" role="modify">수정</button>
+                           <button onclick="location.assign('<%=request.getContextPath()%>/accompany/accompanymodify.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>&userId=<%=loginMember.getUserId() %>');" role="modify">수정</button>
                            <button onclick="deleteaccompanyBoard();" role="delete">삭제</button>
                      <%}%>
                 </div>
@@ -655,7 +655,7 @@ div.subcategory>button{
     function deleteaccompanyBoard(){
          confirm("정말 삭제하시겠습니까?");
          if(confirm){
-            location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>");
+            location.assign("<%=request.getContextPath()%>/accompany/accompanydelete.do?memberNo=<%=b.getMemberNo()%>&accompanyNo=<%=b.getAccompanyNo()%>&userId=<%=loginMember.getUserId()%>");
          }
       }
     function acClosebtn() {
